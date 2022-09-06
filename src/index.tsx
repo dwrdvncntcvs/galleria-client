@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
+  // <Provider store={store}>
     <App />
-  </Provider>
+  // </Provider>
 );

@@ -61,7 +61,6 @@ const SignUpForm = () => {
 
   return (
     <div className="si__main-container">
-      SignUpForm
       <form onSubmit={signUpAction}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (
           <input
