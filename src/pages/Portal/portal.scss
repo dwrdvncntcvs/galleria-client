@@ -1,0 +1,39 @@
+@import "../../index.scss";
+
+.p__main-container {
+  @extend .flex-column;
+  @extend .page-size;
+  flex: 1;
+
+  section {
+    padding: 20px;
+  }
+
+  .p__content-container {
+    @extend .flex-row;
+    flex: 10;
+
+    section:nth-child(1) {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 5;
+      flex-shrink: 1;
+      padding: 0;
+    }
+
+    section:nth-child(2) {
+      display: flex;
+      flex-wrap: no-wrap;
+      flex: 2;
+      flex-shrink: 1;
+    }
+  }
+
+  .p__footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+}
