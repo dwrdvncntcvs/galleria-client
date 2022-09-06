@@ -1,6 +1,7 @@
 import React from "react";
 import { Footer } from "../../components";
 import { MainImage, SignIn, SignUp } from "./components";
+import "./portal.scss";
 
 const Portal = () => {
   return (
