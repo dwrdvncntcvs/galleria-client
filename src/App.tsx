@@ -1,11 +1,16 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
+import { Home, Portal } from "./pages";
 
 function App() {
   return (
-    <div>
-      <h1>Galleria Web Application</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Portal />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
