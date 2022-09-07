@@ -31,8 +31,9 @@ const SignInForm = () => {
       SignInForm
       <h1>Sign In</h1>
       <form onSubmit={submit}>
-        {inputFields.map(({ placeholder, type, value, onChange }) => (
+        {inputFields.map(({ placeholder, type, value, onChange }, i) => (
           <input
+            key={i}
             placeholder={placeholder}
             type={type}
             value={value}
@@ -40,7 +41,7 @@ const SignInForm = () => {
           />
         ))}
         <button className="s__button" type="submit">
-          Sumbit
+          Submit
         </button>
       </form>
     </div>
