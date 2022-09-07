@@ -15,3 +15,8 @@ export interface User {
 export interface UserProfile extends User {
   Profile?: Profile;
 }
+
+export interface UserAuth {
+  email: string;
+  password: string;
+}

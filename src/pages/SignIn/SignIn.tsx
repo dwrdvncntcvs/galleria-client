@@ -5,7 +5,7 @@ import "./signIn.scss";
 const SignIn = () => {
   return (
     <div className="si__main-container">
-      <SignInForm/>
+      <SignInForm />
     </div>
   );
 };
