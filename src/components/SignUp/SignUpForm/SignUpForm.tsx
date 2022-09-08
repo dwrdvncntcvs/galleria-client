@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { userSignUpRequest } from "../../../features/userSlice";
+import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";

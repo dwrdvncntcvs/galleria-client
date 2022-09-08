@@ -1,8 +1,13 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { User, UserAuth, UserRegistration } from "../models/User";
-import { httpService } from "../services/httpService";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  getUserRefresher,
+  signOutRequest,
+  userSignIn,
+  userSignUpRequest,
+} from "../api/userRequest";
+import { User } from "../models/User";
 
-interface UserState {
+export interface UserState {
   refreshToken?: string;
   accessToken?: string;
   user?: User;
@@ -17,42 +22,6 @@ const userState: UserState = {
   isAuth: false,
   successMessage: "",
 };
-
-//Asynchronous Functionalities
-export const userSignIn = createAsyncThunk(
-  "user/signIn",
-  async (data: UserAuth) => {
-    const responseData = await httpService.post<UserState>(
-      "/user/sign-in",
-      data
-    );
-    return responseData;
-  }
-);
-
-export const getUserRefresher = createAsyncThunk(
-  "user/getRefresher",
-  async () => {
-    const responseData = await httpService.get("/user/refresh");
-    return responseData;
-  }
-);
-
-export const signOutRequest = createAsyncThunk("user/sign-out", async () => {
-  const responseData = await httpService.get("/user/sign-out");
-  return responseData;
-});
-
-export const userSignUpRequest = createAsyncThunk(
-  "user/sign-up",
-  async (data: UserRegistration) => {
-    const responseData = await httpService.post<UserRegistration>(
-      "/user/sign-up",
-      data
-    );
-    return responseData;
-  }
-);
 
 const userSlice = createSlice({
   name: "user",
