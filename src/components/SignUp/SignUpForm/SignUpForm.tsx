@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { userSignUpRequest } from "../../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
+import { TextInput } from "../../global";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
@@ -73,7 +74,7 @@ const SignUpForm = () => {
       ) : null}
       <form onSubmit={signUpAction}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (
-          <input
+          <TextInput
             key={i}
             placeholder={placeholder}
             type={type}

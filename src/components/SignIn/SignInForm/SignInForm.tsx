@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { userSignIn } from "../../../features/userSlice";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
+import { TextInput } from "../../global";
 import "./signInForm.scss";
 
 const SignInForm = () => {
@@ -38,7 +39,7 @@ const SignInForm = () => {
       <h1>Sign In</h1>
       <form onSubmit={submit}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (
-          <input
+          <TextInput
             key={i}
             placeholder={placeholder}
             type={type}
