@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { userSignUpRequest } from "../../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
-import { TextInput } from "../../global";
+import { FormContainer, TextInput } from "../../global";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
@@ -72,7 +72,7 @@ const SignUpForm = () => {
       {userState.successMessage !== "" || userState.successMessage !== null ? (
         <p>{userState.successMessage}</p>
       ) : null}
-      <form onSubmit={signUpAction}>
+      <FormContainer onSubmit={signUpAction}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (
           <TextInput
             key={i}
@@ -83,7 +83,7 @@ const SignUpForm = () => {
           />
         ))}
         <button type="submit">Sign Up</button>
-      </form>
+      </FormContainer>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { userSignIn } from "../../../features/userSlice";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
-import { TextInput } from "../../global";
+import { FormContainer, TextInput } from "../../global";
 import "./signInForm.scss";
 
 const SignInForm = () => {
@@ -36,7 +36,7 @@ const SignInForm = () => {
   return (
     <div>
       <h1>Sign In</h1>
-      <form onSubmit={submit}>
+      <FormContainer onSubmit={submit}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (
           <TextInput
             key={i}
@@ -49,7 +49,7 @@ const SignInForm = () => {
         <button className="s__button" type="submit">
           Submit
         </button>
-      </form>
+      </FormContainer>
     </div>
   );
 };
