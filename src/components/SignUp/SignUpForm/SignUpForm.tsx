@@ -1,7 +1,13 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { userSignUpRequest } from "../../../features/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { UserRegistration } from "../../../models/User";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
+  const { userState } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -45,22 +51,26 @@ const SignUpForm = () => {
     },
   ];
 
-  const signUpAction = (e: FormEvent) => {
+  const signUpAction = async (e: FormEvent) => {
     e.preventDefault();
 
-    const body = {
-      firstName,
-      lastName,
+    const body: UserRegistration = {
+      first_name: firstName,
+      last_name: lastName,
       username,
       email,
       password,
     };
 
     console.table(body);
+    await dispatch(userSignUpRequest(body));
   };
 
   return (
     <div className="si__main-container">
+      {userState.successMessage !== "" || userState.successMessage !== null ? (
+        <p>{userState.successMessage}</p>
+      ) : null}
       <form onSubmit={signUpAction}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (
           <input

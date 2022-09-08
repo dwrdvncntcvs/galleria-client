@@ -28,6 +28,7 @@ const SignInForm = () => {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     const data: UserAuth = { email, password };
+    console.log("Clicked");
 
     await dispatch(userSignIn(data));
   };
