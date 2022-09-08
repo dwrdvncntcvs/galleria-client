@@ -5,6 +5,12 @@ import {
   userSignIn,
   userSignUpRequest,
 } from "../api/userRequest";
+import {
+  getUserRefresherBuilder,
+  signOutRequestBuilder,
+  userSignInBuilder,
+  userSignUpRequestBuilder,
+} from "../builders/userBuilders";
 import { User } from "../models/User";
 
 export interface UserState {
@@ -33,57 +39,16 @@ const userSlice = createSlice({
   },
   extraReducers(builder) {
     //User Sign In Reducer
-    builder
-      .addCase(userSignIn.pending, () => {
-        console.log("User sign in pending...");
-      })
-      .addCase(userSignIn.fulfilled, (state, action) => {
-        console.log("User sign in succeeded");
-        if (action.payload.accessToken !== "")
-          return { ...state, ...action.payload, isAuth: true };
-      })
-      .addCase(userSignIn.rejected, (state) => {
-        console.log("Sign in rejected");
-      });
+    userSignInBuilder(builder);
 
     //Getting New Access Token Reducer
-    builder
-      .addCase(getUserRefresher.pending, () => {
-        console.log("Pending...");
-      })
-      .addCase(getUserRefresher.fulfilled, (state, action) => {
-        console.log("Fulfilled...");
-        return { ...state, refreshToken: action.payload };
-      })
-      .addCase(getUserRefresher.rejected, (state) => {
-        console.log("Rejected...");
-      });
+    getUserRefresherBuilder(builder);
 
     //Sign Out Reducer
-    builder
-      .addCase(signOutRequest.pending, () => {
-        console.log("Pending...");
-      })
-      .addCase(signOutRequest.fulfilled, (state, action) => {
-        console.log("Fulfilled...");
-        return { ...state, refreshToken: "" };
-      })
-      .addCase(signOutRequest.rejected, (state) => {
-        console.log("Rejected...");
-      });
+    signOutRequestBuilder(builder);
 
     //Sign Up Request Reducer
-    builder
-      .addCase(userSignUpRequest.pending, () => {
-        console.log("Pending...");
-      })
-      .addCase(userSignUpRequest.fulfilled, (state, action) => {
-        console.log("Fulfilled...");
-        return { ...state, successMessage: "" };
-      })
-      .addCase(userSignUpRequest.rejected, (state) => {
-        console.log("Rejected...");
-      });
+    userSignUpRequestBuilder(builder);
   },
 });
 
