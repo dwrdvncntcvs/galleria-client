@@ -31,9 +31,7 @@ export const userSignIn = createAsyncThunk(
 export const getUserRefresher = createAsyncThunk(
   "user/getRefresher",
   async () => {
-    const responseData = await httpService.get("/user/refresh", {
-      withCredentials: true,
-    });
+    const responseData = await httpService.get("/user/refresh");
     return responseData;
   }
 );
@@ -62,7 +60,7 @@ const userSlice = createSlice({
       })
       .addCase(getUserRefresher.fulfilled, (state, action) => {
         console.log("Fulfilled...");
-        return { ...state, refreshToken: action.payload };
+        return { ...state, accessToken: action.payload };
       })
       .addCase(getUserRefresher.rejected, (state) => {
         console.log("Rejected...");

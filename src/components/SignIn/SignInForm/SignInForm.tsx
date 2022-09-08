@@ -1,11 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { userSignIn } from "../../../features/userSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import "./signInForm.scss";
 
 const SignInForm = () => {
-  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,7 +49,6 @@ const SignInForm = () => {
           Submit
         </button>
       </form>
-      <h1>{userState.refreshToken}</h1>
     </div>
   );
 };
