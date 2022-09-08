@@ -35,7 +35,6 @@ const SignInForm = () => {
   };
   return (
     <div>
-      SignInForm
       <h1>Sign In</h1>
       <form onSubmit={submit}>
         {inputFields.map(({ placeholder, type, value, onChange }, i) => (

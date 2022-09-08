@@ -68,7 +68,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="si__main-container">
+    <div>
       {userState.successMessage !== "" || userState.successMessage !== null ? (
         <p>{userState.successMessage}</p>
       ) : null}
