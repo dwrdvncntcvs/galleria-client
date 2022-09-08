@@ -36,6 +36,11 @@ export const getUserRefresher = createAsyncThunk(
   }
 );
 
+export const signOutRequest = createAsyncThunk("user/sign-out", async () => {
+  const responseData = await httpService.get("/user/sign-out");
+  return responseData;
+});
+
 const userSlice = createSlice({
   name: "user",
   initialState: userState,
@@ -60,9 +65,23 @@ const userSlice = createSlice({
       })
       .addCase(getUserRefresher.fulfilled, (state, action) => {
         console.log("Fulfilled...");
-        return { ...state, accessToken: action.payload };
+        console.log(action.payload);
+        return { ...state, refreshToken: action.payload };
       })
       .addCase(getUserRefresher.rejected, (state) => {
+        console.log("Rejected...");
+      });
+
+    builder
+      .addCase(signOutRequest.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(signOutRequest.fulfilled, (state, action) => {
+        console.log("Fulfilled...");
+        console.log(action.payload);
+        return { ...state, refreshToken: "" };
+      })
+      .addCase(signOutRequest.rejected, (state) => {
         console.log("Rejected...");
       });
   },

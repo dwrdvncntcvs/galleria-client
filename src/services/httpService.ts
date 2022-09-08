@@ -1,4 +1,3 @@
-import axios from "axios";
 import { instance } from "../config/axios";
 
 export interface Http {
