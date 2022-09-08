@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import "./textInput.scss";
 
 interface TextInputProps {
   key?: string | number;
@@ -16,6 +17,7 @@ export default function TextInput({
 }: TextInputProps) {
   return (
     <input
+      className="ti__main-input"
       placeholder={placeholder}
       type={type}
       value={value}

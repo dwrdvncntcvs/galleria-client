@@ -68,23 +68,21 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <FormContainer onSubmit={signUpAction}>
       {userState.successMessage !== "" || userState.successMessage !== null ? (
         <p>{userState.successMessage}</p>
       ) : null}
-      <FormContainer onSubmit={signUpAction}>
-        {inputFields.map(({ placeholder, type, value, onChange }, i) => (
-          <TextInput
-            key={i}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onChange}
-          />
-        ))}
-        <button type="submit">Sign Up</button>
-      </FormContainer>
-    </div>
+      {inputFields.map(({ placeholder, type, value, onChange }, i) => (
+        <TextInput
+          key={i}
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          onChange={onChange}
+        />
+      ))}
+      <button type="submit">Sign Up</button>
+    </FormContainer>
   );
 };
 

@@ -13,7 +13,7 @@ export default function FormContainer({
   onSubmit,
 }: FormContainerProps) {
   return (
-    <form className={`${className}`} onSubmit={onSubmit}>
+    <form className={`${className} fc__main-container`} onSubmit={onSubmit}>
       {children}
     </form>
   );

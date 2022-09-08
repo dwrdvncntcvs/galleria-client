@@ -1,0 +1,7 @@
+@import "../../../index.scss";
+
+.fc__main-container {
+  @extend .flex-column;
+  gap: 10px;
+  margin: 10px 5px;
+}

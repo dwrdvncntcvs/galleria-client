@@ -34,23 +34,20 @@ const SignInForm = () => {
     await dispatch(userSignIn(data));
   };
   return (
-    <div>
-      <h1>Sign In</h1>
-      <FormContainer onSubmit={submit}>
-        {inputFields.map(({ placeholder, type, value, onChange }, i) => (
-          <TextInput
-            key={i}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onChange}
-          />
-        ))}
-        <button className="s__button" type="submit">
-          Submit
-        </button>
-      </FormContainer>
-    </div>
+    <FormContainer onSubmit={submit}>
+      {inputFields.map(({ placeholder, type, value, onChange }, i) => (
+        <TextInput
+          key={i}
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          onChange={onChange}
+        />
+      ))}
+      <button className="s__button" type="submit">
+        Submit
+      </button>
+    </FormContainer>
   );
 };
 
