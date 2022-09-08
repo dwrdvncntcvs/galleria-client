@@ -56,7 +56,7 @@ const SignUpForm = () => {
       password,
     };
 
-    console.log("Data; ", body);
+    console.table(body);
   };
 
   return (
