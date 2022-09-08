@@ -23,7 +23,7 @@
 
     section:nth-child(2) {
       display: flex;
-      flex-wrap: no-wrap;
+      flex-wrap: wrap;
       flex: 2;
       flex-shrink: 1;
     }

@@ -5,7 +5,7 @@ import "./signUp.scss";
 
 const SignUp = () => {
   return (
-    <div>
+    <div className="su__main-container">
       <Link to="/">Already have an account?</Link>
       <h1>Sign Up</h1>
       <SignUpForm />
