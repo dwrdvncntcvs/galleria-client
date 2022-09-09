@@ -28,3 +28,11 @@ export interface UserRegistration {
   email: string;
   password: string;
 }
+
+export interface UserState {
+  refreshToken?: string;
+  accessToken?: string;
+  userData?: User;
+  isAuth?: boolean;
+  successMessage?: string;
+}

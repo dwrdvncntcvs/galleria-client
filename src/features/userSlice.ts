@@ -5,20 +5,12 @@ import {
   userSignInBuilder,
   userSignUpRequestBuilder,
 } from "../builders/userBuilders";
-import { User } from "../models/User";
-
-export interface UserState {
-  refreshToken?: string;
-  accessToken?: string;
-  user?: User;
-  isAuth?: boolean;
-  successMessage?: string;
-}
+import { UserState } from "../models/User";
 
 const userState: UserState = {
   refreshToken: "",
   accessToken: "",
-  user: {},
+  userData: {},
   isAuth: false,
   successMessage: "",
 };
@@ -29,6 +21,16 @@ const userSlice = createSlice({
   reducers: {
     defaultSuccessMsg: (state, action) => {
       return { ...state, successMessage: action.payload };
+    },
+    setAuth: (state, action) => {
+      return {
+        ...state,
+        isAuth: action.payload.isAuth,
+        accessToken: action.payload.accessToken,
+      };
+    },
+    setAccessToken: (state, action) => {
+      return { ...state, accessToken: action.payload };
     },
   },
   extraReducers(builder) {
@@ -45,5 +47,7 @@ const userSlice = createSlice({
     userSignUpRequestBuilder(builder);
   },
 });
+
+export const { defaultSuccessMsg, setAuth, setAccessToken } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserState } from "../features/userSlice";
-import { UserAuth, UserRegistration } from "../models/User";
+import { UserAuth, UserRegistration, UserState } from "../models/User";
 import { httpService } from "../services/httpService";
 
 export const userSignIn = createAsyncThunk(

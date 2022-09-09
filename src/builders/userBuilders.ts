@@ -5,7 +5,7 @@ import {
   userSignIn,
   userSignUpRequest,
 } from "../api/userRequest";
-import { UserState } from "../features/userSlice";
+import { UserState } from "../models/User";
 
 export const userSignInBuilder = (
   builder: ActionReducerMapBuilder<UserState>
@@ -29,15 +29,19 @@ export const getUserRefresherBuilder = (
 ) => {
   return builder
     .addCase(getUserRefresher.pending, () => {
-      console.log("User sign in pending...");
+      console.log("User Refresh in pending...");
     })
     .addCase(getUserRefresher.fulfilled, (state, action) => {
-      console.log("User sign in succeeded");
-      if (action.payload.accessToken !== "")
-        return { ...state, ...action.payload, isAuth: true };
+      console.log("User Refresh in succeeded");
+      console.log(action.payload);
+      return {
+        ...state,
+        ...action.payload,
+        isAuth: true,
+      };
     })
     .addCase(getUserRefresher.rejected, (state) => {
-      console.log("Sign in rejected");
+      console.log("Refresh in rejected");
     });
 };
 
@@ -50,8 +54,9 @@ export const signOutRequestBuilder = (
     })
     .addCase(signOutRequest.fulfilled, (state, action) => {
       console.log("User sign in succeeded");
+      console.log({ ...action.payload });
       if (action.payload.accessToken !== "")
-        return { ...state, ...action.payload, isAuth: true };
+        return { ...state, ...action.payload, isAuth: false };
     })
     .addCase(signOutRequest.rejected, (state) => {
       console.log("Sign in rejected");

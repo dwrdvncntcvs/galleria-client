@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
@@ -9,6 +10,7 @@ const SignInForm = () => {
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const inputFields = [
     {
@@ -32,6 +34,7 @@ const SignInForm = () => {
     console.log("Clicked");
 
     await dispatch(userSignIn(data));
+    navigate("/home");
   };
   return (
     <FormContainer onSubmit={submit}>
