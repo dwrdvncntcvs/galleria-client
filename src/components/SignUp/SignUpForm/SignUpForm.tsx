@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
@@ -8,6 +9,7 @@ import "./signUpForm.scss";
 const SignUpForm = () => {
   const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,6 +67,7 @@ const SignUpForm = () => {
 
     console.table(body);
     await dispatch(userSignUpRequest(body));
+    navigate(`/${email}/otp`);
   };
 
   return (

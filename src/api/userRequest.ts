@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserAuth, UserRegistration, UserState } from "../models/User";
+import { OTP, UserAuth, UserRegistration, UserState } from "../models/User";
 import { httpService } from "../services/httpService";
 
 export const userSignIn = createAsyncThunk(
@@ -33,6 +33,14 @@ export const userSignUpRequest = createAsyncThunk(
       "/user/sign-up",
       data
     );
+    return responseData;
+  }
+);
+
+export const userOtpRequest = createAsyncThunk(
+  "user/otp",
+  async (data: OTP) => {
+    const responseData = await httpService.post<OTP>("/user/verify", data);
     return responseData;
   }
 );

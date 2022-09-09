@@ -36,3 +36,8 @@ export interface UserState {
   isAuth?: boolean;
   successMessage?: string;
 }
+
+export interface OTP {
+  email: string;
+  otp: string;
+}

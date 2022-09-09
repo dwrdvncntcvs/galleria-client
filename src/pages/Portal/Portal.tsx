@@ -3,20 +3,19 @@ import { Footer } from "../../components/global";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./portal.scss";
 import { MainImage } from "../../components/Portal";
-import { useAppSelector } from "../../hooks/reduxHook";
-import { useRefreshToken } from "../../hooks/useRefreshToken";
+import { httpService } from "../../services/httpService";
 
 const Portal = () => {
-  const { userState } = useAppSelector((state) => state);
   const navigate = useNavigate();
-  const refresh = useRefreshToken();
 
   useEffect(() => {
-    const getAccessToken = async () => await refresh();
+    const getAccessToken = async () => {
+      const response = await httpService.get("/user/refresh");
+      if (response.accessToken! !== "") navigate("/home");
+      return response;
+    };
     getAccessToken();
-
-    if (userState.isAuth) navigate("/home");
-  }, [userState.isAuth]);
+  }, []);
 
   return (
     <div className="p__main-container">
