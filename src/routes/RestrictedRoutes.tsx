@@ -1,24 +1,16 @@
 import React, { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { instance } from "../config/axios";
-import { setAuth } from "../features/userSlice";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import { Outlet } from "react-router-dom";
+import { useAppSelector } from "../hooks/reduxHook";
+import { useRefreshToken } from "../hooks/useRefreshToken";
 
 export default function RestrictedRoutes() {
   const { userState } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
+  const refresh = useRefreshToken();
 
   useEffect(() => {
     const getAccessToken = async () => {
-      try {
-        const response = await instance.get("/user/refresh");
-        const data = response.data;
-
-        dispatch(setAuth({ accessToken: data.accessToken, isAuth: true }));
-      } catch (e: any) {
-        if (e.response.status === 403) navigate("/");
-      }
+      await refresh();
     };
 
     if (userState.accessToken === "") getAccessToken();
