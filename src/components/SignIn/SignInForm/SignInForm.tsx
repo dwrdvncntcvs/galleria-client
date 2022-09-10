@@ -1,26 +1,16 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
-import { setMessage, setStatus } from "../../../features/userSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";
 import "./signInForm.scss";
 
 const SignInForm = () => {
-  const { status, message } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (status === "error")
-      setTimeout(() => {
-        dispatch(setStatus("none"));
-        dispatch(setMessage(""));
-      }, 5000);
-  }, [status]);
 
   const inputFields = [
     {
