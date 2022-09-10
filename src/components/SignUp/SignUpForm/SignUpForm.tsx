@@ -1,12 +1,13 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
+  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -64,11 +65,6 @@ const SignUpForm = () => {
       password,
     };
 
-    const isValid =
-      Object.keys(body).filter((key) => (body as any)[key] === "").length < 1;
-
-    if (!isValid) return;
-
     console.table(body);
     await dispatch(userSignUpRequest(body));
     setEmail("");
@@ -76,8 +72,6 @@ const SignUpForm = () => {
     setFirstName("");
     setLastName("");
     setUsername("");
-
-    navigate(`/${email}/otp`);
   };
 
   return (
@@ -92,6 +86,7 @@ const SignUpForm = () => {
         />
       ))}
       <button type="submit">Sign Up</button>
+      {userState.status === "success" && <Navigate to={`/${email}/otp`} />}
     </FormContainer>
   );
 };

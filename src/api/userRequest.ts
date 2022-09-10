@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { rejects } from "assert";
 import { OTP, UserAuth, UserRegistration, UserState } from "../models/User";
 import { httpService } from "../services/httpService";
 

@@ -1,12 +1,13 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";
 import "./signInForm.scss";
 
 const SignInForm = () => {
+  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,13 +32,8 @@ const SignInForm = () => {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     const data: UserAuth = { email, password };
-    const isValid =
-      Object.keys(data).filter((key) => (data as any)[key] === "").length < 1;
-
-    if (!isValid) return;
 
     await dispatch(userSignIn(data));
-    navigate("/home");
   };
 
   return (
@@ -54,6 +50,7 @@ const SignInForm = () => {
       <button className="s__button" type="submit">
         Submit
       </button>
+      {userState.status === "success" && <Navigate to="/home" />}
     </FormContainer>
   );
 };
