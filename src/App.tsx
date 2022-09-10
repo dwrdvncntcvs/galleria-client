@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
+import { NavBar } from "./components/global";
 import { Home, Otp, Portal, SignIn, SignUp } from "./pages";
 import { Persistent, RequiredAuth } from "./routes";
 
 function App() {
   return (
     <BrowserRouter>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Portal />}>
           <Route path="" element={<SignIn />} />
