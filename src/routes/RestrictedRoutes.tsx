@@ -1,27 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useAppSelector } from "../hooks/reduxHook";
 import { useRefreshToken } from "../hooks/useRefreshToken";
 
 export default function RestrictedRoutes() {
+  const [isLoading, setIsLoading] = useState(true);
   const { userState } = useAppSelector((state) => state);
 
   const refresh = useRefreshToken();
 
   useEffect(() => {
     const getAccessToken = async () => {
-      await refresh();
+      try {
+        await refresh();
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    if (userState.accessToken === "") getAccessToken();
+    userState.accessToken === "" ? getAccessToken() : setIsLoading(false);
   }, []);
 
   // return <Outlet />;
-  return userState.isAuth ? (
-    <>
-      <Outlet />
-    </>
-  ) : (
-    <p>Loading...</p>
-  );
+  return isLoading ? <p>Loading...</p> : <Outlet />;
 }
