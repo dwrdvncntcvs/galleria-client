@@ -19,8 +19,9 @@ export const userSignInBuilder = (
       if (action.payload.accessToken !== "")
         return { ...state, ...action.payload, isAuth: true };
     })
-    .addCase(userSignIn.rejected, (state) => {
+    .addCase(userSignIn.rejected, (state, action) => {
       console.log("Sign in rejected");
+      return { ...state, status: "error" };
     });
 };
 

@@ -1,16 +1,25 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { setStatus } from "../../../features/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";
 import "./signInForm.scss";
 
 const SignInForm = () => {
+  const { status } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (status === "error")
+      setTimeout(() => {
+        dispatch(setStatus("none"));
+      }, 5000);
+  }, [status]);
 
   const inputFields = [
     {
@@ -36,8 +45,10 @@ const SignInForm = () => {
     await dispatch(userSignIn(data));
     navigate("/home");
   };
+
   return (
     <FormContainer onSubmit={submit}>
+      {status === "error" && <p>Incorrect email or password.</p>}
       {inputFields.map(({ placeholder, type, value, onChange }, i) => (
         <TextInput
           key={i}

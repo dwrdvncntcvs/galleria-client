@@ -12,7 +12,7 @@ const userState: UserState = {
   accessToken: "",
   userData: {},
   isAuth: false,
-  successMessage: "",
+  status: "none",
 };
 
 const userSlice = createSlice({
@@ -32,6 +32,12 @@ const userSlice = createSlice({
     setAccessToken: (state, action) => {
       return { ...state, accessToken: action.payload };
     },
+    setStatus: (
+      state,
+      action: { type: string; payload: "none" | "error" | "success" }
+    ) => {
+      return { ...state, status: action.payload };
+    },
   },
   extraReducers(builder) {
     //User Sign In Reducer
@@ -48,6 +54,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { defaultSuccessMsg, setAuth, setAccessToken } = userSlice.actions;
+export const { defaultSuccessMsg, setAuth, setAccessToken, setStatus } =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -72,9 +72,6 @@ const SignUpForm = () => {
 
   return (
     <FormContainer onSubmit={signUpAction}>
-      {userState.successMessage !== "" || userState.successMessage !== null ? (
-        <p>{userState.successMessage}</p>
-      ) : null}
       {inputFields.map(({ placeholder, type, value, onChange }, i) => (
         <TextInput
           key={i}
