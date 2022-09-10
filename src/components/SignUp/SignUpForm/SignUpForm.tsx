@@ -2,13 +2,12 @@ import React, { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { setMessage, setStatus } from "../../../features/userSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
-  const { status, message } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -17,14 +16,6 @@ const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (status === "error")
-      setTimeout(() => {
-        dispatch(setStatus("none"));
-        dispatch(setMessage(""));
-      }, 5000);
-  }, [status]);
 
   const inputFields = [
     {
@@ -74,6 +65,11 @@ const SignUpForm = () => {
       password,
     };
 
+    const isValid =
+      Object.keys(body).filter((key) => (body as any)[key] === "").length < 1;
+
+    if (!isValid) return;
+
     console.table(body);
     await dispatch(userSignUpRequest(body));
     setEmail("");
@@ -82,12 +78,11 @@ const SignUpForm = () => {
     setLastName("");
     setUsername("");
 
-    if (status === "success") navigate(`/${email}/otp`);
+    navigate(`/${email}/otp`);
   };
 
   return (
     <FormContainer onSubmit={signUpAction}>
-      {status === "error" && <p>{message}</p>}
       {inputFields.map(({ placeholder, type, value, onChange }, i) => (
         <TextInput
           key={i}

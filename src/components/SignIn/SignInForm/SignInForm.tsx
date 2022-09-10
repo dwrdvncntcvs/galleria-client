@@ -41,15 +41,17 @@ const SignInForm = () => {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     const data: UserAuth = { email, password };
-    console.log("Clicked");
+    const isValid =
+      Object.keys(data).filter((key) => (data as any)[key] === "").length < 1;
+
+    if (!isValid) return;
 
     await dispatch(userSignIn(data));
-    if (status === "success") navigate("/home");
+    navigate("/home");
   };
 
   return (
     <FormContainer onSubmit={submit}>
-      {status === "error" && <p>{message}</p>}
       {inputFields.map(({ placeholder, type, value, onChange }, i) => (
         <TextInput
           key={i}
