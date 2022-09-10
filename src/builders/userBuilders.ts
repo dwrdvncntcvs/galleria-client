@@ -2,6 +2,7 @@ import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import {
   getUserRefresher,
   signOutRequest,
+  userOtpRequest,
   userSignIn,
   userSignUpRequest,
 } from "../api/userRequest";
@@ -51,16 +52,16 @@ export const signOutRequestBuilder = (
 ) => {
   return builder
     .addCase(signOutRequest.pending, () => {
-      console.log("User sign in pending...");
+      console.log("pending...");
     })
     .addCase(signOutRequest.fulfilled, (state, action) => {
-      console.log("User sign in succeeded");
+      console.log("succeeded");
       console.log({ ...action.payload });
       if (action.payload.accessToken !== "")
         return { ...state, ...action.payload, isAuth: false };
     })
     .addCase(signOutRequest.rejected, (state) => {
-      console.log("Sign in rejected");
+      console.log("rejected");
     });
 };
 
@@ -76,6 +77,23 @@ export const userSignUpRequestBuilder = (
       return { ...state, status: "success" };
     })
     .addCase(userSignUpRequest.rejected, (state, action) => {
+      console.log("Rejected...");
+      return { ...state, status: "error", message: action.payload as string };
+    });
+};
+
+export const userOtpRequestBuilder = (
+  builder: ActionReducerMapBuilder<UserState>
+) => {
+  return builder
+    .addCase(userOtpRequest.pending, () => {
+      console.log("Pending...");
+    })
+    .addCase(userOtpRequest.fulfilled, (state, action) => {
+      console.log("Fulfilled...");
+      return { ...state, status: "success" };
+    })
+    .addCase(userOtpRequest.rejected, (state, action) => {
       console.log("Rejected...");
       return { ...state, status: "error", message: action.payload as string };
     });

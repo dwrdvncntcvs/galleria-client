@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getUserRefresherBuilder,
   signOutRequestBuilder,
+  userOtpRequestBuilder,
   userSignInBuilder,
   userSignUpRequestBuilder,
 } from "../builders/userBuilders";
@@ -55,6 +56,8 @@ const userSlice = createSlice({
 
     //Sign Up Request Reducer
     userSignUpRequestBuilder(builder);
+
+    userOtpRequestBuilder(builder);
   },
 });
 

@@ -1,46 +1,34 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { FormContainer, TextInput } from "../../components/global";
-import { OTP } from "../../models/User";
-import { httpService } from "../../services/httpService";
+import React, { useEffect } from "react";
+import OtpForm from "../../components/Otp/OtpForm";
+import { setMessage, setStatus } from "../../features/userSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 
 export default function Otp() {
-  const [otp, setOtp] = useState<string>("");
-  const [errorMsg, setErrorMsg] = useState<string>("");
-  const params = useParams();
-  const navigate = useNavigate();
+  const { userState } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
-  const submitOtp = async (e: FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    return () => {
+      dispatch(setStatus("none"));
+    };
+  }, []);
 
-    const body: OTP = { otp, email: params.email! };
+  const displayErrorMessage = () => {
+    if (userState.status === "error")
+      setTimeout(() => {
+        dispatch(setStatus("none"));
+        dispatch(setMessage(""));
+        return;
+      }, 5000);
 
-    try {
-      await httpService.post<OTP>("/user/verify", body);
-      setOtp("");
-      navigate("/");
-    } catch (e) {
-      console.log(e);
-      setErrorMsg("OTP Expired");
-    }
+    return <p>{userState.message}</p>;
   };
 
   return (
     <div>
       <h1>OTP</h1>
-      {errorMsg.length > 0 && <p>{errorMsg}</p>}
-      <FormContainer onSubmit={submitOtp}>
-        <TextInput
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            if (/[^0-9]/g.test(e.target.value)) return;
-            setOtp(e.target.value);
-          }}
-          placeholder="Enter Otp"
-          type="text"
-          value={otp!}
-        ></TextInput>
-        <button type="submit">Submit</button>
-      </FormContainer>
+      <OtpForm />
+      {userState.status === "error" && displayErrorMessage()}
     </div>
   );
 }

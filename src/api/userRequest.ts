@@ -47,8 +47,12 @@ export const userSignUpRequest = createAsyncThunk(
 
 export const userOtpRequest = createAsyncThunk(
   "user/otp",
-  async (data: OTP) => {
-    const responseData = await httpService.post<OTP>("/user/verify", data);
-    return responseData;
+  async (data: OTP, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.post<OTP>("/user/verify", data);
+      return responseData;
+    } catch (err: any) {
+      return rejectWithValue(err.response.data.msg);
+    }
   }
 );
