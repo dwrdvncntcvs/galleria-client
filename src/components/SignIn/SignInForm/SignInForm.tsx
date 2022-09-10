@@ -43,7 +43,7 @@ const SignInForm = () => {
     console.log("Clicked");
 
     await dispatch(userSignIn(data));
-    navigate("/home");
+    if (status === "success") navigate("/home");
   };
 
   return (
