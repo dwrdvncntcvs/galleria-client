@@ -21,7 +21,7 @@ export const userSignInBuilder = (
     })
     .addCase(userSignIn.rejected, (state, action) => {
       console.log("Sign in rejected");
-      return { ...state, status: "error" };
+      return { ...state, status: "error", message: action.payload as string };
     });
 };
 
@@ -73,9 +73,10 @@ export const userSignUpRequestBuilder = (
     })
     .addCase(userSignUpRequest.fulfilled, (state, action) => {
       console.log("Fulfilled...");
-      return { ...state, successMessage: "" };
+      return { ...state, status: "success" };
     })
-    .addCase(userSignUpRequest.rejected, (state) => {
+    .addCase(userSignUpRequest.rejected, (state, action) => {
       console.log("Rejected...");
+      return { ...state, status: "error", message: action.payload as string };
     });
 };

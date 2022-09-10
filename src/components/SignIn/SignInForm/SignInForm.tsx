@@ -1,14 +1,14 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
-import { setStatus } from "../../../features/userSlice";
+import { setMessage, setStatus } from "../../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { FormContainer, TextInput } from "../../global";
 import "./signInForm.scss";
 
 const SignInForm = () => {
-  const { status } = useAppSelector((state) => state.userState);
+  const { status, message } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +18,7 @@ const SignInForm = () => {
     if (status === "error")
       setTimeout(() => {
         dispatch(setStatus("none"));
+        dispatch(setMessage(""));
       }, 5000);
   }, [status]);
 
@@ -48,7 +49,7 @@ const SignInForm = () => {
 
   return (
     <FormContainer onSubmit={submit}>
-      {status === "error" && <p>Incorrect email or password.</p>}
+      {status === "error" && <p>{message}</p>}
       {inputFields.map(({ placeholder, type, value, onChange }, i) => (
         <TextInput
           key={i}

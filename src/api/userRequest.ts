@@ -1,15 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { rejects } from "assert";
 import { OTP, UserAuth, UserRegistration, UserState } from "../models/User";
 import { httpService } from "../services/httpService";
 
 export const userSignIn = createAsyncThunk(
   "user/signIn",
-  async (data: UserAuth) => {
-    const responseData = await httpService.post<UserState>(
-      "/user/sign-in",
-      data
-    );
-    return responseData;
+  async (data: UserAuth, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.post<UserState>(
+        "/user/sign-in",
+        data
+      );
+      return responseData;
+    } catch (err: any) {
+      return rejectWithValue(err.response.data.msg);
+    }
   }
 );
 
@@ -28,12 +33,16 @@ export const signOutRequest = createAsyncThunk("user/sign-out", async () => {
 
 export const userSignUpRequest = createAsyncThunk(
   "user/sign-up",
-  async (data: UserRegistration) => {
-    const responseData = await httpService.post<UserRegistration>(
-      "/user/sign-up",
-      data
-    );
-    return responseData;
+  async (data: UserRegistration, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.post<UserRegistration>(
+        "/user/sign-up",
+        data
+      );
+      return responseData;
+    } catch (err: any) {
+      return rejectWithValue(err?.response.data.msg);
+    }
   }
 );
 
