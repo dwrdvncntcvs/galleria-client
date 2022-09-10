@@ -21,7 +21,7 @@ export default function RestrictedRoutes() {
     };
 
     userState.accessToken === "" ? getAccessToken() : setIsLoading(false);
-  }, []);
+  }, [userState]);
 
   // return <Outlet />;
   return isLoading ? <p>Loading...</p> : <Outlet />;

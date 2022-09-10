@@ -2,18 +2,18 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import { Home, Otp, Portal, SignIn, SignUp } from "./pages";
-import { RestrictedRoutes } from "./routes";
+import { Persistent } from "./routes";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>  
+      <Routes>
         <Route path="/" element={<Portal />}>
           <Route path="" element={<SignIn />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path=":email/otp" element={<Otp />} />
         </Route>
-        <Route path="" element={<RestrictedRoutes />}>
+        <Route path="" element={<Persistent />}>
           <Route path="/home" element={<Home />} />
         </Route>
       </Routes>

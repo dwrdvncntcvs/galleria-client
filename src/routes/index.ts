@@ -1,1 +1,1 @@
-export { default as RestrictedRoutes } from "./RestrictedRoutes";
+export { default as Persistent } from "./Persistent";

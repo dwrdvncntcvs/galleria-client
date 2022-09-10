@@ -10,6 +10,7 @@ export const useRefreshToken = () => {
     const data = response.data;
 
     dispatch(setAuth({ accessToken: data.accessToken, isAuth: true }));
+    return data.accessToken;
   };
 
   return getRefreshToken;
