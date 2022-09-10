@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import { Home, Otp, Portal, SignIn, SignUp } from "./pages";
-import { Persistent } from "./routes";
+import { Persistent, RequiredAuth } from "./routes";
 
 function App() {
   return (
@@ -14,7 +14,9 @@ function App() {
           <Route path=":email/otp" element={<Otp />} />
         </Route>
         <Route path="" element={<Persistent />}>
-          <Route path="/home" element={<Home />} />
+          <Route element={<RequiredAuth />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
