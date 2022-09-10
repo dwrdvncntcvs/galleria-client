@@ -10,20 +10,26 @@ const SignIn = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(setStatus("none"));
-      dispatch(setMessage(""));
-    }, 5000);
-
     return () => {
       dispatch(setStatus("none"));
       dispatch(setMessage(""));
     };
   }, []);
 
+  const displayErrorMessage = () => {
+    if (userState.status === "error")
+      setTimeout(() => {
+        dispatch(setStatus("none"));
+        dispatch(setMessage(""));
+        return;
+      }, 5000);
+
+    return <p>{userState.message}</p>;
+  };
+
   return (
     <div className="si__main-container">
-      {userState.status === "error" && <p>{userState.message}</p>}
+      {userState.status === "error" && displayErrorMessage()}
       <h1>Sign In</h1>
       <SignInForm />
       <Link to="/sign-up">Doesn't have and account?</Link>
