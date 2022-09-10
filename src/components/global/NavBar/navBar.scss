@@ -1,0 +1,24 @@
+@import "../../../index.scss";
+
+.nb__main-container {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+
+  .nb__content-container {
+    @extend .flex-row;
+    width: 60%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .nb__button-group {
+      @extend .flex-row;
+      gap: 10px;
+    }
+  }
+}
