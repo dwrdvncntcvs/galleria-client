@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,4 +37,14 @@ code {
 
 button {
   cursor: pointer;
+}
+
+a {
+  color: $secondary-color;
+  text-decoration: none;
+  transition: all ease 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
