@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
@@ -9,13 +9,13 @@ import "./signUpForm.scss";
 const SignUpForm = () => {
   const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const inputFields = [
     {
@@ -51,6 +51,13 @@ const SignUpForm = () => {
       value: password,
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setPassword(e.target.value),
+    },
+    {
+      placeholder: "Re-type Password",
+      type: "password",
+      value: password2,
+      onChange: (e: ChangeEvent<HTMLInputElement>) =>
+        setPassword2(e.target.value),
     },
   ];
 
