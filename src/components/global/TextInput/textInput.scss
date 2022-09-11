@@ -1,6 +1,14 @@
+@import "../../../variables.scss";
+
 .ti__main-input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid gray;
   font-size: 14px;
+  transition: all ease 0.2s;
+  color: $secondary-color;
+
+  &:focus {
+    outline: 2px solid $secondary-color;
+  }
 }

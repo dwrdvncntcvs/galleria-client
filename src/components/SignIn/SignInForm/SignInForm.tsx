@@ -1,9 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
-import { FormContainer, TextInput } from "../../global";
+import { ButtonContainer, FormContainer, TextInput } from "../../global";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signInForm.scss";
 
 const SignInForm = () => {
@@ -11,7 +12,7 @@ const SignInForm = () => {
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
   const inputFields = [
     {
@@ -22,7 +23,7 @@ const SignInForm = () => {
     },
     {
       placeholder: "Password",
-      type: "password",
+      type: show ? "text" : "password",
       value: password,
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setPassword(e.target.value),
@@ -47,9 +48,14 @@ const SignInForm = () => {
           onChange={onChange}
         />
       ))}
-      <button className="s__button" type="submit">
-        Submit
-      </button>
+      <ButtonContainer>
+        <button className="s__button" type="submit">
+          Sign In
+        </button>
+        <button type="button" onClick={() => setShow((prev) => !prev)}>
+          {show ? <BsEyeSlashFill /> : <BsEyeFill />}
+        </button>
+      </ButtonContainer>
       {userState.status === "success" && <Navigate to="/home" />}
     </FormContainer>
   );

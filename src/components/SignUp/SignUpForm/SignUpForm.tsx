@@ -3,7 +3,8 @@ import { Navigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
-import { FormContainer, TextInput } from "../../global";
+import { ButtonContainer, FormContainer, TextInput } from "../../global";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
@@ -16,6 +17,7 @@ const SignUpForm = () => {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password2, setPassword2] = useState("");
+  const [show, setShow] = useState(false);
 
   const inputFields = [
     {
@@ -47,14 +49,14 @@ const SignUpForm = () => {
     },
     {
       placeholder: "Password",
-      type: "password",
+      type: !show ? "password" : "text",
       value: password,
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setPassword(e.target.value),
     },
     {
       placeholder: "Re-type Password",
-      type: "password",
+      type: !show ? "password" : "text",
       value: password2,
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setPassword2(e.target.value),
@@ -92,7 +94,12 @@ const SignUpForm = () => {
           onChange={onChange}
         />
       ))}
-      <button type="submit">Sign Up</button>
+      <ButtonContainer>
+        <button type="submit">Sign Up</button>
+        <button type="button" onClick={() => setShow((prev) => !prev)}>
+          {show ? <BsEyeSlashFill /> : <BsEyeFill />}
+        </button>
+      </ButtonContainer>
       {userState.status === "success" && <Navigate to={`/${email}/otp`} />}
     </FormContainer>
   );

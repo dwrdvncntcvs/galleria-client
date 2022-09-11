@@ -1,0 +1,30 @@
+@import "../../../variables.scss";
+@import "../../../index.scss";
+
+.btnC__mainContainer {
+  @extend .flex-row;
+  flex: 1;
+  width: 100%;
+  gap: 10px;
+
+  button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid $secondary-color;
+    background-color: $secondary-color;
+    font-size: 15px;
+    color: $quaternary-color;
+    font-weight: bold;
+  }
+
+  button:nth-child(1) {
+    flex: 5;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+  }
+}

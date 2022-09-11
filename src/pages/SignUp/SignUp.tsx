@@ -14,7 +14,7 @@ const SignUp = () => {
       dispatch(setStatus("none"));
       dispatch(setMessage(""));
     };
-  }, [userState.status]);
+  }, []);
 
   const displayErrorMessage = () => {
     if (userState.status === "error")
