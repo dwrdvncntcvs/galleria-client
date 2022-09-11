@@ -3,10 +3,10 @@ import "./textInput.scss";
 
 interface TextInputProps {
   key?: string | number;
-  placeholder: string;
-  type: string;
-  value: any;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  type?: string;
+  value?: any;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function TextInput({
