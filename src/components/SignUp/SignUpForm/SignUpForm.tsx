@@ -103,7 +103,8 @@ const SignUpForm = () => {
     setFirstName((prev) => ({ ...prev, value: "" }));
     setLastName((prev) => ({ ...prev, value: "" }));
     setUsername((prev) => ({ ...prev, value: "" }));
-    if (value.meta.requestStatus === "fulfilled") navigate(`/${email}/otp`);
+    if (value.meta.requestStatus === "fulfilled")
+      navigate(`/${email.value}/otp`);
   };
 
   return (
