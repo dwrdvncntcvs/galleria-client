@@ -6,33 +6,42 @@ import { UserAuth } from "../../../models/User";
 import { ButtonContainer, FormContainer, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signInForm.scss";
+import { useValidationMessage } from "../../../hooks/validationHook";
 
 const SignInForm = () => {
   const dispatch = useAppDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState({ value: "", message: "" });
+  const [password, setPassword] = useState({ value: "", message: "" });
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const validation = useValidationMessage();
 
   const inputFields = [
     {
       placeholder: "Email",
       type: "email",
-      value: email,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value),
+      value: email.value,
+      onChange: (e: ChangeEvent<HTMLInputElement>) => {
+        validation(setEmail, "email", e.target.value);
+        setEmail((prev) => ({ ...prev, value: e.target.value }));
+      },
+      error: email.message,
     },
     {
       placeholder: "Password",
       type: show ? "text" : "password",
-      value: password,
-      onChange: (e: ChangeEvent<HTMLInputElement>) =>
-        setPassword(e.target.value),
+      value: password.value,
+      onChange: (e: ChangeEvent<HTMLInputElement>) => {
+        validation(setPassword, "password", e.target.value);
+        setPassword((prev) => ({ ...prev, value: e.target.value }));
+      },
+      error: password.message,
     },
   ];
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const data: UserAuth = { email, password };
+    const data: UserAuth = { email: email.value, password: password.value };
 
     const response = await dispatch(userSignIn(data));
 
@@ -41,14 +50,17 @@ const SignInForm = () => {
 
   return (
     <FormContainer onSubmit={submit}>
-      {inputFields.map(({ placeholder, type, value, onChange }, i) => (
-        <TextInput
-          key={i}
-          placeholder={placeholder}
-          type={type}
-          value={value}
-          onChange={onChange}
-        />
+      {inputFields.map(({ placeholder, type, value, onChange, error }, i) => (
+        <>
+          <TextInput
+            key={i}
+            placeholder={placeholder}
+            type={type}
+            value={value}
+            onChange={onChange}
+          />
+          {error ? <p>{error}</p> : null}
+        </>
       ))}
       <ButtonContainer>
         <button className="s__button" type="submit">
