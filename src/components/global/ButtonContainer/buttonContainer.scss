@@ -19,6 +19,11 @@
     font-size: 15px;
     color: $quaternary-color;
     font-weight: bold;
+    transition: all ease 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   button:nth-child(1) {
