@@ -1,0 +1,6 @@
+@import "../../../variables.scss";
+@import "../../../index.scss";
+
+.f__main-container {
+  @extend .flex-row;
+}

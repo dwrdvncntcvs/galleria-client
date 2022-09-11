@@ -23,7 +23,7 @@ const Portal = () => {
         <section>
           <MainImage />
         </section>
-        <section>
+        <section className={"p__outlet-container"}>
           <Outlet />
         </section>
       </div>

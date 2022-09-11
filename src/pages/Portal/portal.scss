@@ -1,4 +1,5 @@
 @import "../../index.scss";
+@import "../../variables.scss";
 
 .p__main-container {
   @extend .flex-column;
@@ -11,7 +12,7 @@
 
   .p__content-container {
     @extend .flex-row;
-    flex: 10;
+    flex: 15;
 
     section:nth-child(1) {
       display: flex;
@@ -26,6 +27,8 @@
       flex-wrap: wrap;
       flex: 2;
       flex-shrink: 1;
+      justify-content: center;
+      align-items: center;
     }
   }
 
@@ -35,5 +38,6 @@
     flex: 1;
     justify-content: center;
     align-items: center;
+    background-color: $secondary-color;
   }
 }
