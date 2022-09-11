@@ -1,18 +1,18 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { ButtonContainer, FormContainer, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signInForm.scss";
 
 const SignInForm = () => {
-  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const inputFields = [
     {
@@ -34,7 +34,9 @@ const SignInForm = () => {
     e.preventDefault();
     const data: UserAuth = { email, password };
 
-    await dispatch(userSignIn(data));
+    const response = await dispatch(userSignIn(data));
+
+    if (response.meta.requestStatus === "fulfilled") navigate("/home");
   };
 
   return (
@@ -56,7 +58,6 @@ const SignInForm = () => {
           {show ? <BsEyeSlashFill /> : <BsEyeFill />}
         </button>
       </ButtonContainer>
-      {userState.status === "success" && <Navigate to="/home" />}
     </FormContainer>
   );
 };

@@ -1,14 +1,13 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
 import { ButtonContainer, FormContainer, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signUpForm.scss";
 
 const SignUpForm = () => {
-  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState("");
@@ -18,6 +17,7 @@ const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [password2, setPassword2] = useState("");
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const inputFields = [
     {
@@ -74,13 +74,14 @@ const SignUpForm = () => {
       password,
     };
 
-    console.table(body);
-    await dispatch(userSignUpRequest(body));
+    const value = await dispatch(userSignUpRequest(body));
     setEmail("");
     setPassword("");
+    setPassword2("");
     setFirstName("");
     setLastName("");
     setUsername("");
+    if (value.meta.requestStatus === "fulfilled") navigate(`/${email}/otp`);
   };
 
   return (
@@ -100,7 +101,6 @@ const SignUpForm = () => {
           {show ? <BsEyeSlashFill /> : <BsEyeFill />}
         </button>
       </ButtonContainer>
-      {userState.status === "success" && <Navigate to={`/${email}/otp`} />}
     </FormContainer>
   );
 };

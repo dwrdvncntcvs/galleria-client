@@ -1,22 +1,24 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { Navigate, Route, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { userOtpRequest } from "../../api/userRequest";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import { useAppDispatch } from "../../hooks/reduxHook";
 import { OTP } from "../../models/User";
 import { ButtonContainer, FormContainer, TextInput } from "../global";
 
 export default function OtpForm() {
-  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string>("");
   const params = useParams();
+  const navigate = useNavigate();
 
   const submitOtp = async (e: FormEvent) => {
     e.preventDefault();
 
     const body: OTP = { otp, email: params.email! };
 
-    await dispatch(userOtpRequest(body));
+    const response = await dispatch(userOtpRequest(body));
+
+    if (response.meta.requestStatus === "fulfilled") navigate("/");
   };
 
   return (
@@ -49,7 +51,6 @@ export default function OtpForm() {
       <ButtonContainer>
         <button type="submit">Submit</button>
       </ButtonContainer>
-      {userState.status === "success" && <Navigate to="/" />}
     </FormContainer>
   );
 }
