@@ -7,4 +7,22 @@
   height: 100%;
   justify-content: center;
   align-items: center;
+
+  section {
+    padding: 12px;
+  }
+
+  section:nth-child(1) {
+    @extend .flex-column;
+    flex: 2;
+    width: 100%;
+    height: 100%;
+  }
+
+  section:nth-child(2) {
+    @extend .flex-column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+  }
 }
