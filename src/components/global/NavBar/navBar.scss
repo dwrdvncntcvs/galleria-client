@@ -1,4 +1,5 @@
 @import "../../../index.scss";
+@import "../../../variables.scss";
 
 .nb__main-container {
   display: flex;
@@ -10,7 +11,7 @@
 
   .nb__content-container {
     @extend .flex-row;
-    width: 60%;
+    width: 50%;
     height: 100%;
     justify-content: space-between;
     align-items: center;
@@ -23,16 +24,22 @@
       align-items: center;
       gap: 10px;
 
-      input {
-        padding: 5px;
-        padding-inline: 20px;
-        border: none;
-        background-color: $quaternary-color;
-        border-radius: 20px;
+      h1 {
+        font-family: 'Ms Madi', cursive;
+        font-size: 30px;
+        color: $secondary-color;
+      }
+    }
 
-        &:focus {
-          outline: none;
-        }
+    input {
+      padding: 5px;
+      padding-inline: 20px;
+      border: none;
+      background-color: $quaternary-color;
+      border-radius: 5px;
+
+      &:focus {
+        outline: none;
       }
     }
 

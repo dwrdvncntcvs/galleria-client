@@ -8,7 +8,6 @@ const Home = () => {
     <div className="h__main-container">
       <ContentContainer>
         <section>
-          <h1>Home</h1>
           <CreatePost />
         </section>
         <section>

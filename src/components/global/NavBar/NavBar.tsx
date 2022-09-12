@@ -18,9 +18,9 @@ export default function NavBar() {
             src={appIcon}
             alt=""
           />
-          <input type="text" placeholder="Galleria" />
+          <h1>Galleria</h1>
         </section>
-        <nav></nav>
+        <input type="text" placeholder="Galleria Search ..." />
         <section className="nb__button-group">
           <button onClick={async (e) => await dispatch(signOutRequest())}>
             <BsBoxArrowRight />
