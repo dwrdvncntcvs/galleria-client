@@ -14,15 +14,6 @@ export default function RestrictedRoutes() {
   const refresh = useRefreshToken();
 
   useEffect(() => {
-    const getUser = async () => {
-      console.log("Getting User");
-      await dispatch(getUserRequest({ privateInstance }));
-    };
-
-    if (userState.accessToken !== "") {
-      getUser();
-    }
-
     const getAccessToken = async () => {
       try {
         await refresh();

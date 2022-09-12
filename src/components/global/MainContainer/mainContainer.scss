@@ -3,6 +3,6 @@
 .mc__main-container {
   @extend .flex-column;
   @extend .page-size;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

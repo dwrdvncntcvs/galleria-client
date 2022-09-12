@@ -8,6 +8,8 @@
   box-shadow: 1px 1px 3px 1px rgba(95, 95, 95, 0.5);
   align-items: center;
   justify-content: center;
+  position: fixed;
+  background-color: white;
 
   .nb__content-container {
     @extend .flex-row;
@@ -25,7 +27,7 @@
       gap: 10px;
 
       h1 {
-        font-family: 'Ms Madi', cursive;
+        font-family: "Ms Madi", cursive;
         font-size: 30px;
         color: $secondary-color;
       }

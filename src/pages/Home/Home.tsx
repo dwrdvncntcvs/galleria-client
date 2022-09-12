@@ -1,6 +1,6 @@
 import React from "react";
 import { ContentContainer } from "../../components/global";
-import { CreatePost } from "../../components/Home";
+import { CreatePost, Posts } from "../../components/Home";
 import { useAppSelector } from "../../hooks/reduxHook";
 import "./home.scss";
 
@@ -16,6 +16,7 @@ const Home = () => {
             imageUrl={userState.userData?.Profile?.profileImage!}
             firstName={userState.userData?.first_name!}
           />
+          <Posts />
         </section>
         <section>
           <h1>Side</h1>

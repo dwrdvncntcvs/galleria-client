@@ -1,0 +1,38 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.pc__main-container {
+  @extend .flex-column;
+  background-color: white;
+  box-shadow: 0px 1px 3px 1px lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 10px;
+
+  .pc__header-container {
+    @extend .flex-row;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      object-fit: cover;
+    }
+
+    p:nth-child(1) {
+      font-size: 1rem;
+    }
+
+    p:nth-child(2) {
+      font-size: 0.75rem;
+      color: gray;
+    }
+  }
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+}
