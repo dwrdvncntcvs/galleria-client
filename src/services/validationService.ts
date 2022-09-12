@@ -1,3 +1,5 @@
+import { debounce } from "../utils/helper";
+
 export type Validation = {
   user: (
     type: string,
@@ -153,3 +155,8 @@ export const hasError = (...state: any[]) =>
   state.filter((element) => element.value === "").length > 0
     ? true
     : false;
+
+export const validationDebounce = debounce((arr) => {
+  const { validation, target, setter, type, secondValue } = arr[0];
+  return validation(setter, type, target, secondValue);
+}, 200);

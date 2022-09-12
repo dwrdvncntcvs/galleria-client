@@ -7,7 +7,10 @@ import { ButtonContainer, FormContainer, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signUpForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
-import { hasError } from "../../../services/validationService";
+import {
+  hasError,
+  validationDebounce,
+} from "../../../services/validationService";
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +31,12 @@ const SignUpForm = () => {
       type: "text",
       value: firstName.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setFirstName, "firstName", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setFirstName,
+          type: "firstName",
+        });
         setFirstName((prev) => ({ ...prev, value: e.target.value }));
       },
       error: firstName.message,
@@ -38,7 +46,12 @@ const SignUpForm = () => {
       type: "text",
       value: lastName.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setLastName, "lastName", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setLastName,
+          type: "lastName",
+        });
         setLastName((prev) => ({ ...prev, value: e.target.value }));
       },
       error: lastName.message,
@@ -48,7 +61,12 @@ const SignUpForm = () => {
       type: "text",
       value: username.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setUsername, "username", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setUsername,
+          type: "username",
+        });
         setUsername((prev) => ({ ...prev, value: e.target.value }));
       },
       error: username.message,
@@ -58,7 +76,12 @@ const SignUpForm = () => {
       type: "email",
       value: email.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setEmail, "email", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setEmail,
+          type: "email",
+        });
         setEmail((prev) => ({ ...prev, value: e.target.value }));
       },
       error: email.message,
@@ -68,7 +91,12 @@ const SignUpForm = () => {
       type: !show ? "password" : "text",
       value: password.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setPassword, "password", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setPassword,
+          type: "password",
+        });
         setPassword((prev) => ({ ...prev, value: e.target.value }));
       },
       error: password.message,
@@ -78,7 +106,13 @@ const SignUpForm = () => {
       type: !show ? "password" : "text",
       value: password2.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setPassword2, "password2", e.target.value, password.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setPassword2,
+          type: "password2",
+          secondValue: password.value,
+        });
         setPassword2((prev) => ({ ...prev, value: e.target.value }));
       },
       error: password2.message,
