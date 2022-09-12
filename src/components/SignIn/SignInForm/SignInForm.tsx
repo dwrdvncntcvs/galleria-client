@@ -7,6 +7,7 @@ import { ButtonContainer, FormContainer, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signInForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
+import { validationDebounce } from "../../../services/validationService";
 
 const SignInForm = () => {
   const dispatch = useAppDispatch();
@@ -22,7 +23,12 @@ const SignInForm = () => {
       type: "email",
       value: email.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setEmail, "email", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setEmail,
+          type: "email",
+        });
         setEmail((prev) => ({ ...prev, value: e.target.value }));
       },
       error: email.message,
@@ -32,7 +38,12 @@ const SignInForm = () => {
       type: show ? "text" : "password",
       value: password.value,
       onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validation(setPassword, "password", e.target.value);
+        validationDebounce({
+          validation,
+          target: e.target.value,
+          setter: setPassword,
+          type: "password",
+        });
         setPassword((prev) => ({ ...prev, value: e.target.value }));
       },
       error: password.message,
