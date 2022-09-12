@@ -1,0 +1,8 @@
+@import "../../index.scss";
+@import "../../variables.scss";
+
+.h__main-container {
+  @extend .flex-column;
+  width: 100%;
+  height: 100%;
+}
