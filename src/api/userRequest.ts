@@ -1,5 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { OTP, UserAuth, UserRegistration, UserState } from "../models/User";
+import {
+  OTP,
+  UserAuth,
+  UserProfile,
+  UserRegistration,
+  UserState,
+  UserToken,
+} from "../models/User";
 import { httpService } from "../services/httpService";
 
 export const userSignIn = createAsyncThunk(
@@ -53,6 +60,19 @@ export const userOtpRequest = createAsyncThunk(
       return responseData;
     } catch (err: any) {
       return rejectWithValue(err.response.data.msg);
+    }
+  }
+);
+
+export const getUserRequest = createAsyncThunk(
+  "user/getUserRequest",
+  async ({ token }: UserToken, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.get<UserProfile>("/user");
+
+      console.log("User Data: ", responseData);
+    } catch (err: any) {
+      rejectWithValue(err.response.data.msg);
     }
   }
 );

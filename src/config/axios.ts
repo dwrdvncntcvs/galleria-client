@@ -1,7 +1,16 @@
 import axios from "axios";
 
+const BASE_URL = "http://localhost:5000";
+
 export const instance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: BASE_URL,
 });
 
-instance.defaults.withCredentials = true; 
+export const privateInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
+
+instance.defaults.withCredentials = true;
+
+

@@ -6,7 +6,6 @@ export interface User {
   last_name?: string;
   username?: string;
   email?: string;
-  password?: string;
   refreshToken?: string;
   verified?: boolean;
   createdAt?: Date;
@@ -32,7 +31,7 @@ export interface UserRegistration {
 export interface UserState {
   refreshToken?: string;
   accessToken?: string;
-  userData?: User;
+  userData?: UserProfile;
   isAuth?: boolean;
   status?: "error" | "success" | "none";
   message?: string;
@@ -41,4 +40,8 @@ export interface UserState {
 export interface OTP {
   email: string;
   otp: string;
+}
+
+export interface UserToken {
+  token: string
 }

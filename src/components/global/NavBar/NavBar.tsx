@@ -1,7 +1,7 @@
 import React from "react";
 import { signOutRequest } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import { BsBoxArrowRight } from "react-icons/bs";
+import { BsDoorOpenFill } from "react-icons/bs";
 import "./navBar.scss";
 
 export default function NavBar() {
@@ -17,7 +17,7 @@ export default function NavBar() {
         <input type="text" placeholder="Galleria Search ..." />
         <section className="nb__button-group">
           <button onClick={async (e) => await dispatch(signOutRequest())}>
-            <BsBoxArrowRight />
+            <BsDoorOpenFill />
           </button>
         </section>
       </section>

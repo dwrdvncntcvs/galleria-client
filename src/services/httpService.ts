@@ -30,4 +30,4 @@ export const httpService: Http = {
     );
     return response.data as T;
   },
-  };
+};
