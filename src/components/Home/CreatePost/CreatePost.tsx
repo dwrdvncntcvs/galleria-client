@@ -23,7 +23,7 @@ export default function CreatePost({
         )}
       </div>
       <button className="cp__text-input">
-        <p>Post Something ...</p>
+        <p>What's on your mind {firstName}?</p>
       </button>
     </div>
   );

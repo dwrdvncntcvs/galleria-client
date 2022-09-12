@@ -2,18 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { getUserRequest } from "../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import { usePrivateAxios } from "../hooks/usePrivateAxios";
 import { useRefreshToken } from "../hooks/useRefreshToken";
 
 export default function RestrictedRoutes() {
   const [isLoading, setIsLoading] = useState(true);
   const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const privateInstance = usePrivateAxios();
 
   const refresh = useRefreshToken();
 
   useEffect(() => {
-    if (userState.accessToken !== "")
-      dispatch(getUserRequest({ token: userState.accessToken! }));
+    const getUser = async () => {
+      console.log("Getting User");
+      await dispatch(getUserRequest({ privateInstance }));
+    };
+
+    if (userState.accessToken !== "") {
+      getUser();
+    }
 
     const getAccessToken = async () => {
       try {
@@ -26,7 +34,7 @@ export default function RestrictedRoutes() {
     };
 
     userState.accessToken === "" ? getAccessToken() : setIsLoading(false);
-  }, [userState]);
+  }, [userState.accessToken]);
 
   // return <Outlet />;
   return isLoading ? <p>Loading...</p> : <Outlet />;

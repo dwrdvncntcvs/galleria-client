@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { usePrivateAxios } from "../hooks/usePrivateAxios";
 import {
   OTP,
   UserAuth,
@@ -7,7 +8,7 @@ import {
   UserState,
   UserToken,
 } from "../models/User";
-import { httpService } from "../services/httpService";
+import { httpService, privateHttpService } from "../services/httpService";
 
 export const userSignIn = createAsyncThunk(
   "user/signIn",
@@ -66,11 +67,17 @@ export const userOtpRequest = createAsyncThunk(
 
 export const getUserRequest = createAsyncThunk(
   "user/getUserRequest",
-  async ({ token }: UserToken, { rejectWithValue }) => {
+  async ({ privateInstance }: any, { rejectWithValue }) => {
+    console.log("Getting");
+    console.log(privateInstance);
+
     try {
-      const responseData = await httpService.get<UserProfile>("/user");
+      const responseData = await privateHttpService(
+        privateInstance
+      ).get<UserProfile>("/user");
 
       console.log("User Data: ", responseData);
+      return responseData;
     } catch (err: any) {
       rejectWithValue(err.response.data.msg);
     }
