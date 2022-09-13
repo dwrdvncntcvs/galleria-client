@@ -31,7 +31,7 @@ export default function PostCard({ post }: PostProps) {
       </div>
       <p>{content}</p>
       {ImagePost.map(({ id, postImageUrl }) => (
-        <img src={postImageUrl} alt={`${User.first_name}'s post`} />
+        <img src={postImageUrl} alt={`${User.first_name}'s post`} key={id} />
       ))}
     </div>
   );

@@ -35,18 +35,18 @@ export default function NavLinks({ user }: NavLinksProps) {
 
   return (
     <nav>
-      {links.map(({ to, isIcon, Icon, isImage, image, isActive }) => {
+      {links.map(({ to, isIcon, Icon, isImage, image, isActive }, i) => {
         let component: any;
         console.log(isActive);
         if (isIcon)
           component = (
-            <Link className="nl__button-link" to={to}>
+            <Link className="nl__button-link" to={to} key={i}>
               <Icon size={18} />
             </Link>
           );
         else if (isImage)
           component = (
-            <Link className="nl__button-link" to={to}>
+            <Link className="nl__button-link" to={to} key={i}>
               <img src={image.src} alt={image.alt} />
             </Link>
           );

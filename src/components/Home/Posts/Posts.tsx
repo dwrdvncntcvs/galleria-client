@@ -27,7 +27,7 @@ export default function Posts() {
   return (
     <>
       {postState.posts.map((post, i) => (
-        <PostCard post={post} />
+        <PostCard post={post} key={post.id} />
       ))}
     </>
   );
