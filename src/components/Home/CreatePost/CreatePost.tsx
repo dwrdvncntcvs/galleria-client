@@ -1,8 +1,7 @@
 import React from "react";
 import "./createPost.scss";
 import { BsPersonFill } from "react-icons/bs";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 
 interface CreatePostProps {
@@ -16,7 +15,6 @@ export default function CreatePost({
   imageUrl = "",
   firstName,
 }: CreatePostProps) {
-  const { status, name } = useAppSelector((state) => state.modalState);
   const dispatch = useAppDispatch();
 
   return (
