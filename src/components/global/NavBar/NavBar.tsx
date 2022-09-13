@@ -25,11 +25,11 @@ export default function NavBar() {
         <input type="text" placeholder="Galleria Search ..." />
         <section className="nb__button-group">
           <button onClick={async (e) => await dispatch(signOutRequest())}>
-            <HiPlus size={15} />
+            <HiPlus size={18} />
           </button>
           <NavLinks user={userState.userData!} />
           <button onClick={signOutAction}>
-            <HiLogout size={15} />
+            <HiLogout size={18} />
           </button>
         </section>
       </section>

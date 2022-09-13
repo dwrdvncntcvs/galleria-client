@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
-import { HiOutlineHome } from "react-icons/hi";
+import { HiOutlineHome, HiHome } from "react-icons/hi";
 import "./navLinks.scss";
 
 interface NavLinksProps {
@@ -9,8 +9,19 @@ interface NavLinksProps {
 }
 
 export default function NavLinks({ user }: NavLinksProps) {
+  const location = useLocation();
+
+  const activeURL = (endpoint: string) => {
+    return endpoint === location.pathname ? true : false;
+  };
+
   const links = [
-    { to: "/home", isIcon: true, Icon: HiOutlineHome },
+    {
+      to: "/home",
+      isIcon: true,
+      Icon: activeURL("/home") ? HiHome : HiOutlineHome,
+      isActive: activeURL("/home"),
+    },
     {
       to: `/${user.username}`,
       isImage: true,
@@ -18,18 +29,19 @@ export default function NavLinks({ user }: NavLinksProps) {
         src: user.Profile?.profileImage,
         alt: `${user.first_name}'s avatar`,
       },
+      isActive: activeURL(`/${user.username}`),
     },
   ];
 
   return (
     <nav>
-      {links.map(({ to, isIcon, Icon, isImage, image }) => {
+      {links.map(({ to, isIcon, Icon, isImage, image, isActive }) => {
         let component: any;
-
+        console.log(isActive);
         if (isIcon)
           component = (
             <Link className="nl__button-link" to={to}>
-              <Icon size={15} />
+              <Icon size={18} />
             </Link>
           );
         else if (isImage)

@@ -16,8 +16,8 @@ nav {
     font-weight: bold;
     border: none;
     font-size: 15px;
-    background-color: lightgray;
-    color: black;
+    background-color: $secondary-color;
+    color: white;
 
     &:hover {
       opacity: 0.5;
