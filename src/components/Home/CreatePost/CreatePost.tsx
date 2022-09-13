@@ -1,6 +1,9 @@
 import React from "react";
 import "./createPost.scss";
 import { BsPersonFill } from "react-icons/bs";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import { setModal } from "../../../features/modalSlice";
 
 interface CreatePostProps {
   userId: string;
@@ -13,6 +16,9 @@ export default function CreatePost({
   imageUrl = "",
   firstName,
 }: CreatePostProps) {
+  const { status, name } = useAppSelector((state) => state.modalState);
+  const dispatch = useAppDispatch();
+
   return (
     <div className="cp__main-container">
       <div className="cp__avatar-container">
@@ -22,7 +28,12 @@ export default function CreatePost({
           <img src={imageUrl} alt={`${firstName}'s avatar`} />
         )}
       </div>
-      <button className="cp__text-input">
+      <button
+        className="cp__text-input"
+        onClick={() =>
+          dispatch(setModal({ status: true, name: "createPostModal" }))
+        }
+      >
         <p>What's on your mind {firstName}?</p>
       </button>
     </div>

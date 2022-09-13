@@ -5,6 +5,7 @@ import { HiPlus, HiLogout } from "react-icons/hi";
 import "./navBar.scss";
 import NavLinks from "../NavLinks/NavLinks";
 import { useNavigate } from "react-router-dom";
+import { setModal } from "../../../features/modalSlice";
 
 export default function NavBar() {
   const { userState } = useAppSelector((state) => state);
@@ -24,7 +25,11 @@ export default function NavBar() {
         </section>
         <input type="text" placeholder="Galleria Search ..." />
         <section className="nb__button-group">
-          <button onClick={async (e) => await dispatch(signOutRequest())}>
+          <button
+            onClick={() =>
+              dispatch(setModal({ status: true, name: "createPostModal" }))
+            }
+          >
             <HiPlus size={18} />
           </button>
           <NavLinks user={userState.userData!} />

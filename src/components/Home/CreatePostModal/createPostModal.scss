@@ -1,0 +1,13 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.cpm__main-container {
+  @extend .flex-column;
+  background-color: white;
+  width: 500px;
+  height: 300px;
+  max-height: 800px;
+  padding: 20px;
+  transition: all ease 0.2s;
+  border-radius: 10px;
+}

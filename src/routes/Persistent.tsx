@@ -24,7 +24,14 @@ export default function RestrictedRoutes() {
       }
     };
 
-    userState.accessToken === "" ? getAccessToken() : setIsLoading(false);
+    if (userState.accessToken === "") {
+      getAccessToken();
+    } else {
+      dispatch(getUserRequest({ privateInstance }));
+      setIsLoading(false);
+    }
+
+    // userState.accessToken === "" ? getAccessToken() : setIsLoading(false);
   }, [userState.accessToken]);
 
   // return <Outlet />;
