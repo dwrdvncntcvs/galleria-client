@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import { MainContainer, NavBar } from "./components/global";
-import { Home, Otp, Portal, SignIn, SignUp } from "./pages";
+import { Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
 import { Persistent, RequiredAuth } from "./routes";
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
             <Route element={<RequiredAuth />}>
               <Route path="/home" element={<Home />} />
             </Route>
+            <Route path="/:username" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>

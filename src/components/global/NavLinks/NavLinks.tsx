@@ -12,7 +12,7 @@ export default function NavLinks({ user }: NavLinksProps) {
   const links = [
     { to: "/home", isIcon: true, Icon: HiOutlineHome },
     {
-      to: "/",
+      to: `/${user.username}`,
       isImage: true,
       image: {
         src: user.Profile?.profileImage,
