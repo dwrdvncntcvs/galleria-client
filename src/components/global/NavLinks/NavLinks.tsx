@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
-import { BsHouseFill } from "react-icons/bs";
+import { HiOutlineHome } from "react-icons/hi";
 import "./navLinks.scss";
 
 interface NavLinksProps {
@@ -10,7 +10,7 @@ interface NavLinksProps {
 
 export default function NavLinks({ user }: NavLinksProps) {
   const links = [
-    { to: "/home", isIcon: true, Icon: BsHouseFill },
+    { to: "/home", isIcon: true, Icon: HiOutlineHome },
     {
       to: "/",
       isImage: true,
