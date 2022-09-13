@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getAllPosts } from "../../../features/postSlice";
+import { getAllPosts } from "../../../api/postRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import PostCard from "../PostCard/PostCard";
