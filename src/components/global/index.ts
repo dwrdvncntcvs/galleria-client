@@ -5,3 +5,4 @@ export { default as NavBar } from "./NavBar/NavBar";
 export { default as ButtonContainer } from "./ButtonContainer/ButtonContainer";
 export { default as MainContainer } from "./MainContainer/MainContainer";
 export { default as ContentContainer } from "./ContentContainer/ContentContainer";
+export { default as NavLinks } from "./NavLinks/NavLinks";

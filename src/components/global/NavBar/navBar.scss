@@ -48,6 +48,7 @@
     .nb__button-group {
       @extend .flex-row;
       gap: 10px;
+      align-items: center;
 
       button {
         display: flex;
@@ -59,6 +60,11 @@
         font-weight: bold;
         border: none;
         font-size: 15px;
+        background-color: lightgray;
+
+        &:hover {
+          opacity: 0.5;
+        }
       }
     }
   }
