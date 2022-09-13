@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { Post } from "../../../models/Post";
 import "./postCard.scss";
@@ -11,7 +12,8 @@ export default function PostCard({ post }: PostProps) {
 
   console.log(ImagePost);
 
-  const convertDate = (date: Date) => new Date(date).toDateString();
+  const convertDate = (date: Date) =>
+    moment(date).format("MMMM Do, YYYY | h:mm A");
 
   return (
     <div className="pc__main-container">
