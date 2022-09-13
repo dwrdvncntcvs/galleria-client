@@ -1,6 +1,6 @@
 import React from "react";
-import { ContentContainer } from "../../components/global";
-import { CreatePost, Posts } from "../../components/Home";
+import { ContentContainer, StickyPanel } from "../../components/global";
+import { CreatePost, Posts, SidePanel } from "../../components/Home";
 import { useAppSelector } from "../../hooks/reduxHook";
 import "./home.scss";
 
@@ -19,7 +19,9 @@ const Home = () => {
           <Posts />
         </section>
         <section>
-          <h1>Side</h1>
+          <StickyPanel>
+            <SidePanel />
+          </StickyPanel>
         </section>
       </ContentContainer>
     </div>

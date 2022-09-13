@@ -10,6 +10,7 @@
   justify-content: center;
   position: fixed;
   background-color: white;
+  z-index: 2;
 
   .nb__content-container {
     @extend .flex-row;
