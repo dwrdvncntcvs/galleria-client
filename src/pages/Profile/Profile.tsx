@@ -1,6 +1,23 @@
 import React from "react";
+import {
+  AdjustedNavContainer,
+  ContentContainer,
+} from "../../components/global";
 import "./profile.scss";
 
 export default function Profile() {
-  return <div>Profile</div>;
+  return (
+    <AdjustedNavContainer>
+      <div className="profile__main-container">
+        <ContentContainer>
+          <section>
+            <h1>Profile</h1>
+          </section>
+          <section>
+            <h1>Side</h1>
+          </section>
+        </ContentContainer>
+      </div>
+    </AdjustedNavContainer>
+  );
 }

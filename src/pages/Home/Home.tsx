@@ -13,7 +13,8 @@ const Home = () => {
 
   return (
     <AdjustedNavContainer>
-      <div className="h__main-container">
+
+    <div className="h__main-container">
         <ContentContainer>
           <section>
             <CreatePost
@@ -29,8 +30,9 @@ const Home = () => {
             </StickyPanel>
           </section>
         </ContentContainer>
-      </div>
-    </AdjustedNavContainer>
+    </div>
+      </AdjustedNavContainer>
+
   );
 };
 
