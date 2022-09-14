@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
@@ -8,51 +8,37 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signInForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
 import { validationDebounce } from "../../../services/validationService";
+import { signInFields } from "./inputFields";
 
 const SignInForm = () => {
   const dispatch = useAppDispatch();
-  const [email, setEmail] = useState({ value: "", message: "" });
-  const [password, setPassword] = useState({ value: "", message: "" });
+  const [userAuthData, setUserAuthData] = useState<UserAuth>({
+    email: "",
+    password: "",
+  });
+  const [errorMessage, setErrorMessage] = useState<UserAuth>({
+    email: "",
+    password: "",
+  });
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const validation = useValidationMessage();
 
-  const inputFields = [
-    {
-      placeholder: "Email",
-      type: "email",
-      value: email.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setEmail,
-          type: "email",
-        });
-        setEmail((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: email.message,
-    },
-    {
-      placeholder: "Password",
-      type: show ? "text" : "password",
-      value: password.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setPassword,
-          type: "password",
-        });
-        setPassword((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: password.message,
-    },
-  ];
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+    validationDebounce({
+      validation,
+      target: e.target.value,
+      setter: setErrorMessage,
+      name,
+    });
+
+    setUserAuthData((prev) => ({ ...prev, [name]: e.target.value }));
+  };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const data: UserAuth = { email: email.value, password: password.value };
+    const data: UserAuth = userAuthData;
 
     const response = await dispatch(userSignIn(data));
 
@@ -61,18 +47,20 @@ const SignInForm = () => {
 
   return (
     <FormContainer onSubmit={submit}>
-      {inputFields.map(({ placeholder, type, value, onChange, error }, i) => (
-        <>
-          <TextInput
-            key={i}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onChange}
-          />
-          {error ? <p>{error}</p> : null}
-        </>
-      ))}
+      {signInFields(handleChange, userAuthData, errorMessage, show).map(
+        ({ placeholder, type, value, onChange, error, name }, i) => (
+          <Fragment key={i}>
+            <TextInput
+              name={name}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onChange}
+            />
+            {error ? <p>{error}</p> : null}
+          </Fragment>
+        )
+      )}
       <ButtonContainer>
         <button className="s__button" type="submit">
           Sign In

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
@@ -81,17 +81,16 @@ const SignUpForm = () => {
     <FormContainer onSubmit={signUpAction}>
       {signUpInputFields(handleChange, userRegData, errorMessage, show).map(
         ({ placeholder, type, value, onChange, error, name }, i) => (
-          <>
+          <Fragment key={i}>
             <TextInput
               name={name}
-              key={i}
               placeholder={placeholder}
               type={type}
               value={value}
               onChange={onChange}
             />
             {error !== "" ? <p>{error}</p> : ""}
-          </>
+          </Fragment>
         )
       )}
       <ButtonContainer>

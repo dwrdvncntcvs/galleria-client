@@ -29,6 +29,11 @@ export interface UserRegistration {
   password2?: string;
 }
 
+export interface UserAuth {
+  email: string;
+  password: string;
+}
+
 export interface UserState {
   refreshToken?: string;
   accessToken?: string;
