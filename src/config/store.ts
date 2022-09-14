@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { modalReducer, postReducer, userReducer } from "../features";
+import { modalReducer, postReducer, toggleReducer, userReducer } from "../features";
 
 export const store = configureStore({
   reducer: {
     userState: userReducer,
     postState: postReducer,
     modalState: modalReducer,
+    toggleState: toggleReducer,
   },
 });
 
