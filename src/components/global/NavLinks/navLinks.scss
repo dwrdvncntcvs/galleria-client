@@ -10,14 +10,15 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 1000px;
     font-weight: bold;
     border: none;
     font-size: 15px;
-    background-color: $secondary-color;
-    color: white;
+    background-color: transparent;
+    border: 2px solid $primary-color;
+    color:  $primary-color;
 
     &:hover {
       opacity: 0.5;
@@ -25,8 +26,8 @@ nav {
 
     img {
       border-radius: 1000px;
-      width: 35px;
-      height: 35px;
+      width: 25px;
+      height: 25px;
       object-fit: cover;
     }
   }
