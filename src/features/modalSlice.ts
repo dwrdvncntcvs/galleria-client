@@ -16,14 +16,19 @@ const modalSlice = createSlice({
   reducers: {
     setModal: (state, action) => {
       return {
-        ...state,
         status: action.payload.status,
         name: action.payload.name,
+      };
+    },
+    closeModal: () => {
+      return {
+        status: false,
+        name: "",
       };
     },
   },
 });
 
-export const { setModal } = modalSlice.actions;
+export const { setModal, closeModal } = modalSlice.actions;
 
 export default modalSlice.reducer;
