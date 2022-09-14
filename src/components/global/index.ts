@@ -8,3 +8,4 @@ export { default as ContentContainer } from "./ContentContainer/ContentContainer
 export { default as NavLinks } from "./NavLinks/NavLinks";
 export { default as StickyPanel } from "./StickyPanel/StickyPanel";
 export { default as Backdrop } from "./Backdrop/Backdrop";
+export { default as AdjustedNavContainer } from "./AdjustedNavContainer/AdjustedWithNavContainer";
