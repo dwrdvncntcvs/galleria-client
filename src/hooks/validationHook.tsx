@@ -1,14 +1,16 @@
 import { validationService } from "../services/validationService";
 
 export const useValidationMessage = () => {
-  return (setter: any, type: string, input: string, secondValue?: string) => {
+  return (setter: any, name: string, input: string, secondValue?: string) => {
     const [isError, errorMessage] = validationService.user(
-      type,
+      name,
       input,
       secondValue
     );
 
-    if (isError) setter((prev: any) => ({ ...prev, message: errorMessage }));
-    else setter((prev: any) => ({ ...prev, message: "" }));
+    console.log(errorMessage);
+
+    if (isError) setter((prev: any) => ({ ...prev, [name]: errorMessage }));
+    else setter((prev: any) => ({ ...prev, [name]: "" }));
   };
 };

@@ -8,162 +8,99 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signUpForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
 import {
+  emptyInput,
   hasError,
   validationDebounce,
 } from "../../../services/validationService";
+import { signUpInputFields } from "./inputFields";
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
+  const [userRegData, setUserRegData] = useState<UserRegistration>({
+    email: "",
+    first_name: "",
+    last_name: "",
+    username: "",
+    password: "",
+    password2: "",
+  });
+  const [errorMessage, setErrorMessage] = useState<UserRegistration>({
+    email: "",
+    first_name: "",
+    last_name: "",
+    username: "",
+    password: "",
+    password2: "",
+  });
 
-  const [email, setEmail] = useState({ value: "", message: "" });
-  const [password, setPassword] = useState({ value: "", message: "" });
-  const [firstName, setFirstName] = useState({ value: "", message: "" });
-  const [lastName, setLastName] = useState({ value: "", message: "" });
-  const [username, setUsername] = useState({ value: "", message: "" });
-  const [password2, setPassword2] = useState({ value: "", message: "" });
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const validation = useValidationMessage();
 
-  const inputFields = [
-    {
-      placeholder: "First Name",
-      type: "text",
-      value: firstName.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setFirstName,
-          type: "firstName",
-        });
-        setFirstName((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: firstName.message,
-    },
-    {
-      placeholder: "Last Name",
-      type: "text",
-      value: lastName.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setLastName,
-          type: "lastName",
-        });
-        setLastName((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: lastName.message,
-    },
-    {
-      placeholder: "Username",
-      type: "text",
-      value: username.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setUsername,
-          type: "username",
-        });
-        setUsername((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: username.message,
-    },
-    {
-      placeholder: "Email",
-      type: "email",
-      value: email.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setEmail,
-          type: "email",
-        });
-        setEmail((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: email.message,
-    },
-    {
-      placeholder: "Password",
-      type: !show ? "password" : "text",
-      value: password.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setPassword,
-          type: "password",
-        });
-        setPassword((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: password.message,
-    },
-    {
-      placeholder: "Re-type Password",
-      type: !show ? "password" : "text",
-      value: password2.value,
-      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-        validationDebounce({
-          validation,
-          target: e.target.value,
-          setter: setPassword2,
-          type: "password2",
-          secondValue: password.value,
-        });
-        setPassword2((prev) => ({ ...prev, value: e.target.value }));
-      },
-      error: password2.message,
-    },
-  ];
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name;
+
+    validationDebounce({
+      validation,
+      target: e.target.value,
+      setter: setErrorMessage,
+      name,
+      secondValue: name === "password2" ? userRegData.password : "",
+    });
+    setUserRegData((prev) => ({ ...prev, [name]: e.target.value }));
+  };
+
+  const checkErrors = () =>
+    hasError(
+      errorMessage.first_name,
+      errorMessage.last_name,
+      errorMessage.username,
+      errorMessage.email,
+      errorMessage.password,
+      errorMessage.password2
+    ) ||
+    emptyInput(
+      userRegData.first_name,
+      userRegData.last_name,
+      userRegData.username,
+      userRegData.email,
+      userRegData.password,
+      userRegData.password2
+    );
 
   const signUpAction = async (e: FormEvent) => {
     e.preventDefault();
 
-    const body: UserRegistration = {
-      first_name: firstName.value,
-      last_name: lastName.value,
-      username: username.value,
-      email: email.value,
-      password: password.value,
-    };
+    const value = await dispatch(userSignUpRequest(userRegData));
 
-    const value = await dispatch(userSignUpRequest(body));
-    setEmail((prev) => ({ ...prev, value: "" }));
-    setPassword((prev) => ({ ...prev, value: "" }));
-    setPassword2((prev) => ({ ...prev, value: "" }));
-    setFirstName((prev) => ({ ...prev, value: "" }));
-    setLastName((prev) => ({ ...prev, value: "" }));
-    setUsername((prev) => ({ ...prev, value: "" }));
     if (value.meta.requestStatus === "fulfilled")
-      navigate(`/${email.value}/otp`);
+      navigate(`/${userRegData.email}/otp`);
   };
 
   return (
     <FormContainer onSubmit={signUpAction}>
-      {inputFields.map(({ placeholder, type, value, onChange, error }, i) => (
-        <>
-          <TextInput
-            key={i}
-            placeholder={placeholder}
-            type={type}
-            value={value}
-            onChange={onChange}
-          />
-          {error !== "" ? <p>{error}</p> : ""}
-        </>
-      ))}
+      {signUpInputFields(handleChange, userRegData, errorMessage, show).map(
+        ({ placeholder, type, value, onChange, error, name }, i) => (
+          <>
+            <TextInput
+              name={name}
+              key={i}
+              placeholder={placeholder}
+              type={type}
+              value={value}
+              onChange={onChange}
+            />
+            {error !== "" ? <p>{error}</p> : ""}
+          </>
+        )
+      )}
       <ButtonContainer>
         <button
           style={{
-            cursor: hasError(firstName, lastName, username, email, password)
-              ? "not-allowed"
-              : "pointer",
+            cursor: checkErrors() ? "not-allowed" : "pointer",
           }}
           type="submit"
-          disabled={hasError(firstName, lastName, username, email, password)}
+          disabled={checkErrors()}
         >
           Sign Up
         </button>

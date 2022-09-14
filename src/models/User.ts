@@ -26,6 +26,7 @@ export interface UserRegistration {
   username: string;
   email: string;
   password: string;
+  password2?: string;
 }
 
 export interface UserState {
@@ -43,5 +44,5 @@ export interface OTP {
 }
 
 export interface UserToken {
-  token: string
+  token: string;
 }

@@ -99,7 +99,7 @@ export const validationService: Validation = {
         errorMessage = validation.errorMessage;
         break;
       }
-      case "firstName": {
+      case "first_name": {
         if (inputValue === "") break;
         const validation: ValidationResult = validateFirstName(inputValue);
 
@@ -107,7 +107,7 @@ export const validationService: Validation = {
         errorMessage = validation.errorMessage;
         break;
       }
-      case "lastName": {
+      case "": {
         if (inputValue === "") break;
         const validation: ValidationResult = validateLastName(inputValue);
 
@@ -150,13 +150,17 @@ export const validationService: Validation = {
   },
 };
 
-export const hasError = (...state: any[]) =>
-  state.filter((element) => element.message !== "").length > 0 ||
-  state.filter((element) => element.value === "").length > 0
+export const hasError = (...state: any[]) => {
+  return state.filter((element) => element !== "").length > 0 ? true : false;
+};
+
+export const emptyInput = (...inputValues: any[]) => {
+  return inputValues.filter((element) => element === "").length > 0
     ? true
     : false;
+};
 
 export const validationDebounce = debounce((arr) => {
-  const { validation, target, setter, type, secondValue } = arr[0];
-  return validation(setter, type, target, secondValue);
+  const { validation, target, setter, name, secondValue } = arr[0];
+  return validation(setter, name, target, secondValue);
 }, 200);
