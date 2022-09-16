@@ -28,3 +28,7 @@ export interface GetAllPosts {
   page: number;
   privateInstance: typeof privateInstance;
 }
+
+export interface TextPost {
+  content: string;
+}

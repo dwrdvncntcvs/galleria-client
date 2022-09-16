@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPostsBuilder } from "../builders/postBuilder";
+import {
+  createTextPostBuilder,
+  getAllPostsBuilder,
+} from "../builders/postBuilder";
 import { PostState } from "../models/Post";
 
 const initialState: PostState = {
@@ -11,10 +14,18 @@ const initialState: PostState = {
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    addPost: (state, action) => {
+      return { ...state, posts: [{ ...action.payload! }, ...state.posts] };
+    },
+  },
   extraReducers(builder) {
     getAllPostsBuilder(builder);
+
+    createTextPostBuilder(builder);
   },
 });
+
+export const { addPost } = postSlice.actions;
 
 export default postSlice.reducer;

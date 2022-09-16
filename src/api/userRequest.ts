@@ -1,12 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { usePrivateAxios } from "../hooks/usePrivateAxios";
 import {
   OTP,
   UserAuth,
   UserProfile,
   UserRegistration,
   UserState,
-  UserToken,
 } from "../models/User";
 import { httpService, privateHttpService } from "../services/httpService";
 
