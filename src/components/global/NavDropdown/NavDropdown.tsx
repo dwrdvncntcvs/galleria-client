@@ -2,7 +2,7 @@ import React from "react";
 import "./navDropdown.scss";
 import { HiUser, HiLogout } from "react-icons/hi";
 import { Dropdown } from "../../../layouts";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { signOutRequest } from "../../../api/userRequest";
@@ -22,7 +22,10 @@ export default function NavDropdown({ user }: NavDropdownProps) {
       action: async () => navigate(`/${user.username}`),
     },
     {
-      action: async () => dispatch(signOutRequest()),
+      action: async () => {
+        dispatch(signOutRequest());
+        navigate("/");
+      },
       Icon: HiLogout,
       name: "Logout",
     },
