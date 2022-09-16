@@ -10,8 +10,6 @@ interface PostProps {
 export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt } = post;
 
-  console.log(ImagePost);
-
   const convertDate = (date: Date) =>
     moment(date).format("MMMM Do, YYYY | h:mm A");
 
