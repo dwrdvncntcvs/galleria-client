@@ -1,58 +1,77 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { Fragment } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
-import { HiOutlineHome, HiHome } from "react-icons/hi";
+import { HiOutlineHome, HiHome, HiPlus, HiUser } from "react-icons/hi";
 import "./navLinks.scss";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { setModal } from "../../../features/modalSlice";
+import { setToggle } from "../../../features/toggleSlice";
+import NavDropdown from "../NavDropdown/NavDropdown";
 
 interface NavLinksProps {
   user: UserProfile;
 }
 
 export default function NavLinks({ user }: NavLinksProps) {
+  const { status: STATUS, name: NAME } = useAppSelector(
+    (state) => state.toggleState
+  );
+  const dispatch = useAppDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const activeURL = (endpoint: string) => {
     return endpoint === location.pathname ? true : false;
   };
 
-  const links = [
+  const navButtons = [
     {
-      to: "/home",
-      isIcon: true,
-      Icon: activeURL("/home") ? HiHome : HiOutlineHome,
-      isActive: activeURL("/home"),
+      Icon: HiPlus,
+      hasImage: false,
+      isDropdown: false,
+      action: () =>
+        dispatch(setModal({ status: true, name: "createPostModal" })),
     },
     {
-      to: `/${user.username}`,
-      isImage: true,
+      Icon: activeURL("/home") ? HiHome : HiOutlineHome,
+      hasImage: false,
+      isDropdown: false,
+      action: () => navigate("/home"),
+    },
+    {
+      Icon: HiUser,
       image: {
         src: user.Profile?.profileImage,
         alt: `${user.first_name}'s avatar`,
       },
-      isActive: activeURL(`/${user.username}`),
+      hasImage: true,
+      isDropdown: true,
+      action: () =>
+        dispatch(
+          setToggle({
+            status: STATUS ? false : true,
+            name: "createNavDropdown",
+          })
+        ),
     },
   ];
 
   return (
     <nav>
-      {links.map(({ to, isIcon, Icon, isImage, image, isActive }, i) => {
-        let component: any;
-        console.log(isActive);
-        if (isIcon)
-          component = (
-            <Link className="nl__button-link" to={to} key={i}>
+      {navButtons.map(({ action, Icon, hasImage, image, isDropdown }, i) => (
+        <Fragment key={i}>
+          <button onClick={action} className="nl__button-link">
+            {hasImage ? (
+              <img src={image?.src} alt={image?.alt!} />
+            ) : (
               <Icon size={18} />
-            </Link>
-          );
-        else if (isImage)
-          component = (
-            <Link className="nl__button-link" to={to} key={i}>
-              <img src={image.src} alt={image.alt} />
-            </Link>
-          );
-
-        return component;
-      })}
+            )}
+          </button>
+          {STATUS && NAME === "createNavDropdown" && isDropdown && (
+            <NavDropdown user={user!} />
+          )}
+        </Fragment>
+      ))}
     </nav>
   );
 }

@@ -13,7 +13,21 @@ const initialState: ToggleState = {
 const toggleSlice = createSlice({
   name: "toggle",
   initialState,
-  reducers: {},
+  reducers: {
+    setToggle: (state, action) => {
+      return {
+        ...state,
+        status: action.payload.status,
+        name: action.payload.name,
+      };
+    },
+    closeToggle: () => ({
+      status: false,
+      name: "",
+    }),
+  },
 });
+
+export const { closeToggle, setToggle } = toggleSlice.actions;
 
 export default toggleSlice.reducer;

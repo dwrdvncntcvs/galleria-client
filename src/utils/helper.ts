@@ -1,3 +1,5 @@
+import { MouseEventHandler } from "react";
+
 type DebounceCB = (args: any[]) => void;
 
 export const debounce = (cb: DebounceCB, delay: number) => {
@@ -8,4 +10,8 @@ export const debounce = (cb: DebounceCB, delay: number) => {
       cb([...args]);
     }, delay);
   };
+};
+
+export const stopPropagation = (e: any) => {
+  e.stopPropagation();
 };

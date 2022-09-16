@@ -1,0 +1,26 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.navdrp__elements {
+  @extend .flex-row;
+  width: 200px;
+  height: auto;
+  border: none;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  padding-inline: 20px;
+  border-radius: 0px;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: $primary-color;
+  font-weight: normal;
+  background-color: transparent;
+  transition: all ease 0.2s;
+
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.371);
+    opacity: 1;
+  }
+}

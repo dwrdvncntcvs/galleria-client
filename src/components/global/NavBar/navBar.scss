@@ -50,24 +50,7 @@
       @extend .flex-row;
       gap: 10px;
       align-items: center;
-
-      button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 35px;
-        height: 35px;
-        border-radius: 1000px;
-        font-weight: bold;
-        border: 2px solid $primary-color;
-        font-size: 15px;
-        background-color: transparent;
-        color: $primary-color;
-
-        &:hover {
-          opacity: 0.5;
-        }
-      }
+      position: relative;
     }
   }
 }
