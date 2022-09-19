@@ -1,15 +1,19 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { closeModal } from "../../../features/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { Backdrop, ButtonContainer } from "../../global";
 import { HiX, HiPhotograph } from "react-icons/hi";
 import "./createPostModal.scss";
 import { createTextPost } from "../../../api/postRequest";
-import { Post, TextPost } from "../../../models/Post";
+import { ImageBlob, Post } from "../../../models/Post";
 import { v4 } from "uuid";
+import AddImages from "../AddImages/AddImages";
 
 export default function CreatePostModal() {
   const [post, setPost] = useState("");
+  const [images, setImages] = useState<ImageBlob[]>([]);
+  const [hasImage, setHasImage] = useState(false);
+  const [show, setShow] = useState(false);
 
   const { userData } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
@@ -27,7 +31,10 @@ export default function CreatePostModal() {
       userId: userData?.id!,
     };
 
-    const value = await dispatch(createTextPost(data));
+    let value: any;
+    console.log(images);
+
+    if (!hasImage) value = await dispatch(createTextPost(data));
 
     if (value.meta.requestStatus === "fulfilled") {
       dispatch(closeModal());
@@ -54,10 +61,17 @@ export default function CreatePostModal() {
               setPost(e.target.value);
             }}
           ></textarea>
+          {show && <AddImages setImages={setImages} />}
           <ButtonContainer>
             <button onClick={createPostAction!}>Post</button>
-            <button>
-              <HiPhotograph size={20} />
+            <button
+              onClick={() => {
+                setShow((prev) => (prev = !prev));
+                setImages([]);
+                setHasImage((prev) => !prev);
+              }}
+            >
+              {show ? <HiX size={20} /> : <HiPhotograph size={20} />}
             </button>
           </ButtonContainer>
         </section>

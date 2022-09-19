@@ -1,0 +1,78 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.ai__main-container {
+  @extend .flex-column;
+  width: 100%;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    @extend .flex-column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    border-radius: 0px 0px 10px 10px;
+    color: $quaternary-color;
+    background-color: $secondary-color;
+    border: $secondary-color 2px solid;
+    transition: all ease 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  section {
+    @extend .flex-column;
+    width: 100%;
+    height: 300px;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid $secondary-color;
+    border-radius: 10px 10px 0px 0px;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 10px;
+    gap: 10px;
+    border-bottom: 0px;
+
+    .ai__image-prev {
+      @extend .flex-column;
+      position: relative;
+
+      #ai__rm-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 100px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background-color: rgba(177, 20, 20, 0.8);
+        border: 2px solid red;
+      }
+    }
+
+    .ai__empty {
+      @extend .flex-column;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        color: $primary-color;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+  }
+}

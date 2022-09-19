@@ -32,3 +32,14 @@ export interface GetAllPosts {
 export interface TextPost {
   content: string;
 }
+
+export interface ImageData {
+  id: string;
+  src: any;
+  alt: any;
+}
+
+export interface ImageBlob {
+  value: string | ArrayBuffer;
+  id: string;
+}
