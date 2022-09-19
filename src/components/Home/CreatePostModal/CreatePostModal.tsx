@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { closeModal } from "../../../features/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { Backdrop, ButtonContainer } from "../../global";

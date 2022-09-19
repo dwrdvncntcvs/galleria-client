@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { privateInstance } from "../config/axios";
 import { addPost } from "../features/postSlice";
-import { GetAllPosts, Post, TextPost } from "../models/Post";
+import { GetAllPosts, Post } from "../models/Post";
 import { privateHttpService } from "../services/httpService";
 import { serializeDate } from "../utils/helper";
 
