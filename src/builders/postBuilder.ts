@@ -1,5 +1,5 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { createTextPost, getAllPosts } from "../api/postRequest";
+import { createPost, getAllPosts } from "../api/postRequest";
 import { PostState } from "../models/Post";
 
 export const getAllPostsBuilder = (
@@ -32,10 +32,10 @@ export const createTextPostBuilder = (
   builder: ActionReducerMapBuilder<PostState>
 ) => {
   builder
-    .addCase(createTextPost.pending, () => {
+    .addCase(createPost.pending, () => {
       console.log("Pending...");
     })
-    .addCase(createTextPost.fulfilled, (state, action) => {
+    .addCase(createPost.fulfilled, (state, action) => {
       console.log("Getting posts Fulfilled...");
 
       return {
@@ -43,7 +43,7 @@ export const createTextPostBuilder = (
         status: "success",
       };
     })
-    .addCase(createTextPost.rejected, (state, action) => {
+    .addCase(createPost.rejected, (state, action) => {
       console.log(action);
       return {
         ...state,

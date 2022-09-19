@@ -23,11 +23,7 @@ export const httpService: Http = {
     return response.data as T;
   },
   post: async <T>(path: string, params?: Record<string, any>, config?: any) => {
-    const response = await instance.post(
-      path,
-      { ...params },
-      { ...config, headers }
-    );
+    const response = await instance.post(path, params, { ...config, headers });
     return response.data as T;
   },
 };
@@ -37,16 +33,11 @@ export const privateHttpService = (privateInstance: any): Http => ({
     const response = await privateInstance.get(path, {
       ...config,
       params,
-      headers,
     });
     return response.data as T;
   },
   post: async <T>(path: string, params?: Record<string, any>, config?: any) => {
-    const response = await privateInstance.post(
-      path,
-      { ...params },
-      { ...config, headers }
-    );
+    const response = await privateInstance.post(path, params, { ...config });
     return response.data as T;
   },
 });

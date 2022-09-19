@@ -27,7 +27,7 @@ export default function AddImages({ setImages }: AddImagesProps) {
     const fileData = await getImageData();
     const id = v4();
 
-    setImages((prev) => [{ value: fileData, id }, ...prev]);
+    setImages((prev) => [{ value: file, id }, ...prev]);
     setImagesData((prev) => [
       { id, src: fileData, alt: "toBePostedFile" },
       ...prev,

@@ -9,7 +9,7 @@ export const instance = axios.create({
 export const privateInstance = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
-  headers: { "Content-Type": "application/json" },
+  // headers: { "Content-Type": "application/json" },
 });
 
 instance.defaults.withCredentials = true;

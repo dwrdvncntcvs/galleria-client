@@ -26,7 +26,7 @@ export interface GetAllPosts {
   userId: string;
   limit: number;
   page: number;
-  privateInstance: typeof privateInstance;
+  // privateInstance: typeof privateInstance;
 }
 
 export interface TextPost {
@@ -40,6 +40,12 @@ export interface ImageData {
 }
 
 export interface ImageBlob {
-  value: string | ArrayBuffer;
+  value: Blob;
   id: string;
+}
+
+export interface PostData {
+  content: string;
+  imagePost: ImageBlob[];
+  hasImage: boolean;
 }

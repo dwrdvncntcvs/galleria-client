@@ -4,37 +4,25 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { Backdrop, ButtonContainer } from "../../global";
 import { HiX, HiPhotograph } from "react-icons/hi";
 import "./createPostModal.scss";
-import { createTextPost } from "../../../api/postRequest";
-import { ImageBlob, Post } from "../../../models/Post";
-import { v4 } from "uuid";
+import { ImageBlob, PostData } from "../../../models/Post";
 import AddImages from "../AddImages/AddImages";
+import { createPost } from "../../../api/postRequest";
 
 export default function CreatePostModal() {
   const [post, setPost] = useState("");
   const [images, setImages] = useState<ImageBlob[]>([]);
   const [hasImage, setHasImage] = useState(false);
   const [show, setShow] = useState(false);
-
-  const { userData } = useAppSelector((state) => state.userState);
   const dispatch = useAppDispatch();
 
   const createPostAction = async (e: any) => {
-    const newDate = new Date();
-
-    const data: Post = {
-      id: v4(),
+    const data: PostData = {
       content: post,
-      createdAt: newDate,
-      ImagePost: [],
-      updatedAt: newDate,
-      User: userData!,
-      userId: userData?.id!,
+      imagePost: images,
+      hasImage,
     };
 
-    let value: any;
-    console.log(images);
-
-    if (!hasImage) value = await dispatch(createTextPost(data));
+    const value = await dispatch(createPost(data));
 
     if (value.meta.requestStatus === "fulfilled") {
       dispatch(closeModal());

@@ -14,10 +14,10 @@ export default function Posts() {
     const getPostsData = async () => {
       await dispatch(
         getAllPosts({
-          privateInstance,
+          // privateInstance,
           userId: userState.userData?.id!,
-          limit: 9,
-          page: 1,
+          limit: 10,
+          page: 0,
         })
       );
     };
