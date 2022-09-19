@@ -27,7 +27,9 @@ export default function PostCard({ post }: PostProps) {
           <p>{convertDate(updatedAt)}</p>
         </div>
       </div>
-      <p>{content}</p>
+      <div className="pc__content-container">
+        <p>{content}</p>
+      </div>
       {ImagePost.map(({ id, postImageUrl }) => (
         <img src={postImageUrl} alt={`${User.first_name}'s post`} key={id} />
       ))}
