@@ -1,0 +1,56 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.ppi__main-container {
+  @extend .flex-column;
+  width: 100%;
+  position: relative;
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 310px;
+    left: 0px;
+    line-height: normal;
+    background-color: lightgray;
+  }
+
+  button {
+    @extend .flex-column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    font-size: 1.1 rem;
+    transition: all ease 0.2s;
+    background-color: white;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  #ppi__right {
+    right: 10px;
+    top: calc(50% - 10px);
+  }
+
+  #ppi__left {
+    left: 10px;
+    top: calc(50% - 10px);
+  }
+
+  #ppi__tracker {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    bottom: 0;
+    align-self: center;
+    border-radius: 100px;
+  }
+}

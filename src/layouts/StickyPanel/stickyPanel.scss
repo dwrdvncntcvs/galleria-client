@@ -2,6 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: sticky;
-  top: 72px;
+  position: fixed;
+  width: calc(20% - 20px);
 }

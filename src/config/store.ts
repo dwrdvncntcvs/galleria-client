@@ -1,5 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { modalReducer, postReducer, toggleReducer, userReducer } from "../features";
+import {
+  modalReducer,
+  postReducer,
+  toggleReducer,
+  userReducer,
+} from "../features";
 
 export const store = configureStore({
   reducer: {
@@ -8,6 +13,7 @@ export const store = configureStore({
     modalState: modalReducer,
     toggleState: toggleReducer,
   },
+  devTools: true,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

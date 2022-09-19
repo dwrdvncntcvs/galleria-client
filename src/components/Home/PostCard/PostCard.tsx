@@ -1,6 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { Post } from "../../../models/Post";
+import { PreviewPostImage } from "..";
 import "./postCard.scss";
 
 interface PostProps {
@@ -30,9 +31,9 @@ export default function PostCard({ post }: PostProps) {
       <div className="pc__content-container">
         <p>{content}</p>
       </div>
-      {ImagePost.map(({ id, postImageUrl }) => (
-        <img src={postImageUrl} alt={`${User.first_name}'s post`} key={id} />
-      ))}
+      {ImagePost.length > 0 && (
+        <PreviewPostImage imagePost={ImagePost} userData={User} />
+      )}
     </div>
   );
 }

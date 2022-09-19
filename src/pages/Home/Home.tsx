@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { CreatePost, Posts } from "../../components/Home";
 import { useAppSelector } from "../../hooks/reduxHook";
