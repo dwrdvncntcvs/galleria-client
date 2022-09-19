@@ -59,11 +59,11 @@ export default function AddImages({ setImages }: AddImagesProps) {
           </div>
         )}
         {imagesData.map(({ src, alt, id }) => (
-          <div className="ai__image-prev">
+          <div className="ai__image-prev" key={id}>
             <button id="ai__rm-btn" onClick={(e) => removeImageData(id)}>
               <HiTrash />
             </button>
-            <img src={src} alt={alt} key={id} />
+            <img src={src} alt={alt} />
           </div>
         ))}
       </section>
