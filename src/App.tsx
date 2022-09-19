@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
-import { MainContainer, NavBar } from "./components/global";
+import { NavBar } from "./components/global";
 import { CreatePostModal } from "./components/Home";
 import { useAppSelector } from "./hooks/reduxHook";
+import { MainContainer } from "./layouts";
 import { Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
 import { Persistent, RequiredAuth } from "./routes";
 

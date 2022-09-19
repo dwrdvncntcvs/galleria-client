@@ -2,8 +2,9 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userOtpRequest } from "../../api/userRequest";
 import { useAppDispatch } from "../../hooks/reduxHook";
+import { ButtonContainer, FormContainer } from "../../layouts";
 import { OTP } from "../../models/User";
-import { ButtonContainer, FormContainer, TextInput } from "../global";
+import { TextInput } from "../global";
 
 export default function OtpForm() {
   const dispatch = useAppDispatch();

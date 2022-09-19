@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { closeModal } from "../../../features/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import { Backdrop, ButtonContainer } from "../../global";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { HiX, HiPhotograph } from "react-icons/hi";
 import "./createPostModal.scss";
 import { ImageBlob, PostData } from "../../../models/Post";
 import AddImages from "../AddImages/AddImages";
 import { createPost } from "../../../api/postRequest";
+import { Backdrop, ButtonContainer } from "../../../layouts";
 
 export default function CreatePostModal() {
   const [post, setPost] = useState("");

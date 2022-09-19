@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from "react";
-import { closeToggle } from "../../../features/toggleSlice";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { closeToggle } from "../../features/toggleSlice";
+import { useAppDispatch } from "../../hooks/reduxHook";
+
 import "./mainContainer.scss";
 
 export default function MainContainer({ children }: PropsWithChildren) {

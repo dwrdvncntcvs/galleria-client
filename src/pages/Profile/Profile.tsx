@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  AdjustedNavContainer,
-  ContentContainer,
-} from "../../components/global";
+import { AdjustedNavContainer, ContentContainer } from "../../layouts";
 import "./profile.scss";
 
 export default function Profile() {

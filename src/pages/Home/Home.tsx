@@ -1,11 +1,13 @@
 import React from "react";
+
+import { CreatePost, Posts } from "../../components/Home";
+import { useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
   ContentContainer,
+  SidePanel,
   StickyPanel,
-} from "../../components/global";
-import { CreatePost, Posts, SidePanel } from "../../components/Home";
-import { useAppSelector } from "../../hooks/reduxHook";
+} from "../../layouts";
 import "./home.scss";
 
 const Home = () => {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
-import { ButtonContainer, FormContainer, TextInput } from "../../global";
+import { TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signUpForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
@@ -13,6 +13,7 @@ import {
   validationDebounce,
 } from "../../../services/validationService";
 import { signUpInputFields } from "./inputFields";
+import { ButtonContainer, FormContainer } from "../../../layouts";
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
