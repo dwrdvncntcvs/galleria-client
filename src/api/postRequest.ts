@@ -6,7 +6,7 @@ import { privateHttpService } from "../services/httpService";
 export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
   async (
-    { userId, limit = 10, page = 0 }: GetAllPosts,
+    { userId, limit = 5, page = 0 }: GetAllPosts,
     { rejectWithValue }
   ) => {
     const currentPage = 1 + page;

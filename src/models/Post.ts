@@ -24,8 +24,8 @@ export interface PostState {
 
 export interface GetAllPosts {
   userId: string;
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
   // privateInstance: typeof privateInstance;
 }
 

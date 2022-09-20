@@ -16,7 +16,7 @@ export default function Posts() {
         getAllPosts({
           // privateInstance,
           userId: userState.userData?.id!,
-          limit: 10,
+          // limit: 10,
           page: 0,
         })
       );
