@@ -41,6 +41,7 @@ export interface UserState {
   isAuth?: boolean;
   status?: "error" | "success" | "none";
   message?: string;
+  userProfile: UserProfile;
 }
 
 export interface OTP {

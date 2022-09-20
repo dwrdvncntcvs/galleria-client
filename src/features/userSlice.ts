@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  getUserProfileRequestBuilder,
   getUserRefresherBuilder,
   getUserRequestBuilder,
   signOutRequestBuilder,
@@ -16,6 +17,7 @@ const userState: UserState = {
   isAuth: false,
   status: "none",
   message: "",
+  userProfile: {},
 };
 
 const userSlice = createSlice({
@@ -61,6 +63,8 @@ const userSlice = createSlice({
     userOtpRequestBuilder(builder);
 
     getUserRequestBuilder(builder);
+
+    getUserProfileRequestBuilder(builder);
   },
 });
 

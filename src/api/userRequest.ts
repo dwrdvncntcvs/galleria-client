@@ -81,3 +81,19 @@ export const getUserRequest = createAsyncThunk(
     }
   }
 );
+
+export const getUserProfileRequest = createAsyncThunk(
+  "user/getUserProfileRequest",
+  async ({ username }: { username: string }, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.get<UserProfile>(
+        `/user/profile/${username}`
+      );
+      console.log("User Profile Data: ", responseData);
+
+      return responseData;
+    } catch (err: any) {
+      rejectWithValue(err.response.data.msg);
+    }
+  }
+);

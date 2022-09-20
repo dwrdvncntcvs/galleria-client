@@ -1,5 +1,6 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import {
+  getUserProfileRequest,
   getUserRefresher,
   getUserRequest,
   signOutRequest,
@@ -112,6 +113,28 @@ export const getUserRequestBuilder = (
       return { ...state, userData: action.payload.profile, status: "success" };
     })
     .addCase(getUserRequest.rejected, (state, action) => {
+      console.log("Rejected...");
+      console.log(action);
+      return { ...state, status: "error", message: action.payload as string };
+    });
+};
+
+export const getUserProfileRequestBuilder = (
+  builder: ActionReducerMapBuilder<UserState>
+) => {
+  return builder
+    .addCase(getUserProfileRequest.pending, () => {
+      console.log("Pending...");
+    })
+    .addCase(getUserProfileRequest.fulfilled, (state, action) => {
+      console.log("Fulfilled...");
+      return {
+        ...state,
+        userProfile: action.payload.profile,
+        status: "success",
+      };
+    })
+    .addCase(getUserProfileRequest.rejected, (state, action) => {
       console.log("Rejected...");
       console.log(action);
       return { ...state, status: "error", message: action.payload as string };
