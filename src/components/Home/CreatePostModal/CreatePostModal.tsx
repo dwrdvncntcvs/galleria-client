@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { closeModal } from "../../../features/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { HiX, HiPhotograph } from "react-icons/hi";
 import "./createPostModal.scss";
-import {
-  generatePostFromUserInput,
-  ImageBlob,
-  ImagePost,
-  PostData,
-} from "../../../models/Post";
+import { ImageBlob, ImagePost, PostData } from "../../../models/Post";
 import AddImages from "../AddImages/AddImages";
 import { createPost } from "../../../api/postRequest";
 import { Backdrop, ButtonContainer } from "../../../layouts";
-import { addPost } from "../../../features/postSlice";
 
 export default function CreatePostModal() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +15,6 @@ export default function CreatePostModal() {
   const [imageUrls, setImageUrls] = useState<ImagePost[]>([]);
   const [hasImage, setHasImage] = useState(false);
   const [show, setShow] = useState(false);
-  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   const createPostAction = async (e: any) => {
