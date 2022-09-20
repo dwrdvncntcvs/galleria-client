@@ -21,8 +21,8 @@ export default function SidePanel() {
   return (
     <div className="sp__side-container">
       <h1>People you might know</h1>
-      {followerState.suggestedPeople.map((user) => (
-        <PersonCard user={user} />
+      {followerState.suggestedPeople.map((user, i) => (
+        <PersonCard user={user} key={i} />
       ))}
     </div>
   );
