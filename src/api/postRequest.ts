@@ -1,14 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { privateInstance } from "../config/axios";
-import { GetAllPosts, Post, PostData } from "../models/Post";
+import { RootState } from "../config/store";
+import { addPost } from "../features/postSlice";
+import {
+  generatePostFromUserInput,
+  GetAllPosts,
+  ImagePost,
+  Post,
+  PostData,
+} from "../models/Post";
+import { User } from "../models/User";
 import { privateHttpService } from "../services/httpService";
+import { serializeDate } from "../utils/helper";
 
 export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
-  async (
-    { userId, limit = 5, page = 0 }: GetAllPosts,
-    { rejectWithValue }
-  ) => {
+  async ({ userId, limit = 5, page = 0 }: GetAllPosts, { rejectWithValue }) => {
     const currentPage = 1 + page;
 
     try {
@@ -25,20 +32,17 @@ export const getAllPosts = createAsyncThunk(
 
 export const createPost = createAsyncThunk(
   "post/createPost",
-  async (postData: PostData, { rejectWithValue }) => {
+  async (
+    { postData, imageUrls }: { postData: PostData; imageUrls: ImagePost[] },
+    { rejectWithValue, getState, dispatch }
+  ) => {
+    const { userState } = getState() as RootState;
     const body = getBody(postData);
 
     try {
-      let responseData;
-      if (!postData.hasImage) {
-        responseData = await createNewTextPost(body);
-      } else {
-        if (postData.imagePost.length > 0 && postData.imagePost.length < 2)
-          responseData = await createNewImagePost(body);
-        else responseData = await createNewMultipleImagePost(body);
-      }
+      const responseData = await create(postData, body);
 
-      console.log(responseData);
+      createSyncPost(dispatch, postData, imageUrls, userState.userData!);
 
       return responseData;
     } catch (error: any) {
@@ -46,6 +50,33 @@ export const createPost = createAsyncThunk(
     }
   }
 );
+
+const createSyncPost = (
+  dispatch: any,
+  postData: PostData,
+  images: ImagePost[],
+  userData: User
+) => {
+  const post = serializeDate<Post>(
+    generatePostFromUserInput(postData, images, userData!)
+  );
+
+  dispatch(addPost(post));
+};
+
+const create = (postData: PostData, body: FormData | { content: string }) => {
+  let response;
+
+  if (!postData.hasImage) {
+    response = createNewTextPost(body);
+  } else {
+    if (postData.imagePost.length > 0 && postData.imagePost.length < 2)
+      response = createNewImagePost(body);
+    else response = createNewMultipleImagePost(body);
+  }
+
+  return response;
+};
 
 const createNewTextPost = (body: FormData | { content: string }) => {
   return privateHttpService(privateInstance).post("/post/text", body);
@@ -82,6 +113,5 @@ const genFormData = (body: PostData) => {
     });
   else formData.append("image_post", body.imagePost[0].value);
 
-  formData.forEach((value) => console.log("Value: ", value));
   return formData;
 };

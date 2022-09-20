@@ -6,16 +6,17 @@ import React, {
   useState,
 } from "react";
 import { HiPlus, HiOutlinePhotograph, HiTrash } from "react-icons/hi";
-import { ImageBlob, ImageData } from "../../../models/Post";
+import { ImageBlob, ImageData, ImagePost } from "../../../models/Post";
 import { v4 } from "uuid";
 import "./addImages.scss";
 import { ImageService } from "../../../services/imageServices";
 
 interface AddImagesProps {
   setImages: Dispatch<SetStateAction<ImageBlob[]>>;
+  setImageUrls: Dispatch<SetStateAction<ImagePost[]>>;
 }
 
-export default function AddImages({ setImages }: AddImagesProps) {
+export default function AddImages({ setImages, setImageUrls }: AddImagesProps) {
   const [imagesData, setImagesData] = useState<ImageData[]>([]);
 
   const buttonRef = useRef<HTMLInputElement>(null);
@@ -29,9 +30,10 @@ export default function AddImages({ setImages }: AddImagesProps) {
 
     setImages((prev) => [{ value: file, id }, ...prev]);
     setImagesData((prev) => [
-      { id, src: fileData, alt: "toBePostedFile" },
       ...prev,
+      { id, src: fileData, alt: "toBePostedFile" },
     ]);
+    setImageUrls((prev) => [...prev, { id, postImageUrl: fileData }]);
   };
 
   const removeImageData = (id: string) => {

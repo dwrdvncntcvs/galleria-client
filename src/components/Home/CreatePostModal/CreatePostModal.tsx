@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { closeModal } from "../../../features/modalSlice";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { HiX, HiPhotograph } from "react-icons/hi";
 import "./createPostModal.scss";
-import { ImageBlob, PostData } from "../../../models/Post";
+import {
+  generatePostFromUserInput,
+  ImageBlob,
+  ImagePost,
+  PostData,
+} from "../../../models/Post";
 import AddImages from "../AddImages/AddImages";
 import { createPost } from "../../../api/postRequest";
 import { Backdrop, ButtonContainer } from "../../../layouts";
+import { addPost } from "../../../features/postSlice";
 
 export default function CreatePostModal() {
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState("");
   const [images, setImages] = useState<ImageBlob[]>([]);
+  const [imageUrls, setImageUrls] = useState<ImagePost[]>([]);
   const [hasImage, setHasImage] = useState(false);
   const [show, setShow] = useState(false);
+  const { userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   const createPostAction = async (e: any) => {
@@ -24,7 +32,7 @@ export default function CreatePostModal() {
     };
 
     setLoading(true);
-    const value = await dispatch(createPost(data));
+    const value = await dispatch(createPost({ postData: data, imageUrls }));
 
     if (value.meta.requestStatus === "fulfilled") {
       setLoading(false);
@@ -57,7 +65,9 @@ export default function CreatePostModal() {
                 setPost(e.target.value);
               }}
             ></textarea>
-            {show && <AddImages setImages={setImages} />}
+            {show && (
+              <AddImages setImages={setImages} setImageUrls={setImageUrls} />
+            )}
             <ButtonContainer>
               <button onClick={createPostAction!}>Post</button>
               <button

@@ -1,5 +1,6 @@
+import { v4 } from "uuid";
 import { privateInstance } from "../config/axios";
-import { UserProfile } from "./User";
+import { User, UserProfile } from "./User";
 
 export interface Post {
   id: string;
@@ -13,7 +14,7 @@ export interface Post {
 
 export type ImagePost = {
   id: string;
-  postImageUrl: string;
+  postImageUrl: any;
 };
 
 export interface PostState {
@@ -49,3 +50,19 @@ export interface PostData {
   imagePost: ImageBlob[];
   hasImage: boolean;
 }
+
+export const generatePostFromUserInput = (
+  post: PostData,
+  images: ImagePost[],
+  user: User
+): Post => {
+  return {
+    id: v4(),
+    content: post.content,
+    createdAt: new Date(),
+    ImagePost: images,
+    updatedAt: new Date(),
+    User: user,
+    userId: user.id!,
+  };
+};
