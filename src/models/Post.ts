@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { privateInstance } from "../config/axios";
+// import { privateInstance } from "../config/axios";
 import { User, UserProfile } from "./User";
 
 export interface Post {
