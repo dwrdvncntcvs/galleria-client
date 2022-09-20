@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 import { setToggle } from "../../../features/toggleSlice";
 import NavDropdown from "../NavDropdown/NavDropdown";
+import { defaultAvatar } from "../../../assets/images";
 
 interface NavLinksProps {
   user: UserProfile;
@@ -41,7 +42,10 @@ export default function NavLinks({ user }: NavLinksProps) {
     {
       Icon: HiUser,
       image: {
-        src: user.Profile?.profileImage,
+        src:
+          user.Profile?.profileImage !== ""
+            ? user.Profile?.profileImage
+            : defaultAvatar,
         alt: `${user.first_name}'s avatar`,
       },
       hasImage: true,

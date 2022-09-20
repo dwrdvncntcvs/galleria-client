@@ -1,8 +1,8 @@
 import React from "react";
 import "./createPost.scss";
-import { BsPersonFill } from "react-icons/bs";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
+import { defaultAvatar } from "../../../assets/images";
 
 interface CreatePostProps {
   userId: string;
@@ -20,11 +20,10 @@ export default function CreatePost({
   return (
     <div className="cp__main-container">
       <div className="cp__avatar-container">
-        {imageUrl === "" ? (
-          <BsPersonFill size={20} />
-        ) : (
-          <img src={imageUrl} alt={`${firstName}'s avatar`} />
-        )}
+        <img
+          src={imageUrl === "" ? defaultAvatar : imageUrl}
+          alt={`${firstName}'s avatar`}
+        />
       </div>
       <button
         className="cp__text-input"
