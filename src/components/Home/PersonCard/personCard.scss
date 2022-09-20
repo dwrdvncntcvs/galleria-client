@@ -1,0 +1,50 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.perC__main-container {
+  @extend .flex-row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+
+  .perC__profile-container {
+    @extend .flex-row;
+    gap: 10px;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 20px;
+    transition: all ease 0.2s;
+
+    &:hover {
+      background-color: lightgray;
+    }
+
+    p {
+      padding-right: 10px;
+    }
+
+    img {
+      height: 30px;
+      width: 30px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+  }
+
+  #perC__follow-btn {
+    background-color: transparent;
+    border: none;
+    color: $secondary-color;
+    padding: 5px 20px;
+    border-radius: 20px;
+    transition: all ease 0.2s;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $quaternary-color;
+    }
+  }
+}

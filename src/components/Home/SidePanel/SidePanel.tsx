@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getSuggestedPeopleRequest } from "../../../api/followerRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
+import PersonCard from "../PersonCard/PersonCard";
 import "./sidePanel.scss";
 
 export default function SidePanel() {
@@ -19,10 +20,9 @@ export default function SidePanel() {
 
   return (
     <div className="sp__side-container">
-      {followerState.suggestedPeople.map(({ first_name, last_name }) => (
-        <p>
-          {first_name} {last_name}
-        </p>
+      <h1>People you might know</h1>
+      {followerState.suggestedPeople.map((user) => (
+        <PersonCard user={user} />
       ))}
     </div>
   );

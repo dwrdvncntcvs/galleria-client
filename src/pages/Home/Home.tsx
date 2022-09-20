@@ -1,4 +1,5 @@
 import React from "react";
+import { Footer } from "../../components/global";
 
 import { CreatePost, Posts, SidePanel } from "../../components/Home";
 import { useAppSelector } from "../../hooks/reduxHook";
