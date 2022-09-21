@@ -31,7 +31,7 @@ export default function CreatePost({
           dispatch(setModal({ status: true, name: "createPostModal" }))
         }
       >
-        <p>What's on your mind {firstName}?</p>
+        <p>What's on your mind, {firstName}?</p>
       </button>
     </div>
   );

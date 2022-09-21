@@ -34,13 +34,14 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex: 1;
-    background-color: lightgray;
+    background-color: $quaternary-color;
     padding: 8px;
     padding-inline: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
     border: none;
     transition: all ease 0.2s;
+    color: gray;
 
     &:hover {
       opacity: 0.6;
