@@ -58,9 +58,8 @@ export const signOutRequestBuilder = (
     })
     .addCase(signOutRequest.fulfilled, (state, action) => {
       console.log("succeeded");
-      console.log({ ...action.payload });
-      if (action.payload.accessToken !== "")
-        return { ...state, ...action.payload, isAuth: false };
+      console.log("ACTION PAYLOAD: ", { ...action.payload });
+      return { ...state, accessToken: "", isAuth: false };
     })
     .addCase(signOutRequest.rejected, (state) => {
       console.log("rejected");
