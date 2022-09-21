@@ -21,6 +21,7 @@ const Home = () => {
               userId={userState.userData?.id!}
               imageUrl={userState.userData?.Profile?.profileImage!}
               firstName={userState.userData?.first_name!}
+              username={userState.userData?.username!}
             />
             <Posts />
           </section>

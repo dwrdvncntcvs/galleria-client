@@ -8,6 +8,7 @@ import { setModal } from "../../../features/modalSlice";
 import { setToggle } from "../../../features/toggleSlice";
 import NavDropdown from "../NavDropdown/NavDropdown";
 import { defaultAvatar } from "../../../assets/images";
+import RoundedAvatar from "../RoundedAvatar/RoundedAvatar";
 
 interface NavLinksProps {
   user: UserProfile;
@@ -66,7 +67,7 @@ export default function NavLinks({ user }: NavLinksProps) {
         <Fragment key={i}>
           <button onClick={action} className="nl__button-link">
             {hasImage ? (
-              <img src={image?.src} alt={image?.alt!} />
+              <RoundedAvatar src={image?.src!} alt={image?.alt!} />
             ) : (
               <Icon size={18} />
             )}

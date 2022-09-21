@@ -4,10 +4,9 @@ import "./navBar.scss";
 import NavLinks from "../NavLinks/NavLinks";
 
 import { stopPropagation } from "../../../utils/helper";
-import NavDropdown from "../NavDropdown/NavDropdown";
 
 export default function NavBar() {
-  const { userState, toggleState } = useAppSelector((state) => state);
+  const { userState } = useAppSelector((state) => state);
 
   return userState.isAuth ? (
     <div className="nb__main-container">
