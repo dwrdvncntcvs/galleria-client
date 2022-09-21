@@ -18,7 +18,8 @@ nav {
     font-size: 15px;
     background-color: transparent;
     border: 2px solid $primary-color;
-    color:  $primary-color;
+    color: $primary-color;
+    transition: all ease 0.2s;
 
     &:hover {
       opacity: 0.5;
@@ -32,30 +33,3 @@ nav {
     }
   }
 }
-
- // button {
-      //   display: flex;
-      //   justify-content: center;
-      //   align-items: center;
-      //   width: 35px;
-      //   height: 35px;
-      //   border-radius: 1000px;
-      //   font-weight: bold;
-      //   border: 2px solid $primary-color;
-      //   font-size: 15px;
-      //   background-color: transparent;
-      //   color: $primary-color;
-      //   transition: all ease 0.2s;
-      //   position: relative;
-
-      //   &:hover {
-      //     opacity: 0.5;
-      //   }
-
-      //   img {
-      //     border-radius: 1000px;
-      //     width: 25px;
-      //     height: 25px;
-      //     object-fit: cover;
-      //   }
-      // }
