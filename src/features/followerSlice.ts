@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSuggestedPeopleRequestBuilder } from "../builders/followerBuilder";
+import {
+  followUserRequestBuilder,
+  getSuggestedPeopleRequestBuilder,
+} from "../builders/followerBuilder";
 import { FollowerState } from "../models/Follower";
 
 const initialState: FollowerState = {
@@ -9,10 +12,18 @@ const initialState: FollowerState = {
 const followerSlice = createSlice({
   name: "follower",
   initialState,
-  reducers: {},
+  reducers: {
+    updateSuggestedPeople: (state, action) => {
+      return { ...state, suggestedPeople: [...action.payload] };
+    },
+  },
   extraReducers(builder) {
     getSuggestedPeopleRequestBuilder(builder);
+
+    followUserRequestBuilder(builder);
   },
 });
+
+export const { updateSuggestedPeople } = followerSlice.actions;
 
 export default followerSlice.reducer;
