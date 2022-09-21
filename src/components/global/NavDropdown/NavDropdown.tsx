@@ -19,7 +19,7 @@ export default function NavDropdown({ user }: NavDropdownProps) {
     {
       Icon: HiUser,
       name: "Profile",
-      action: async () => navigate(`/${user.username}`),
+      action: async () => navigate(`/${user.username}`, { replace: true }),
     },
     {
       action: async () => {

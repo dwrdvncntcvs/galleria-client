@@ -16,7 +16,7 @@ export default function Profile() {
     };
 
     getData();
-  }, []);
+  }, [params.username]);
 
   return (
     <AdjustedNavContainer>

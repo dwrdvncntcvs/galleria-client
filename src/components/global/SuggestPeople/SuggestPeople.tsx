@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { getSuggestedPeopleRequest } from "../../../api/followerRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
-import PersonCard from "../PersonCard/PersonCard";
-import "./sidePanel.scss";
+import PersonCard from "../../Home/PersonCard/PersonCard";
+import "./suggestPeople.scss";
 
-export default function SidePanel() {
+export default function SuggestedPeople() {
   const { followerState, userState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const privateInstance = usePrivateAxios();

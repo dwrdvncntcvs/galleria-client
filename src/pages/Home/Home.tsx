@@ -1,7 +1,6 @@
 import React from "react";
-import { Footer } from "../../components/global";
-
-import { CreatePost, Posts, SidePanel } from "../../components/Home";
+import { SuggestPeople } from "../../components/global";
+import { CreatePost, Posts } from "../../components/Home";
 import { useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
@@ -27,7 +26,7 @@ const Home = () => {
           </section>
           <section>
             <StickyPanel>
-              <SidePanel />
+              <SuggestPeople />
             </StickyPanel>
           </section>
         </ContentContainer>
