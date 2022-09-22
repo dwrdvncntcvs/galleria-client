@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { signOutRequest } from "../../../api/userRequest";
+import { closeToggle } from "../../../features/toggleSlice";
 
 interface NavDropdownProps {
   user: UserProfile;
@@ -19,10 +20,14 @@ export default function NavDropdown({ user }: NavDropdownProps) {
     {
       Icon: HiUser,
       name: "Profile",
-      action: async () => navigate(`/${user.username}`, { replace: true }),
+      action: async () => {
+        dispatch(closeToggle());
+        navigate(`/${user.username}`, { replace: true });
+      },
     },
     {
       action: async () => {
+        dispatch(closeToggle());
         dispatch(signOutRequest());
         navigate("/");
       },
