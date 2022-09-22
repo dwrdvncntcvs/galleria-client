@@ -5,10 +5,14 @@
   border-radius: 10px;
   border: 1px solid gray;
   font-size: 14px;
-  transition: all ease 0.2s;
+  transition: all ease 0.1s;
   color: $secondary-color;
 
   &:focus {
-    outline: 2px solid $secondary-color;
+    outline: none;
   }
+}
+
+.ti__error {
+  border: 3px solid $error-color;
 }

@@ -7,6 +7,7 @@ interface TextInputProps {
   type?: string;
   value?: any;
   name?: string;
+  hasError?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,11 +17,12 @@ export default function TextInput({
   type,
   value,
   onChange,
+  hasError = false,
 }: TextInputProps) {
   return (
     <input
       name={name}
-      className="ti__main-input"
+      className={`ti__main-input ${hasError ? "ti__error" : ""}`}
       placeholder={placeholder}
       type={type}
       value={value}

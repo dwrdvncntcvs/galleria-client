@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
-import { TextInput } from "../../global";
+import { InputError, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signInForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
@@ -57,8 +57,9 @@ const SignInForm = () => {
               type={type}
               value={value}
               onChange={onChange}
+              hasError={error !== ""}
             />
-            {error ? <p>{error}</p> : null}
+            {error ? <InputError errorMessage={error!} /> : null}
           </Fragment>
         )
       )}

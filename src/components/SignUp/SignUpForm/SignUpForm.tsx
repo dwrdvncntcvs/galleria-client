@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userSignUpRequest } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
-import { TextInput } from "../../global";
+import { InputError, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import "./signUpForm.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
@@ -89,8 +89,9 @@ const SignUpForm = () => {
               type={type}
               value={value}
               onChange={onChange}
+              hasError={error !== ""}
             />
-            {error !== "" ? <p>{error}</p> : ""}
+            {error !== "" ? <InputError errorMessage={error!} /> : ""}
           </Fragment>
         )
       )}
