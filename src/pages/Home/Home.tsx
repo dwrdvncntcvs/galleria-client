@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getAllPosts } from "../../api/postRequest";
 import { SuggestPeople } from "../../components/global";
 import { CreatePost, Posts } from "../../components/Home";
-import { useAppSelector } from "../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
   ContentContainer,
@@ -10,7 +11,22 @@ import {
 import "./home.scss";
 
 const Home = () => {
-  const { userState } = useAppSelector((state) => state);
+  const { userState, postState } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getPostsData = async () => {
+      await dispatch(
+        getAllPosts({
+          // privateInstance,
+          userId: userState.userData?.id!,
+          // limit: 10,
+          page: 0,
+        })
+      );
+    };
+    getPostsData();
+  }, [userState.userData]);
 
   return (
     <AdjustedNavContainer>
@@ -23,7 +39,7 @@ const Home = () => {
               firstName={userState.userData?.first_name!}
               username={userState.userData?.username!}
             />
-            <Posts />
+            <Posts posts={postState.posts} />
           </section>
           <section>
             <StickyPanel>
