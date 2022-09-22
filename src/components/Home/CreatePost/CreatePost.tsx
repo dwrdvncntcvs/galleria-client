@@ -1,10 +1,12 @@
 import React from "react";
 import "./createPost.scss";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 import { defaultAvatar } from "../../../assets/images";
 import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
+import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import { DOMPortal } from "../../helpers";
 
 interface CreatePostProps {
   userId: string;
@@ -19,6 +21,8 @@ export default function CreatePost({
   firstName,
   username,
 }: CreatePostProps) {
+  const { status, name } = useAppSelector((state) => state.modalState);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -44,6 +48,9 @@ export default function CreatePost({
       >
         <p>What's on your mind, {firstName}?</p>
       </button>
+      {status && name === "createPostModal" && (
+        <DOMPortal element={<CreatePostModal />} elementId={"overlay-root"} />
+      )}
     </div>
   );
 }
