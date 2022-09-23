@@ -1,0 +1,11 @@
+@import "../../variables.scss";
+@import "../../index.scss";
+
+.side-panel {
+  @extend .flex-column;
+  flex: 2;
+  width: 100%;
+  height: 100%;
+  position: inherit;
+  padding: 12px;
+}

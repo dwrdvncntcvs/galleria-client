@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { getUserProfileRequest } from "../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { AdjustedNavContainer, ContentContainer } from "../../layouts";
+import MainPanel from "../../layouts/MainPanel/MainPanel";
+import SidePanel from "../../layouts/SidePanel/SidePanel";
 import "./profile.scss";
 
 export default function Profile() {
@@ -22,13 +24,13 @@ export default function Profile() {
     <AdjustedNavContainer>
       <div className="profile__main-container">
         <ContentContainer>
-          <section>
+          <MainPanel>
             <h1>Profile</h1>
             {userState.userProfile.first_name}
-          </section>
-          <section>
+          </MainPanel>
+          <SidePanel>
             <h1>Side</h1>
-          </section>
+          </SidePanel>
         </ContentContainer>
       </div>
     </AdjustedNavContainer>

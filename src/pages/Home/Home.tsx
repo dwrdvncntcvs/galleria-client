@@ -8,6 +8,8 @@ import {
   ContentContainer,
   StickyPanel,
 } from "../../layouts";
+import MainPanel from "../../layouts/MainPanel/MainPanel";
+import SidePanel from "../../layouts/SidePanel/SidePanel";
 import "./home.scss";
 
 const Home = () => {
@@ -32,7 +34,7 @@ const Home = () => {
     <AdjustedNavContainer>
       <div className="h__main-container">
         <ContentContainer>
-          <section>
+          <MainPanel>
             <CreatePost
               userId={userState.userData?.id!}
               imageUrl={userState.userData?.Profile?.profileImage!}
@@ -40,12 +42,12 @@ const Home = () => {
               username={userState.userData?.username!}
             />
             <Posts posts={postState.posts} />
-          </section>
-          <section>
+          </MainPanel>
+          <SidePanel>
             <StickyPanel>
               <SuggestPeople />
             </StickyPanel>
-          </section>
+          </SidePanel>
         </ContentContainer>
       </div>
     </AdjustedNavContainer>
