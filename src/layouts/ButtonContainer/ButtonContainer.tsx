@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import "./buttonContainer.scss";
+import style from "./buttonContainer.module.scss";
 
 export default function ButtonContainer({ children }: PropsWithChildren) {
-  return <div className="btnC__mainContainer">{children}</div>;
+  return <div className={style["button-container"]}>{children}</div>;
 }

@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from "react";
-import "./dropdown.scss";
+import style from "./dropdown.module.scss";
 import { stopPropagation } from "../../utils/helper";
 
 export default function Dropdown({ children }: PropsWithChildren) {
   return (
-    <div className="drp__main-container" onClick={stopPropagation}>
+    <div className={style.dropdown} onClick={stopPropagation}>
       {children}
     </div>
   );

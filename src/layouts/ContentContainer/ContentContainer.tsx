@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import "./contentContainer.scss"
+import style from "./contentContainer.module.scss";
 
 export default function ContentContainer({ children }: PropsWithChildren) {
-  return <div className="cc__main-container">{children}</div>;
+  return <div className={style["content-container"]}>{children}</div>;
 }

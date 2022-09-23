@@ -1,5 +1,5 @@
 import React, { FormEvent } from "react";
-import "./formContainer.scss";
+import style from "./formContainer.module.scss";
 
 interface FormContainerProps {
   children?: any;
@@ -13,7 +13,10 @@ export default function FormContainer({
   onSubmit,
 }: FormContainerProps) {
   return (
-    <form className={`${className} fc__main-container`} onSubmit={onSubmit}>
+    <form
+      className={`${className} ${style["form-container"]}`}
+      onSubmit={onSubmit}
+    >
       {children}
     </form>
   );

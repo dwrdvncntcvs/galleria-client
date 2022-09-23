@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import "./backdrop.scss";
+import style from "./backdrop.module.scss";
 
 export default function Backdrop({ children }: PropsWithChildren) {
-  return <div className="bd__main-container">{children}</div>;
+  return <div className={style.backdrop}>{children}</div>;
 }
