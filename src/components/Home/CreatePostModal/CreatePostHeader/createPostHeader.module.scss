@@ -1,0 +1,18 @@
+@import "../../../../index.scss";
+
+.header {
+  @extend .flex-row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    border: none;
+  }
+}

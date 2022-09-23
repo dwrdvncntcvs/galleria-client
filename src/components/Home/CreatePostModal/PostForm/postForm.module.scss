@@ -1,0 +1,22 @@
+@import "../../../../index.scss";
+
+.post-form {
+  @extend .flex-column;
+  width: 100%;
+  gap: 10px;
+
+  textarea {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    max-height: 300px;
+    border: none;
+    resize: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./createPost.scss";
+import style from "./createPost.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 import { defaultAvatar } from "../../../assets/images";
@@ -27,13 +27,13 @@ export default function CreatePost({
   const navigate = useNavigate();
 
   const goToProfile = () => {
-    console.log("Goind to profile");
+    console.log("Going to profile");
     navigate(`/${username}`);
   };
 
   return (
-    <div className="cp__main-container">
-      <div className="cp__avatar-container">
+    <div className={style["create-post"]}>
+      <div className={style.avatar}>
         <RoundedAvatar
           src={imageUrl === "" ? defaultAvatar : imageUrl}
           alt={`${firstName}'s avatar`}
@@ -41,7 +41,7 @@ export default function CreatePost({
         />
       </div>
       <button
-        className="cp__text-input"
+        className={style["text-input"]}
         onClick={() =>
           dispatch(setModal({ status: true, name: "createPostModal" }))
         }
