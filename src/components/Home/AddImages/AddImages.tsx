@@ -5,11 +5,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { HiPlus, HiOutlinePhotograph, HiTrash } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
 import { ImageBlob, ImageData, ImagePost } from "../../../models/Post";
 import { v4 } from "uuid";
-import "./addImages.scss";
+import style from "./addImages.module.scss";
 import { ImageService } from "../../../services/imageServices";
+import NoImages from "./NoImages/NoImages";
+import DisplayImage from "./DisplayImage/DisplayImage";
 
 interface AddImagesProps {
   setImages: Dispatch<SetStateAction<ImageBlob[]>>;
@@ -41,8 +43,10 @@ export default function AddImages({ setImages, setImageUrls }: AddImagesProps) {
     setImagesData((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const noImages = imagesData.length < 1 && <NoImages />;
+
   return (
-    <div className="ai__main-container">
+    <div className={style["add-image-container"]}>
       <input
         type="file"
         accept="image/*"
@@ -52,21 +56,15 @@ export default function AddImages({ setImages, setImageUrls }: AddImagesProps) {
         onChange={handleChange}
       />
       <section>
-        {imagesData.length < 1 && (
-          <div className="ai__empty">
-            <p>Add Image</p>
-            <p>
-              <HiOutlinePhotograph size={30} />
-            </p>
-          </div>
-        )}
+        {noImages}
         {imagesData.map(({ src, alt, id }) => (
-          <div className="ai__image-prev" key={id}>
-            <button id="ai__rm-btn" onClick={(e) => removeImageData(id)}>
-              <HiTrash />
-            </button>
-            <img src={src} alt={alt} />
-          </div>
+          <DisplayImage
+            src={src}
+            alt={alt}
+            id={id}
+            onRemoveImage={removeImageData}
+            key={id}
+          />
         ))}
       </section>
       <button onClick={() => buttonRef.current?.click()}>

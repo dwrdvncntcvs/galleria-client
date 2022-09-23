@@ -1,0 +1,25 @@
+@import "../../../../index.scss";
+@import "../../../../variables.scss";
+
+.preview-images {
+    @extend .flex-column;
+    position: relative;
+
+    #remove-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 100px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background-color: rgba(177, 20, 20, 0.8);
+      border: 2px solid red;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+  }
