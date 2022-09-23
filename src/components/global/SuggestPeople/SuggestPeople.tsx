@@ -3,7 +3,7 @@ import { getSuggestedPeopleRequest } from "../../../api/followerRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import PersonCard from "../../Home/PersonCard/PersonCard";
-import "./suggestPeople.scss";
+import style from "./suggestPeople.module.scss";
 
 export default function SuggestedPeople() {
   const { followerState, userState } = useAppSelector((state) => state);
@@ -19,7 +19,7 @@ export default function SuggestedPeople() {
   }, [userState.userData]);
 
   return (
-    <div className="sp__side-container">
+    <div className={style["suggested-people"]}>
       <h1>People you might know</h1>
       {followerState.suggestedPeople.map((user, i) => (
         <PersonCard user={user} key={i} />

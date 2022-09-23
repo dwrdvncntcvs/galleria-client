@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks/reduxHook";
-import "./navBar.scss";
+import style from "./navBar.module.scss";
 import NavLinks from "../NavLinks/NavLinks";
 
 import { stopPropagation } from "../../../utils/helper";
@@ -9,13 +9,13 @@ export default function NavBar() {
   const { userState } = useAppSelector((state) => state);
 
   return userState.isAuth ? (
-    <div className="nb__main-container">
-      <section className="nb__content-container">
-        <section className="nb__title-container">
+    <div className={style["nav-container"]}>
+      <section className={style["nav-content"]}>
+        <section className={style["title-container"]}>
           <h1>Galleria</h1>
         </section>
         <input type="text" placeholder="Galleria Search ..." />
-        <section className="nb__button-group" onClick={stopPropagation}>
+        <section className={style["nav-btn-group"]} onClick={stopPropagation}>
           <NavLinks user={userState.userData!} />
         </section>
       </section>

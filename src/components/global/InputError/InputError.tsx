@@ -1,10 +1,10 @@
 import React from "react";
-import "./inputError.scss";
+import style from "./inputError.module.scss";
 
 interface InputErrorProps {
   errorMessage: string;
 }
 
 export default function InputError({ errorMessage }: InputErrorProps) {
-  return <p id="ie__p">{errorMessage}</p>;
+  return <p className={style["input-error"]}>{errorMessage}</p>;
 }

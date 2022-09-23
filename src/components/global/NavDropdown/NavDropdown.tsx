@@ -1,5 +1,5 @@
 import React from "react";
-import "./navDropdown.scss";
+import style from "./navDropdown.module.scss";
 import { HiUser, HiLogout } from "react-icons/hi";
 import { Dropdown } from "../../../layouts";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +39,7 @@ export default function NavDropdown({ user }: NavDropdownProps) {
   return (
     <Dropdown>
       {actionsArr.map(({ Icon, action, name }, i) => (
-        <button className="navdrp__elements" key={i} onClick={action}>
+        <button className={style["nav-dropdown-menu"]} key={i} onClick={action}>
           <Icon /> {name}
         </button>
       ))}

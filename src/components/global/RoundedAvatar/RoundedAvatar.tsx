@@ -1,5 +1,5 @@
 import React from "react";
-import "./roundedAvatar.scss";
+import style from "./roundedAvatar.module.scss";
 
 interface RoundedAvatarProps {
   src: string;
@@ -13,7 +13,7 @@ export default function RoundedAvatar({
   onClickAction,
 }: RoundedAvatarProps) {
   return (
-    <div className="rAva__main-container" onClick={onClickAction}>
+    <div className={style["rounded-avatar"]} onClick={onClickAction}>
       <img src={src} alt={alt} />
     </div>
   );

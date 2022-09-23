@@ -1,7 +1,7 @@
 @import "../../../index.scss";
 @import "../../../variables.scss";
 
-.nb__main-container {
+.nav-container {
   display: flex;
   width: 100%;
   height: 60px;
@@ -12,7 +12,7 @@
   background-color: white;
   z-index: 2;
 
-  .nb__content-container {
+  .nav-content {
     @extend .flex-row;
     width: 50%;
     height: 100%;
@@ -20,7 +20,7 @@
     align-items: center;
     padding: 12px;
 
-    .nb__title-container {
+    .title-container {
       display: flex;
       height: 100%;
       justify-content: center;
@@ -46,7 +46,7 @@
       }
     }
 
-    .nb__button-group {
+    .nav-btn-group {
       @extend .flex-row;
       gap: 10px;
       align-items: center;

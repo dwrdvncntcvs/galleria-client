@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import "./textInput.scss";
+import style from "./textInput.module.scss";
 
 interface TextInputProps {
   key?: string | number;
@@ -22,7 +22,9 @@ export default function TextInput({
   return (
     <input
       name={name}
-      className={`ti__main-input ${hasError ? "ti__error" : ""}`}
+      className={`${style["text-input"]} ${
+        hasError ? style["input-error"] : ""
+      }`}
       placeholder={placeholder}
       type={type}
       value={value}

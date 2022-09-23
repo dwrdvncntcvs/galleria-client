@@ -1,6 +1,6 @@
 @import "../../../variables.scss";
 
-.ti__main-input {
+.text-input {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid gray;
@@ -13,6 +13,6 @@
   }
 }
 
-.ti__error {
+.input-error {
   border: 3px solid $error-color;
 }

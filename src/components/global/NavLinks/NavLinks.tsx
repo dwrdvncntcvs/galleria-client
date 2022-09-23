@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
 import { HiOutlineHome, HiHome, HiPlus, HiUser } from "react-icons/hi";
-import "./navLinks.scss";
+import style from "./navLinks.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 import { setToggle } from "../../../features/toggleSlice";
@@ -65,7 +65,7 @@ export default function NavLinks({ user }: NavLinksProps) {
     <nav>
       {navButtons.map(({ action, Icon, hasImage, image, isDropdown }, i) => (
         <Fragment key={i}>
-          <button onClick={action} className="nl__button-link">
+          <button onClick={action} className={style["button-link"]}>
             {hasImage ? (
               <RoundedAvatar src={image?.src!} alt={image?.alt!} />
             ) : (
