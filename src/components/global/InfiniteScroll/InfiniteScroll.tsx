@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { changePage, setHasMore } from "../../../features/postSlice";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { throttle } from "lodash";
@@ -29,10 +29,14 @@ const InfiniteScroll = ({
   numberOfItems,
   hasMore,
 }: InfiniteScrollProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
 
   const request = async () => {
-    await dispatch(dataRequest({ userId, limit, page }));
+    setIsLoading((prev) => (prev = true));
+    const value = await dispatch(dataRequest({ userId, limit, page }));
+
+    if (value.meta.requestStatus === "fulfilled") setIsLoading(false);
   };
 
   const handleScrollChange = throttle(() => {
@@ -64,7 +68,12 @@ const InfiniteScroll = ({
     if (hasMore) request();
   }, [userId, hasMore]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      {isLoading && <p>Loading ...</p>}
+    </>
+  );
 };
 
 export default InfiniteScroll;

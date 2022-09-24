@@ -24,9 +24,7 @@ const postSlice = createSlice({
     addPost: (state, action) => {
       return { ...state, posts: [{ ...action.payload! }, ...state.posts] };
     },
-    resetPosts: (state) => {
-      return { ...state, posts: [] };
-    },
+
     changePage: (state, action) => {
       return {
         ...state,
@@ -47,7 +45,6 @@ const postSlice = createSlice({
   },
 });
 
-export const { addPost, resetPosts, changePage, setHasMore } =
-  postSlice.actions;
+export const { addPost, changePage, setHasMore } = postSlice.actions;
 
 export default postSlice.reducer;
