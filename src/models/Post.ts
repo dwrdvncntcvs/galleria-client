@@ -21,6 +21,13 @@ export interface PostState {
   status?: string;
   message?: string;
   posts: Post[];
+  postsInfo: PostInfo;
+}
+
+export interface PostInfo {
+  count?: number;
+  page: number;
+  limit: number;
 }
 
 export interface GetAllPosts {

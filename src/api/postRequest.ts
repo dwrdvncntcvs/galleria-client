@@ -23,6 +23,8 @@ export const getAllPosts = createAsyncThunk(
         Post[]
       >(`/post/?limit=${limit}&page=${currentPage}&id=${userId}`);
 
+      console.log(responseData);
+
       return responseData;
     } catch (error: any) {
       return rejectWithValue(error.response.data.msg);

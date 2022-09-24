@@ -14,7 +14,8 @@ export const getAllPostsBuilder = (
 
       return {
         ...state,
-        posts: action.payload.posts,
+        posts: [...state.posts, ...action.payload.posts],
+        postsInfo: action.payload.info,
         status: "success",
       };
     })

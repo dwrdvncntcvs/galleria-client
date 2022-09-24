@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { getAllPosts } from "../../api/postRequest";
-import { SuggestPeople } from "../../components/global";
+import { InfiniteScroll, SuggestPeople } from "../../components/global";
 import { CreatePost, Posts } from "../../components/Home";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import { resetPosts } from "../../features/postSlice";
+import { useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
   ContentContainer,
@@ -14,43 +15,37 @@ import style from "./home.module.scss";
 
 const Home = () => {
   const { userState, postState } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const getPostsData = async () => {
-      await dispatch(
-        getAllPosts({
-          // privateInstance,
-          userId: userState.userData?.id!,
-          // limit: 10,
-          page: 0,
-        })
-      );
-    };
-    getPostsData();
-  }, [userState.userData]);
 
   return (
-    <AdjustedNavContainer>
-      <div className={style.home}>
-        <ContentContainer>
-          <MainPanel>
-            <CreatePost
-              userId={userState.userData?.id!}
-              imageUrl={userState.userData?.Profile?.profileImage!}
-              firstName={userState.userData?.first_name!}
-              username={userState.userData?.username!}
-            />
-            <Posts posts={postState.posts} />
-          </MainPanel>
-          <SidePanel>
-            <StickyPanel>
-              <SuggestPeople />
-            </StickyPanel>
-          </SidePanel>
-        </ContentContainer>
-      </div>
-    </AdjustedNavContainer>
+    <InfiniteScroll
+      dataRequest={getAllPosts}
+      userId={userState.userData?.id!}
+      limit={+postState.postsInfo.limit}
+      page={+postState.postsInfo.page}
+      reset={resetPosts}
+      numberOfItems={postState.postsInfo.count!}
+    >
+      <AdjustedNavContainer>
+        <div className={style.home}>
+          <ContentContainer>
+            <MainPanel>
+              <CreatePost
+                userId={userState.userData?.id!}
+                imageUrl={userState.userData?.Profile?.profileImage!}
+                firstName={userState.userData?.first_name!}
+                username={userState.userData?.username!}
+              />
+              <Posts posts={postState.posts} />
+            </MainPanel>
+            <SidePanel>
+              <StickyPanel>
+                <SuggestPeople />
+              </StickyPanel>
+            </SidePanel>
+          </ContentContainer>
+        </div>
+      </AdjustedNavContainer>
+    </InfiniteScroll>
   );
 };
 
