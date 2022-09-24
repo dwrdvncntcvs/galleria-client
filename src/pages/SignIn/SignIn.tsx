@@ -28,7 +28,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className={style["sign-in"]}>
+    <div className={style["sign-in" ]}>
       {userState.status === "error" && displayErrorMessage()}
       <h1>Sign In</h1>
       <SignInForm />
