@@ -1,10 +1,11 @@
-import moment from "moment";
 import React from "react";
+import moment from "moment";
 import { Post } from "../../../models/Post";
 import { PreviewPostImage } from "..";
-import "./postCard.scss";
+import style from "./postCard.module.scss";
 import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
+import Card from "../../../layouts/Card/Card";
 
 interface PostProps {
   post: Post;
@@ -15,33 +16,33 @@ export default function PostCard({ post }: PostProps) {
   const navigate = useNavigate();
 
   const convertDate = (date: Date) =>
-    moment(date).format("MMMM Do, YYYY | h:mm A");
+    moment(date).format("MMMM D, YYYY | h:mm A");
 
   const goToProfile = () => {
     navigate(`/${User.username}`);
   };
 
   return (
-    <div className="pc__main-container">
-      <div className="pc__header-container">
+    <Card>
+      <header className={style.header}>
         <RoundedAvatar
           src={User.Profile?.profileImage!}
           alt={`${User.first_name}'s avatar`}
           onClickAction={goToProfile}
         />
-        <div>
+        <div className={style['header-content']}>
           <p>
             {User.first_name} {User.last_name}
           </p>
           <p>{convertDate(updatedAt)}</p>
         </div>
-      </div>
-      <div className="pc__content-container">
+      </header>
+      <div className={style.content}>
         <p>{content}</p>
       </div>
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
-    </div>
+    </Card>
   );
 }

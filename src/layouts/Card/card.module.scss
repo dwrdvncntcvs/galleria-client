@@ -1,0 +1,10 @@
+@import "../../index.scss";
+
+.card {
+  @extend .flex-column;
+  background-color: white;
+  box-shadow: 0px 1px 3px 1px lightgray;
+  border-radius: 10px;
+  gap: 10px;
+  padding: 20px 0px;
+}
