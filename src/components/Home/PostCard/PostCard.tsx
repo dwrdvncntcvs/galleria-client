@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { Post } from "../../../models/Post";
 import { PreviewPostImage } from "..";
@@ -6,6 +6,8 @@ import style from "./postCard.module.scss";
 import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
+import ActionsComponent from "./ActionsComponent/ActionsComponent";
+import { CommentList } from "../../Comments";
 
 interface PostProps {
   post: Post;
@@ -13,6 +15,7 @@ interface PostProps {
 
 export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt } = post;
+  const [showComments, setShowComments] = useState(false);
   const navigate = useNavigate();
 
   const convertDate = (date: Date) =>
@@ -22,6 +25,8 @@ export default function PostCard({ post }: PostProps) {
     navigate(`/${User.username}`);
   };
 
+  const commentVisibilityHandler = () => setShowComments((prev) => !prev);
+
   return (
     <Card>
       <header className={style.header}>
@@ -30,7 +35,7 @@ export default function PostCard({ post }: PostProps) {
           alt={`${User.first_name}'s avatar`}
           onClickAction={goToProfile}
         />
-        <div className={style['header-content']}>
+        <div className={style["header-content"]}>
           <p>
             {User.first_name} {User.last_name}
           </p>
@@ -43,6 +48,8 @@ export default function PostCard({ post }: PostProps) {
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
+      <ActionsComponent onComment={commentVisibilityHandler} />
+      {showComments && <CommentList />}
     </Card>
   );
 }
