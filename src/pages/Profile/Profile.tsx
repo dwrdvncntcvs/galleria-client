@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { AdjustedNavContainer, ContentContainer } from "../../layouts";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
 import SidePanel from "../../layouts/SidePanel/SidePanel";
-import "./profile.scss";
+import style from "./profile.module.scss";
 
 export default function Profile() {
   const { userState } = useAppSelector((state) => state);
@@ -22,7 +22,7 @@ export default function Profile() {
 
   return (
     <AdjustedNavContainer>
-      <div className="profile__main-container">
+      <div className={style.profile}>
         <ContentContainer>
           <MainPanel>
             <h1>Profile</h1>

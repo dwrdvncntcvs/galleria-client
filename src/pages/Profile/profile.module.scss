@@ -1,0 +1,11 @@
+@import "../../index.scss";
+@import "../../variables.scss";
+
+.profile {
+  @extend .flex-column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
