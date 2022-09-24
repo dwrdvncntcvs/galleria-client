@@ -10,7 +10,7 @@ import {
 } from "../../layouts";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
 import SidePanel from "../../layouts/SidePanel/SidePanel";
-import "./home.scss";
+import style from "./home.module.scss";
 
 const Home = () => {
   const { userState, postState } = useAppSelector((state) => state);
@@ -32,7 +32,7 @@ const Home = () => {
 
   return (
     <AdjustedNavContainer>
-      <div className="h__main-container">
+      <div className={style.home}>
         <ContentContainer>
           <MainPanel>
             <CreatePost

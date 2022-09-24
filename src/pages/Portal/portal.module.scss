@@ -1,7 +1,7 @@
 @import "../../index.scss";
 @import "../../variables.scss";
 
-.p__main-container {
+.portal {
   @extend .flex-column;
   @extend .page-size;
   flex: 1;
@@ -10,7 +10,7 @@
     padding: 20px;
   }
 
-  .p__content-container {
+  .content {
     @extend .flex-row;
     flex: 15;
 
@@ -32,7 +32,7 @@
     }
   }
 
-  .p__footer-container {
+  .footer {
     display: flex;
     flex-wrap: wrap;
     flex: 1;

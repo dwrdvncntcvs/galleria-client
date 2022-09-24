@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Footer } from "../../components/global";
 import { Outlet, useNavigate } from "react-router-dom";
-import "./portal.scss";
+import style from "./portal.module.scss";
 import { MainImage } from "../../components/Portal";
 import { httpService } from "../../services/httpService";
 
@@ -18,16 +18,16 @@ const Portal = () => {
   }, []);
 
   return (
-    <div className="p__main-container">
-      <div className="p__content-container">
+    <div className={style.portal}>
+      <div className={style.content}>
         <section>
           <MainImage />
         </section>
-        <section className={"p__outlet-container"}>
+        <section>
           <Outlet />
         </section>
       </div>
-      <section className="p__footer-container">
+      <section className={style.footer}>
         <Footer />
       </section>
     </div>
