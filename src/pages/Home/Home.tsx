@@ -22,7 +22,7 @@ const Home = () => {
       userId={userState.userData?.id!}
       limit={+postState.postsInfo.limit}
       page={+postState.postsInfo.page}
-      reset={resetPosts}
+      hasMore={postState.postsInfo.hasMore}
       numberOfItems={postState.postsInfo.count!}
     >
       <AdjustedNavContainer>

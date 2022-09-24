@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useEffect, useCallback } from "react";
-import { changePage } from "../../../features/postSlice";
+import { changePage, setHasMore } from "../../../features/postSlice";
 import { useAppDispatch } from "../../../hooks/reduxHook";
+import { throttle } from "lodash";
 
 interface InfiniteScrollProps extends PropsWithChildren {
   dataRequest: ({
@@ -12,11 +13,11 @@ interface InfiniteScrollProps extends PropsWithChildren {
     limit: number;
     page: number;
   }) => any;
-  reset: () => any;
   userId: string;
   limit: number;
   page: number;
   numberOfItems: number;
+  hasMore: boolean;
 }
 
 const InfiniteScroll = ({
@@ -26,7 +27,7 @@ const InfiniteScroll = ({
   limit,
   page,
   numberOfItems,
-  reset,
+  hasMore,
 }: InfiniteScrollProps) => {
   const dispatch = useAppDispatch();
 
@@ -34,23 +35,29 @@ const InfiniteScroll = ({
     await dispatch(dataRequest({ userId, limit, page }));
   };
 
-  const handleScrollChange = useCallback(() => {
-    const isAtBottom =
-      document.documentElement.scrollHeight -
-        document.documentElement.scrollTop <=
-      document.documentElement.clientHeight;
+  const handleScrollChange = useCallback(
+    throttle(() => {
+      const isAtBottom =
+        document.documentElement.scrollHeight -
+          document.documentElement.scrollTop <=
+        document.documentElement.clientHeight;
 
-    if (Math.ceil(numberOfItems / limit) <= page) return;
+      if (Math.ceil(numberOfItems / limit) <= page) {
+        dispatch(setHasMore(false));
+        return;
+      }
 
-    if (isAtBottom) {
-      console.log("At bottom");
-      dispatch(changePage(page + 1));
-      request();
-    }
-  }, [numberOfItems, numberOfItems, page]);
+      if (isAtBottom) {
+        dispatch(changePage(page + 1));
+        request();
+      }
+    }, 1000),
+    [numberOfItems, numberOfItems, page]
+  );
 
   useEffect(() => {
     console.log("Current Page: ", page);
+
     window.addEventListener("scroll", handleScrollChange);
 
     return () => {
@@ -59,8 +66,8 @@ const InfiniteScroll = ({
   }, [page, limit]);
 
   useEffect(() => {
-    request();
-  }, [userId]);
+    if (hasMore) request();
+  }, [userId, hasMore]);
 
   return <>{children}</>;
 };

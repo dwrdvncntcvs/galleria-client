@@ -13,6 +13,7 @@ const initialState: PostState = {
     limit: 5,
     page: 0,
     count: 0,
+    hasMore: true,
   },
 };
 
@@ -32,6 +33,12 @@ const postSlice = createSlice({
         postsInfo: { ...state.postsInfo, page: action.payload },
       };
     },
+    setHasMore: (state, action) => {
+      return {
+        ...state,
+        postsInfo: { ...state.postsInfo, hasMore: action.payload },
+      };
+    },
   },
   extraReducers(builder) {
     getAllPostsBuilder(builder);
@@ -40,6 +47,7 @@ const postSlice = createSlice({
   },
 });
 
-export const { addPost, resetPosts, changePage } = postSlice.actions;
+export const { addPost, resetPosts, changePage, setHasMore } =
+  postSlice.actions;
 
 export default postSlice.reducer;
