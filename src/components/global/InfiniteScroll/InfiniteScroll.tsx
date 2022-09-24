@@ -28,33 +28,9 @@ const InfiniteScroll = ({
   reset,
 }: InfiniteScrollProps) => {
   console.log("Current Page: ", page);
-  const [newPage, setNewPage] = useState(page);
+  const [newPage, setNewPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const scroll = () => {
-      const handleScroll = () => {
-        const isAtBottom =
-          document.documentElement.scrollHeight -
-            document.documentElement.scrollTop <=
-          document.documentElement.clientHeight;
-
-        if (numberOfItems / limit <= newPage) {
-          console.log("Done Scrolling");
-          return;
-        }
-
-        if (isAtBottom) {
-          setNewPage(newPage + 1);
-        }
-      };
-
-      window.addEventListener("scroll", handleScroll);
-    };
-
-    scroll();
-  }, [numberOfItems, newPage]);
 
   useEffect(() => {
     const getData = async () => {
@@ -64,7 +40,31 @@ const InfiniteScroll = ({
     };
 
     getData();
+
+    return () => {};
   }, [userId, newPage]);
+
+  useEffect(() => {
+    const scroll = () => {
+      const handleScroll = () => {
+        const isAtBottom =
+          document.documentElement.scrollHeight -
+            document.documentElement.scrollTop <=
+          document.documentElement.clientHeight + 10;
+
+        if (numberOfItems / limit <= newPage) return;
+
+        if (isAtBottom) setNewPage(newPage + 1);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+    };
+
+    scroll();
+    return () => {
+      if (numberOfItems / limit <= newPage) dispatch(reset());
+    };
+  }, [numberOfItems, newPage]);
 
   return (
     <>
