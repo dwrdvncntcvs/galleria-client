@@ -1,10 +1,10 @@
 import React from "react";
 import { backgroundImage1 } from "../../../assets/images";
-import "./mainImage.scss";
+import style from "./mainImage.module.scss";
 
 const MainImage = () => {
   return (
-    <div className="mi__main-container">
+    <div className={style["main-image"]}>
       <img src={backgroundImage1} alt="" />
     </div>
   );
