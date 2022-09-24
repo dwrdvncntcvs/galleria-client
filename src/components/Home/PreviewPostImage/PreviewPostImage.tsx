@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ImagePost } from "../../../models/Post";
 import { User } from "../../../models/User";
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
-import "./previewPostImage.scss";
+import style from "./previewPostImage.module.scss";
 
 interface PreviewImageProps {
   imagePost: ImagePost[];
@@ -27,7 +27,7 @@ export default function PreviewImage({
   };
 
   return (
-    <div className="ppi__main-container">
+    <div className={style["preview-post-image"]}>
       <img
         src={imagePost[imageId].postImageUrl}
         alt={`${userData?.first_name}'s post`}
@@ -36,12 +36,12 @@ export default function PreviewImage({
       {imagePost.length > 1 && (
         <>
           {imageId !== 0 && (
-            <button id="ppi__left" onClick={goLeft}>
+            <button id={style.left} onClick={goLeft}>
               <HiChevronLeft />
             </button>
           )}
           {imageId !== imagePost.length - 1 && (
-            <button id="ppi__right" onClick={goRight}>
+            <button id={style.right} onClick={goRight}>
               <HiChevronRight />
             </button>
           )}
