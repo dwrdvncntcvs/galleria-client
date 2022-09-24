@@ -1,4 +1,5 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useCallback } from "react";
+import { changePage } from "../../../features/postSlice";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 
 interface InfiniteScrollProps extends PropsWithChildren {
@@ -27,51 +28,41 @@ const InfiniteScroll = ({
   numberOfItems,
   reset,
 }: InfiniteScrollProps) => {
-  console.log("Current Page: ", page);
-  const [newPage, setNewPage] = useState(0);
-  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
+  const request = async () => {
+    await dispatch(dataRequest({ userId, limit, page }));
+  };
+
+  const handleScrollChange = useCallback(() => {
+    const isAtBottom =
+      document.documentElement.scrollHeight -
+        document.documentElement.scrollTop <=
+      document.documentElement.clientHeight;
+
+    if (Math.ceil(numberOfItems / limit) <= page) return;
+
+    if (isAtBottom) {
+      console.log("At bottom");
+      dispatch(changePage(page + 1));
+      request();
+    }
+  }, [numberOfItems, numberOfItems, page]);
+
   useEffect(() => {
-    const getData = async () => {
-      setLoading((prev) => (prev = true));
-      await dispatch(dataRequest({ userId, limit, page: newPage }));
-      setLoading((prev) => (prev = false));
-    };
+    console.log("Current Page: ", page);
+    window.addEventListener("scroll", handleScrollChange);
 
-    getData();
-
-    return () => {};
-  }, [userId, newPage]);
-
-  useEffect(() => {
-    const scroll = () => {
-      const handleScroll = () => {
-        const isAtBottom =
-          document.documentElement.scrollHeight -
-            document.documentElement.scrollTop <=
-          document.documentElement.clientHeight + 10;
-
-        if (numberOfItems / limit <= newPage) return;
-
-        if (isAtBottom) setNewPage(newPage + 1);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-    };
-
-    scroll();
     return () => {
-      if (numberOfItems / limit <= newPage) dispatch(reset());
+      window.removeEventListener("scroll", handleScrollChange);
     };
-  }, [numberOfItems, newPage]);
+  }, [page, limit]);
 
-  return (
-    <>
-      {children}
-      {loading && <p>Loading</p>}
-    </>
-  );
+  useEffect(() => {
+    request();
+  }, [userId]);
+
+  return <>{children}</>;
 };
 
 export default InfiniteScroll;
