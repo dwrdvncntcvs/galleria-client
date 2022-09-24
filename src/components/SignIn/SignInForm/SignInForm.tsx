@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { InputError, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import "./signInForm.scss";
+import style from "./signInForm.module.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
 import { validationDebounce } from "../../../services/validationService";
 import { signInFields } from "./inputFields";
@@ -64,9 +64,7 @@ const SignInForm = () => {
         )
       )}
       <ButtonContainer>
-        <button className="s__button" type="submit">
-          Sign In
-        </button>
+        <button type="submit">Sign In</button>
         <button type="button" onClick={() => setShow((prev) => !prev)}>
           {show ? <BsEyeSlashFill /> : <BsEyeFill />}
         </button>
