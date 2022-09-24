@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../hooks/reduxHook";
 import { ButtonContainer, FormContainer } from "../../layouts";
 import { OTP } from "../../models/User";
 import { TextInput } from "../global";
+import OtpMessage from "./OtpMessage/OtpMessage";
 
 export default function OtpForm() {
   const dispatch = useAppDispatch();
@@ -22,29 +23,17 @@ export default function OtpForm() {
     if (response.meta.requestStatus === "fulfilled") navigate("/");
   };
 
+  const otpInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    if (/[^0-9]/g.test(e.target.value)) return;
+    if (e.target.value.length > 6) return;
+    setOtp(e.target.value);
+  };
+
   return (
     <FormContainer onSubmit={submitOtp}>
-      <p>
-        Good day! We had sent you your one-time-password code that you could
-        access on your email.
-      </p>
-      <p>
-        <b>
-          <i>{params.email}</i>
-        </b>
-      </p>
-      <p>
-        The OTP will be expired after{" "}
-        <b>
-          <i>5 minutes</i>
-        </b>
-      </p>
+      <OtpMessage value={params.email} />
       <TextInput
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          if (/[^0-9]/g.test(e.target.value)) return;
-          if (e.target.value.length > 6) return;
-          setOtp(e.target.value);
-        }}
+        onChange={otpInputHandler}
         placeholder="Enter Otp"
         type="text"
         value={otp!}
