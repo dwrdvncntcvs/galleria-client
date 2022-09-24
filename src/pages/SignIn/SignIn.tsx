@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SignInForm } from "../../components/SignIn";
 import { setMessage, setStatus } from "../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
-import "./signIn.scss";
+import style from "./signIn.module.scss";
 
 const SignIn = () => {
   const { userState } = useAppSelector((state) => state);
@@ -28,7 +28,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="si__main-container">
+    <div className={style["sign-in"]}>
       {userState.status === "error" && displayErrorMessage()}
       <h1>Sign In</h1>
       <SignInForm />
