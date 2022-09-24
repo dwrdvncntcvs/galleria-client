@@ -4,7 +4,7 @@ import { followUserRequest } from "../../../api/followerRequest";
 import { defaultAvatar } from "../../../assets/images";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserProfile } from "../../../models/User";
-import "./personCard.scss";
+import style from "./personCard.module.scss";
 
 interface PersonCardProps {
   user: UserProfile;
@@ -23,8 +23,8 @@ export default function PersonCard({ user }: PersonCardProps) {
   };
 
   return (
-    <div className="perC__main-container">
-      <button className="perC__profile-container" onClick={goToUserProfile}>
+    <div className={style.person}>
+      <button className={style.profile} onClick={goToUserProfile}>
         <img
           src={
             user.Profile?.profileImage !== ""
@@ -37,7 +37,7 @@ export default function PersonCard({ user }: PersonCardProps) {
           {user.first_name} {user.last_name}
         </p>
       </button>
-      <button id="perC__follow-btn" onClick={followUser}>
+      <button id={style["follow-action"]} onClick={followUser}>
         Follow
       </button>
     </div>

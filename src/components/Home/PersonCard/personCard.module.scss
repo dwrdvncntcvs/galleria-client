@@ -1,14 +1,14 @@
 @import "../../../index.scss";
 @import "../../../variables.scss";
 
-.perC__main-container {
+.person {
   @extend .flex-row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 30px;
 
-  .perC__profile-container {
+  .profile {
     @extend .flex-row;
     gap: 10px;
     align-items: center;
@@ -34,7 +34,7 @@
     }
   }
 
-  #perC__follow-btn {
+  #follow-action {
     background-color: $primary-color;
     border: none;
     color: $quaternary-color;
