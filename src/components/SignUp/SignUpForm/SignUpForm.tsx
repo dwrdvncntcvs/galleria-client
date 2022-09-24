@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserRegistration } from "../../../models/User";
 import { InputError, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import "./signUpForm.scss";
+import style from "./signUpForm.module.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
 import {
   emptyInput,
