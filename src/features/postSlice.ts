@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  createTextPostBuilder,
-  getAllPostsBuilder,
-} from "../builders/postBuilder";
+import { postBuilder } from "../builders/postBuilder";
 import { PostState } from "../models/Post";
 
 const initialState: PostState = {
@@ -39,9 +36,7 @@ const postSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    getAllPostsBuilder(builder);
-
-    createTextPostBuilder(builder);
+    postBuilder(builder).createPost().getAllPosts();
   },
 });
 
