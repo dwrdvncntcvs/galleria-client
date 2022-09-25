@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { CommentList } from "../../Comments";
+import { HiOutlineChat } from "react-icons/hi";
+import { v4 } from "uuid";
 
 interface PostProps {
   post: Post;
@@ -26,6 +28,15 @@ export default function PostCard({ post }: PostProps) {
   };
 
   const commentVisibilityHandler = () => setShowComments((prev) => !prev);
+
+  const buttons = [
+    {
+      Icon: HiOutlineChat,
+      label: "Comment",
+      id: v4(),
+      action: commentVisibilityHandler,
+    },
+  ];
 
   return (
     <Card>
@@ -48,7 +59,7 @@ export default function PostCard({ post }: PostProps) {
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
-      <ActionsComponent onComment={commentVisibilityHandler} />
+      <ActionsComponent buttons={buttons} />
       {showComments && <CommentList />}
     </Card>
   );

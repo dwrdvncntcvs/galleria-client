@@ -4,7 +4,7 @@ import Comment from "../Comment/Comment";
 import style from "./commentList.module.scss";
 
 export default function CommentList() {
-  const commentArr = [1, 2, 3];
+  const commentArr: any[] = [];
 
   return (
     <div className={style.comments}>
