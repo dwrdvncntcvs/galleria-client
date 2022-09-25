@@ -1,7 +1,5 @@
 import React from "react";
 import style from "./actionsComponent.module.scss";
-import { HiOutlineChat } from "react-icons/hi";
-import { v4 } from "uuid";
 import { IconType } from "react-icons/lib";
 
 interface ActionsComponentProps {
