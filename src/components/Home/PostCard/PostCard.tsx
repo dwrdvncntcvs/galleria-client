@@ -43,7 +43,11 @@ export default function PostCard({ post }: PostProps) {
     <Card>
       <header className={style.header}>
         <RoundedAvatar
-          src={User.Profile?.profileImage! !== "" ? User.Profile?.profileImage! : defaultAvatar}
+          src={
+            User.Profile?.profileImage! !== ""
+              ? User.Profile?.profileImage!
+              : defaultAvatar
+          }
           alt={`${User.first_name}'s avatar`}
           onClickAction={goToProfile}
         />
