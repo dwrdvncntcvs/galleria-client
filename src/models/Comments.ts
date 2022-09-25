@@ -6,3 +6,7 @@ export interface Comment extends UserProfile {
   imageUrl?: string;
   createdAt: Date;
 }
+
+export interface CommentState {
+  comments: Comment[];
+}
