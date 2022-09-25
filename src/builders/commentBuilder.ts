@@ -5,7 +5,7 @@ import { Comment, CommentState } from "../models/Comments";
 export const commentBuilder = (
   builder: ActionReducerMapBuilder<CommentState>
 ) => ({
-  getAllComments: () => {
+  getAllComments() {
     builder
       .addCase(getAllComments.pending, (state, action) => {
         console.log("Pending ...");
@@ -18,5 +18,6 @@ export const commentBuilder = (
       .addCase(getAllComments.rejected, () => {
         console.log("Rejected ...");
       });
+    return this;
   },
 });

@@ -8,7 +8,7 @@ import { FollowerState } from "../models/Follower";
 type FollowerBuilder = ActionReducerMapBuilder<FollowerState>;
 
 export const followerBuilder = (builder: FollowerBuilder) => ({
-  getSuggestedPeopleRequest: function () {
+  getSuggestedPeopleRequest () {
     builder
       .addCase(getSuggestedPeopleRequest.pending, () => {
         console.log("Pending...");
@@ -23,7 +23,8 @@ export const followerBuilder = (builder: FollowerBuilder) => ({
       });
     return this;
   },
-  followUserRequest: function () {
+  
+  followUserRequest () {
     builder
       .addCase(followUserRequest.pending, () => {
         console.log("Pending...");

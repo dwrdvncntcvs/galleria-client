@@ -3,7 +3,7 @@ import { createPost, getAllPosts } from "../api/postRequest";
 import { PostState } from "../models/Post";
 
 export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
-  getAllPosts: function () {
+  getAllPosts() {
     builder
       .addCase(getAllPosts.pending, () => {
         console.log("Pending...");
@@ -28,7 +28,8 @@ export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
       });
     return this;
   },
-  createPost: function () {
+
+  createPost() {
     builder
       .addCase(createPost.pending, () => {
         console.log("Pending...");
