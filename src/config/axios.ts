@@ -1,9 +1,6 @@
 import axios from "axios";
 
-const isDevelopment = false;
-const BASE_URL = isDevelopment
-  ? "https://localhost:5000"
-  : "https://galleria-server.herokuapp.com/";
+const BASE_URL = process.env.REACT_APP_GALLERIA_API_URL;
 
 export const instance = axios.create({
   baseURL: BASE_URL,
