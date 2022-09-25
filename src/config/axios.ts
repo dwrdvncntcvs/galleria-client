@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = "https://ec9c-136-158-30-44.ngrok.io";
+const isDevelopment = false;
+const BASE_URL = isDevelopment
+  ? "https://localhost:5000"
+  : "https://galleria-server.herokuapp.com/";
 
 export const instance = axios.create({
   baseURL: BASE_URL,
