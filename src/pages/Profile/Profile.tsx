@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUserProfileRequest } from "../../api/userRequest";
+import { ProfileCard } from "../../components/Profile";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { AdjustedNavContainer, ContentContainer } from "../../layouts";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
@@ -25,8 +26,7 @@ export default function Profile() {
       <div className={style.profile}>
         <ContentContainer>
           <MainPanel>
-            <h1>Profile</h1>
-            {userState.userProfile.first_name}
+            <ProfileCard profile={userState.userProfile}/>
           </MainPanel>
           <SidePanel>
             <h1>Side</h1>
