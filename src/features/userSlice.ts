@@ -1,13 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getUserProfileRequestBuilder,
-  getUserRefresherBuilder,
-  getUserRequestBuilder,
-  signOutRequestBuilder,
-  userOtpRequestBuilder,
-  userSignInBuilder,
-  userSignUpRequestBuilder,
-} from "../builders/userBuilders";
+import { userBuilder } from "../builders/userBuilders";
 import { UserState } from "../models/User";
 
 const userState: UserState = {
@@ -49,22 +41,14 @@ const userSlice = createSlice({
   },
   extraReducers(builder) {
     //User Sign In Reducer
-    userSignInBuilder(builder);
-
-    //Getting New Access Token Reducer
-    getUserRefresherBuilder(builder);
-
-    //Sign Out Reducer
-    signOutRequestBuilder(builder);
-
-    //Sign Up Request Reducer
-    userSignUpRequestBuilder(builder);
-
-    userOtpRequestBuilder(builder);
-
-    getUserRequestBuilder(builder);
-
-    getUserProfileRequestBuilder(builder);
+    userBuilder(builder)
+      .getUserProfileRequest()
+      .getUserRefresher()
+      .getUserRequest()
+      .signOutRequest()
+      .userOtpRequest()
+      .userSignIn()
+      .userSignUpRequest();
   },
 });
 
