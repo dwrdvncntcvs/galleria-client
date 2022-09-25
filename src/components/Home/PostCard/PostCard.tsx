@@ -10,6 +10,7 @@ import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { CommentList } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
+import { defaultAvatar } from "../../../assets/images";
 
 interface PostProps {
   post: Post;
@@ -42,7 +43,7 @@ export default function PostCard({ post }: PostProps) {
     <Card>
       <header className={style.header}>
         <RoundedAvatar
-          src={User.Profile?.profileImage!}
+          src={User.Profile?.profileImage! !== "" ? User.Profile?.profileImage! : defaultAvatar}
           alt={`${User.first_name}'s avatar`}
           onClickAction={goToProfile}
         />
