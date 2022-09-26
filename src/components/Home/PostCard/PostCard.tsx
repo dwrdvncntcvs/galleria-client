@@ -7,19 +7,23 @@ import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
-import { CommentList } from "../../Comments";
+import { AddComment, CommentList } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
 import { defaultAvatar } from "../../../assets/images";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { setToggle } from "../../../features/toggleSlice";
 
 interface PostProps {
   post: Post;
 }
 
 export default function PostCard({ post }: PostProps) {
-  const { content, User, ImagePost, updatedAt } = post;
-  const [showComments, setShowComments] = useState(false);
+  const { content, User, ImagePost, updatedAt, id } = post;
+  // const [showComments, setShowComments] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { toggleState } = useAppSelector((state) => state);
 
   const convertDate = (date: Date) =>
     moment(date).format("MMMM D, YYYY | h:mm A");
@@ -28,7 +32,10 @@ export default function PostCard({ post }: PostProps) {
     navigate(`/${User.username}`);
   };
 
-  const commentVisibilityHandler = () => setShowComments((prev) => !prev);
+  const commentVisibilityHandler = () => {
+    dispatch(setToggle({ status: !toggleState.status, name: `post-${id}` }));
+    // setShowComments((prev) => !prev);
+  };
 
   const buttons = [
     {
@@ -65,7 +72,7 @@ export default function PostCard({ post }: PostProps) {
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
       <ActionsComponent buttons={buttons} />
-      {showComments && <CommentList />}
+      <AddComment />
     </Card>
   );
 }

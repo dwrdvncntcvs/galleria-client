@@ -4,14 +4,20 @@
 .add-comment {
   @extend .flex-row;
   gap: 10px;
-  padding: 5px 5px;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+  padding: 10px;
 
-  input {
+  textarea {
     width: 100%;
-    border-radius: 20px;
-    border: 2px solid $primary-color;
+    border: none;
     padding: 5px 15px;
-    font-size: .9rem;
+    font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
+    resize: none;
+    max-height: 200px;
 
     &:focus {
       outline: none;
@@ -20,18 +26,25 @@
 
   button {
     @extend .flex-column;
+    width: 80px;
+    height: 35px;
     justify-content: center;
     align-items: center;
     background-color: white;
     border: 2px solid $primary-color;
     padding-inline: 20px;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: $primary-color;
     color: $quaternary-color;
+    transition: all ease 0.2s ;
 
     #btn-logo {
       font-size: 1rem;
       transform: rotateZ(90deg);
+    }
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }
