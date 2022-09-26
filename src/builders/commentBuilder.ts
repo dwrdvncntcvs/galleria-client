@@ -12,7 +12,7 @@ export const commentBuilder = (
       })
       .addCase(getAllComments.fulfilled, (state, action) => {
         console.log("Payload: ", action.payload);
-        const data: Comment[] = action.payload.data;
+        const data: Comment[] = action.payload.data; 
         return { ...state, comments: [...state.comments, ...data] };
       })
       .addCase(getAllComments.rejected, () => {
