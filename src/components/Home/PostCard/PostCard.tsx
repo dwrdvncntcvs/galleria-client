@@ -7,7 +7,7 @@ import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
-import { CommentList } from "../../Comments";
+import { AddComment } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
 import { defaultAvatar } from "../../../assets/images";
@@ -17,8 +17,7 @@ interface PostProps {
 }
 
 export default function PostCard({ post }: PostProps) {
-  const { content, User, ImagePost, updatedAt } = post;
-  const [showComments, setShowComments] = useState(false);
+  const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
   const navigate = useNavigate();
 
   const convertDate = (date: Date) =>
@@ -28,7 +27,9 @@ export default function PostCard({ post }: PostProps) {
     navigate(`/${User.username}`);
   };
 
-  const commentVisibilityHandler = () => setShowComments((prev) => !prev);
+  const commentVisibilityHandler = () => {
+    // setShowComments((prev) => !prev);
+  };
 
   const buttons = [
     {
@@ -36,6 +37,7 @@ export default function PostCard({ post }: PostProps) {
       label: "Comment",
       id: v4(),
       action: commentVisibilityHandler,
+      count: commentsCount,
     },
   ];
 
@@ -65,7 +67,7 @@ export default function PostCard({ post }: PostProps) {
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
       <ActionsComponent buttons={buttons} />
-      {showComments && <CommentList />}
+      <AddComment />
     </Card>
   );
 }
