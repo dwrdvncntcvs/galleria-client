@@ -10,6 +10,7 @@ export interface Post {
   updatedAt: Date;
   User: UserProfile;
   ImagePost: ImagePost[];
+  commentsCount: number;
 }
 
 export type ImagePost = {
@@ -72,5 +73,6 @@ export const generatePostFromUserInput = (
     updatedAt: new Date(),
     User: user,
     userId: user.id!,
+    commentsCount: 0,
   };
 };

@@ -7,7 +7,7 @@ import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
-import { AddComment, CommentList } from "../../Comments";
+import { AddComment } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
 import { defaultAvatar } from "../../../assets/images";
@@ -19,7 +19,7 @@ interface PostProps {
 }
 
 export default function PostCard({ post }: PostProps) {
-  const { content, User, ImagePost, updatedAt, id } = post;
+  const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
   // const [showComments, setShowComments] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -43,6 +43,7 @@ export default function PostCard({ post }: PostProps) {
       label: "Comment",
       id: v4(),
       action: commentVisibilityHandler,
+      count: commentsCount,
     },
   ];
 

@@ -14,10 +14,18 @@
     border: none;
     background-color: transparent;
     padding: 5px 20px;
-    gap: 5px;
+    gap: 10px;
     border-radius: 15px;
     color: $primary-color;
     transition: all ease-in-out 0.2s;
+    position: relative;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: .75rem;
+    }
 
     &:hover {
       background-color: $primary-color;
