@@ -7,12 +7,28 @@ interface ProfileCardProps {
   profile: UserProfile;
 }
 
+// On this component, it could be used to fetch or get data from the backend and other components will be receiving
+// those data as props.
 export default function ProfileCard({ profile }: ProfileCardProps) {
   return (
     <div className={style["main-container"]}>
-      <div className={style.profilebg}>{/* img src background here */}</div>
+      {/* We could create another component that will hold this component from here. */}
+      <div
+        className={
+          style.profilebg /* You could name this as "profileBg" or profile-bg */
+        }
+      >
+        {/* img src background here */}
+      </div>
+      {/* to here */}
+
+      {/* We could create another component that will hold this component from here. */}
       <div className={style["profile-container"]}>
-        <div className={style.profilelink}>
+        <div
+          className={
+            style.profilelink /* You could name this as "profileLink" or profile-link */
+          }
+        >
           <img
             src={
               profile.Profile?.profileImage === ""
@@ -24,6 +40,9 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
         </div>
         <button className={style["follow-btn"]}>Follow</button>
       </div>
+      {/* to here */}
+
+      {/* We could create another component that will hold this component from here. */}
       <div className={style["profile-info"]}>
         <h4>
           {profile.first_name}&nbsp;
@@ -40,6 +59,7 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
           </p>
         </div>
       </div>
+      {/* to here */}
     </div>
   );
 }
