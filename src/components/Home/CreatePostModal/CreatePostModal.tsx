@@ -4,7 +4,6 @@ import "./createPostModal.scss";
 
 import CreatePostHeader from "./CreatePostHeader/CreatePostHeader";
 import PostForm from "./PostForm/PostForm";
-import { Backdrop } from "../../../layouts";
 import ModalOverlay from "../../../layouts/ModalOverlay/ModalOverlay";
 
 export default function CreatePostModal() {

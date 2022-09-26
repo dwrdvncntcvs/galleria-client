@@ -6,7 +6,6 @@ import { defaultAvatar } from "../../../assets/images";
 import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import CreatePostModal from "../CreatePostModal/CreatePostModal";
-import { DOMPortal } from "../../helpers";
 import Card from "../../../layouts/Card/Card";
 
 interface CreatePostProps {
@@ -50,9 +49,7 @@ export default function CreatePost({
         >
           <p>What's on your mind, {firstName}?</p>
         </button>
-        {status && name === "createPostModal" && (
-          <DOMPortal element={<CreatePostModal />} elementId={"overlay-root"} />
-        )}
+        {status && name === "createPostModal" && <CreatePostModal />}
       </div>
     </Card>
   );

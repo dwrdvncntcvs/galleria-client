@@ -2,15 +2,11 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import { NavBar } from "./components/global";
-import { CreatePostModal } from "./components/Home";
-import { useAppSelector } from "./hooks/reduxHook";
 import { MainContainer } from "./layouts";
 import { Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
 import { Persistent, RequiredAuth } from "./routes";
 
 function App() {
-  const { status, name } = useAppSelector((state) => state.modalState);
-
   return (
     <MainContainer>
       <BrowserRouter>
@@ -29,7 +25,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      {status && name === "createPostModal" && <CreatePostModal />}
     </MainContainer>
   );
 }
