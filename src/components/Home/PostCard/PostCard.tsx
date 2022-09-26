@@ -4,7 +4,7 @@ import { Post } from "../../../models/Post";
 import { PreviewPostImage } from "..";
 import style from "./postCard.module.scss";
 import { RoundedAvatar } from "../../global";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { AddComment } from "../../Comments";
@@ -18,6 +18,7 @@ interface PostProps {
 
 export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
+
   const navigate = useNavigate();
 
   const convertDate = (date: Date) =>
@@ -28,7 +29,7 @@ export default function PostCard({ post }: PostProps) {
   };
 
   const commentVisibilityHandler = () => {
-    // setShowComments((prev) => !prev);
+    navigate(`post/${id}`);
   };
 
   const buttons = [

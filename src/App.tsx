@@ -4,6 +4,7 @@ import "./App.scss";
 import { NavBar } from "./components/global";
 import { MainContainer } from "./layouts";
 import { Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
+import PostDetails from "./pages/PostDetails/PostDetails";
 import { Persistent, RequiredAuth } from "./routes";
 
 function App() {
@@ -19,7 +20,9 @@ function App() {
           </Route>
           <Route path="" element={<Persistent />}>
             <Route element={<RequiredAuth />}>
-              <Route path="/home" element={<Home />} />
+              <Route path="/home/" element={<Home />}>
+                <Route path="post/:id" element={<PostDetails />} />
+              </Route>
             </Route>
             <Route path="/:username" element={<Profile />} />
           </Route>

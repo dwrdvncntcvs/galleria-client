@@ -1,11 +1,11 @@
 import React from "react";
-import { Backdrop } from "../../layouts";
+import ModalOverlay from "../../layouts/ModalOverlay/ModalOverlay";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {
   return (
-    <Backdrop>
-      <div>PostDetails</div>
-    </Backdrop>
+    <ModalOverlay>
+      <h1>Post Details</h1>
+    </ModalOverlay>
   );
 }

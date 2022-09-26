@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import { getAllPosts } from "../../api/postRequest";
 import { InfiniteScroll, SuggestPeople } from "../../components/global";
 import { CreatePost, Posts } from "../../components/Home";
@@ -9,11 +10,12 @@ import {
   StickyPanel,
 } from "../../layouts";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
+import ModalOverlay from "../../layouts/ModalOverlay/ModalOverlay";
 import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./home.module.scss";
 
 const Home = () => {
-  const { userState, postState } = useAppSelector((state) => state);
+  const { userState, postState, modalState } = useAppSelector((state) => state);
 
   return (
     <InfiniteScroll
@@ -42,6 +44,7 @@ const Home = () => {
               </StickyPanel>
             </SidePanel>
           </ContentContainer>
+          <Outlet />
         </div>
       </AdjustedNavContainer>
     </InfiniteScroll>
