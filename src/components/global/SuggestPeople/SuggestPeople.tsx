@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getSuggestedPeopleRequest } from "../../../api/followerRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
+import Card from "../../../layouts/Card/Card";
 import PersonCard from "../../Home/PersonCard/PersonCard";
 import style from "./suggestPeople.module.scss";
 
@@ -19,11 +20,13 @@ export default function SuggestedPeople() {
   }, [userState.userData]);
 
   return (
-    <div className={style["suggested-people"]}>
-      <h1>People you might know</h1>
-      {followerState.suggestedPeople.map((user, i) => (
-        <PersonCard user={user} key={i} />
-      ))}
-    </div>
+    <Card>
+      <div className={style["suggested-people"]}>
+        <h1>People you might know</h1>
+        {followerState.suggestedPeople.map((user, i) => (
+          <PersonCard user={user} key={i} />
+        ))}
+      </div>
+    </Card>
   );
 }
