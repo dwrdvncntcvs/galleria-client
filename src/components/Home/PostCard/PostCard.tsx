@@ -11,8 +11,6 @@ import { AddComment } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
 import { defaultAvatar } from "../../../assets/images";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import { setToggle } from "../../../features/toggleSlice";
 
 interface PostProps {
   post: Post;
@@ -20,10 +18,7 @@ interface PostProps {
 
 export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
-  // const [showComments, setShowComments] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { toggleState } = useAppSelector((state) => state);
 
   const convertDate = (date: Date) =>
     moment(date).format("MMMM D, YYYY | h:mm A");
@@ -33,7 +28,6 @@ export default function PostCard({ post }: PostProps) {
   };
 
   const commentVisibilityHandler = () => {
-    dispatch(setToggle({ status: !toggleState.status, name: `post-${id}` }));
     // setShowComments((prev) => !prev);
   };
 
