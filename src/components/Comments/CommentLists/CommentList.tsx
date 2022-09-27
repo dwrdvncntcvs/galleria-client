@@ -1,17 +1,18 @@
 import React from "react";
-import AddComment from "../AddComment/AddComment";
-import Comment from "../Comment/Comment";
+import { Comment } from "../../../models/Comments";
+import CommentItem from "../CommentItem/CommentItem";
 import style from "./commentList.module.scss";
 
-export default function CommentList() {
-  const commentArr: any[] = [];
+interface CommentListProps {
+  comments: Comment[];
+}
 
+export default function CommentList({ comments }: CommentListProps) {
   return (
     <div className={style.comments}>
-      {commentArr.map(() => (
-        <Comment />
+      {comments.map((comment, i) => (
+        <CommentItem key={i} comment={comment} />
       ))}
-      <AddComment />
     </div>
   );
 }

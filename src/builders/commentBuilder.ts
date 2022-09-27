@@ -11,9 +11,9 @@ export const commentBuilder = (
         console.log("Pending ...");
       })
       .addCase(getAllComments.fulfilled, (state, action) => {
-        console.log("Payload: ", action.payload);
-        const data: Comment[] = action.payload.data; 
-        return { ...state, comments: [...state.comments, ...data] };
+        const data: Comment[] = action.payload.data;
+
+        return { ...state, comments: data };
       })
       .addCase(getAllComments.rejected, () => {
         console.log("Rejected ...");

@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Post } from "../../../models/Post";
 import style from "./postCard.module.scss";
-import { PostHeader, PreviewPostImage, RoundedAvatar } from "../../global";
+import { PostHeader, PreviewPostImage } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { AddComment } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
-import { defaultAvatar } from "../../../assets/images";
 import PostContent from "../../global/PostContent/PostContent";
 
 interface PostProps {
