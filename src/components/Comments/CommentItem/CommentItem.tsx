@@ -18,16 +18,20 @@ export default function CommentItem({ comment }: CommentItemProps) {
   };
 
   return (
-    <div>
-      <RoundedAvatar
-        src={User.Profile?.profileImage!}
-        alt={`${User.first_name}'s avatar`}
-        onClickAction={goToProfile}
-      />
-      <h1>
-        {User.first_name} {User.last_name}
-      </h1>
-      <p>{convertDate(createdAt)}</p>
+    <div className={style.comment}>
+      <div className={style.header}>
+        <RoundedAvatar  
+          src={User.Profile?.profileImage!}
+          alt={`${User.first_name}'s avatar`}
+          onClickAction={goToProfile}
+        />
+        <div>
+          <p>
+            {User.first_name} {User.last_name}
+          </p>
+          <p>{convertDate(createdAt)}</p>
+        </div>
+      </div>
       <p>{text}</p>
       {imageUrl !== "" && <img src={imageUrl} alt={`comment-${id}`} />}
     </div>

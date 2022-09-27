@@ -3,5 +3,6 @@
 .content {
   @extend .flex-column;
   padding-inline: 20px;
+  padding-bottom: 10px;
   font-size: 0.9rem;
 }

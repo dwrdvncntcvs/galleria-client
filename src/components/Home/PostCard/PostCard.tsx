@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { AddComment } from "../../Comments";
-import { HiOutlineChat } from "react-icons/hi";
+import { HiOutlineChat, HiOutlineHeart } from "react-icons/hi";
 import { v4 } from "uuid";
 import PostContent from "../../global/PostContent/PostContent";
 
@@ -24,6 +24,15 @@ export default function PostCard({ post }: PostProps) {
   };
 
   const buttons = [
+    {
+      Icon: HiOutlineHeart,
+      label: "Like",
+      id: v4(),
+      action: () => {
+        console.log("Liked...");
+      },
+      count: 0,
+    },
     {
       Icon: HiOutlineChat,
       label: "Comment",

@@ -39,7 +39,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background-color: rgb(41, 41, 41);
+      background-color: black;
     }
   }
 
@@ -58,6 +58,11 @@
     .details-content {
       height: 100%;
       overflow-y: auto;
+
+      .post {
+        @extend .flex-column;
+        gap: 10px;
+      }
     }
   }
 }
