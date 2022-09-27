@@ -12,3 +12,8 @@ export interface Comment {
 export interface CommentState {
   comments: Comment[];
 }
+
+export interface CreateCommentData {
+  text: string;
+  postId: string
+}

@@ -11,7 +11,7 @@ const commentSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    commentBuilder(builder).getAllComments();
+    commentBuilder(builder).getAllComments().createComment();
   },
 });
 

@@ -1,12 +1,30 @@
 import React, { ChangeEvent, useState } from "react";
 import { HiOutlinePaperAirplane } from "react-icons/hi";
+import { createComment } from "../../../api/commentRequest";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import style from "./addComments.module.scss";
 
-export default function AddComment() {
+interface AddCommentProps {
+  postId: string;
+}
+
+export default function AddComment({ postId }: AddCommentProps) {
   const [comment, setComment] = useState("");
 
-  const commentAction = (e: any) => {
+  const dispatch = useAppDispatch();
+
+  const commentAction = async (e: any) => {
     e.preventDefault();
+
+    const data = {
+      postId,
+      text: comment,
+    };
+
+    console.log("Comment Data: ", data);
+    await dispatch(createComment(data));
+
+    setComment("");
   };
 
   const postInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {

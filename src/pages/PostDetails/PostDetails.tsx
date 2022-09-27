@@ -94,7 +94,7 @@ export default function PostDetails() {
               </div>
             </div>
 
-            <AddComment />
+            <AddComment postId={id} />
           </section>
         </>
       )}

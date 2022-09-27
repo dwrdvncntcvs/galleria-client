@@ -50,7 +50,7 @@ export default function PostCard({ post }: PostProps) {
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
       <ActionsComponent buttons={buttons} />
-      <AddComment />
+      <AddComment postId={id} />
     </Card>
   );
 }

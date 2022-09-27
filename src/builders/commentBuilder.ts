@@ -1,5 +1,5 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { getAllComments } from "../api/commentRequest";
+import { createComment, getAllComments } from "../api/commentRequest";
 import { Comment, CommentState } from "../models/Comments";
 
 export const commentBuilder = (
@@ -16,6 +16,20 @@ export const commentBuilder = (
         return { ...state, comments: data };
       })
       .addCase(getAllComments.rejected, () => {
+        console.log("Rejected ...");
+      });
+    return this;
+  },
+
+  createComment: () => {
+    builder
+      .addCase(createComment.pending, (state, action) => {
+        console.log("Pending ...");
+      })
+      .addCase(createComment.fulfilled, (state, action) => {
+        console.log("Fulfilled ...");
+      })
+      .addCase(createComment.rejected, () => {
         console.log("Rejected ...");
       });
     return this;
