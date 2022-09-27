@@ -6,8 +6,8 @@ export interface Post {
   id: string;
   content: string;
   userId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | any;
+  updatedAt: Date | any;
   User: UserProfile;
   ImagePost: ImagePost[];
   commentsCount: number;
@@ -23,6 +23,7 @@ export interface PostState {
   message?: string;
   posts: Post[];
   postsInfo: PostInfo;
+  post?: Post;
 }
 
 export interface PostInfo {

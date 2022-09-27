@@ -1,5 +1,5 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { createPost, getAllPosts } from "../api/postRequest";
+import { createPost, getAllPosts, getPostDetails } from "../api/postRequest";
 import { PostState } from "../models/Post";
 
 export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
@@ -43,6 +43,30 @@ export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
         };
       })
       .addCase(createPost.rejected, (state, action) => {
+        console.log(action);
+        return {
+          ...state,
+          status: "error",
+          message: action.payload as string,
+        };
+      });
+    return this;
+  },
+
+  getPostDetails() {
+    builder
+      .addCase(getPostDetails.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(getPostDetails.fulfilled, (state, action) => {
+        console.log("Getting post Fulfilled...");
+        console.log("Post Action Payload: ", action.payload.post);
+        return {
+          ...state,
+          post: action.payload.post,
+        };
+      })
+      .addCase(getPostDetails.rejected, (state, action) => {
         console.log(action);
         return {
           ...state,

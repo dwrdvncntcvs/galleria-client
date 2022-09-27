@@ -10,7 +10,7 @@ import {
   PostData,
 } from "../models/Post";
 import { User } from "../models/User";
-import { privateHttpService } from "../services/httpService";
+import { httpService, privateHttpService } from "../services/httpService";
 import { serializeDate } from "../utils/helper";
 
 export const getAllPosts = createAsyncThunk(
@@ -49,6 +49,19 @@ export const createPost = createAsyncThunk(
       return responseData;
     } catch (error: any) {
       return rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
+export const getPostDetails = createAsyncThunk(
+  "post/getPostDetails",
+  async ({ postId }: { postId: string }, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.get(`/post/${postId}`);
+
+      return responseData;
+    } catch (error: any) {
+      rejectWithValue(error.response.data.msg);
     }
   }
 );

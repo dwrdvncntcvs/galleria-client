@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Post } from "../../../models/Post";
-import { PreviewPostImage } from "..";
 import style from "./postCard.module.scss";
-import { PostHeader, RoundedAvatar } from "../../global";
+import { PostHeader, PreviewPostImage, RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";

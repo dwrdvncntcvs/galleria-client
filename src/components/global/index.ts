@@ -7,3 +7,4 @@ export { default as RoundedAvatar } from "./RoundedAvatar/RoundedAvatar";
 export { default as InputError } from "./InputError/InputError";
 export { default as InfiniteScroll } from "./InfiniteScroll/InfiniteScroll";
 export { default as PostHeader } from "./PostHeader/PostHeader";
+export { default as PreviewPostImage } from "./PreviewPostImage/PreviewPostImage";

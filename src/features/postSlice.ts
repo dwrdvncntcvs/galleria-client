@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 } from "uuid";
 import { postBuilder } from "../builders/postBuilder";
 import { PostState } from "../models/Post";
 
@@ -11,6 +12,16 @@ const initialState: PostState = {
     page: 0,
     count: 0,
     hasMore: true,
+  },
+  post: {
+    commentsCount: 0,
+    content: "",
+    createdAt: "",
+    id: v4(),
+    ImagePost: [],
+    updatedAt: "",
+    User: {},
+    userId: v4(),
   },
 };
 
@@ -36,7 +47,7 @@ const postSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    postBuilder(builder).createPost().getAllPosts();
+    postBuilder(builder).createPost().getAllPosts().getPostDetails();
   },
 });
 
