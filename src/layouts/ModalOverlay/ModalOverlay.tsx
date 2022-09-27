@@ -4,14 +4,24 @@ import Backdrop from "../Backdrop/Backdrop";
 import Modal from "../Modal/Modal";
 import style from "./modalOverlay.module.scss";
 
-export default function ModalOverlay({ children }: PropsWithChildren) {
+interface ModalOverlayProps extends PropsWithChildren {
+  className?: string;
+}
+
+export default function ModalOverlay({
+  children,
+  className,
+}: ModalOverlayProps) {
+  document.body.style.overflowY = "hidden";
+
   return (
     <DOMPortal
       element={
-        <div className={style["modal-overlay"]}>
-          <Backdrop />
-          <Modal>{children}</Modal>
-        </div>
+        // <div className={style["modal-overlay"]}>
+        <Backdrop>
+          <Modal className={className}>{children}</Modal>
+        </Backdrop>
+        // </div>
       }
       elementId="overlay-root"
     />

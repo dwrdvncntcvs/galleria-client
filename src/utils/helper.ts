@@ -1,3 +1,5 @@
+import moment from "moment";
+
 type DebounceCB = (args: any[]) => void;
 
 export const debounce = (cb: DebounceCB, delay: number) => {
@@ -28,3 +30,6 @@ export const serializeDate = <
 
   return data;
 };
+
+export const convertDate = (date: Date) =>
+  moment(date).format("MMMM D, YYYY | h:mm A");

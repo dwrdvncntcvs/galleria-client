@@ -14,7 +14,7 @@ export default function RoundedAvatar({
 }: RoundedAvatarProps) {
   return (
     <div className={style["rounded-avatar"]} onClick={onClickAction}>
-      <img src={src} alt={alt} />
+      <img className={style['rounded-img']} src={src} alt={alt} />
     </div>
   );
 }

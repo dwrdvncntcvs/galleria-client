@@ -15,7 +15,7 @@ import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./home.module.scss";
 
 const Home = () => {
-  const { userState, postState, modalState } = useAppSelector((state) => state);
+  const { userState, postState } = useAppSelector((state) => state);
 
   return (
     <InfiniteScroll

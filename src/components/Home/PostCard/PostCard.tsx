@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import moment from "moment";
 import { Post } from "../../../models/Post";
 import { PreviewPostImage } from "..";
 import style from "./postCard.module.scss";
-import { RoundedAvatar } from "../../global";
-import { Outlet, useNavigate } from "react-router-dom";
+import { PostHeader, RoundedAvatar } from "../../global";
+import { useNavigate } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { AddComment } from "../../Comments";
 import { HiOutlineChat } from "react-icons/hi";
 import { v4 } from "uuid";
 import { defaultAvatar } from "../../../assets/images";
+import PostContent from "../../global/PostContent/PostContent";
 
 interface PostProps {
   post: Post;
@@ -20,13 +20,6 @@ export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
 
   const navigate = useNavigate();
-
-  const convertDate = (date: Date) =>
-    moment(date).format("MMMM D, YYYY | h:mm A");
-
-  const goToProfile = () => {
-    navigate(`/${User.username}`);
-  };
 
   const commentVisibilityHandler = () => {
     navigate(`post/${id}`);
@@ -44,26 +37,8 @@ export default function PostCard({ post }: PostProps) {
 
   return (
     <Card>
-      <header className={style.header}>
-        <RoundedAvatar
-          src={
-            User.Profile?.profileImage! !== ""
-              ? User.Profile?.profileImage!
-              : defaultAvatar
-          }
-          alt={`${User.first_name}'s avatar`}
-          onClickAction={goToProfile}
-        />
-        <div className={style["header-content"]}>
-          <p>
-            {User.first_name} {User.last_name}
-          </p>
-          <p>{convertDate(updatedAt)}</p>
-        </div>
-      </header>
-      <div className={style.content}>
-        <p>{content}</p>
-      </div>
+      <PostHeader user={User} postDate={updatedAt} />
+      <PostContent content={content} />
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}

@@ -1,0 +1,25 @@
+@import "../../../index.scss";
+
+.header {
+  @extend .flex-row;
+  align-items: center;
+  gap: 10px;
+  padding-inline: 20px;
+  padding-top: 20px;
+
+  .post-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+
+  p:nth-child(1) {
+    font-size: 1rem;
+  }
+
+  p:nth-child(2) {
+    font-size: 0.75rem;
+    color: gray;
+  }
+}

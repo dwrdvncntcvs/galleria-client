@@ -1,0 +1,7 @@
+@import "../../../index.scss";
+
+.content {
+  @extend .flex-column;
+  padding-inline: 20px;
+  font-size: 0.9rem;
+}
