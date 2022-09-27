@@ -9,16 +9,29 @@
   border-radius: 5px;
 
   #close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 100%;
+    border: none;
     position: fixed;
     top: 20px;
     right: 20px;
     width: 40px;
     height: 40px;
+    transition: all ease 0.2s;
+    background-color: $error-color;
+    color: white;
+
+    &:hover {
+      opacity: 0.5;
+    }
   }
 
-  section:nth-child(2) {
+  .images-container {
     @extend .flex-column;
-
+    width: 600px;
     flex: 3;
     img {
       border-radius: 5px 0px 0px 5px;
@@ -30,15 +43,21 @@
     }
   }
 
-  section:nth-child(3) {
+  .details-container {
     @extend .flex-column;
+    justify-content: space-between;
     flex: 2;
     width: 400px;
+    height: 100%;
     gap: 10px;
-    justify-content: flex-start;
 
     .profile {
       @extend .flex-column;
+    }
+
+    .details-content {
+      height: 100%;
+      overflow-y: auto;
     }
   }
 }

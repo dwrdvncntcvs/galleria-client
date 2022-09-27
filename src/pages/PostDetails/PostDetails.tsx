@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { HiOutlineChat } from "react-icons/hi";
+import { HiOutlineChat, HiX } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router-dom";
 import { v4 } from "uuid";
 import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
-import { CommentList } from "../../components/Comments";
+import { AddComment, CommentList } from "../../components/Comments";
 import { PostHeader, PreviewPostImage } from "../../components/global";
 import PostContent from "../../components/global/PostContent/PostContent";
 import ActionsComponent from "../../components/Home/PostCard/ActionsComponent/ActionsComponent";
@@ -51,22 +51,26 @@ export default function PostDetails() {
   return (
     <ModalOverlay className={style["post-details"]}>
       <button id={style.close} onClick={goBack}>
-        Close
+        <HiX />
       </button>
       {ImagePost.length > 0 && (
-        <section>
+        <section className={style["images-container"]}>
           <PreviewPostImage imagePost={ImagePost} userData={User} />
         </section>
       )}
-      <section>
-        <div>
-          <PostHeader user={User!} postDate={updatedAt} />
-          <PostContent content={content} />
+      <section className={style["details-container"]}>
+        <div className={style["details-content"]}>
+          <div>
+            <PostHeader user={User!} postDate={updatedAt} />
+            <PostContent content={content} />
+          </div>
+          <div>
+            <ActionsComponent buttons={buttons} />
+            <CommentList comments={commentState.comments} />
+          </div>
         </div>
-        <div>
-          <ActionsComponent buttons={buttons} />
-        </div>
-        <CommentList comments={commentState.comments} />
+
+        <AddComment />
       </section>
     </ModalOverlay>
   );
