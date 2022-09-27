@@ -9,10 +9,16 @@ const initialState: CommentState = {
 const commentSlice = createSlice({
   name: "comment",
   initialState,
-  reducers: {},
+  reducers: {
+    addComment: (state, action) => {
+      return { ...state, comments: [...state.comments, action.payload] };
+    },
+  },
   extraReducers(builder) {
     commentBuilder(builder).getAllComments().createComment();
   },
 });
+
+export const { addComment } = commentSlice.actions;
 
 export default commentSlice.reducer;

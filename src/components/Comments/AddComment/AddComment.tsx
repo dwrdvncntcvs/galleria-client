@@ -1,7 +1,11 @@
 import React, { ChangeEvent, useState } from "react";
 import { HiOutlinePaperAirplane } from "react-icons/hi";
+import { v4 } from "uuid";
 import { createComment } from "../../../api/commentRequest";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { addComment } from "../../../features/commentSlice";
+import { updatePostCount } from "../../../features/postSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { Comment } from "../../../models/Comments";
 import style from "./addComments.module.scss";
 
 interface AddCommentProps {
@@ -12,19 +16,35 @@ export default function AddComment({ postId }: AddCommentProps) {
   const [comment, setComment] = useState("");
 
   const dispatch = useAppDispatch();
+  const { userState, postState } = useAppSelector((state) => state);
+
+  const { userData } = userState;
 
   const commentAction = async (e: any) => {
     e.preventDefault();
 
     const data = {
-      postId,
       text: comment,
+      postId,
+    };
+
+    const commentData: Comment = {
+      createdAt: new Date(),
+      User: userData!,
+      text: comment,
+      postId,
+      id: v4(),
+      imageUrl: "",
     };
 
     console.log("Comment Data: ", data);
-    await dispatch(createComment(data));
+    const response = await dispatch(createComment(data));
 
-    setComment("");
+    if (response.meta.requestStatus === "fulfilled") {
+      dispatch(addComment(commentData));
+      dispatch(updatePostCount(postState.post?.commentsCount! + 1));
+      setComment("");
+    }
   };
 
   const postInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
