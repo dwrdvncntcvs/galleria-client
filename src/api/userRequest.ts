@@ -1,4 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { resetPostState } from "../features/postSlice";
+import { resetUserState } from "../features/userSlice";
 import {
   OTP,
   UserAuth,

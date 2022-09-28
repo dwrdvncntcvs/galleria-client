@@ -7,6 +7,8 @@ import { UserProfile } from "../../../models/User";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { signOutRequest } from "../../../api/userRequest";
 import { closeToggle } from "../../../features/toggleSlice";
+import { resetPostState } from "../../../features/postSlice";
+import { resetUserState } from "../../../features/userSlice";
 
 interface NavDropdownProps {
   user: UserProfile;
@@ -28,8 +30,13 @@ export default function NavDropdown({ user }: NavDropdownProps) {
     {
       action: async () => {
         dispatch(closeToggle());
-        dispatch(signOutRequest());
-        navigate("/");
+        const res = await dispatch(signOutRequest());
+
+        if (res.meta.requestStatus === "fulfilled") {
+          dispatch(resetPostState());
+          dispatch(resetUserState());
+          navigate("/");
+        }
       },
       Icon: HiLogout,
       name: "Logout",

@@ -9,15 +9,14 @@ import { setToggle } from "../../../features/toggleSlice";
 import NavDropdown from "../NavDropdown/NavDropdown";
 import { defaultAvatar } from "../../../assets/images";
 import RoundedAvatar from "../RoundedAvatar/RoundedAvatar";
+import { resetPostState } from "../../../features/postSlice";
 
 interface NavLinksProps {
   user: UserProfile;
 }
 
 export default function NavLinks({ user }: NavLinksProps) {
-  const { status: STATUS, name: NAME } = useAppSelector(
-    (state) => state.toggleState
-  );
+  const { toggleState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,7 +37,10 @@ export default function NavLinks({ user }: NavLinksProps) {
       Icon: activeURL("/home") ? HiHome : HiOutlineHome,
       hasImage: false,
       isDropdown: false,
-      action: () => navigate("/home"),
+      action: async () => {
+        navigate("/home");
+        dispatch(resetPostState());
+      },
     },
     {
       Icon: HiUser,
@@ -54,7 +56,7 @@ export default function NavLinks({ user }: NavLinksProps) {
       action: () =>
         dispatch(
           setToggle({
-            status: STATUS ? false : true,
+            status: toggleState.status ? false : true,
             name: "createNavDropdown",
           })
         ),
@@ -72,9 +74,9 @@ export default function NavLinks({ user }: NavLinksProps) {
               <Icon size={18} />
             )}
           </button>
-          {STATUS && NAME === "createNavDropdown" && isDropdown && (
-            <NavDropdown user={user!} />
-          )}
+          {toggleState.status &&
+            toggleState.name === "createNavDropdown" &&
+            isDropdown && <NavDropdown user={user!} />}
         </Fragment>
       ))}
     </nav>

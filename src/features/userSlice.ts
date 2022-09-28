@@ -38,6 +38,10 @@ const userSlice = createSlice({
     setMessage: (state, action) => {
       return { ...state, message: action.payload };
     },
+    resetUserState: () => {
+      console.log("User State Reset ...");
+      return userState;
+    },
   },
   extraReducers(builder) {
     //User Sign In Reducer
@@ -58,6 +62,7 @@ export const {
   setAccessToken,
   setStatus,
   setMessage,
+  resetUserState,
 } = userSlice.actions;
 
 export default userSlice.reducer;
