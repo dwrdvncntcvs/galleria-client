@@ -10,7 +10,6 @@ import {
   StickyPanel,
 } from "../../layouts";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
-import ModalOverlay from "../../layouts/ModalOverlay/ModalOverlay";
 import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./home.module.scss";
 
