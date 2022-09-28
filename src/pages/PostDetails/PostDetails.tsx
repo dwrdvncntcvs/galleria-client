@@ -39,7 +39,7 @@ export default function PostDetails() {
   }, []);
 
   const goBack = () => {
-    navigate(-1);
+    navigate("/home");
   };
 
   const { id, User, ImagePost, commentsCount, content, updatedAt } =

@@ -51,13 +51,21 @@ const postSlice = createSlice({
         post: { ...state.post!, commentsCount: action.payload },
       };
     },
+    resetPostState: () => {
+      return initialState;
+    },
   },
   extraReducers(builder) {
     postBuilder(builder).createPost().getAllPosts().getPostDetails();
   },
 });
 
-export const { addPost, changePage, setHasMore, updatePostCount } =
-  postSlice.actions;
+export const {
+  addPost,
+  changePage,
+  setHasMore,
+  updatePostCount,
+  resetPostState,
+} = postSlice.actions;
 
 export default postSlice.reducer;
