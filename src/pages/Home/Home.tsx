@@ -16,6 +16,7 @@ import style from "./home.module.scss";
 const Home = () => {
   const { userState, postState } = useAppSelector((state) => state);
 
+  //Home Page
   return (
     <InfiniteScroll
       dataRequest={getAllPosts}
