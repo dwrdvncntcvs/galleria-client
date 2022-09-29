@@ -8,7 +8,9 @@ interface ImageGalleryProps {
 }
 
 export default function ImageGallery({ username }: ImageGalleryProps) {
-  const { imageInfo } = useAppSelector((state) => state.imageGalleryState);
+  const { imageInfo, images } = useAppSelector(
+    (state) => state.imageGalleryState
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,12 +24,23 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
       );
 
     getData();
-  }, []);
+  }, [username]);
 
   return (
     <div>
-      <h1>Images</h1>
-      <section></section>
+      <h1>Gallery</h1>
+      <div>
+        {images.map(({ postImageUrl, updatedAt, id }) => {
+          return (
+            <img
+              style={{ height: "100px", width: "50%", objectFit: "cover" }}
+              src={postImageUrl}
+              alt={id}
+              key={id}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
