@@ -38,8 +38,8 @@ export default function NavLinks({ user }: NavLinksProps) {
       hasImage: false,
       isDropdown: false,
       action: async () => {
-        navigate("/home");
         dispatch(resetPostState());
+        navigate("/home");
       },
     },
     {
