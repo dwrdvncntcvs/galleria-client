@@ -57,12 +57,8 @@ const InfiniteScroll = ({
   }, 700);
 
   useEffect(() => {
-    request();
-  }, [userId]);
-
-  useEffect(() => {
     if (hasMore) request();
-  }, [hasMore]);
+  }, [hasMore, userId]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrollChange);

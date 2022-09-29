@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUserProfileRequest } from "../../api/userRequest";
+import { ImageGallery } from "../../components/Gallery";
+import { SuggestPeople } from "../../components/global";
 import { ProfileCard } from "../../components/Profile";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { AdjustedNavContainer, ContentContainer } from "../../layouts";
@@ -26,10 +28,11 @@ export default function Profile() {
       <div className={style.profile}>
         <ContentContainer>
           <MainPanel>
-            <ProfileCard profile={userState.userProfile}/>
+            <ProfileCard profile={userState.userProfile} />
           </MainPanel>
           <SidePanel>
-            <h1>Side</h1>
+            <ImageGallery username={params.username!} />
+            <SuggestPeople />
           </SidePanel>
         </ContentContainer>
       </div>
