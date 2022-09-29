@@ -17,7 +17,7 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
       </div>
       <div className={style["bio-container"]}>
         <p className={style["bio-txt"]}>
-          IT/GRAPHIC DESIGNER💖
+          IT/GRAPHIC DESIGNER💖 
         </p>
       </div>
       <div className={style["follow-container"]}>

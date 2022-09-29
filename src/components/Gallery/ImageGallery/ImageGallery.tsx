@@ -29,14 +29,19 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
   return images.length > 0 ? (
     <section className={style["image-gallery"]}>
       <h1>My Gallery</h1>
-      <div className={style['images-container']}>
-        {images.map(({ postImageUrl, updatedAt, id }) => {
+      <div className={style["images-container"]}>
+        {images.map(({ postImageUrl, updatedAt, id }, i) => {
+          console.log(images.length - 1 === i);
+
           return (
-            <img
-              src={postImageUrl}
-              alt={id}
-              key={id}
-            />
+            <div className={style["image-container"]}>
+              {5 === i && (
+                <div className={style.last}>
+                  <button>{imageInfo.count - images.length}</button>
+                </div>
+              )}
+              <img src={postImageUrl} alt={id} key={id} />
+            </div>
           );
         })}
       </div>
