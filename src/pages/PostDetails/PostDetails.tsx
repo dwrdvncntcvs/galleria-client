@@ -9,7 +9,6 @@ import { PostHeader, PreviewPostImage } from "../../components/global";
 import PostContent from "../../components/global/PostContent/PostContent";
 import ActionsComponent from "../../components/Home/PostCard/ActionsComponent/ActionsComponent";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
-import ModalOverlay from "../../layouts/ModalOverlay/ModalOverlay";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {
@@ -38,10 +37,6 @@ export default function PostDetails() {
     getPostDetailsData();
   }, []);
 
-  const goBack = () => {
-    navigate("/home");
-  };
-
   const { id, User, ImagePost, commentsCount, content, updatedAt } =
     postState.post!;
 
@@ -69,14 +64,11 @@ export default function PostDetails() {
   ];
 
   return (
-    <ModalOverlay className={style["post-details"]}>
+    <div className={style["post-details"]}>
       {loading ? (
         <p>Loading ...</p>
       ) : (
         <>
-          <button id={style.close} onClick={goBack}>
-            <HiX />
-          </button>
           {ImagePost.length > 0 && (
             <section className={style["images-container"]}>
               <PreviewPostImage imagePost={ImagePost} userData={User} />
@@ -98,6 +90,6 @@ export default function PostDetails() {
           </section>
         </>
       )}
-    </ModalOverlay>
+    </div>
   );
 }
