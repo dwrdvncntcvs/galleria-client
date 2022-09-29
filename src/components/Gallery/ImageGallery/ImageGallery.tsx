@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { getAllPostImages } from "../../../api/imageGalleryRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import "./imageGallery.module.scss";
+import style from "./imageGallery.module.scss";
 
 interface ImageGalleryProps {
   username: string;
@@ -26,14 +26,13 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
     getData();
   }, [username]);
 
-  return (
-    <div>
-      <h1>Gallery</h1>
-      <div>
+  return images.length > 0 ? (
+    <section className={style["image-gallery"]}>
+      <h1>My Gallery</h1>
+      <div className={style['images-container']}>
         {images.map(({ postImageUrl, updatedAt, id }) => {
           return (
             <img
-              style={{ height: "100px", width: "50%", objectFit: "cover" }}
               src={postImageUrl}
               alt={id}
               key={id}
@@ -41,6 +40,6 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
           );
         })}
       </div>
-    </div>
-  );
+    </section>
+  ) : null;
 }

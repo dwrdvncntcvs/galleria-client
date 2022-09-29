@@ -1,0 +1,34 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.image-gallery {
+  @extend .flex-column;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  gap: 10px;
+
+  h1 {
+    font-size: 1.25rem;
+    color: $primary-color;
+  }
+
+  .images-container {
+    @extend .flex-row;
+    flex-wrap: wrap;
+    gap: 2px;
+
+    img {
+      height: 100px;
+      width: 32.9%;
+      object-fit: cover;
+      border-radius: 5px;
+      background-color: $primary-color;
+      transition: all ease .2s;
+
+      &:hover {
+        transform: scale(.9)
+      }
+    }
+  }
+}
