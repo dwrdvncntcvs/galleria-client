@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   commentReducer,
   followerReducer,
+  imageGalleryReducer,
   modalReducer,
   postReducer,
   toggleReducer,
@@ -15,7 +16,8 @@ export const store = configureStore({
     modalState: modalReducer,
     toggleState: toggleReducer,
     followerState: followerReducer,
-    commentState: commentReducer
+    commentState: commentReducer,
+    imageGalleryState: imageGalleryReducer,
   },
   devTools: true,
 });
