@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { HiOutlineChat, HiOutlineHeart, HiX } from "react-icons/hi";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  HiArrowLeft,
+  HiOutlineChat,
+  HiOutlineHeart,
+  HiX,
+} from "react-icons/hi";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { v4 } from "uuid";
 import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
@@ -18,6 +23,7 @@ import {
   ContentContainer,
   StickyPanel,
 } from "../../layouts";
+import Card from "../../layouts/Card/Card";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
 import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./postDetails.module.scss";
@@ -30,6 +36,7 @@ export default function PostDetails() {
   const dispatch = useAppDispatch();
   const params = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const getPostDetailsData = async () => {
@@ -50,6 +57,10 @@ export default function PostDetails() {
     getPostDetailsData();
   }, [params.id]);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const { id, User, ImagePost, commentsCount, content, updatedAt } =
     postState.post!;
 
@@ -57,7 +68,26 @@ export default function PostDetails() {
     <AdjustedNavContainer>
       <div className={style["post-details"]}>
         <ContentContainer>
-          <MainPanel>Hello</MainPanel>
+          <MainPanel>
+            <header className={style["post-header"]}>
+              <button onClick={goBack}>
+                <HiArrowLeft />
+              </button>
+              <h1>{User.first_name}'s Post</h1>
+            </header>
+            <Card>
+              <PostHeader postDate={updatedAt} user={User} />
+              <PostContent content={content} />
+              {ImagePost.length > 0 && (
+                <PreviewPostImage imagePost={ImagePost} userData={User} />
+              )}
+              <ActionsComponent commentsCount={commentsCount} postId={id} />
+              <AddComment postId={id} />
+              {commentState.comments.length > 0 && (
+                <CommentList comments={commentState.comments} />
+              )}
+            </Card>
+          </MainPanel>
           <SidePanel>
             <StickyPanel>
               <SuggestPeople />

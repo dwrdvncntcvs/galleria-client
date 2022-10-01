@@ -2,7 +2,7 @@ import React from "react";
 import { Post } from "../../../models/Post";
 import style from "./postCard.module.scss";
 import { PostHeader, PreviewPostImage } from "../../global";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Card from "../../../layouts/Card/Card";
 import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { AddComment } from "../../Comments";
@@ -20,10 +20,10 @@ export default function PostCard({ post }: PostProps) {
 
   const { isAuth } = useAppSelector((state) => state.userState);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const commentVisibilityHandler = () => {
-    console.log("Opening Post Details..");
-    navigate(`/post/${id}`, { replace: true });
+    navigate(`/post/${id}`);
   };
 
   const buttons = [
