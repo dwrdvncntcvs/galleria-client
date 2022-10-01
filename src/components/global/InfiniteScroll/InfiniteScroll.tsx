@@ -5,15 +5,15 @@ import { throttle } from "lodash";
 
 interface InfiniteScrollProps extends PropsWithChildren {
   dataRequest: ({
-    userId,
+    param,
     limit,
     page,
   }: {
-    userId: string;
+    param: string;
     limit: number;
     page: number;
   }) => any;
-  userId: string;
+  param: string;
   limit: number;
   page: number;
   numberOfItems: number;
@@ -23,7 +23,7 @@ interface InfiniteScrollProps extends PropsWithChildren {
 const InfiniteScroll = ({
   children,
   dataRequest,
-  userId,
+  param,
   limit,
   page,
   numberOfItems,
@@ -34,7 +34,7 @@ const InfiniteScroll = ({
 
   const request = async () => {
     setIsLoading((prev) => (prev = true));
-    const value = await dispatch(dataRequest({ userId, limit, page }));
+    const value = await dispatch(dataRequest({ param, limit, page }));
 
     if (value.meta.requestStatus === "fulfilled") setIsLoading(false);
   };
@@ -58,7 +58,7 @@ const InfiniteScroll = ({
 
   useEffect(() => {
     if (hasMore) request();
-  }, [hasMore, userId]);
+  }, [hasMore, param]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrollChange);

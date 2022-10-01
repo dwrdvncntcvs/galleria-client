@@ -34,7 +34,7 @@ export interface PostInfo {
 }
 
 export interface GetAllPosts {
-  userId: string;
+  param: string;
   limit?: number;
   page?: number;
   // privateInstance: typeof privateInstance;

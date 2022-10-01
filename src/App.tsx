@@ -35,7 +35,19 @@ function App() {
                 />
               </Route>
             </Route>
-            <Route path="/:username" element={<Profile />} />
+            <Route path="/:username/" element={<Profile />}>
+              <Route
+                path="post/:id"
+                element={
+                  <ModalOverlay
+                    hasBackButton={true}
+                    backButtonComponent={ClosePostButton}
+                  >
+                    <PostDetails />
+                  </ModalOverlay>
+                }
+              />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

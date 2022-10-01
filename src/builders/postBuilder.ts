@@ -1,5 +1,10 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { createPost, getAllPosts, getPostDetails } from "../api/postRequest";
+import {
+  createPost,
+  getAllPosts,
+  getAllUserPosts,
+  getPostDetails,
+} from "../api/postRequest";
 import { PostState } from "../models/Post";
 
 export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
@@ -19,6 +24,34 @@ export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
         };
       })
       .addCase(getAllPosts.rejected, (state, action) => {
+        console.log(action);
+        return {
+          ...state,
+          status: "error",
+          message: action.payload as string,
+        };
+      });
+    return this;
+  },
+
+  getAllUserPosts() {
+    builder
+      .addCase(getAllUserPosts.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(getAllUserPosts.fulfilled, (state, action) => {
+        console.log("Getting User Posts Fulfilled...");
+
+        console.log(action.payload)
+
+        return {
+          ...state,
+          posts: [...state.posts, ...action.payload.posts],
+          postsInfo: action.payload.info,
+          status: "success",
+        };
+      })
+      .addCase(getAllUserPosts.rejected, (state, action) => {
         console.log(action);
         return {
           ...state,

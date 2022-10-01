@@ -10,7 +10,6 @@ import {
   StickyPanel,
 } from "../../layouts";
 import MainPanel from "../../layouts/MainPanel/MainPanel";
-import ModalOverlay from "../../layouts/ModalOverlay/ModalOverlay";
 import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./home.module.scss";
 
@@ -18,9 +17,9 @@ const Home = () => {
   const { userState, postState } = useAppSelector((state) => state);
 
   return (
-    <InfiniteScroll
+    <InfiniteScroll 
       dataRequest={getAllPosts}
-      userId={userState.userData?.id!}
+      param={userState.userData?.id!}
       limit={+postState.postsInfo.limit}
       page={+postState.postsInfo.page}
       hasMore={postState.postsInfo.hasMore}

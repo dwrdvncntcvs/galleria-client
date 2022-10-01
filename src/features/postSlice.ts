@@ -56,7 +56,11 @@ const postSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    postBuilder(builder).createPost().getAllPosts().getPostDetails();
+    postBuilder(builder)
+      .createPost()
+      .getAllPosts()
+      .getPostDetails()
+      .getAllUserPosts();
   },
 });
 

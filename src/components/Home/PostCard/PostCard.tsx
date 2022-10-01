@@ -20,6 +20,7 @@ export default function PostCard({ post }: PostProps) {
   const navigate = useNavigate();
 
   const commentVisibilityHandler = () => {
+    console.log("Opening Post Details..")
     navigate(`post/${id}`);
   };
 

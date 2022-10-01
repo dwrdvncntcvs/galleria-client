@@ -19,6 +19,8 @@ export default function PostDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("Post Details Params: ", params);
+
     const getPostDetailsData = async () => {
       setLoading(true);
       const postsMeta = await dispatch(getPostDetails({ postId: params.id! }));
@@ -35,13 +37,13 @@ export default function PostDetails() {
     };
 
     getPostDetailsData();
-  }, []);
+  }, [params.id]);
 
   const { id, User, ImagePost, commentsCount, content, updatedAt } =
     postState.post!;
 
   const commentVisibilityHandler = () => {
-    navigate(`/home/post/${id}`, { replace: true });
+    navigate(` `, { replace: true });
   };
 
   const buttons = [

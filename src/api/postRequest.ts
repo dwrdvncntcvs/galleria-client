@@ -15,15 +15,39 @@ import { serializeDate } from "../utils/helper";
 
 export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
-  async ({ userId, limit = 5, page = 0 }: GetAllPosts, { rejectWithValue }) => {
+  async ({ param, limit = 5, page = 0 }: GetAllPosts, { rejectWithValue }) => {
     const currentPage = 1 + page;
 
     try {
       const responseData = await privateHttpService(privateInstance).get<
         Post[]
-      >(`/post/?limit=${limit}&page=${currentPage}&id=${userId}`);
+      >(`/post/?limit=${limit}&page=${currentPage}&id=${param}`);
 
       console.log(responseData);
+
+      return responseData;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
+export const getAllUserPosts = createAsyncThunk(
+  "post/getAllUserPosts",
+  async (
+    {
+      param,
+      limit = 5,
+      page = 0,
+    }: { param: string; limit: number; page: number },
+    { rejectWithValue }
+  ) => {
+    const currentPage = 1 + page;
+
+    try {
+      const responseData = await privateHttpService(privateInstance).get(
+        `http://localhost:5000/post/posts/${param}?limit=${limit}&page=${currentPage}`
+      );
 
       return responseData;
     } catch (error: any) {
