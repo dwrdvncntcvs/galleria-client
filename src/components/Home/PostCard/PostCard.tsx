@@ -20,8 +20,8 @@ export default function PostCard({ post }: PostProps) {
   const navigate = useNavigate();
 
   const commentVisibilityHandler = () => {
-    console.log("Opening Post Details..")
-    navigate(`post/${id}`);
+    console.log("Opening Post Details..");
+    navigate(`post/${id}`, { replace: true });
   };
 
   const buttons = [

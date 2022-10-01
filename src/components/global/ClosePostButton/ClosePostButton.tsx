@@ -1,13 +1,20 @@
 import React from "react";
 import { HiX } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import style from "./closePostButton.module.scss";
 
 export default function BackButton() {
   const navigate = useNavigate();
+  const params = useParams();
+
+  console.log("Params", params);
 
   const goBack = () => {
-    navigate(-1);
+    if (params.username !== undefined) {
+      navigate(`/${params.username}`);
+    } else {
+      navigate("/home");
+    }
   };
 
   return (
