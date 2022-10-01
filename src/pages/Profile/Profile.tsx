@@ -59,8 +59,11 @@ export default function Profile() {
                   username={userState.userData?.username!}
                 />
               )}
-              {userState.isAuth ? <Posts posts={posts} /> : <p>This account's posts are hidden...</p>}
-              <Outlet />
+              {userState.isAuth ? (
+                <Posts posts={posts} />
+              ) : (
+                <p>This account's posts are hidden...</p>
+              )}
             </MainPanel>
             <SidePanel>
               <StickyPanel>

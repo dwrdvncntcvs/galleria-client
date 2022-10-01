@@ -21,33 +21,10 @@ function App() {
           </Route>
           <Route path="" element={<Persistent />}>
             <Route element={<RequiredAuth />}>
-              <Route path="/home/" element={<Home />}>
-                <Route
-                  path="post/:id"
-                  element={
-                    <ModalOverlay
-                      hasBackButton={true}
-                      backButtonComponent={ClosePostButton}
-                    >
-                      <PostDetails />
-                    </ModalOverlay>
-                  }
-                />
-              </Route>
+              <Route path="/home" element={<Home />} />
             </Route>
-            <Route path="/:username/" element={<Profile />}>
-              <Route
-                path="post/:id"
-                element={
-                  <ModalOverlay
-                    hasBackButton={true}
-                    backButtonComponent={ClosePostButton}
-                  >
-                    <PostDetails />
-                  </ModalOverlay>
-                }
-              />
-            </Route>
+            <Route path="/:username" element={<Profile />} />
+            <Route path="/post/:id" element={<PostDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -23,7 +23,7 @@ export default function PostCard({ post }: PostProps) {
 
   const commentVisibilityHandler = () => {
     console.log("Opening Post Details..");
-    navigate(`post/${id}`, { replace: true });
+    navigate(`/post/${id}`, { replace: true });
   };
 
   const buttons = [
@@ -52,7 +52,7 @@ export default function PostCard({ post }: PostProps) {
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
-      <ActionsComponent buttons={buttons} />
+      <ActionsComponent postId={id} commentsCount={commentsCount} />
       {isAuth && <AddComment postId={id} />}
     </Card>
   );

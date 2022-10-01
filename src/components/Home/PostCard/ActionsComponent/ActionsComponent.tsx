@@ -1,18 +1,44 @@
 import React from "react";
 import style from "./actionsComponent.module.scss";
 import { IconType } from "react-icons/lib";
+import { HiOutlineChat, HiOutlineHeart } from "react-icons/hi";
+import { v4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 interface ActionsComponentProps {
-  buttons: {
-    Icon: IconType;
-    label: string;
-    id: string;
-    action: () => void;
-    count: number;
-  }[];
+  commentsCount: number;
+  postId: string;
 }
 
-export default function ActionsComponent({ buttons }: ActionsComponentProps) {
+export default function ActionsComponent({
+  commentsCount,
+  postId,
+}: ActionsComponentProps) {
+  const navigate = useNavigate();
+
+  const commentVisibilityHandler = () => {
+    navigate(`/post/${postId}`, { replace: true });
+  };
+
+  const buttons = [
+    {
+      Icon: HiOutlineHeart,
+      label: "Like",
+      id: v4(),
+      action: () => {
+        console.log("Liked");
+      },
+      count: 0,
+    },
+    {
+      Icon: HiOutlineChat,
+      label: "Comment",
+      id: v4(),
+      action: commentVisibilityHandler,
+      count: commentsCount,
+    },
+  ];
+
   return (
     <section className={style.actions}>
       {buttons.map(({ Icon, label, id, action, count }) => (

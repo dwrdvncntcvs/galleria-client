@@ -5,14 +5,27 @@ import { v4 } from "uuid";
 import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
 import { AddComment, CommentList } from "../../components/Comments";
-import { PostHeader, PreviewPostImage } from "../../components/global";
+import {
+  PostHeader,
+  PreviewPostImage,
+  SuggestPeople,
+} from "../../components/global";
 import PostContent from "../../components/global/PostContent/PostContent";
 import ActionsComponent from "../../components/Home/PostCard/ActionsComponent/ActionsComponent";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import {
+  AdjustedNavContainer,
+  ContentContainer,
+  StickyPanel,
+} from "../../layouts";
+import MainPanel from "../../layouts/MainPanel/MainPanel";
+import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {
-  const { postState, commentState, userState } = useAppSelector((state) => state);
+  const { postState, commentState, userState } = useAppSelector(
+    (state) => state
+  );
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -40,56 +53,18 @@ export default function PostDetails() {
   const { id, User, ImagePost, commentsCount, content, updatedAt } =
     postState.post!;
 
-  const commentVisibilityHandler = () => {
-    navigate(` `, { replace: true });
-  };
-
-  const buttons = [
-    {
-      Icon: HiOutlineHeart,
-      label: "Like",
-      id: v4(),
-      action: () => {
-        console.log("Liked");
-      },
-      count: 0,
-    },
-    {
-      Icon: HiOutlineChat,
-      label: "Comment",
-      id: v4(),
-      action: commentVisibilityHandler,
-      count: commentsCount,
-    },
-  ];
-
   return (
-    <div className={style["post-details"]}>
-      {loading ? (
-        <p>Loading ...</p>
-      ) : (
-        <>
-          {ImagePost.length > 0 && (
-            <section className={style["images-container"]}>
-              <PreviewPostImage imagePost={ImagePost} userData={User} />
-            </section>
-          )}
-          <section className={style["details-container"]}>
-            <div className={style["details-content"]}>
-              <div className={style.post}>
-                <PostHeader user={User!} postDate={updatedAt} />
-                <PostContent content={content} />
-              </div>
-              <div>
-                <ActionsComponent buttons={buttons} />
-                <CommentList comments={commentState.comments} />
-              </div>
-            </div>
-
-            {userState.isAuth && <AddComment postId={id} />}
-          </section>
-        </>
-      )}
-    </div>
+    <AdjustedNavContainer>
+      <div className={style["post-details"]}>
+        <ContentContainer>
+          <MainPanel>Hello</MainPanel>
+          <SidePanel>
+            <StickyPanel>
+              <SuggestPeople />
+            </StickyPanel>
+          </SidePanel>
+        </ContentContainer>
+      </div>
+    </AdjustedNavContainer>
   );
 }

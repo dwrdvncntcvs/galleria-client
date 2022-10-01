@@ -17,7 +17,7 @@ const Home = () => {
   const { userState, postState } = useAppSelector((state) => state);
 
   return (
-    <InfiniteScroll 
+    <InfiniteScroll
       dataRequest={getAllPosts}
       param={userState.userData?.id!}
       limit={+postState.postsInfo.limit}
@@ -43,7 +43,6 @@ const Home = () => {
               </StickyPanel>
             </SidePanel>
           </ContentContainer>
-          <Outlet />
         </div>
       </AdjustedNavContainer>
     </InfiniteScroll>
