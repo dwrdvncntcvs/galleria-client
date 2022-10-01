@@ -16,9 +16,7 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
         <p className={style["username-txt"]}>{profile.username}</p>
       </div>
       <div className={style["bio-container"]}>
-        <p className={style["bio-txt"]}>
-          IT/GRAPHIC DESIGNER💖 
-        </p>
+        <p className={style["bio-txt"]}>{profile.Profile?.bio}</p>
       </div>
       <div className={style["follow-container"]}>
         <p className={style["follow-txt"]}>
