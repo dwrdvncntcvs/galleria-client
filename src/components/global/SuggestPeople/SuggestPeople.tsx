@@ -19,7 +19,7 @@ export default function SuggestedPeople() {
     getData();
   }, [userState.userData]);
 
-  return (
+  return userState.isAuth ? (
     <Card>
       <div className={style["suggested-people"]}>
         <h1>People you might know</h1>
@@ -28,5 +28,5 @@ export default function SuggestedPeople() {
         ))}
       </div>
     </Card>
-  );
+  ) : null;
 }

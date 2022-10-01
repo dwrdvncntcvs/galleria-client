@@ -4,13 +4,31 @@ import style from "./navBar.module.scss";
 import NavLinks from "../NavLinks/NavLinks";
 
 import { stopPropagation } from "../../../utils/helper";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const { userState } = useAppSelector((state) => state);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  if (location.pathname === "/") return null;
+  const noNavLocations = [
+    "/",
+    "/sign-up",
+    `/${location.pathname.split("/")[1]}/otp`,
+  ];
+
+  for (let i = 0; i < noNavLocations.length; i++) {
+    console.log(location.pathname === noNavLocations[i]);
+    if (location.pathname === noNavLocations[i]) return null;
+  }
+
+  const goToSignIn = () => {
+    navigate("/");
+  };
+
+  const createAccount = () => {
+    navigate("/sign-up");
+  };
 
   return (
     <div className={style["nav-container"]}>
@@ -29,7 +47,10 @@ export default function NavBar() {
             </section>
           </>
         ) : (
-          <>Hello </>
+          <div>
+            <button onClick={goToSignIn}>Sign In</button>
+            <button onClick={createAccount}>Create Account</button>
+          </div>
         )}
       </section>
     </div>

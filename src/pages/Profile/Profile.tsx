@@ -35,6 +35,8 @@ export default function Profile() {
     getData();
   }, [params.username]);
 
+  const myProfile = userProfile.id === userState.userData?.id;
+
   return (
     <InfiniteScroll
       dataRequest={getAllUserPosts}
@@ -49,13 +51,15 @@ export default function Profile() {
           <ContentContainer>
             <MainPanel>
               <ProfileCard profile={userProfile} />
-              <CreatePost
-                firstName={userProfile.first_name!}
-                imageUrl={userProfile.Profile?.profileImage!}
-                userId={userProfile.id!}
-                username={userProfile.username!}
-              />
-              <Posts posts={posts} />
+              {myProfile && (
+                <CreatePost
+                  firstName={userState.userData?.first_name!}
+                  imageUrl={userState.userData?.Profile?.profileImage!}
+                  userId={userState.userData?.id!}
+                  username={userState.userData?.username!}
+                />
+              )}
+              {userState.isAuth ? <Posts posts={posts} /> : <p>This account's posts are hidden...</p>}
               <Outlet />
             </MainPanel>
             <SidePanel>
