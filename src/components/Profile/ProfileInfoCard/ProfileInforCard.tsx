@@ -20,11 +20,11 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
       </div>
       <div className={style["follow-container"]}>
         <p className={style["follow-txt"]}>
-          30 <span> Following </span>
+          {profile.followingCount!} <span> Following </span>
         </p>
         &nbsp;&nbsp;&nbsp;
         <p className={style["follow-txt"]}>
-          29 <span> Followers </span>
+          {profile.followersCount!} <span> Followers </span>
         </p>
       </div>
     </div>

@@ -48,7 +48,7 @@ export default function Profile() {
         <div className={style.profile}>
           <ContentContainer>
             <MainPanel>
-              <ProfileCard profile={userState.userProfile} />
+              <ProfileCard profile={userProfile} />
               <CreatePost
                 firstName={userProfile.first_name!}
                 imageUrl={userProfile.Profile?.profileImage!}

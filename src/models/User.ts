@@ -13,6 +13,8 @@ export interface User {
 
 export interface UserProfile extends User {
   Profile?: Profile;
+  followingCount?: number;
+  followersCount?: number;
 }
 
 export interface UserAuth {

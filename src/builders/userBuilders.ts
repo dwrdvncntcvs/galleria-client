@@ -129,9 +129,12 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
       })
       .addCase(getUserProfileRequest.fulfilled, (state, action) => {
         console.log("Fulfilled...");
+
+        const { profile, followersCount, followingCount } = action.payload;
+
         return {
           ...state,
-          userProfile: action.payload.profile,
+          userProfile: { ...profile, followersCount, followingCount },
           status: "success",
         };
       })
