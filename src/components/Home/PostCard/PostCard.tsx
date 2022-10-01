@@ -9,6 +9,7 @@ import { AddComment } from "../../Comments";
 import { HiOutlineChat, HiOutlineHeart } from "react-icons/hi";
 import { v4 } from "uuid";
 import PostContent from "../../global/PostContent/PostContent";
+import { useAppSelector } from "../../../hooks/reduxHook";
 
 interface PostProps {
   post: Post;
@@ -17,6 +18,7 @@ interface PostProps {
 export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
 
+  const { isAuth } = useAppSelector((state) => state.userState);
   const navigate = useNavigate();
 
   const commentVisibilityHandler = () => {
@@ -51,7 +53,7 @@ export default function PostCard({ post }: PostProps) {
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
       <ActionsComponent buttons={buttons} />
-      <AddComment postId={id} />
+      {isAuth && <AddComment postId={id} />}
     </Card>
   );
 }

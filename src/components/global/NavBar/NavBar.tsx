@@ -47,10 +47,10 @@ export default function NavBar() {
             </section>
           </>
         ) : (
-          <div>
+          <section className={style["nav-unAuth-btn-group"]}>
             <button onClick={goToSignIn}>Sign In</button>
             <button onClick={createAccount}>Create Account</button>
-          </div>
+          </section>
         )}
       </section>
     </div>

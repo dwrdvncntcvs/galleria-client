@@ -12,15 +12,13 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {
-  const { postState, commentState } = useAppSelector((state) => state);
+  const { postState, commentState, userState } = useAppSelector((state) => state);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const params = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("Post Details Params: ", params);
-
     const getPostDetailsData = async () => {
       setLoading(true);
       const postsMeta = await dispatch(getPostDetails({ postId: params.id! }));
@@ -88,7 +86,7 @@ export default function PostDetails() {
               </div>
             </div>
 
-            <AddComment postId={id} />
+            {userState.isAuth && <AddComment postId={id} />}
           </section>
         </>
       )}
