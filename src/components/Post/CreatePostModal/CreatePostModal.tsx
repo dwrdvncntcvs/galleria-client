@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-
 import "./createPostModal.scss";
-
-import CreatePostHeader from "./CreatePostHeader/CreatePostHeader";
-import PostForm from "./PostForm/PostForm";
 import ModalOverlay from "../../../layouts/ModalOverlay/ModalOverlay";
+import { CreatePostHeader, PostForm } from "..";
 
 export default function CreatePostModal() {
   const [loading, setLoading] = useState(false);

@@ -5,3 +5,6 @@ export { default as PostContent } from "./PostContent/PostContent";
 export { default as PostHeader } from "./PostHeader/PostHeader";
 export { default as PreviewPostImage } from "./PreviewPostImage/PreviewPostImage";
 export { default as CreatePost } from "./CreatePost/CreatePost";
+export { default as CreatePostModal } from "./CreatePostModal/CreatePostModal";
+export { default as CreatePostHeader } from "./CreatePostHeader/CreatePostHeader";
+export { default as PostForm } from "./PostForm/PostForm";

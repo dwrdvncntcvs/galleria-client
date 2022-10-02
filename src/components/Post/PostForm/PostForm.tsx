@@ -1,11 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
 import { HiPhotograph, HiX } from "react-icons/hi";
-import { createPost } from "../../../../api/postRequest";
-import { closeModal } from "../../../../features/modalSlice";
-import { useAppDispatch } from "../../../../hooks/reduxHook";
-import { ButtonContainer } from "../../../../layouts";
-import { ImageBlob, ImagePost, PostData } from "../../../../models/Post";
-import AddImages from "../../AddImages/AddImages";
+import { createPost } from "../../../api/postRequest";
+import { closeModal } from "../../../features/modalSlice";
+import { useAppDispatch } from "../../../hooks/reduxHook";
+import { ButtonContainer } from "../../../layouts";
+import { ImageBlob, ImagePost, PostData } from "../../../models/Post";
+import { AddImages } from "../../Home";
 import style from "./postForm.module.scss";
 
 interface PostFormProp {
