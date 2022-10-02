@@ -5,8 +5,10 @@
   @extend .flex-column;
   width: 100%;
   height: auto;
-  padding-inline: 20px;
   gap: 10px;
+  background-color: rgb(243, 239, 239);
+  padding: 10px;
+  border-radius: 5px;
 
   .header {
     @extend .flex-row;
@@ -18,11 +20,11 @@
 
     div {
       p {
-        font-size: 0.75rem;
+        font-size: .9rem;
       }
 
       p:nth-child(2) {
-        font-size: 0.6rem;
+        font-size: .75rem;
         color: gray;
       }
     }

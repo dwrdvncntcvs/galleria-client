@@ -18,16 +18,21 @@
     font-family: "Poppins", sans-serif;
     resize: none;
     max-height: 200px;
+    background-color: $quaternary-color;
+    border-radius: 10px;
+    transition: all ease 0.2s;
+    color: $primary-color;
 
     &:focus {
       outline: none;
+      background-color: rgb(226, 224, 224);
     }
   }
 
   button {
     @extend .flex-column;
     width: 80px;
-    height: 35px;
+    height: 32px;
     justify-content: center;
     align-items: center;
     background-color: white;
@@ -36,7 +41,7 @@
     border-radius: 15px;
     background-color: $primary-color;
     color: $quaternary-color;
-    transition: all ease 0.2s ;
+    transition: all ease 0.2s;
 
     #btn-logo {
       font-size: 1rem;

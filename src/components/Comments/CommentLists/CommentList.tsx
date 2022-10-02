@@ -10,6 +10,7 @@ interface CommentListProps {
 export default function CommentList({ comments }: CommentListProps) {
   return (
     <div className={style.comments}>
+      <h1>People's Insights</h1>
       {comments.map((comment, i) => (
         <CommentItem key={i} comment={comment} />
       ))}

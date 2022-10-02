@@ -14,17 +14,20 @@ export default function PersonCard({ user }: PersonCardProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const goToUserProfile = () => {
+  const goToUserProfile = (e: any) => {
+    e.stopPropagation();
     navigate(`/${user.username}`);
   };
 
-  const followUser = async () => {
+  const followUser = async (e: any) => {
+    e.stopPropagation();
+
     await dispatch(followUserRequest({ username: user.username! }));
   };
 
   return (
-    <div className={style.person}>
-      <button className={style.profile} onClick={goToUserProfile}>
+    <button className={style.person} onClick={goToUserProfile}>
+      <div className={style.profile}>
         <img
           src={
             user.Profile?.profileImage !== ""
@@ -36,10 +39,10 @@ export default function PersonCard({ user }: PersonCardProps) {
         <p>
           {user.first_name} {user.last_name}
         </p>
-      </button>
+      </div>
       <button id={style["follow-action"]} onClick={followUser}>
         Follow
       </button>
-    </div>
+    </button>
   );
 }
