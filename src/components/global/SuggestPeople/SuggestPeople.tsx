@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { getSuggestedPeopleRequest } from "../../../api/followerRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
-import Card from "../../../layouts/Card/Card";
-import PersonCard from "../../Home/PersonCard/PersonCard";
+import { Card } from "../../../layouts";
+import { PersonCard } from "..";
 import style from "./suggestPeople.module.scss";
 
 export default function SuggestedPeople() {
