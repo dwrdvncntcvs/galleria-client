@@ -6,10 +6,10 @@ import style from "./navLinks.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 import { setToggle } from "../../../features/toggleSlice";
-import NavDropdown from "../NavDropdown/NavDropdown";
 import { defaultAvatar } from "../../../assets/images";
-import RoundedAvatar from "../RoundedAvatar/RoundedAvatar";
 import { resetPostState } from "../../../features/postSlice";
+import { RoundedAvatar } from "../../global";
+import { NavDropdown } from "..";
 
 interface NavLinksProps {
   user: UserProfile;

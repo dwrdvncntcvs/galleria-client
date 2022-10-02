@@ -1,10 +1,9 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks/reduxHook";
 import style from "./navBar.module.scss";
-import NavLinks from "../NavLinks/NavLinks";
-
 import { stopPropagation } from "../../../utils/helper";
 import { useLocation, useNavigate } from "react-router-dom";
+import { NavLinks } from "..";
 
 export default function NavBar() {
   const { userState } = useAppSelector((state) => state);

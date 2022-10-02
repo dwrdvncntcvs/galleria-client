@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
-import { ClosePostButton, NavBar } from "./components/global";
+import { NavBar } from "./components/Navigation";
 import { MainContainer } from "./layouts";
-import ModalOverlay from "./layouts/ModalOverlay/ModalOverlay";
 import { Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import { Persistent, RequiredAuth } from "./routes";
