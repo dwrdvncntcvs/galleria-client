@@ -1,9 +1,8 @@
 import React from "react";
 import style from "./actionsComponent.module.scss";
-import { IconType } from "react-icons/lib";
 import { HiOutlineChat, HiOutlineHeart } from "react-icons/hi";
 import { v4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface ActionsComponentProps {
   commentsCount: number;
@@ -15,9 +14,13 @@ export default function ActionsComponent({
   postId,
 }: ActionsComponentProps) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const commentVisibilityHandler = () => {
-    navigate(`/post/${postId}`, { replace: true });
+    navigate(`/post/${postId}`, {
+      replace: true,
+      state: { from: location.pathname },
+    });
   };
 
   const buttons = [

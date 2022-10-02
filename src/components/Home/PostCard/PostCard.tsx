@@ -19,31 +19,6 @@ export default function PostCard({ post }: PostProps) {
   const { content, User, ImagePost, updatedAt, id, commentsCount } = post;
 
   const { isAuth } = useAppSelector((state) => state.userState);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const commentVisibilityHandler = () => {
-    navigate(`/post/${id}`);
-  };
-
-  const buttons = [
-    {
-      Icon: HiOutlineHeart,
-      label: "Like",
-      id: v4(),
-      action: () => {
-        console.log("Liked...");
-      },
-      count: 0,
-    },
-    {
-      Icon: HiOutlineChat,
-      label: "Comment",
-      id: v4(),
-      action: commentVisibilityHandler,
-      count: commentsCount,
-    },
-  ];
 
   return (
     <Card>

@@ -38,6 +38,8 @@ export default function PostDetails() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(location);
+
   useEffect(() => {
     const getPostDetailsData = async () => {
       setLoading(true);
@@ -58,7 +60,7 @@ export default function PostDetails() {
   }, [params.id]);
 
   const goBack = () => {
-    navigate(-1);
+    navigate((location.state as { from: string }).from);
   };
 
   const { id, User, ImagePost, commentsCount, content, updatedAt } =
