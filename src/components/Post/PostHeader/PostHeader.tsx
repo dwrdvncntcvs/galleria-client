@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { defaultAvatar } from "../../../assets/images";
 import { UserProfile } from "../../../models/User";
 import { convertDate } from "../../../utils/helper";
-import RoundedAvatar from "../RoundedAvatar/RoundedAvatar";
+import { RoundedAvatar } from "../../global";
 import style from "./postHeader.module.scss";
 
 interface PostHeaderProps {

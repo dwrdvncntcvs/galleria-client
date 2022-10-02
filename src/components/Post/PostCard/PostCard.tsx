@@ -1,10 +1,14 @@
 import React from "react";
 import { Post } from "../../../models/Post";
-import { PostActionsComponent, PostHeader, PreviewPostImage } from "../../global";
 import Card from "../../../layouts/Card/Card";
 import { AddComment } from "../../Comments";
-import PostContent from "../../global/PostContent/PostContent";
 import { useAppSelector } from "../../../hooks/reduxHook";
+import {
+  PostActionsComponent,
+  PreviewPostImage,
+  PostContent,
+  PostHeader,
+} from "..";
 
 interface PostProps {
   post: Post;

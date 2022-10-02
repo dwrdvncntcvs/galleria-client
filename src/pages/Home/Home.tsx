@@ -1,7 +1,7 @@
 import React from "react";
 import { getAllPosts } from "../../api/postRequest";
 import { InfiniteScroll, SuggestPeople } from "../../components/global";
-import { CreatePost, Posts } from "../../components/Home";
+import { CreatePost, Posts } from "../../components/Post";
 import { useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,

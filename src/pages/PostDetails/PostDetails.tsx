@@ -4,13 +4,8 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
 import { AddComment, CommentList } from "../../components/Comments";
-import {
-  PostActionsComponent,
-  PostHeader,
-  PreviewPostImage,
-  SuggestPeople,
-} from "../../components/global";
-import PostContent from "../../components/global/PostContent/PostContent";
+import { SuggestPeople } from "../../components/global";
+import { PostActionsComponent, PostContent, PostHeader, PreviewPostImage } from "../../components/Post";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,

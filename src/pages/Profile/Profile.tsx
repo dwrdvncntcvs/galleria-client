@@ -4,7 +4,7 @@ import { getAllUserPosts } from "../../api/postRequest";
 import { getUserProfileRequest } from "../../api/userRequest";
 import { ImageGallery } from "../../components/Gallery";
 import { InfiniteScroll, SuggestPeople } from "../../components/global";
-import { CreatePost, Posts } from "../../components/Home";
+import { CreatePost, Posts } from "../../components/Post";
 import { ProfileCard } from "../../components/Profile";
 import { resetPostState } from "../../features/postSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
