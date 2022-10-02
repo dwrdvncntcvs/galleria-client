@@ -1,8 +1,7 @@
 import React from "react";
 import { Post } from "../../../models/Post";
-import { PostHeader, PreviewPostImage } from "../../global";
+import { PostActionsComponent, PostHeader, PreviewPostImage } from "../../global";
 import Card from "../../../layouts/Card/Card";
-import ActionsComponent from "./ActionsComponent/ActionsComponent";
 import { AddComment } from "../../Comments";
 import PostContent from "../../global/PostContent/PostContent";
 import { useAppSelector } from "../../../hooks/reduxHook";
@@ -23,7 +22,7 @@ export default function PostCard({ post }: PostProps) {
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
       )}
-      <ActionsComponent postId={id} commentsCount={commentsCount} />
+      <PostActionsComponent postId={id} commentsCount={commentsCount} />
       {isAuth && <AddComment postId={id} />}
     </Card>
   );

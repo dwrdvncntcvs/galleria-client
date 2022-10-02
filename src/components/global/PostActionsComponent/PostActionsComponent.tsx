@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./actionsComponent.module.scss";
+import style from "./postActionsComponent.module.scss";
 import { HiOutlineChat, HiOutlineHeart } from "react-icons/hi";
 import { v4 } from "uuid";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ interface ActionsComponentProps {
   postId: string;
 }
 
-export default function ActionsComponent({
+export default function PostActionsComponent({
   commentsCount,
   postId,
 }: ActionsComponentProps) {

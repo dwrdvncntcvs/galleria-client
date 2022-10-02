@@ -5,12 +5,12 @@ import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
 import { AddComment, CommentList } from "../../components/Comments";
 import {
+  PostActionsComponent,
   PostHeader,
   PreviewPostImage,
   SuggestPeople,
 } from "../../components/global";
 import PostContent from "../../components/global/PostContent/PostContent";
-import ActionsComponent from "../../components/Home/PostCard/ActionsComponent/ActionsComponent";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
@@ -79,7 +79,10 @@ export default function PostDetails() {
                   {ImagePost.length > 0 && (
                     <PreviewPostImage imagePost={ImagePost} userData={User} />
                   )}
-                  <ActionsComponent commentsCount={commentsCount} postId={id} />
+                  <PostActionsComponent
+                    commentsCount={commentsCount}
+                    postId={id}
+                  />
                   <AddComment postId={id} />
                   {commentState.comments.length > 0 && (
                     <CommentList comments={commentState.comments} />

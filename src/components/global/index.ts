@@ -9,3 +9,4 @@ export { default as InfiniteScroll } from "./InfiniteScroll/InfiniteScroll";
 export { default as PostHeader } from "./PostHeader/PostHeader";
 export { default as PreviewPostImage } from "./PreviewPostImage/PreviewPostImage";
 export { default as ClosePostButton } from "./ClosePostButton/ClosePostButton";
+export { default as PostActionsComponent } from "./PostActionsComponent/PostActionsComponent";
