@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getAllUserPosts } from "../../api/postRequest";
 import { getUserProfileRequest } from "../../api/userRequest";
 import { ImageGallery } from "../../components/Gallery";
@@ -11,10 +11,11 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
   ContentContainer,
+  MainPanel,
+  SidePanel,
   StickyPanel,
 } from "../../layouts";
-import MainPanel from "../../layouts/MainPanel/MainPanel";
-import SidePanel from "../../layouts/SidePanel/SidePanel";
+
 import style from "./profile.module.scss";
 
 export default function Profile() {

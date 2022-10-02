@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import { getAllPosts } from "../../api/postRequest";
 import { InfiniteScroll, SuggestPeople } from "../../components/global";
 import { CreatePost, Posts } from "../../components/Home";
@@ -7,10 +6,10 @@ import { useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
   ContentContainer,
+  MainPanel,
+  SidePanel,
   StickyPanel,
 } from "../../layouts";
-import MainPanel from "../../layouts/MainPanel/MainPanel";
-import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./home.module.scss";
 
 const Home = () => {

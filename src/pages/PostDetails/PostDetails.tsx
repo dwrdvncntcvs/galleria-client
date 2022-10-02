@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  HiArrowLeft,
-  HiOutlineChat,
-  HiOutlineHeart,
-  HiX,
-} from "react-icons/hi";
+import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { v4 } from "uuid";
 import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
 import { AddComment, CommentList } from "../../components/Comments";
@@ -20,18 +14,16 @@ import ActionsComponent from "../../components/Home/PostCard/ActionsComponent/Ac
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
+  Card,
   ContentContainer,
+  MainPanel,
+  SidePanel,
   StickyPanel,
 } from "../../layouts";
-import Card from "../../layouts/Card/Card";
-import MainPanel from "../../layouts/MainPanel/MainPanel";
-import SidePanel from "../../layouts/SidePanel/SidePanel";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {
-  const { postState, commentState, userState } = useAppSelector(
-    (state) => state
-  );
+  const { postState, commentState } = useAppSelector((state) => state);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -71,24 +63,30 @@ export default function PostDetails() {
       <div className={style["post-details"]}>
         <ContentContainer>
           <MainPanel>
-            <header className={style["post-header"]}>
-              <button onClick={goBack}>
-                <HiArrowLeft />
-              </button>
-              <h1>{User.first_name}'s Post</h1>
-            </header>
-            <Card>
-              <PostHeader postDate={updatedAt} user={User} />
-              <PostContent content={content} />
-              {ImagePost.length > 0 && (
-                <PreviewPostImage imagePost={ImagePost} userData={User} />
-              )}
-              <ActionsComponent commentsCount={commentsCount} postId={id} />
-              <AddComment postId={id} />
-              {commentState.comments.length > 0 && (
-                <CommentList comments={commentState.comments} />
-              )}
-            </Card>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <header className={style["post-header"]}>
+                  <button onClick={goBack}>
+                    <HiArrowLeft />
+                  </button>
+                  <h1>{User.first_name}'s Post</h1>
+                </header>
+                <Card>
+                  <PostHeader postDate={updatedAt} user={User} />
+                  <PostContent content={content} />
+                  {ImagePost.length > 0 && (
+                    <PreviewPostImage imagePost={ImagePost} userData={User} />
+                  )}
+                  <ActionsComponent commentsCount={commentsCount} postId={id} />
+                  <AddComment postId={id} />
+                  {commentState.comments.length > 0 && (
+                    <CommentList comments={commentState.comments} />
+                  )}
+                </Card>
+              </>
+            )}
           </MainPanel>
           <SidePanel>
             <StickyPanel>
