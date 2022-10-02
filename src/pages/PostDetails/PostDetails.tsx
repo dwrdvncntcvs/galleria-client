@@ -5,7 +5,13 @@ import { getAllComments } from "../../api/commentRequest";
 import { getPostDetails } from "../../api/postRequest";
 import { AddComment, CommentList } from "../../components/Comments";
 import { SuggestPeople } from "../../components/global";
-import { PostActionsComponent, PostContent, PostHeader, PreviewPostImage } from "../../components/Post";
+import {
+  PostActionsComponent,
+  PostContent,
+  PostHeader,
+  PreviewPostImage,
+} from "../../components/Post";
+import { MiniProfile } from "../../components/Profile";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import {
   AdjustedNavContainer,
@@ -88,6 +94,7 @@ export default function PostDetails() {
           </MainPanel>
           <SidePanel>
             <StickyPanel>
+              <MiniProfile profile={User} />
               <SuggestPeople />
             </StickyPanel>
           </SidePanel>

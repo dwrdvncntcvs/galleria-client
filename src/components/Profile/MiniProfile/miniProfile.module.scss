@@ -1,0 +1,39 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.mini-profile {
+  @extend .flex-column;
+  padding: 10px 20px;
+  gap: 10px;
+
+  #content {
+    font-size: 0.85rem;
+    color: $primary-color;
+  }
+
+  h1 {
+    color: $primary-color;
+  }
+
+  .profile-header {
+    @extend .flex-row;
+    gap: 10px;
+    align-items: center;
+
+    .profile-header-content {
+      @extend .flex-column;
+
+      #name {
+        font-size: 1rem;
+        font-weight: bold;
+        color: $primary-color;
+      }
+
+      #username {
+        font-size: 0.75rem;
+        font-style: italic;
+        color: gray;
+      }
+    }
+  }
+}
