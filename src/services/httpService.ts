@@ -11,6 +11,11 @@ export interface Http {
     params?: Record<string, any>,
     config?: any
   ) => Promise<T | any>;
+  delete: <T>(
+    path: string,
+    params?: Record<string, any>,
+    config?: any
+  ) => Promise<T | any>;
 }
 
 const headers = {
@@ -26,6 +31,14 @@ export const httpService: Http = {
     const response = await instance.post(path, params, { ...config, headers });
     return response.data as T;
   },
+  delete: async <T>(
+    path: string,
+    params?: Record<string, any>,
+    config?: any
+  ) => {
+    const response = await instance.delete(path, { ...config, params, headers });
+    return response.data as T;
+  },
 };
 
 export const privateHttpService = (privateInstance: any): Http => ({
@@ -38,6 +51,14 @@ export const privateHttpService = (privateInstance: any): Http => ({
   },
   post: async <T>(path: string, params?: Record<string, any>, config?: any) => {
     const response = await privateInstance.post(path, params, { ...config });
+    return response.data as T;
+  },
+  delete: async <T>(
+    path: string,
+    params?: Record<string, any>,
+    config?: any
+  ) => {
+    const response = await privateInstance.delete(path, { ...config, params, headers });
     return response.data as T;
   },
 });

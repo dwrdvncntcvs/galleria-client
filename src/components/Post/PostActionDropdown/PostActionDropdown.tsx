@@ -1,6 +1,9 @@
 import React from "react";
 import style from "./postActionDropdown.module.scss";
 import { HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
+import { useAppDispatch } from "../../../hooks/reduxHook";
+import { deletePostRequest } from "../../../api/postRequest";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface PostActionDropdownProps {
   postId: string;
@@ -9,19 +12,30 @@ interface PostActionDropdownProps {
 export default function PostActionDropdown({
   postId,
 }: PostActionDropdownProps) {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const actionButtons = [
     {
       label: "Edit",
       Icon: HiOutlinePencil,
-      action: () => {
+      action: async () => {
         console.log("Editing Post: ", postId);
       },
     },
     {
       label: "Delete",
       Icon: HiOutlineTrash,
-      action: () => {
+      action: async () => {
         console.log("Deleting Post: ", postId);
+        const { meta } = await dispatch(deletePostRequest({ postId }));
+        if (
+          meta.requestStatus === "fulfilled" &&
+          location.pathname === `/post/${postId}`
+        ) {
+          navigate((location.state as { from: string }).from);
+        }
       },
     },
   ];
@@ -30,7 +44,7 @@ export default function PostActionDropdown({
     <div className={style["dropdown-container"]}>
       {actionButtons.map(({ Icon, label, action }, i) => (
         <button className={style["action-button"]} key={i} onClick={action}>
-          {label} <Icon /> 
+          {label} <Icon />
         </button>
       ))}
     </div>

@@ -51,6 +51,12 @@ const postSlice = createSlice({
         post: { ...state.post!, commentsCount: action.payload },
       };
     },
+    removePost: (state, action) => {
+      const { postId } = action.payload;
+      const updatedPosts = state.posts.filter((post) => post.id !== postId);
+
+      return { ...state, posts: [...updatedPosts] };
+    },
     resetPostState: () => {
       return initialState;
     },
@@ -60,7 +66,8 @@ const postSlice = createSlice({
       .createPost()
       .getAllPosts()
       .getPostDetails()
-      .getAllUserPosts();
+      .getAllUserPosts()
+      .deletePost();
   },
 });
 
@@ -70,6 +77,7 @@ export const {
   setHasMore,
   updatePostCount,
   resetPostState,
+  removePost,
 } = postSlice.actions;
 
 export default postSlice.reducer;

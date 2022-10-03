@@ -1,6 +1,7 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import {
   createPost,
+  deletePostRequest,
   getAllPosts,
   getAllUserPosts,
   getPostDetails,
@@ -42,7 +43,7 @@ export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
       .addCase(getAllUserPosts.fulfilled, (state, action) => {
         console.log("Getting User Posts Fulfilled...");
 
-        console.log(action.payload)
+        console.log(action.payload);
 
         return {
           ...state,
@@ -106,6 +107,20 @@ export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
           status: "error",
           message: action.payload as string,
         };
+      });
+    return this;
+  },
+
+  deletePost() {
+    builder
+      .addCase(deletePostRequest.pending, () => {
+        console.log("Deleting post pending...");
+      })
+      .addCase(deletePostRequest.fulfilled, (state, action) => {
+        console.log("Deleting post Fulfilled...");
+      })
+      .addCase(deletePostRequest.rejected, (state, action) => {
+        console.log("Deleting post rejected...");
       });
     return this;
   },
