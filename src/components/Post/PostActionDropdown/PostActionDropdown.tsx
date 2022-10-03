@@ -4,6 +4,7 @@ import { HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { deletePostRequest } from "../../../api/postRequest";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setModal } from "../../../features/modalSlice";
 
 interface PostActionDropdownProps {
   postId: string;
@@ -25,6 +26,9 @@ export default function PostActionDropdown({
       action: async () => {
         onClose();
         console.log("Editing Post: ", postId);
+        dispatch(
+          setModal({ name: "editPostModal", status: true, props: { postId } })
+        );
       },
     },
     {
@@ -45,12 +49,14 @@ export default function PostActionDropdown({
   ];
 
   return (
-    <div className={style["dropdown-container"]}>
-      {actionButtons.map(({ Icon, label, action }, i) => (
-        <button className={style["action-button"]} key={i} onClick={action}>
-          {label} <Icon />
-        </button>
-      ))}
-    </div>
+    <>
+      <div className={style["dropdown-container"]}>
+        {actionButtons.map(({ Icon, label, action }, i) => (
+          <button className={style["action-button"]} key={i} onClick={action}>
+            {label} <Icon />
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
