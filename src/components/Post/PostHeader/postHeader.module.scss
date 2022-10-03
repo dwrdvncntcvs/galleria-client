@@ -3,23 +3,52 @@
 .header {
   @extend .flex-row;
   align-items: center;
-  gap: 10px;
   padding-inline: 20px;
   padding-top: 20px;
 
-  .post-image {
-    width: 35px;
-    height: 35px;
-    border-radius: 100%;
-    object-fit: cover;
+  .details {
+    @extend .flex-row;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+
+    .post-image {
+      width: 35px;
+      height: 35px;
+      border-radius: 100%;
+      object-fit: cover;
+    }
+
+    .header-content {
+      p:nth-child(1) {
+        font-size: 1rem;
+      }
+
+      p:nth-child(2) {
+        font-size: 0.75rem;
+        color: gray;
+      }
+    }
   }
 
-  p:nth-child(1) {
-    font-size: 1rem;
-  }
+  button {
+    align-self: flex-start;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 20px;
+    color: $primary-color;
+    @extend .flex-column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 100px;
+    transition: all ease 0.2s;
 
-  p:nth-child(2) {
-    font-size: 0.75rem;
-    color: gray;
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
   }
 }

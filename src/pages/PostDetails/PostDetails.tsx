@@ -75,7 +75,7 @@ export default function PostDetails() {
                   <h1>{User.first_name}'s Post</h1>
                 </header>
                 <Card>
-                  <PostHeader postDate={updatedAt} user={User} />
+                  <PostHeader postDate={updatedAt} user={User} postId={id}/>
                   <PostContent content={content} />
                   {ImagePost.length > 0 && (
                     <PreviewPostImage imagePost={ImagePost} userData={User} />

@@ -21,7 +21,7 @@ export default function PostCard({ post }: PostProps) {
 
   return (
     <Card>
-      <PostHeader user={User} postDate={updatedAt} />
+      <PostHeader user={User} postDate={updatedAt} postId={id} />
       <PostContent content={content} />
       {ImagePost.length > 0 && (
         <PreviewPostImage imagePost={ImagePost} userData={User} />
