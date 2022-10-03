@@ -7,10 +7,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 interface PostActionDropdownProps {
   postId: string;
+  onClose: () => void;
 }
 
 export default function PostActionDropdown({
   postId,
+  onClose,
 }: PostActionDropdownProps) {
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -21,6 +23,7 @@ export default function PostActionDropdown({
       label: "Edit",
       Icon: HiOutlinePencil,
       action: async () => {
+        onClose();
         console.log("Editing Post: ", postId);
       },
     },
@@ -34,6 +37,7 @@ export default function PostActionDropdown({
           meta.requestStatus === "fulfilled" &&
           location.pathname === `/post/${postId}`
         ) {
+          onClose();
           navigate((location.state as { from: string }).from);
         }
       },

@@ -32,6 +32,10 @@ export default function PostHeader({
     setShowDropdown((prev) => !prev);
   };
 
+  const closeDropdown = () => {
+    setShowDropdown(false);
+  };
+
   return (
     <header className={style.header}>
       <div className={style["details"]}>
@@ -56,7 +60,9 @@ export default function PostHeader({
           <HiDotsHorizontal />
         </button>
       )}
-      {showDropdown && <PostActionDropDown postId={postId} />}
+      {showDropdown && (
+        <PostActionDropDown postId={postId} onClose={closeDropdown} />
+      )}
     </header>
   );
 }
