@@ -26,7 +26,7 @@ export default function PersonCard({ user }: PersonCardProps) {
   };
 
   return (
-    <button className={style.person} onClick={goToUserProfile}>
+    <div className={style.person} onClick={goToUserProfile}>
       <div className={style.profile}>
         <img
           src={
@@ -43,6 +43,6 @@ export default function PersonCard({ user }: PersonCardProps) {
       <button id={style["follow-action"]} onClick={followUser}>
         Follow
       </button>
-    </button>
+    </div>
   );
 }

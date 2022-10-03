@@ -8,3 +8,4 @@ export { default as CreatePost } from "./CreatePost/CreatePost";
 export { default as CreatePostModal } from "./CreatePostModal/CreatePostModal";
 export { default as CreatePostHeader } from "./CreatePostHeader/CreatePostHeader";
 export { default as PostForm } from "./PostForm/PostForm";
+export { default as PostActionDropDown } from "./PostActionDropdown/PostActionDropdown";

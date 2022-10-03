@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { defaultAvatar } from "../../../assets/images";
 import { UserProfile } from "../../../models/User";
@@ -7,6 +7,7 @@ import { RoundedAvatar } from "../../global";
 import { HiDotsHorizontal } from "react-icons/hi";
 import style from "./postHeader.module.scss";
 import { useAppSelector } from "../../../hooks/reduxHook";
+import { PostActionDropDown } from "..";
 
 interface PostHeaderProps {
   user: UserProfile;
@@ -20,6 +21,7 @@ export default function PostHeader({
   postId,
 }: PostHeaderProps) {
   const { userState } = useAppSelector((state) => state);
+  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
   const goToProfile = () => {
@@ -27,7 +29,7 @@ export default function PostHeader({
   };
 
   const postActionDropdown = () => {
-    console.log("Deleting post with id: ", postId);
+    setShowDropdown((prev) => !prev);
   };
 
   return (
@@ -54,6 +56,7 @@ export default function PostHeader({
           <HiDotsHorizontal />
         </button>
       )}
+      {showDropdown && <PostActionDropDown postId={postId} />}
     </header>
   );
 }

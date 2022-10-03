@@ -5,6 +5,7 @@
   align-items: center;
   padding-inline: 20px;
   padding-top: 20px;
+  position: relative;
 
   .details {
     @extend .flex-row;
