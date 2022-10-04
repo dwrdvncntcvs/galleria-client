@@ -5,6 +5,7 @@ import {
   getAllPosts,
   getAllUserPosts,
   getPostDetails,
+  updatePostContent,
 } from "../api/postRequest";
 import { PostState } from "../models/Post";
 
@@ -121,6 +122,20 @@ export const postBuilder = (builder: ActionReducerMapBuilder<PostState>) => ({
       })
       .addCase(deletePostRequest.rejected, (state, action) => {
         console.log("Deleting post rejected...");
+      });
+    return this;
+  },
+
+  updatePost() {
+    builder
+      .addCase(updatePostContent.pending, () => {
+        console.log("Updating post pending...");
+      })
+      .addCase(updatePostContent.fulfilled, (state, action) => {
+        console.log("Updating post Fulfilled...");
+      })
+      .addCase(updatePostContent.rejected, (state, action) => {
+        console.log("Updating post rejected...");
       });
     return this;
   },

@@ -57,6 +57,9 @@ const postSlice = createSlice({
 
       return { ...state, posts: [...updatedPosts] };
     },
+    updateContent: (state, action) => {
+      return { ...state, post: { ...state.post!, content: action.payload } };
+    },
     resetPostState: () => {
       return initialState;
     },
@@ -67,7 +70,8 @@ const postSlice = createSlice({
       .getAllPosts()
       .getPostDetails()
       .getAllUserPosts()
-      .deletePost();
+      .deletePost()
+      .updatePost();
   },
 });
 
@@ -78,6 +82,7 @@ export const {
   updatePostCount,
   resetPostState,
   removePost,
+  updateContent,
 } = postSlice.actions;
 
 export default postSlice.reducer;

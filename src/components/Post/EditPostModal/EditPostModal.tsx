@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { HiX } from "react-icons/hi";
+import { updatePostContent } from "../../../api/postRequest";
 import { closeModal } from "../../../features/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { ModalOverlay } from "../../../layouts";
@@ -44,8 +45,15 @@ export default function EditPostModal() {
     dispatch(closeModal());
   };
 
-  const submitEditedPost = (e: SyntheticEvent) => {
+  const submitEditedPost = async (e: SyntheticEvent) => {
     e.preventDefault();
+
+    const { meta } = await dispatch(updatePostContent({ postId, content }));
+
+    if (meta.requestStatus === "fulfilled") {
+      setContent("");
+      dispatch(closeModal());
+    }
   };
 
   return curPost ? (
@@ -70,7 +78,9 @@ export default function EditPostModal() {
               userData={curPost?.User!}
             />
           </div>
-          <button type="submit">Save Changes</button>
+          <button id={style.save} type="submit">
+            Save Changes
+          </button>
         </form>
       </div>
     </ModalOverlay>

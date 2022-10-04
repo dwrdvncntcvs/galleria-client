@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { privateInstance } from "../config/axios";
 import { RootState } from "../config/store";
-import { addPost, removePost } from "../features/postSlice";
+import { addPost, removePost, updateContent } from "../features/postSlice";
 import {
   generatePostFromUserInput,
   GetAllPosts,
@@ -97,6 +97,30 @@ export const deletePostRequest = createAsyncThunk(
         `/post/${postId}`
       );
       dispatch(removePost({ postId }));
+      return responseData;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
+export const updatePostContent = createAsyncThunk(
+  "post/updatePostContent",
+  async (
+    { postId, content }: { postId: string; content: string },
+    { rejectWithValue, dispatch }
+  ) => {
+    const body = {
+      content,
+    };
+    try {
+      const responseData = await privateHttpService(privateInstance).put(
+        `/post/${postId}`,
+        body
+      );
+
+      dispatch(updateContent(content));
+
       return responseData;
     } catch (error: any) {
       return rejectWithValue(error.response.data.msg);
