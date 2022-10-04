@@ -17,7 +17,6 @@ export default function NavBar() {
   ];
 
   for (let i = 0; i < noNavLocations.length; i++) {
-    console.log(location.pathname === noNavLocations[i]);
     if (location.pathname === noNavLocations[i]) return null;
   }
 
