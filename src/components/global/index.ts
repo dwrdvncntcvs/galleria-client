@@ -6,3 +6,4 @@ export { default as InputError } from "./InputError/InputError";
 export { default as InfiniteScroll } from "./InfiniteScroll/InfiniteScroll";
 export { default as ClosePostButton } from "./ClosePostButton/ClosePostButton";
 export { default as PersonCard } from "./PersonCard/PersonCard";
+export { default as AppTitle } from "./AppTitle/AppTitle";

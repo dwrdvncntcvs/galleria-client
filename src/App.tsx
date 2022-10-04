@@ -34,6 +34,7 @@ function App() {
                   <ModalOverlay
                     backButtonComponent={BackButton}
                     hasBackButton={true}
+                    isBackdropBlur={false}
                   >
                     <Gallery />
                   </ModalOverlay>

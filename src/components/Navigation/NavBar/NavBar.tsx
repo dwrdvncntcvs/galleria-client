@@ -4,6 +4,7 @@ import style from "./navBar.module.scss";
 import { stopPropagation } from "../../../utils/helper";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NavLinks } from "..";
+import { AppTitle } from "../../global";
 
 export default function NavBar() {
   const { userState } = useAppSelector((state) => state);
@@ -32,7 +33,7 @@ export default function NavBar() {
     <div className={style["nav-container"]}>
       <section className={style["nav-content"]}>
         <section className={style["title-container"]}>
-          <h1>Galleria</h1>
+          <AppTitle />
         </section>
         {userState.isAuth ? (
           <>

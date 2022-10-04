@@ -8,6 +8,7 @@ interface ModalOverlayProps extends PropsWithChildren {
   className?: string;
   hasBackButton?: boolean;
   backButtonComponent?: FC;
+  isBackdropBlur?: boolean;
 }
 
 export default function ModalOverlay({
@@ -15,6 +16,7 @@ export default function ModalOverlay({
   className,
   backButtonComponent,
   hasBackButton = false,
+  isBackdropBlur = true,
 }: ModalOverlayProps) {
   useEffect(() => {
     document.body.style.overflowY = "hidden";
@@ -29,7 +31,7 @@ export default function ModalOverlay({
   return (
     <DOMPortal
       element={
-        <Backdrop>
+        <Backdrop isBlur={isBackdropBlur}>
           <Modal className={`${className} ${style["modal-overlay"]}`}>
             {hasBackButton && <BackButton />}
             {children}
