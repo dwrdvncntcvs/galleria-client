@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { getAllUserPosts } from "../../api/postRequest";
 import { getUserProfileRequest } from "../../api/userRequest";
 import { ImageGallery } from "../../components/Gallery";
@@ -65,6 +65,7 @@ export default function Profile() {
               ) : (
                 <p>This account's posts are hidden...</p>
               )}
+              <Outlet />
             </MainPanel>
             <SidePanel>
               <StickyPanel>

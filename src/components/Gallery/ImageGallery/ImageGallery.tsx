@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { getAllPostImages } from "../../../api/imageGalleryRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import style from "./imageGallery.module.scss";
@@ -13,6 +14,7 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
     (state) => state.imageGalleryState
   );
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     const getData = async () =>
@@ -42,6 +44,9 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
           />
         ))}
       </div>
+      <Link to="gallery" state={{ from: location.pathname }}>
+        See all
+      </Link>
     </section>
   ) : null;
 }

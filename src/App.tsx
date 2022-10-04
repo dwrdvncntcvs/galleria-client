@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
+import BackButton from "./components/global/ClosePostButton/ClosePostButton";
 import { NavBar } from "./components/Navigation";
 import { EditPostModal } from "./components/Post";
 import { useAppSelector } from "./hooks/reduxHook";
-import { MainContainer } from "./layouts";
-import { Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
+import { MainContainer, ModalOverlay } from "./layouts";
+import { Gallery, Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import { Persistent, RequiredAuth } from "./routes";
 
@@ -26,7 +27,19 @@ function App() {
             <Route element={<RequiredAuth />}>
               <Route path="/home" element={<Home />} />
             </Route>
-            <Route path="/:username" element={<Profile />} />
+            <Route path="/:username/" element={<Profile />}>
+              <Route
+                path="gallery"
+                element={
+                  <ModalOverlay
+                    backButtonComponent={BackButton}
+                    hasBackButton={true}
+                  >
+                    <Gallery />
+                  </ModalOverlay>
+                }
+              />
+            </Route>
             <Route path="/post/:id" element={<PostDetails />} />
           </Route>
         </Routes>
