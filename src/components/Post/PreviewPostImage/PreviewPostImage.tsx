@@ -36,12 +36,12 @@ export default function PreviewImage({
       {imagePost.length > 1 && (
         <>
           {imageId !== 0 && (
-            <button id={style.left} onClick={goLeft}>
+            <button type="button" id={style.left} onClick={goLeft}>
               <HiChevronLeft />
             </button>
           )}
           {imageId !== imagePost.length - 1 && (
-            <button id={style.right} onClick={goRight}>
+            <button type="button" id={style.right} onClick={goRight}>
               <HiChevronRight />
             </button>
           )}

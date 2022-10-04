@@ -33,7 +33,7 @@ export default function EditPostModal() {
       localStorage.setItem("p_e", JSON.stringify(post));
       setCurPost(post);
     }
-  }, [postId]);
+  }, [postId, posts]);
 
   const contentHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.currentTarget.style.height = "auto";
