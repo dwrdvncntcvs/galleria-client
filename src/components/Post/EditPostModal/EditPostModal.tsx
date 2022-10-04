@@ -53,7 +53,7 @@ export default function EditPostModal() {
       <div className={style["edit-post"]}>
         <header>
           <h1>Edit Post</h1>
-          <button onClick={closeModalAction}>
+          <button type="button" onClick={closeModalAction}>
             <HiX />
           </button>
         </header>
