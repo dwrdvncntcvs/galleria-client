@@ -1,0 +1,38 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+form {
+  @extend .flex-column;
+  gap: 10px;
+
+  textarea {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    max-height: 300px;
+    border: none;
+    resize: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    background-color: rgb(237, 235, 235);
+    padding: 5px 20px;
+    border-radius: 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  #save {
+    background-color: $primary-color;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    transition: all ease 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

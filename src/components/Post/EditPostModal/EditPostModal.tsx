@@ -1,22 +1,14 @@
-import React, {
-  ChangeEvent,
-  FormEventHandler,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { HiX } from "react-icons/hi";
-import { updatePostContent } from "../../../api/postRequest";
 import { closeModal } from "../../../features/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { ModalOverlay } from "../../../layouts";
 import { Post } from "../../../models/Post";
-import PreviewImage from "../PreviewPostImage/PreviewPostImage";
+import { EditPostForm } from "..";
 import style from "./editPostModal.module.scss";
 
 export default function EditPostModal() {
   const [curPost, setCurPost] = useState<Post>();
-  const [content, setContent] = useState("");
   const { posts } = useAppSelector((state) => state.postState);
   const { props } = useAppSelector((state) => state.modalState);
   const dispatch = useAppDispatch();
@@ -35,25 +27,8 @@ export default function EditPostModal() {
     }
   }, [postId, posts]);
 
-  const contentHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    e.currentTarget.style.height = "auto";
-    e.currentTarget.style.height = `${e.target.scrollHeight}px`;
-    setContent(e.target.value);
-  };
-
   const closeModalAction = () => {
     dispatch(closeModal());
-  };
-
-  const submitEditedPost = async (e: SyntheticEvent) => {
-    e.preventDefault();
-
-    const { meta } = await dispatch(updatePostContent({ postId, content }));
-
-    if (meta.requestStatus === "fulfilled") {
-      setContent("");
-      dispatch(closeModal());
-    }
   };
 
   return curPost ? (
@@ -65,23 +40,7 @@ export default function EditPostModal() {
             <HiX />
           </button>
         </header>
-        <form onSubmit={submitEditedPost}>
-          <textarea
-            placeholder="Write something ..."
-            rows={1}
-            onChange={contentHandler}
-            value={content}
-          ></textarea>
-          <div>
-            <PreviewImage
-              imagePost={curPost?.ImagePost!}
-              userData={curPost?.User!}
-            />
-          </div>
-          <button id={style.save} type="submit">
-            Save Changes
-          </button>
-        </form>
+        <EditPostForm post={curPost} />
       </div>
     </ModalOverlay>
   ) : null;
