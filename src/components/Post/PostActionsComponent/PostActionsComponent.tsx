@@ -17,10 +17,11 @@ export default function PostActionsComponent({
   const location = useLocation();
 
   const commentVisibilityHandler = () => {
-    navigate(`/post/${postId}`, {
-      replace: true,
-      state: { from: location.pathname },
-    });
+    if (location.pathname !== `/post/${postId}`)
+      navigate(`/post/${postId}`, {
+        replace: true,
+        state: { from: location.pathname },
+      });
   };
 
   const buttons = [
