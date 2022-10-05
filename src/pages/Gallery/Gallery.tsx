@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { getAllPostImages } from "../../api/imageGalleryRequest";
+import { GalleryMainImage, ImageSelector } from "../../components/Gallery";
 import { AppTitle } from "../../components/global";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import style from "./gallery.module.scss";
@@ -24,8 +25,12 @@ export default function Gallery() {
   if (images.length > 0) console.log(images);
 
   return (
-    <div>
-      <AppTitle titleColor="white" />
+    <div className={style.gallery}>
+      <header>
+        <AppTitle titleColor="white" />
+      </header>
+      <GalleryMainImage />
+      <ImageSelector />
     </div>
   );
 }
