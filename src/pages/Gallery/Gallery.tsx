@@ -27,7 +27,7 @@ export default function Gallery() {
   return (
     <div className={style.gallery}>
       <header>
-        <AppTitle titleColor="white" />
+        <AppTitle titleColor="white" homePath="/home" />
       </header>
       <GalleryMainImage />
       <ImageSelector />

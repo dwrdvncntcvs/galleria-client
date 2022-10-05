@@ -33,7 +33,7 @@ export default function NavBar() {
     <div className={style["nav-container"]}>
       <section className={style["nav-content"]}>
         <section className={style["title-container"]}>
-          <AppTitle />
+          <AppTitle homePath="/home"/>
         </section>
         {userState.isAuth ? (
           <>
