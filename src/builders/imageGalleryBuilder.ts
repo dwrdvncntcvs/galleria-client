@@ -17,7 +17,7 @@ export const imageGalleryBuilder = (
 
         return {
           ...state,
-          images,
+          images: [...state.images, ...images],
           imageInfo,
         };
       })

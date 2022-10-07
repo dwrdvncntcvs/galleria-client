@@ -50,12 +50,14 @@ export default function PostDetails() {
     getPostDetailsData();
   }, [params.id]);
 
-  const goBack = () => {
-    navigate((location.state as { from: string }).from);
-  };
-
   const { id, User, ImagePost, commentsCount, content, updatedAt } =
     postState.post!;
+
+  const goBack = () => {
+    navigate((location.state as { from: string }).from, {
+      state: { username: User.username },
+    });
+  };
 
   return (
     <AdjustedNavContainer>

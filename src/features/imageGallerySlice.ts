@@ -14,10 +14,16 @@ const initialState: ImageGalleryState = {
 const imageGallerySlice = createSlice({
   name: "imageGallery",
   initialState,
-  reducers: {},
+  reducers: {
+    resetImages: () => {
+      return initialState;
+    },
+  },
   extraReducers(builder) {
     imageGalleryBuilder(builder).getAllPostImagesRequest();
   },
 });
+
+export const { resetImages } = imageGallerySlice.actions;
 
 export default imageGallerySlice.reducer;

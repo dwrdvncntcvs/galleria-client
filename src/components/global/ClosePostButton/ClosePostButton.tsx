@@ -8,10 +8,16 @@ export default function BackButton() {
   const location = useLocation();
 
   const prevLocation = (location.state as { from: string })?.from;
+  const username = (location.state as { username: string })?.username;
 
   const goBack = () => {
-    if (!prevLocation) {
+    if (!prevLocation && !username) {
       navigate(-1);
+      return;
+    }
+
+    if (username) {
+      navigate(`/${username}`);
       return;
     }
 

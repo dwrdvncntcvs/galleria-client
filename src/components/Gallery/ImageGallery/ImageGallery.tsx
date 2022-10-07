@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { getAllPostImages } from "../../../api/imageGalleryRequest";
+import { resetImages } from "../../../features/imageGallerySlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import style from "./imageGallery.module.scss";
 import ImageItem from "./ImageItem/ImageItem";
@@ -17,7 +18,7 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
   const location = useLocation();
 
   useEffect(() => {
-    const getData = async () =>
+    const getData = async () => {
       await dispatch(
         getAllPostImages({
           username,
@@ -25,8 +26,13 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
           page: imageInfo.page,
         })
       );
+    };
 
     getData();
+
+    return () => {
+      dispatch(resetImages());
+    };
   }, [username]);
 
   return images.length > 0 ? (
@@ -44,7 +50,7 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
           />
         ))}
       </div>
-      <Link to="gallery" state={{ from: location.pathname }}>
+      <Link to="gallery" state={{ from: location.pathname, username }}>
         See all
       </Link>
     </section>
