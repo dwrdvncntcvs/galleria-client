@@ -6,112 +6,11 @@
   align-self: center;
   justify-content: center;
 
-  // section {
-  //   @extend .flex-row;
-  //   width: 30%;
-  //   height: 50vh;
-  //   align-self: center;
-  //   justify-content: flex-end;
-  //   position: fixed;
-  //   gap: 30px;
-
-  //   .sub-image-container {
-  //     @extend .flex-column;
-  //     width: auto;
-
-  //     img {
-  //       height: 100%;
-  //       width: 300px;
-  //       object-fit: contain;
-  //       background-color: black;
-  //       border-radius: 10px;
-  //     }
-  //   }
-  // }
-
-  // .left {
-  //   left: 10px;
-  //   justify-content: flex-end;
-  // }
-
-  // .right {
-  //   right: 10px;
-  //   justify-content: flex-start;
-  // }
-
   .main-image-container {
     @extend .flex-column;
     width: 25%;
     height: 90vh;
     gap: 10px;
     position: relative;
-
-    // button {
-    //   @extend .flex-column;
-    //   justify-content: center;
-    //   align-items: center;
-    //   position: absolute;
-    //   width: 50px;
-    //   height: 50px;
-    //   font-size: 20px;
-    //   border-radius: 50%;
-    //   border: none;
-    // }
-
-    // #btn-left {
-    //   top: calc(50% - 25px);
-    //   left: -70px;
-    // }
-
-    // #btn-right {
-    //   top: calc(50% - 25px);
-    //   right: -70px;
-    // }
-
-    // img {
-    //   height: 100%;
-    //   width: 100%;
-    //   object-fit: contain;
-    //   background-color: black;
-    //   border-radius: 5px;
-    // }
-
-    // .image-details {
-    //   @extend .flex-column;
-    //   justify-content: space-between;
-    //   align-items: flex-end;
-    //   gap: 10px;
-    //   flex: 1;
-    //   width: 100%;
-    //   position: absolute;
-    //   padding: 10px 20px;
-    //   bottom: 0px;
-    //   right: 0px;
-    //   border-radius: 5px;
-
-    //   p {
-    //     color: white;
-    //     margin-inline: 10px;
-    //     font-size: .9rem;
-    //     font-style: italic;
-    //   }
-
-    //   .view-post {
-    //     position: relative;
-    //     width: 100%;
-    //     height: auto;
-    //     font-size: 0.75rem;
-    //     padding: 5px 20px;
-    //     border-radius: 5px;
-    //     border: none;
-    //     background-color: $secondary-color;
-    //     color: white;
-    //     transition: all ease 0.2s;
-
-    //     &:hover {
-    //       opacity: 0.9;
-    //     }
-    //   }
-    // }
   }
 }
