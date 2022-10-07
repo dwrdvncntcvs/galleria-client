@@ -4,8 +4,17 @@
 .gallery {
   width: 100%;
   header {
+    @extend .flex-row;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 20px;
     left: 20px;
+    gap: 5px;
+
+    span {
+      color: white;
+      font-size: 1rem;
+    }
   }
 }
