@@ -8,9 +8,10 @@
 
   .main-image-container {
     @extend .flex-column;
-    width: 25%;
+    width: 475px;
     height: 90vh;
     gap: 10px;
     position: relative;
+    z-index: 5;
   }
 }

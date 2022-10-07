@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Image } from "../../../models/ImageGallery";
-import { convertDate } from "../../../utils/helper";
 import style from "./galleryMainImage.module.scss";
-import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
 import { SideImages, MainImageNavigator, MainImage } from "..";
 interface GalleryMainImageProps {
   images: Image[];
@@ -15,6 +13,7 @@ export default function GalleryMainImage({ images }: GalleryMainImageProps) {
   const [rightList, setRightList] = useState<Image[]>([
     ...images.filter((image) => image.id !== images[0].id),
   ]);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,6 +31,10 @@ export default function GalleryMainImage({ images }: GalleryMainImageProps) {
   };
 
   const navigateRight = () => {
+    if (rightList.length <= 2) {
+      console.log("Time to request new data...");
+    }
+
     const nextElement = rightList[0];
     setRightList((prev) => prev.filter((image) => image.id !== nextElement.id));
     setPreviewImage(nextElement);
