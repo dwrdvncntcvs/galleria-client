@@ -4,7 +4,7 @@ import { Image } from "../../../models/ImageGallery";
 import { convertDate } from "../../../utils/helper";
 import style from "./galleryMainImage.module.scss";
 import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
-
+import { SideImages, MainImageNavigator, MainImage } from "..";
 interface GalleryMainImageProps {
   images: Image[];
 }
@@ -40,49 +40,17 @@ export default function GalleryMainImage({ images }: GalleryMainImageProps) {
 
   return (
     <div className={style["main-container"]}>
-      {leftList.length > 0 && (
-        <section className={style.left}>
-          {leftList.slice(-2).map((image) => (
-            <div className={`${style["sub-image-container"]} ${style["left"]}`}>
-              <img src={image.postImageUrl} alt={`gallery-item-${image.id}`} />
-            </div>
-          ))}
-        </section>
-      )}
+      {leftList.length > 0 && <SideImages.PreviousImages images={leftList} />}
       <div className={style["main-image-container"]}>
-        <img
-          src={previewImage?.postImageUrl}
-          alt={`gallery-item-${previewImage?.id}`}
+        <MainImage image={previewImage} onViewPost={viewPostAction} />
+        <MainImageNavigator
+          nextImages={rightList}
+          previousImages={leftList}
+          onNavigateLeft={navigateLeft}
+          onNavigateRight={navigateRight}
         />
-        <div className={style["image-details"]}>
-          <p>Posted at {convertDate(previewImage?.updatedAt!)}</p>
-          <button
-            className={style["view-post"]}
-            onClick={viewPostAction(previewImage?.postId!)}
-          >
-            View Post
-          </button>
-        </div>
-        {leftList.length > 0 && (
-          <button id={style["btn-left"]} onClick={navigateLeft}>
-            <HiChevronLeft />
-          </button>
-        )}
-        {rightList.length > 0 && (
-          <button id={style["btn-right"]} onClick={navigateRight}>
-            <HiChevronRight />
-          </button>
-        )}
       </div>
-      {rightList.length > 0 && (
-        <section className={style.right}>
-          {rightList.map((image) => (
-            <div className={style["sub-image-container"]}>
-              <img src={image.postImageUrl} alt={`gallery-item-${image.id}`} />
-            </div>
-          ))}
-        </section>
-      )}
+      {rightList.length > 0 && <SideImages.NextImages images={rightList} />}
     </div>
   );
 }

@@ -1,0 +1,35 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.side-image {
+  @extend .flex-row;
+  width: 30%;
+  height: 50vh;
+  align-self: center;
+  justify-content: flex-end;
+  position: fixed;
+  gap: 30px;
+
+  .sub-image-container {
+    @extend .flex-column;
+    width: auto;
+
+    .image {
+      height: 100%;
+      width: 300px;
+      object-fit: contain;
+      background-color: black;
+      border-radius: 10px;
+    }
+  }
+}
+
+.left {
+  left: 10px;
+  justify-content: flex-end;
+}
+
+.right {
+  right: 10px;
+  justify-content: flex-start;
+}
