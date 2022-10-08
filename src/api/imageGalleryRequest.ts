@@ -22,3 +22,18 @@ export const getAllPostImages = createAsyncThunk(
     }
   }
 );
+
+export const getInitialPostImages = createAsyncThunk(
+  "imageGallery/getInitialPostImages",
+  async ({ username }: { username: string }, { rejectWithValue }) => {
+    try {
+      const responseData = await httpService.get(
+        `/gallery/${username}?limit=${6}&page=${1}`
+      );
+
+      return responseData;
+    } catch (err: any) {
+      rejectWithValue(err.response.data.msg);
+    }
+  }
+);

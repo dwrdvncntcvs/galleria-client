@@ -4,6 +4,7 @@ import { ImageGalleryState } from "../models/ImageGallery";
 
 const initialState: ImageGalleryState = {
   images: [],
+  initialImages: [],
   imageInfo: {
     limit: 6,
     page: 1,
@@ -27,7 +28,9 @@ const imageGallerySlice = createSlice({
     },
   },
   extraReducers(builder) {
-    imageGalleryBuilder(builder).getAllPostImagesRequest();
+    imageGalleryBuilder(builder)
+      .getAllPostImagesRequest()
+      .getInitialPostImagesRequest();
   },
 });
 

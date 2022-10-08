@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { getAllPostImages } from "../../../api/imageGalleryRequest";
+import { getInitialPostImages } from "../../../api/imageGalleryRequest";
 import { resetImages } from "../../../features/imageGallerySlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import style from "./imageGallery.module.scss";
@@ -11,7 +11,7 @@ interface ImageGalleryProps {
 }
 
 export default function ImageGallery({ username }: ImageGalleryProps) {
-  const { imageInfo, images } = useAppSelector(
+  const { imageInfo, initialImages } = useAppSelector(
     (state) => state.imageGalleryState
   );
   const dispatch = useAppDispatch();
@@ -20,10 +20,8 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
   useEffect(() => {
     const getData = async () => {
       await dispatch(
-        getAllPostImages({
+        getInitialPostImages({
           username,
-          limit: imageInfo.limit,
-          page: imageInfo.page,
         })
       );
     };
@@ -35,15 +33,15 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
     };
   }, [username]);
 
-  return images.length > 0 ? (
+  return initialImages.length > 0 ? (
     <section className={style["image-gallery"]}>
       <h1>My Gallery</h1>
       <div className={style["images-container"]}>
-        {images.map(({ postImageUrl, updatedAt, id }, i) => (
+        {initialImages.map(({ postImageUrl, updatedAt, id }, i) => (
           <ImageItem
             count={imageInfo.count}
             imageId={id}
-            images={images}
+            images={initialImages}
             postImageUrl={postImageUrl}
             index={i}
             key={id}

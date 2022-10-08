@@ -1,6 +1,7 @@
 export interface ImageGalleryState {
   images: Image[];
   imageInfo: ImageInfo;
+  initialImages: Image[];
 }
 
 export interface Image {

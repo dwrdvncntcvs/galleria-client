@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { getAllPostImages } from "../../api/imageGalleryRequest";
 import { GalleryMainImage } from "../../components/Gallery";
 import { AppTitle } from "../../components/global";
-import { resetImages } from "../../features/imageGallerySlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { Image } from "../../models/ImageGallery";
 import style from "./gallery.module.scss";
@@ -16,10 +15,6 @@ export default function Gallery() {
 
   const dispatch = useAppDispatch();
   const params = useParams();
-
-  useEffect(() => {
-    dispatch(resetImages());
-  }, []);
 
   const getGalleryImagesRequest = async ({ page }: { page: number }) => {
     await dispatch(
