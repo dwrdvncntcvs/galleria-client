@@ -33,6 +33,8 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
     };
   }, [username]);
 
+  const resetGalleryImages = () => dispatch(resetImages());
+
   return initialImages.length > 0 ? (
     <section className={style["image-gallery"]}>
       <h1>My Gallery</h1>
@@ -48,7 +50,11 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
           />
         ))}
       </div>
-      <Link to="gallery" state={{ from: location.pathname, username }}>
+      <Link
+        to="gallery"
+        state={{ from: location.pathname, username }}
+        onClick={resetGalleryImages}
+      >
         See all
       </Link>
     </section>

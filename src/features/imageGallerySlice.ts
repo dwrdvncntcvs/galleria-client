@@ -17,8 +17,8 @@ const imageGallerySlice = createSlice({
   name: "imageGallery",
   initialState,
   reducers: {
-    resetImages: () => {
-      return initialState;
+    resetImages: (state) => {
+      return { ...state, images: [], imageInfo: { ...initialState.imageInfo } };
     },
     setHasMoreImages: (state, action) => {
       return {
