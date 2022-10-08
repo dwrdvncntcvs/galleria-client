@@ -11,14 +11,12 @@ export const imageGalleryBuilder = (
         console.log("Getting images...");
       })
       .addCase(getAllPostImages.fulfilled, (state, action) => {
-        const { images, imageInfo } = action.payload;
-
         console.log("Images Fetched");
 
         return {
           ...state,
-          images: [...state.images, ...images],
-          imageInfo,
+          images: action.payload?.images,
+          imageInfo: action.payload?.imageInfo,
         };
       })
       .addCase(getAllPostImages.rejected, () => {

@@ -1,21 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Image } from "../../../models/ImageGallery";
 import style from "./galleryMainImage.module.scss";
 import { SideImages, MainImageNavigator, MainImage } from "..";
+import { canRequest } from "../../../utils/helper";
 interface GalleryMainImageProps {
   images: Image[];
+  request: ({ page }: { page: number }) => void;
+  page: number;
+  hasMore: boolean;
+  numberOfItems: number;
+  limit: number;
 }
 
-export default function GalleryMainImage({ images }: GalleryMainImageProps) {
+export default function GalleryMainImage({
+  images,
+  request,
+  page,
+  numberOfItems,
+  limit,
+}: GalleryMainImageProps) {
   const [previewImage, setPreviewImage] = useState<Image>(images[0]);
   const [leftList, setLeftList] = useState<Image[]>([]);
-  const [rightList, setRightList] = useState<Image[]>([
-    ...images.filter((image) => image.id !== images[0].id),
-  ]);
+  const [rightList, setRightList] = useState<Image[]>([]);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    setRightList((prev) => [
+      ...images.filter((image) => image.id !== previewImage.id),
+    ]);
+  }, [images]);
 
   const viewPostAction = (postId: string) => () => {
     navigate(`/post/${postId}`, { state: { from: location.pathname } });
@@ -31,9 +47,8 @@ export default function GalleryMainImage({ images }: GalleryMainImageProps) {
   };
 
   const navigateRight = () => {
-    if (rightList.length <= 2) {
-      console.log("Time to request new data...");
-    }
+    if (!canRequest(limit, page, numberOfItems))
+      if (rightList.length === 2) request({ page: page + 1 });
 
     const nextElement = rightList[0];
     setRightList((prev) => prev.filter((image) => image.id !== nextElement.id));

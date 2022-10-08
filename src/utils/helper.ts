@@ -33,3 +33,9 @@ export const serializeDate = <
 
 export const convertDate = (date: Date) =>
   moment(date).format("MMMM D, YYYY | h:mm A");
+
+export const canRequest = (
+  limit: number,
+  page: number,
+  numberOfItems: number
+) => Math.ceil(numberOfItems / limit) <= page;

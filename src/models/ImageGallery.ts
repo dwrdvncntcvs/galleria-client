@@ -14,4 +14,5 @@ export interface ImageInfo {
   limit: number;
   page: number;
   count: number;
+  hasMore: boolean;
 }

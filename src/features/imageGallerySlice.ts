@@ -8,6 +8,7 @@ const initialState: ImageGalleryState = {
     limit: 6,
     page: 1,
     count: 0,
+    hasMore: true,
   },
 };
 
@@ -18,12 +19,18 @@ const imageGallerySlice = createSlice({
     resetImages: () => {
       return initialState;
     },
+    setHasMoreImages: (state, action) => {
+      return {
+        ...state,
+        imageInfo: { ...state.imageInfo, hasMore: action.payload },
+      };
+    },
   },
   extraReducers(builder) {
     imageGalleryBuilder(builder).getAllPostImagesRequest();
   },
 });
 
-export const { resetImages } = imageGallerySlice.actions;
+export const { resetImages, setHasMoreImages } = imageGallerySlice.actions;
 
 export default imageGallerySlice.reducer;
