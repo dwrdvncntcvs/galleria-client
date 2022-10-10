@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { privateInstance } from "../config/axios";
 import { RootState } from "../config/store";
-import { updateSuggestedPeople } from "../features/followerSlice";
+import {
+  updateFollowingPeople,
+  updateSuggestedPeople,
+} from "../features/followerSlice";
 import { privateHttpService } from "../services/httpService";
 
 export const getSuggestedPeopleRequest = createAsyncThunk(
@@ -87,6 +90,32 @@ export const getUserFollowing = createAsyncThunk(
 
       return responseData;
     } catch (error: any) {
+      rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
+export const unfollowUser = createAsyncThunk(
+  "follower/unfollowUser",
+  async (
+    {
+      username,
+      privateAxiosInstance,
+    }: {
+      username: string;
+      privateAxiosInstance: any;
+    },
+    { rejectWithValue, dispatch }
+  ) => {
+    console.log("Username", username);
+    try {
+      const responseData = await privateHttpService(privateAxiosInstance).put(
+        `/unfollow/${username}`
+      );
+
+      return { responseData, username };
+    } catch (error: any) {
+      console.log(error);
       rejectWithValue(error.response.data.msg);
     }
   }

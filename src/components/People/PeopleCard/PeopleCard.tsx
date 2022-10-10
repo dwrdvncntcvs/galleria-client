@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { unfollowUser } from "../../../api/followerRequest";
 import { defaultAvatar } from "../../../assets/images";
+import { useAppDispatch } from "../../../hooks/reduxHook";
+import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { PeopleType } from "../../../models/GenericTypes";
 import { UserProfile } from "../../../models/User";
 import style from "./peopleCard.module.scss";
@@ -15,10 +18,22 @@ export default function PeopleCard({
   type = "followers",
 }: PeopleCardProps) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const privateAxiosInstance = usePrivateAxios();
 
-  const goToProfile = (username: string) => () => {
+  const goToProfile = (username: string) => (e: any) => {
+    e.stopPropagation();
     navigate(`/${username}`);
   };
+
+  const unfollowAction = async (e: any) => {
+    e.stopPropagation();
+
+    await dispatch(
+      unfollowUser({ username: userProfile.username!, privateAxiosInstance })
+    );
+  };
+
   return (
     <div
       className={style["person-container"]}
@@ -40,7 +55,9 @@ export default function PeopleCard({
           <p>{userProfile.username}</p>
         </div>
       </div>
-      {type === "following" && <button>Unfollow</button>}
+      {type === "following" && (
+        <button onClick={unfollowAction}>Unfollow</button>
+      )}
     </div>
   );
 }

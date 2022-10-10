@@ -21,16 +21,29 @@ const followerSlice = createSlice({
     updateSuggestedPeople: (state, action) => {
       return { ...state, suggestedPeople: [...action.payload] };
     },
+    updateFollowingPeople: (state, action) => {
+      const username = action.payload;
+      const filterFollowing = state.userFollowing.following.filter(
+        (user) => user.username !== username
+      );
+      const followingCount = state.userFollowing.count--;
+      return {
+        ...state,
+        userFollowing: { following: filterFollowing, count: followingCount },
+      };
+    },
   },
   extraReducers(builder) {
     followerBuilder(builder)
       .followUserRequest()
       .getSuggestedPeopleRequest()
       .getUserFollowersRequest()
-      .getUserFollowingRequest();
+      .getUserFollowingRequest()
+      .unfollowUserRequest();
   },
 });
 
-export const { updateSuggestedPeople } = followerSlice.actions;
+export const { updateSuggestedPeople, updateFollowingPeople } =
+  followerSlice.actions;
 
 export default followerSlice.reducer;

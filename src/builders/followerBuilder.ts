@@ -4,6 +4,7 @@ import {
   getSuggestedPeopleRequest,
   getUserFollowers,
   getUserFollowing,
+  unfollowUser,
 } from "../api/followerRequest";
 import { FollowerState } from "../models/Follower";
 
@@ -78,6 +79,20 @@ export const followerBuilder = (builder: FollowerBuilder) => ({
       .addCase(getUserFollowing.rejected, (state, action) => {
         console.log("Rejected...");
         console.log(action.payload);
+      });
+    return this;
+  },
+
+  unfollowUserRequest() {
+    builder
+      .addCase(unfollowUser.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(unfollowUser.fulfilled, (state, action) => {
+        console.log("Deleting Fulfilled...");
+      })
+      .addCase(unfollowUser.rejected, (state, action) => {
+        console.log("Deleting Rejected...");
       });
     return this;
   },

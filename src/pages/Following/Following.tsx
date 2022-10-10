@@ -23,10 +23,12 @@ export default function Following({ type }: FollowingProps) {
     );
   }, []);
 
+  useEffect(() => {}, [userFollowing]);
+
   return (
     <div className={style["main-container"]}>
       {userFollowing.following.map((user) => (
-        <PeopleCard userProfile={user} type={type} />
+        <PeopleCard userProfile={user} type={type} key={user.id} />
       ))}
     </div>
   );
