@@ -7,9 +7,12 @@ import { EditPostModal } from "./components/Post";
 import { useAppSelector } from "./hooks/reduxHook";
 import { MainContainer, ModalOverlay } from "./layouts";
 import {
+  Followers,
+  Following,
   Gallery,
   Home,
   Otp,
+  People,
   Portal,
   Profile,
   ProfileDetails,
@@ -38,6 +41,8 @@ function App() {
             </Route>
             <Route path="/:username/" element={<Profile />}>
               <Route path="" element={<ProfileDetails />} />
+              <Route path="followers" element={<People type="followers" />} />
+              <Route path="following" element={<People type="following" />} />
               <Route
                 path="gallery"
                 element={
