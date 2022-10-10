@@ -7,17 +7,13 @@
   justify-content: space-between;
   transition: all ease 0.2s;
   border-radius: 5px;
-  /* If you want to implement it in very old browser-versions */
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+ */
-
-  /* The rule below is not implemented in browsers yet */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   -o-user-select: none;
-
-  /* The rule below is implemented in most browsers by now */
   user-select: none;
   cursor: pointer;
+  align-items: center;
 
   .person-details {
     @extend .flex-row;
@@ -43,5 +39,20 @@
 
   &:hover {
     background-color: rgb(204, 204, 204);
+  }
+  button {
+    background-color: transparent;
+    height: 40px;
+    padding-inline: 20px;
+    border: none;
+    font-size: 0.9rem;
+    transition: all ease 0.2s;
+    border-radius: 5px;
+    color: $primary-color;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
   }
 }
