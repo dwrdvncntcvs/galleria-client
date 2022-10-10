@@ -5,3 +5,4 @@ export { default as SignUp } from "./SignUp/SignUp";
 export { default as Otp } from "./Otp/Otp";
 export { default as Profile } from "./Profile/Profile";
 export { default as Gallery } from "./Gallery/Gallery";
+export { default as ProfileDetails } from "./ProfileDetails/ProfileDetails";

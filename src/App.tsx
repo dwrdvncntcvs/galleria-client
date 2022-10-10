@@ -6,7 +6,16 @@ import { NavBar } from "./components/Navigation";
 import { EditPostModal } from "./components/Post";
 import { useAppSelector } from "./hooks/reduxHook";
 import { MainContainer, ModalOverlay } from "./layouts";
-import { Gallery, Home, Otp, Portal, Profile, SignIn, SignUp } from "./pages";
+import {
+  Gallery,
+  Home,
+  Otp,
+  Portal,
+  Profile,
+  ProfileDetails,
+  SignIn,
+  SignUp,
+} from "./pages";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import { Persistent, RequiredAuth } from "./routes";
 
@@ -28,6 +37,7 @@ function App() {
               <Route path="/home" element={<Home />} />
             </Route>
             <Route path="/:username/" element={<Profile />}>
+              <Route path="" element={<ProfileDetails />} />
               <Route
                 path="gallery"
                 element={

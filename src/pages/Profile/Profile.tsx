@@ -19,24 +19,11 @@ import {
 import style from "./profile.module.scss";
 
 export default function Profile() {
-  const { userState, postState } = useAppSelector((state) => state);
-  const dispatch = useAppDispatch();
+  const { postState } = useAppSelector((state) => state);
   const params = useParams();
   const username = params.username!;
 
-  const { posts, postsInfo } = postState;
-  const { userProfile } = userState;
-
-  useEffect(() => {
-    dispatch(resetPostState());
-    const getData = async () => {
-      await dispatch(getUserProfileRequest({ username }));
-    };
-
-    getData();
-  }, [params.username]);
-
-  const myProfile = userProfile.id === userState.userData?.id;
+  const { postsInfo } = postState;
 
   return (
     <InfiniteScroll
@@ -51,20 +38,6 @@ export default function Profile() {
         <div className={style.profile}>
           <ContentContainer>
             <MainPanel>
-              <ProfileCard profile={userProfile} />
-              {myProfile && (
-                <CreatePost
-                  firstName={userState.userData?.first_name!}
-                  imageUrl={userState.userData?.Profile?.profileImage!}
-                  userId={userState.userData?.id!}
-                  username={userState.userData?.username!}
-                />
-              )}
-              {userState.isAuth ? (
-                <Posts posts={posts} />
-              ) : (
-                <p>This account's posts are hidden...</p>
-              )}
               <Outlet />
             </MainPanel>
             <SidePanel>
