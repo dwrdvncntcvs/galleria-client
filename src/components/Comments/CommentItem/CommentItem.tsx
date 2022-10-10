@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { defaultAvatar } from "../../../assets/images";
 import { Comment } from "../../../models/Comments";
 import { convertDate } from "../../../utils/helper";
 import { RoundedAvatar } from "../../global";
@@ -20,8 +21,12 @@ export default function CommentItem({ comment }: CommentItemProps) {
   return (
     <div className={style.comment}>
       <div className={style.header}>
-        <RoundedAvatar  
-          src={User.Profile?.profileImage!}
+        <RoundedAvatar
+          src={
+            User.Profile?.profileImage! !== ""
+              ? User.Profile?.profileImage!
+              : defaultAvatar
+          }
           alt={`${User.first_name}'s avatar`}
           onClickAction={goToProfile}
         />
