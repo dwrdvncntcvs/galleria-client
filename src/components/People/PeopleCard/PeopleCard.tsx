@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { defaultAvatar } from "../../../assets/images";
+import { PeopleType } from "../../../models/GenericTypes";
 import { UserProfile } from "../../../models/User";
 import style from "./peopleCard.module.scss";
 
 interface PeopleCardProps {
   userProfile: UserProfile;
-  type?: "following" | "followers";
+  type?: PeopleType;
 }
 
 export default function PeopleCard({

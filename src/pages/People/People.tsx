@@ -2,10 +2,11 @@ import React from "react";
 import { HiArrowLeft } from "react-icons/hi";
 import { useNavigate, useParams } from "react-router-dom";
 import { Followers, Following } from "..";
+import { PeopleType } from "../../models/GenericTypes";
 import style from "./people.module.scss";
 
 interface PeopleProps {
-  type: "following" | "followers";
+  type: PeopleType;
 }
 
 export default function People({ type }: PeopleProps) {
