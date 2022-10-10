@@ -49,3 +49,24 @@ export const followUserRequest = createAsyncThunk(
     }
   }
 );
+
+export const getUserFollowers = createAsyncThunk(
+  "follower/getUserFollowers",
+  async (
+    {
+      username,
+      privateAxiosInstance,
+    }: { username: string; privateAxiosInstance: any },
+    { rejectWithValue }
+  ) => {
+    try {
+      const responseData = await privateHttpService(privateAxiosInstance).get(
+        `/${username}/follower`
+      );
+
+      return responseData;
+    } catch (error: any) {
+      rejectWithValue(error.response.data.msg);
+    }
+  }
+);

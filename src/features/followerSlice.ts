@@ -4,6 +4,10 @@ import { FollowerState } from "../models/Follower";
 
 const initialState: FollowerState = {
   suggestedPeople: [],
+  userFollowers: {
+    count: 0,
+    followers: [],
+  },
 };
 
 const followerSlice = createSlice({
@@ -15,7 +19,10 @@ const followerSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    followerBuilder(builder).followUserRequest().getSuggestedPeopleRequest();
+    followerBuilder(builder)
+      .followUserRequest()
+      .getSuggestedPeopleRequest()
+      .getUserFollowersRequest();
   },
 });
 

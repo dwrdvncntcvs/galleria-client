@@ -1,5 +1,11 @@
 import { UserProfile } from "./User";
 
 export interface FollowerState {
-    suggestedPeople: UserProfile[]
+  suggestedPeople: UserProfile[];
+  userFollowers: Followers;
+}
+
+export interface Followers {
+  count: number;
+  followers: UserProfile[];
 }

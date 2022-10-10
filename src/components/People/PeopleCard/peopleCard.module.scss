@@ -1,0 +1,47 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.person-container {
+  @extend .flex-row;
+  padding: 10px;
+  justify-content: space-between;
+  transition: all ease 0.2s;
+  border-radius: 5px;
+  /* If you want to implement it in very old browser-versions */
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* The rule below is not implemented in browsers yet */
+  -o-user-select: none;
+
+  /* The rule below is implemented in most browsers by now */
+  user-select: none;
+  cursor: pointer;
+
+  .person-details {
+    @extend .flex-row;
+    gap: 10px;
+
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+
+    p:nth-child(1) {
+      color: $primary-color;
+      font-size: 1rem;
+    }
+    p:nth-child(2) {
+      color: gray;
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(204, 204, 204);
+  }
+}

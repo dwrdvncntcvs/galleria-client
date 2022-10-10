@@ -2,13 +2,14 @@ import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import {
   followUserRequest,
   getSuggestedPeopleRequest,
+  getUserFollowers,
 } from "../api/followerRequest";
 import { FollowerState } from "../models/Follower";
 
 type FollowerBuilder = ActionReducerMapBuilder<FollowerState>;
 
 export const followerBuilder = (builder: FollowerBuilder) => ({
-  getSuggestedPeopleRequest () {
+  getSuggestedPeopleRequest() {
     builder
       .addCase(getSuggestedPeopleRequest.pending, () => {
         console.log("Pending...");
@@ -23,8 +24,8 @@ export const followerBuilder = (builder: FollowerBuilder) => ({
       });
     return this;
   },
-  
-  followUserRequest () {
+
+  followUserRequest() {
     builder
       .addCase(followUserRequest.pending, () => {
         console.log("Pending...");
@@ -39,6 +40,24 @@ export const followerBuilder = (builder: FollowerBuilder) => ({
       });
     return this;
   },
-});
 
-export const followUserRequestBuilder = (builder: FollowerBuilder) => {};
+  getUserFollowersRequest() {
+    builder
+      .addCase(getUserFollowers.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(getUserFollowers.fulfilled, (state, action) => {
+        console.log("Fulfilled...");
+        const { userData, count } = action.payload.followers;
+        return {
+          ...state,
+          userFollowers: { followers: userData, count },
+        };
+      })
+      .addCase(getUserFollowers.rejected, (state, action) => {
+        console.log("Rejected...");
+        console.log(action.payload);
+      });
+    return this;
+  },
+});
