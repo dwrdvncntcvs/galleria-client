@@ -3,6 +3,7 @@ import {
   followUserRequest,
   getSuggestedPeopleRequest,
   getUserFollowers,
+  getUserFollowing,
 } from "../api/followerRequest";
 import { FollowerState } from "../models/Follower";
 
@@ -55,6 +56,26 @@ export const followerBuilder = (builder: FollowerBuilder) => ({
         };
       })
       .addCase(getUserFollowers.rejected, (state, action) => {
+        console.log("Rejected...");
+        console.log(action.payload);
+      });
+    return this;
+  },
+
+  getUserFollowingRequest() {
+    builder
+      .addCase(getUserFollowing.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(getUserFollowing.fulfilled, (state, action) => {
+        console.log("Fulfilled...");
+        const { userData, count } = action.payload.following;
+        return {
+          ...state,
+          userFollowing: { following: userData, count },
+        };
+      })
+      .addCase(getUserFollowing.rejected, (state, action) => {
         console.log("Rejected...");
         console.log(action.payload);
       });

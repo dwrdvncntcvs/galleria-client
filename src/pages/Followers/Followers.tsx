@@ -29,7 +29,7 @@ export default function Followers({ type }: FollowersProps) {
   return (
     <div className={style["main-container"]}>
       {userFollowers.followers.map((element) => (
-        <PeopleCard userProfile={element} type={type} />
+        <PeopleCard userProfile={element} type={type}/>
       ))}
     </div>
   );

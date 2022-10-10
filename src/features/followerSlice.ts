@@ -8,6 +8,10 @@ const initialState: FollowerState = {
     count: 0,
     followers: [],
   },
+  userFollowing: {
+    count: 0,
+    following: [],
+  },
 };
 
 const followerSlice = createSlice({
@@ -22,7 +26,8 @@ const followerSlice = createSlice({
     followerBuilder(builder)
       .followUserRequest()
       .getSuggestedPeopleRequest()
-      .getUserFollowersRequest();
+      .getUserFollowersRequest()
+      .getUserFollowingRequest();
   },
 });
 

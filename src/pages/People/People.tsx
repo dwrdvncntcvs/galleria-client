@@ -27,8 +27,8 @@ export default function People({ type }: PeopleProps) {
         </button>{" "}
         <span>{label}</span>
       </div>
-      {type === "following" && <Following />}
-      {type === "followers" && <Followers />}
+      {type === "following" && <Following type={type} />}
+      {type === "followers" && <Followers type={type} />}
     </>
   );
 }
