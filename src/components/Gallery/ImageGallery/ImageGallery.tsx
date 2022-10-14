@@ -51,11 +51,12 @@ export default function ImageGallery({ username }: ImageGalleryProps) {
         ))}
       </div>
       <Link
+        className={style.link}
         to="gallery"
         state={{ from: location.pathname, username }}
         onClick={resetGalleryImages}
       >
-        See all
+        See all . . .
       </Link>
     </section>
   ) : null;

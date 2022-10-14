@@ -7,7 +7,7 @@
 .sticky-panel {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   position: fixed;
   width: calculatePercent(20%);
   transition: all ease 0.2s;
