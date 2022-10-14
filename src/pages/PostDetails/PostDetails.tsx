@@ -13,6 +13,7 @@ import {
 } from "../../components/Post";
 import { MiniProfile } from "../../components/Profile";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import { MainPageLayout } from "../../layout";
 import {
   AdjustedNavContainer,
   Card,
@@ -59,47 +60,39 @@ export default function PostDetails() {
     });
   };
 
+  const mainPanel = loading ? (
+    <p>Loading...</p>
+  ) : (
+    <>
+      <header className={style["post-header"]}>
+        <button onClick={goBack}>
+          <HiArrowLeft />
+        </button>
+        <h1>{User.first_name}'s Post</h1>
+      </header>
+      <Card>
+        <PostHeader postDate={updatedAt} user={User} postId={id} />
+        <PostContent content={content} />
+        {ImagePost.length > 0 && (
+          <PreviewPostImage imagePost={ImagePost} userData={User} />
+        )}
+        <PostActionsComponent commentsCount={commentsCount} postId={id} />
+        <AddComment postId={id} />
+        {commentState.comments.length > 0 && (
+          <CommentList comments={commentState.comments} />
+        )}
+      </Card>
+    </>
+  );
+
+  const sidePanel = (
+    <>
+      <MiniProfile profile={User} />
+      <SuggestPeople />
+    </>
+  );
+
   return (
-    <AdjustedNavContainer>
-      <div className={style["post-details"]}>
-        <ContentContainer>
-          <MainPanel>
-            {loading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <header className={style["post-header"]}>
-                  <button onClick={goBack}>
-                    <HiArrowLeft />
-                  </button>
-                  <h1>{User.first_name}'s Post</h1>
-                </header>
-                <Card>
-                  <PostHeader postDate={updatedAt} user={User} postId={id} />
-                  <PostContent content={content} />
-                  {ImagePost.length > 0 && (
-                    <PreviewPostImage imagePost={ImagePost} userData={User} />
-                  )}
-                  <PostActionsComponent
-                    commentsCount={commentsCount}
-                    postId={id}
-                  />
-                  <AddComment postId={id} />
-                  {commentState.comments.length > 0 && (
-                    <CommentList comments={commentState.comments} />
-                  )}
-                </Card>
-              </>
-            )}
-          </MainPanel>
-          <SidePanel>
-            <StickyPanel>
-              <MiniProfile profile={User} />
-              <SuggestPeople />
-            </StickyPanel>
-          </SidePanel>
-        </ContentContainer>
-      </div>
-    </AdjustedNavContainer>
+    <MainPageLayout mainPanelContent={mainPanel} sidePanelContent={sidePanel} />
   );
 }
