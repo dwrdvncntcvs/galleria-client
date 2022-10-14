@@ -1,6 +1,6 @@
 {
-  "name": "galleria-client",
-  "version": "0.1.0",
+  "name": "galleria",
+  "version": "1.5.50",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
