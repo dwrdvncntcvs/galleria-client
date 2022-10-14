@@ -1,0 +1,19 @@
+@import "../../../variables.scss";
+@import "../../../index.scss";
+
+.nav-bar-search {
+  @extend .flex-column;
+  position: relative;
+
+  input {
+    padding: 5px;
+    padding-inline: 20px;
+    border: none;
+    background-color: $quaternary-color;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

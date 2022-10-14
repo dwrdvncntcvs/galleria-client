@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { resetPostState } from "../features/postSlice";
-import { resetUserState } from "../features/userSlice";
+import { privateInstance } from "../config/axios";
 import {
   OTP,
   UserAuth,
@@ -96,6 +95,22 @@ export const getUserProfileRequest = createAsyncThunk(
       return responseData;
     } catch (err: any) {
       rejectWithValue(err.response.data.msg);
+    }
+  }
+);
+
+export const searchUserProfile = createAsyncThunk(
+  "user/searchUserProfile",
+  async ({ str }: { str: string }, { rejectWithValue }) => {
+    try {
+      const responseData = await privateHttpService(privateInstance).get(
+        `/user/find-user?search=${str}`
+      );
+      console.log(responseData);
+
+      return responseData;
+    } catch (err: any) {
+      return rejectWithValue(err.response.data.msg);
     }
   }
 );

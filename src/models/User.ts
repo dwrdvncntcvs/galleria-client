@@ -44,6 +44,7 @@ export interface UserState {
   status?: "error" | "success" | "none";
   message?: string;
   userProfile: UserProfile;
+  foundUsers: FoundUsers;
 }
 
 export interface OTP {
@@ -53,4 +54,9 @@ export interface OTP {
 
 export interface UserToken {
   token: string;
+}
+
+export interface FoundUsers {
+  data: UserProfile[];
+  count: number;
 }

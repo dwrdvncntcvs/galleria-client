@@ -10,6 +10,10 @@ const userState: UserState = {
   status: "none",
   message: "",
   userProfile: {},
+  foundUsers: {
+    count: 0,
+    data: [],
+  },
 };
 
 const userSlice = createSlice({
@@ -42,6 +46,9 @@ const userSlice = createSlice({
       console.log("User State Reset ...");
       return userState;
     },
+    resetSearchResults: (state) => {
+      return { ...state, foundUsers: userState.foundUsers };
+    },
   },
   extraReducers(builder) {
     //User Sign In Reducer
@@ -52,7 +59,8 @@ const userSlice = createSlice({
       .signOutRequest()
       .userOtpRequest()
       .userSignIn()
-      .userSignUpRequest();
+      .userSignUpRequest()
+      .searchUserProfileRequest();
   },
 });
 
@@ -63,6 +71,7 @@ export const {
   setStatus,
   setMessage,
   resetUserState,
+  resetSearchResults,
 } = userSlice.actions;
 
 export default userSlice.reducer;

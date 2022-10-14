@@ -3,6 +3,7 @@ import {
   getUserProfileRequest,
   getUserRefresher,
   getUserRequest,
+  searchUserProfile,
   signOutRequest,
   userOtpRequest,
   userSignIn,
@@ -139,6 +140,29 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
         };
       })
       .addCase(getUserProfileRequest.rejected, (state, action) => {
+        console.log("Rejected...");
+        console.log(action);
+        return { ...state, status: "error", message: action.payload as string };
+      });
+    return this;
+  },
+
+  searchUserProfileRequest() {
+    builder
+      .addCase(searchUserProfile.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(searchUserProfile.fulfilled, (state, action) => {
+        console.log("Fulfilled...");
+
+        const { data, count } = action.payload;
+
+        return {
+          ...state,
+          foundUsers: { data, count },
+        };
+      })
+      .addCase(searchUserProfile.rejected, (state, action) => {
         console.log("Rejected...");
         console.log(action);
         return { ...state, status: "error", message: action.payload as string };

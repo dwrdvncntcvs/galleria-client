@@ -29,18 +29,6 @@
       gap: 10px;
     }
 
-    input {
-      padding: 5px;
-      padding-inline: 20px;
-      border: none;
-      background-color: $quaternary-color;
-      border-radius: 5px;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
     .nav-btn-group {
       @extend .flex-row;
       gap: 10px;

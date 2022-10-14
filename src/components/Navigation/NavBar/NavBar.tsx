@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../hooks/reduxHook";
 import style from "./navBar.module.scss";
 import { stopPropagation } from "../../../utils/helper";
 import { useLocation, useNavigate } from "react-router-dom";
-import { NavLinks } from "..";
+import { NavLinks, NavBarSearch } from "..";
 import { AppTitle } from "../../global";
 import { ContentContainer } from "../../../UI";
 
@@ -39,7 +39,7 @@ export default function NavBar() {
           </section>
           {userState.isAuth ? (
             <>
-              <input type="text" placeholder="Galleria Search ..." />
+              <NavBarSearch />
               <section
                 className={style["nav-btn-group"]}
                 onClick={stopPropagation}
