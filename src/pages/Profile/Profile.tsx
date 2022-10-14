@@ -14,6 +14,19 @@ export default function Profile() {
 
   const { postsInfo } = postState;
 
+  const mainPanelContent = (
+    <>
+      <Outlet />
+    </>
+  );
+
+  const sidePanelContent = (
+    <>
+      <ImageGallery username={params.username!} />
+      <SuggestPeople />
+    </>
+  );
+
   return (
     <InfiniteScroll
       dataRequest={getAllUserPosts}
@@ -24,17 +37,8 @@ export default function Profile() {
       page={+postsInfo.page}
     >
       <MainPageLayout
-        mainPanelContent={
-          <>
-            <Outlet />
-          </>
-        }
-        sidePanelContent={
-          <>
-            <ImageGallery username={params.username!} />
-            <SuggestPeople />
-          </>
-        }
+        mainPanelContent={mainPanelContent}
+        sidePanelContent={sidePanelContent}
       />
     </InfiniteScroll>
   );

@@ -9,6 +9,24 @@ import style from "./home.module.scss";
 const Home = () => {
   const { userState, postState } = useAppSelector((state) => state);
 
+  const mainPanelContent = (
+    <>
+      <CreatePost
+        userId={userState.userData?.id!}
+        imageUrl={userState.userData?.Profile?.profileImage!}
+        firstName={userState.userData?.first_name!}
+        username={userState.userData?.username!}
+      />
+      <Posts posts={postState.posts} />
+    </>
+  );
+
+  const sidePanelContent = (
+    <>
+      <SuggestPeople />
+    </>
+  );
+
   return (
     <InfiniteScroll
       dataRequest={getAllPosts}
@@ -19,22 +37,8 @@ const Home = () => {
       numberOfItems={postState.postsInfo.count!}
     >
       <MainPageLayout
-        mainPanelContent={
-          <>
-            <CreatePost
-              userId={userState.userData?.id!}
-              imageUrl={userState.userData?.Profile?.profileImage!}
-              firstName={userState.userData?.first_name!}
-              username={userState.userData?.username!}
-            />
-            <Posts posts={postState.posts} />
-          </>
-        }
-        sidePanelContent={
-          <>
-            <SuggestPeople />
-          </>
-        }
+        mainPanelContent={mainPanelContent}
+        sidePanelContent={sidePanelContent}
       />
     </InfiniteScroll>
   );
