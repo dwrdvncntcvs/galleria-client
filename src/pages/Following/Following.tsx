@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUserFollowing } from "../../api/followerRequest";
 import { PeopleCard } from "../../components/People";
+import EmptyPeopleMessage from "../../components/People/EmptyPeopleMessage/EmptyPeopleMessage";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { usePrivateAxios } from "../../hooks/usePrivateAxios";
 import { PeopleType } from "../../models/GenericTypes";
@@ -30,6 +31,7 @@ export default function Following({ type }: FollowingProps) {
       {userFollowing.following.map((user) => (
         <PeopleCard userProfile={user} type={type} key={user.id} />
       ))}
+      <EmptyPeopleMessage users={userFollowing.following} message="Currently you doesn't follow anyone."/>
     </div>
   );
 }
