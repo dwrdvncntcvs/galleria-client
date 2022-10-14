@@ -5,6 +5,7 @@ import { stopPropagation } from "../../../utils/helper";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NavLinks } from "..";
 import { AppTitle } from "../../global";
+import { ContentContainer } from "../../../layouts";
 
 export default function NavBar() {
   const { userState } = useAppSelector((state) => state);
@@ -31,27 +32,29 @@ export default function NavBar() {
 
   return (
     <div className={style["nav-container"]}>
-      <section className={style["nav-content"]}>
-        <section className={style["title-container"]}>
-          <AppTitle homePath="/home"/>
-        </section>
-        {userState.isAuth ? (
-          <>
-            <input type="text" placeholder="Galleria Search ..." />
-            <section
-              className={style["nav-btn-group"]}
-              onClick={stopPropagation}
-            >
-              <NavLinks user={userState.userData!} />
-            </section>
-          </>
-        ) : (
-          <section className={style["nav-unAuth-btn-group"]}>
-            <button onClick={goToSignIn}>Sign In</button>
-            <button onClick={createAccount}>Create Account</button>
+      <ContentContainer>
+        <section className={style["nav-content"]}>
+          <section className={style["title-container"]}>
+            <AppTitle homePath="/home" />
           </section>
-        )}
-      </section>
+          {userState.isAuth ? (
+            <>
+              <input type="text" placeholder="Galleria Search ..." />
+              <section
+                className={style["nav-btn-group"]}
+                onClick={stopPropagation}
+              >
+                <NavLinks user={userState.userData!} />
+              </section>
+            </>
+          ) : (
+            <section className={style["nav-unAuth-btn-group"]}>
+              <button onClick={goToSignIn}>Sign In</button>
+              <button onClick={createAccount}>Create Account</button>
+            </section>
+          )}
+        </section>
+      </ContentContainer>
     </div>
   );
 }

@@ -4,4 +4,47 @@ $tertiary-color: #a5c9ca;
 $quaternary-color: #e7f6f2;
 $error-color: #eb445a;
 $dark-gray: #657786;
-$light-gray: #AAB8C2;
+$light-gray: #aab8c2;
+
+$LGdesktop: 1920px;
+$MDdesktop: 1600px;
+$desktop: 1366px;
+$LGtablet: 1150px;
+$tablet: 768px;
+$phone: 500px;
+
+@mixin LGdesktop {
+  @media (max-width: #{$LGdesktop}) and (min-width: #{$MDdesktop + 1}) {
+    @content;
+  }
+}
+
+@mixin MDdesktop {
+  @media (max-width: #{$MDdesktop}) and (min-width: #{$desktop + 1}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: #{$desktop}) and (min-width: #{$LGtablet + 1}) {
+    @content;
+  }
+}
+
+@mixin LGtablet {
+  @media (max-width: #{$LGtablet}) and (min-width: #{$tablet + 1}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) and (min-width: #{$phone + 1}) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: #{$phone}) and (min-width: #{$phone - 400}) {
+    @content;
+  }
+}

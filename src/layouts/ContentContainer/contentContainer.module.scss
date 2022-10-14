@@ -1,4 +1,5 @@
 @import "../../index.scss";
+@import "../../variables.scss";
 
 .content-container {
   @extend .flex-row;
@@ -6,4 +7,25 @@
   height: 100%;
   justify-content: flex-start;
   align-items: flex-start;
+  transition: all ease 0.2s;
+
+  @include LGdesktop {
+    width: 50%;
+  }
+
+  @include MDdesktop {
+    width: 60%;
+  }
+
+  @include desktop {
+    width: 80%;
+  }
+
+  @include LGtablet {
+    width: 100%;
+  }
+
+  @include tablet {
+    width: 90%;
+  }
 }
