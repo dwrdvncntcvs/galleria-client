@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import AppVersion from "../AppVersion/AppVersion";
 import style from "./sideFooter.module.scss";
 
 type Link = {
@@ -20,8 +21,10 @@ export default function SideFooter() {
         <Fragment key={i}>
           <a href={link}>{label}</a> {links.length - 1 !== i ? "|" : ""}{" "}
         </Fragment>
-      ))}...
+      ))}
+      ...
       <p>@2022 Galleria - All Rights Reserved.</p>
+      <AppVersion />
     </div>
   );
 }

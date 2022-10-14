@@ -8,3 +8,4 @@ export { default as ClosePostButton } from "./ClosePostButton/ClosePostButton";
 export { default as PersonCard } from "./PersonCard/PersonCard";
 export { default as AppTitle } from "./AppTitle/AppTitle";
 export { default as SideFooter } from "./SideFooter/SideFooter";
+export { default as AppVersion } from "./AppVersion/AppVersion";

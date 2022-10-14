@@ -16,9 +16,7 @@ export default function SettingsPageLayout({
       <div className={style["settings-page-layout"]}>
         <ContentContainer>
           {settingsNav}
-          <MainPanel>
-            {mainPanel}
-          </MainPanel>
+          <MainPanel>{mainPanel}</MainPanel>
         </ContentContainer>
       </div>
     </AdjustedNavContainer>
