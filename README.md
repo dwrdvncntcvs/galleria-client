@@ -23,26 +23,34 @@ npm install -g yarn
 git clone https://github.com/dwrdvncntcvs/galleria-client.git
 ```
 
-- Run these commands after cloning.
+- The application relies on environment variables which means you should create a <b><i>.env</i></b> file and store the following variables:
+
+```dotenv
+ADD API BASE_URL
+REACT_APP_GALLERIA_API_URL= <URL of Galleria API that I created>
+```
+
+- Run these commands.
 
 ```bash
 
-# To install all the dependencies
+# To install all the dependencies used in this project
 yarn
 
-# To run the React application
+# To run the application
 yarn start
 
-# To build the React application
+# To build the application
 yarn build
 
-# To test the React application
+# To test the application
 yarn test
 
-# To eject the React application
+# To eject the application
 yarn eject
 
 ```
+
 <i><b>Note: </b> Galleria is currently under development at this moment. </i>
 
 <i>All rights reserved | Galleria 2022</i>
