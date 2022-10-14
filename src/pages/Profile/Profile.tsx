@@ -4,14 +4,7 @@ import { getAllUserPosts } from "../../api/postRequest";
 import { ImageGallery } from "../../components/Gallery";
 import { InfiniteScroll, SuggestPeople } from "../../components/global";
 import { useAppSelector } from "../../hooks/reduxHook";
-import {
-  AdjustedNavContainer,
-  ContentContainer,
-  MainPanel,
-  SidePanel,
-  StickyPanel,
-} from "../../UI";
-
+import { MainPageLayout } from "../../layout";
 import style from "./profile.module.scss";
 
 export default function Profile() {
@@ -30,21 +23,19 @@ export default function Profile() {
       numberOfItems={+postsInfo.count!}
       page={+postsInfo.page}
     >
-      <AdjustedNavContainer>
-        <div className={style.profile}>
-          <ContentContainer>
-            <MainPanel>
-              <Outlet />
-            </MainPanel>
-            <SidePanel>
-              <StickyPanel>
-                <ImageGallery username={params.username!} />
-                <SuggestPeople />
-              </StickyPanel>
-            </SidePanel>
-          </ContentContainer>
-        </div>
-      </AdjustedNavContainer>
+      <MainPageLayout
+        mainPanelContent={
+          <>
+            <Outlet />
+          </>
+        }
+        sidePanelContent={
+          <>
+            <ImageGallery username={params.username!} />
+            <SuggestPeople />
+          </>
+        }
+      />
     </InfiniteScroll>
   );
 }
