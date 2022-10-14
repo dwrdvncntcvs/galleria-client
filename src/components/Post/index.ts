@@ -11,3 +11,4 @@ export { default as PostForm } from "./PostForm/PostForm";
 export { default as PostActionDropDown } from "./PostActionDropdown/PostActionDropdown";
 export { default as EditPostModal } from "./EditPostModal/EditPostModal";
 export { default as EditPostForm } from "./EditPostForm/EditPostForm";
+export { default as NoPostMessage } from "./NoPostMessage/NoPostMessage";

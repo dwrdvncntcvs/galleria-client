@@ -39,7 +39,7 @@ export default function ProfileDetails() {
         />
       )}
       {userState.isAuth ? (
-        <Posts posts={posts} />
+        <Posts posts={posts} type="user" />
       ) : (
         <p>This account's posts are hidden...</p>
       )}
