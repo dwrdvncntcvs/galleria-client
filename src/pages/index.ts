@@ -9,3 +9,4 @@ export { default as ProfileDetails } from "./ProfileDetails/ProfileDetails";
 export { default as Followers } from "./Followers/Followers";
 export { default as Following } from "./Following/Following";
 export { default as People } from "./People/People";
+export { default as Settings } from "./Settings/Settings";

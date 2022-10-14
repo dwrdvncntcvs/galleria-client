@@ -7,8 +7,6 @@ import { EditPostModal } from "./components/Post";
 import { useAppSelector } from "./hooks/reduxHook";
 import { MainContainer, ModalOverlay } from "./layouts";
 import {
-  Followers,
-  Following,
   Gallery,
   Home,
   Otp,
@@ -16,6 +14,7 @@ import {
   Portal,
   Profile,
   ProfileDetails,
+  Settings,
   SignIn,
   SignUp,
 } from "./pages";
@@ -38,6 +37,7 @@ function App() {
           <Route path="" element={<Persistent />}>
             <Route element={<RequiredAuth />}>
               <Route path="/home" element={<Home />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
             <Route path="/:username/" element={<Profile />}>
               <Route path="" element={<ProfileDetails />} />
