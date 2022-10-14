@@ -1,15 +1,15 @@
 import React, { useState, ChangeEvent, FormEvent, Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { InputError, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import style from "./signInForm.module.scss";
 import { useValidationMessage } from "../../../hooks/validationHook";
 import { validationDebounce } from "../../../services/validationService";
 import { signInFields } from "./inputFields";
 import { ButtonContainer, FormContainer } from "../../../layouts";
+import style from "./signInForm.module.scss";
 
 const SignInForm = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +24,12 @@ const SignInForm = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const validation = useValidationMessage();
+  const location = useLocation();
+
+  const prevLocation =
+    location.state !== null
+      ? (location.state as { from: string }).from
+      : "/home";
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -43,7 +49,7 @@ const SignInForm = () => {
 
     const response = await dispatch(userSignIn(data));
 
-    if (response.meta.requestStatus === "fulfilled") navigate("/home");
+    if (response.meta.requestStatus === "fulfilled") navigate(prevLocation);
   };
 
   return (

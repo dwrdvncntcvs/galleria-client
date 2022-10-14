@@ -23,7 +23,7 @@ export default function NavBar() {
   }
 
   const goToSignIn = () => {
-    navigate("/");
+    navigate("/", { replace: true, state: { from: location.pathname } });
   };
 
   const createAccount = () => {

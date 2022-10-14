@@ -6,9 +6,14 @@ import "./posts.scss";
 interface PostsProps {
   posts: Post[];
   type?: "user" | "public";
+  canView?: boolean;
 }
 
-export default function Posts({ posts, type = "public" }: PostsProps) {
+export default function Posts({
+  posts,
+  type = "public",
+  canView = true,
+}: PostsProps) {
   let message: string;
 
   if (type === "user") {
@@ -17,15 +22,14 @@ export default function Posts({ posts, type = "public" }: PostsProps) {
     message = "There are no posts on your feed.";
   }
 
-  return (
+  return canView ? (
     <>
       {posts.map((post, i) => (
         <PostCard post={post} key={post.id} />
       ))}
-      <NoPostMessage
-        posts={posts}
-        message={message!}
-      />
+      <NoPostMessage posts={posts} message={message!} />
     </>
+  ) : (
+    <p>This account's posts are hidden...</p>
   );
 }

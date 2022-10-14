@@ -38,11 +38,12 @@ export default function ProfileDetails() {
           username={userState.userData?.username!}
         />
       )}
-      {userState.isAuth ? (
-        <Posts posts={posts} type="user" />
-      ) : (
-        <p>This account's posts are hidden...</p>
-      )}
+
+      <Posts
+        posts={posts}
+        type="user"
+        canView={userState.isAuth ? true : false}
+      />
     </>
   );
 }
