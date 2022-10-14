@@ -5,7 +5,7 @@ import BackButton from "./components/global/ClosePostButton/ClosePostButton";
 import { NavBar } from "./components/Navigation";
 import { EditPostModal } from "./components/Post";
 import { useAppSelector } from "./hooks/reduxHook";
-import { MainContainer, ModalOverlay } from "./layouts";
+import { MainContainer, ModalOverlay } from "./UI";
 import {
   Gallery,
   Home,

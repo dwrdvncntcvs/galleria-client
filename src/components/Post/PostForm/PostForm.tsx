@@ -3,7 +3,7 @@ import { HiPhotograph, HiX } from "react-icons/hi";
 import { createPost } from "../../../api/postRequest";
 import { closeModal } from "../../../features/modalSlice";
 import { useAppDispatch } from "../../../hooks/reduxHook";
-import { ButtonContainer } from "../../../layouts";
+import { ButtonContainer } from "../../../UI";
 import { ImageBlob, ImagePost, PostData } from "../../../models/Post";
 import { AddImages } from "../../Home";
 import style from "./postForm.module.scss";

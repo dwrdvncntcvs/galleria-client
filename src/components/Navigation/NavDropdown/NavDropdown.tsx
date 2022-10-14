@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./navDropdown.module.scss";
 import { HiUser, HiLogout, HiCog } from "react-icons/hi";
-import { Dropdown } from "../../../layouts";
+import { Dropdown } from "../../../UI";
 import { useNavigate } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
 import { useAppDispatch } from "../../../hooks/reduxHook";

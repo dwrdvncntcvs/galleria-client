@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { defaultAvatar } from "../../../assets/images";
-import { Card } from "../../../layouts";
+import { Card } from "../../../UI";
 import { UserProfile } from "../../../models/User";
 import { RoundedAvatar } from "../../global";
 import style from "./miniProfile.module.scss";

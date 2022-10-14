@@ -13,7 +13,7 @@ import {
   validationDebounce,
 } from "../../../services/validationService";
 import { signUpInputFields } from "./inputFields";
-import { ButtonContainer, FormContainer } from "../../../layouts";
+import { ButtonContainer, FormContainer } from "../../../UI";
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiX } from "react-icons/hi";
 import { closeModal } from "../../../features/modalSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import { ModalOverlay } from "../../../layouts";
+import { ModalOverlay } from "../../../UI";
 import { Post } from "../../../models/Post";
 import { EditPostForm } from "..";
 import style from "./editPostModal.module.scss";

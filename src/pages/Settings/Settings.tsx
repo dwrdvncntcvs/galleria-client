@@ -4,7 +4,7 @@ import {
   AdjustedNavContainer,
   ContentContainer,
   MainPanel,
-} from "../../layouts";
+} from "../../UI";
 import style from "./settings.module.scss";
 
 export default function Settings() {

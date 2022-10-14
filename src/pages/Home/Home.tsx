@@ -9,7 +9,7 @@ import {
   MainPanel,
   SidePanel,
   StickyPanel,
-} from "../../layouts";
+} from "../../UI";
 import style from "./home.module.scss";
 
 const Home = () => {

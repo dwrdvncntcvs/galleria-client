@@ -5,7 +5,7 @@ import { stopPropagation } from "../../../utils/helper";
 import { useLocation, useNavigate } from "react-router-dom";
 import { NavLinks } from "..";
 import { AppTitle } from "../../global";
-import { ContentContainer } from "../../../layouts";
+import { ContentContainer } from "../../../UI";
 
 export default function NavBar() {
   const { userState } = useAppSelector((state) => state);

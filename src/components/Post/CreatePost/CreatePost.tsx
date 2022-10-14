@@ -5,7 +5,7 @@ import { setModal } from "../../../features/modalSlice";
 import { defaultAvatar } from "../../../assets/images";
 import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
-import Card from "../../../layouts/Card/Card";
+import Card from "../../../UI/Card/Card";
 import CreatePostModal from "../CreatePostModal/CreatePostModal";
 
 interface CreatePostProps {

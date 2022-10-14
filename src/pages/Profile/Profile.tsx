@@ -10,7 +10,7 @@ import {
   MainPanel,
   SidePanel,
   StickyPanel,
-} from "../../layouts";
+} from "../../UI";
 
 import style from "./profile.module.scss";
 

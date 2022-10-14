@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./createPostModal.scss";
-import ModalOverlay from "../../../layouts/ModalOverlay/ModalOverlay";
+import ModalOverlay from "../../../UI/ModalOverlay/ModalOverlay";
 import { CreatePostHeader, PostForm } from "..";
 
 export default function CreatePostModal() {

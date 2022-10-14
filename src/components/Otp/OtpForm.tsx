@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userOtpRequest } from "../../api/userRequest";
 import { useAppDispatch } from "../../hooks/reduxHook";
-import { ButtonContainer, FormContainer } from "../../layouts";
+import { ButtonContainer, FormContainer } from "../../UI";
 import { OTP } from "../../models/User";
 import { TextInput } from "../global";
 import OtpMessage from "./OtpMessage/OtpMessage";

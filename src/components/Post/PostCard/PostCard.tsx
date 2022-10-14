@@ -1,6 +1,5 @@
 import React from "react";
 import { Post } from "../../../models/Post";
-import Card from "../../../layouts/Card/Card";
 import { AddComment } from "../../Comments";
 import { useAppSelector } from "../../../hooks/reduxHook";
 import {
@@ -9,6 +8,7 @@ import {
   PostContent,
   PostHeader,
 } from "..";
+import { Card } from "../../../UI";
 
 interface PostProps {
   post: Post;

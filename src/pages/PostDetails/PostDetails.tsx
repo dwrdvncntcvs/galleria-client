@@ -20,7 +20,7 @@ import {
   MainPanel,
   SidePanel,
   StickyPanel,
-} from "../../layouts";
+} from "../../UI";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {

@@ -8,7 +8,7 @@ import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { useValidationMessage } from "../../../hooks/validationHook";
 import { validationDebounce } from "../../../services/validationService";
 import { signInFields } from "./inputFields";
-import { ButtonContainer, FormContainer } from "../../../layouts";
+import { ButtonContainer, FormContainer } from "../../../UI";
 import style from "./signInForm.module.scss";
 
 const SignInForm = () => {
