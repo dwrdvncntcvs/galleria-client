@@ -1,8 +1,26 @@
 @import "../../variables.scss";
 
+@function calculatePercent($percent: 0%) {
+  @return calc(#{$percent} - 20px);
+}
+
 .sticky-panel {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: fixed;
+  width: calculatePercent(20%);
+  transition: all ease 0.2s;
 
+  @include MDdesktop {
+    width: calculatePercent(25%);
+  }
+
+  @include desktop {
+    width: calculatePercent(32%);
+  }
+
+  @include LGtablet {
+    width: calculatePercent(40%);
+  }
 }

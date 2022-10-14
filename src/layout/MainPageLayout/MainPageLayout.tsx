@@ -7,6 +7,7 @@ import {
   SidePanel,
   StickyPanel,
 } from "../../UI";
+import { SideFooter } from "../../components/global";
 
 interface MainPageLayoutProps {
   mainPanelContent: ReactElement;
@@ -23,7 +24,10 @@ export default function MainPageLayout({
         <ContentContainer>
           <MainPanel>{mainPanelContent}</MainPanel>
           <SidePanel>
-            <StickyPanel>{sidePanelContent}</StickyPanel>
+            <StickyPanel>
+              {sidePanelContent}
+              <SideFooter />
+            </StickyPanel>
           </SidePanel>
         </ContentContainer>
       </div>

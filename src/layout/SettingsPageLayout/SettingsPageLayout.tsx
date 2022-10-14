@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { SideFooter } from "../../components/global";
 import { AdjustedNavContainer, ContentContainer, MainPanel } from "../../UI";
 import style from "./settingsPageLayout.module.scss";
 
@@ -16,7 +17,10 @@ export default function SettingsPageLayout({
       <div className={style["settings-page-layout"]}>
         <ContentContainer>
           {settingsNav}
-          <MainPanel>{mainPanel}</MainPanel>
+          <MainPanel>
+            {mainPanel}
+            <SideFooter />
+          </MainPanel>
         </ContentContainer>
       </div>
     </AdjustedNavContainer>
