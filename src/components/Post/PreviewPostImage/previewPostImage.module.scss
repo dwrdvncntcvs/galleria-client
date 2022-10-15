@@ -10,7 +10,8 @@
   img {
     object-fit: contain;
     width: 100%;
-    background-color: lightgray;
+    aspect-ratio: 16/9;
+    background-color: black;
   }
 
   button {
