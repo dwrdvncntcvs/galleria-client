@@ -28,6 +28,15 @@ export default function NavBarSearch() {
     setSelected((prev) => true);
   };
 
+  const setSearchDefault = () => {
+    setSelected(false);
+    setSearch("");
+  };
+
+  const closeSearchResults = () => {
+    setSelected(false);
+  };
+
   return (
     <div className={style["nav-bar-search"]}>
       <input
@@ -38,7 +47,12 @@ export default function NavBarSearch() {
         onClick={selectInput}
       />
       {selected && search.length > 0 && (
-        <SearchResult count={count} users={data} />
+        <SearchResult
+          count={count}
+          users={data}
+          onDefault={setSearchDefault}
+          onClose={closeSearchResults}
+        />
       )}
     </div>
   );

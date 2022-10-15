@@ -3,13 +3,83 @@
 
 .search-result {
   @extend .flex-column;
-  width: 500px;
+  width: 400px;
+  max-height: 500px;
+  overflow-y: auto;
   background-color: white;
   position: absolute;
   top: 35px;
-  left: -100px;
-  padding: 10px;
+  left: -50px;
+  padding: 10px 0px;
   border-radius: 5px;
   border: 1px solid gainsboro;
   box-shadow: 0px 1px 2px lightgray;
+
+  .no-result {
+    padding: 5px 20px;
+  }
+
+  .header {
+    @extend .flex-row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px 5px;
+    color: $primary-color;
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    #clear {
+      width: 30px;
+      height: 30px;
+      padding: 0px;
+      @extend .flex-column;
+      justify-content: center;
+      align-items: center;
+      background-color: gainsboro;
+      border-radius: 100%;
+      align-self: flex-end;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  button {
+    @extend .flex-row;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 5px 20px;
+    background-color: white;
+    border: none;
+    border-radius: 0px;
+    gap: 15px;
+    transition: all ease 0.2s;
+
+    &:hover {
+      background-color: gainsboro;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+
+    .profile-details {
+      @extend .flex-column;
+      justify-content: center;
+      align-items: flex-start;
+
+      p {
+        font-size: 0.85rem;
+        color: $primary-color;
+      }
+    }
+  }
 }
