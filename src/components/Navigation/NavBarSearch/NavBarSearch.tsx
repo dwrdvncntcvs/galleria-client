@@ -1,5 +1,6 @@
 import { debounce } from "lodash";
 import React, { useState, ChangeEvent } from "react";
+import { HiTrash, HiX } from "react-icons/hi";
 import { searchUserProfile } from "../../../api/userRequest";
 import { resetSearchResults } from "../../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
@@ -37,6 +38,10 @@ export default function NavBarSearch() {
     setSelected(false);
   };
 
+  const clearInput = () => {
+    setSearch("");
+  };
+
   return (
     <div className={style["nav-bar-search"]}>
       <input
@@ -46,6 +51,11 @@ export default function NavBarSearch() {
         onChange={searchHandler}
         onClick={selectInput}
       />
+      {search.length > 0 && (
+        <button id={style.clear} onClick={clearInput}>
+          <HiTrash />
+        </button>
+      )}
       {selected && search.length > 0 && (
         <SearchResult
           count={count}

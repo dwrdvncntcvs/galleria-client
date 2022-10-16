@@ -2,8 +2,29 @@
 @import "../../../index.scss";
 
 .nav-bar-search {
-  @extend .flex-column;
+  @extend .flex-row;
   position: relative;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+
+  #clear {
+    @extend .flex-column;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    transition: all ease 0.2s;
+    font-size: 16px;
+    border-radius: 100%;
+    background-color: transparent;
+    color: $error-color;
+    position: absolute;
+    right: -25px;
+
+    &:hover {
+      transform: rotate(20deg);
+    }
+  }
 
   input {
     padding: 5px;
@@ -11,6 +32,7 @@
     border: none;
     background-color: $quaternary-color;
     border-radius: 5px;
+    transition: all ease 0.2s;
 
     &:focus {
       outline: none;
