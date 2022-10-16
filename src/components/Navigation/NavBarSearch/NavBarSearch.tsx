@@ -58,6 +58,7 @@ export default function NavBarSearch() {
       )}
       {selected && search.length > 0 && (
         <SearchResult
+          query={search}
           count={count}
           users={data}
           onDefault={setSearchDefault}

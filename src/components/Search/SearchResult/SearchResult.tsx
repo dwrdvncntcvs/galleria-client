@@ -11,6 +11,7 @@ interface SearchResultProps {
   count: number;
   onDefault: () => void;
   onClose: () => void;
+  query: string;
 }
 
 export default function SearchResult({
@@ -18,6 +19,7 @@ export default function SearchResult({
   users,
   onDefault,
   onClose,
+  query,
 }: SearchResultProps) {
   const { userData } = useAppSelector((state) => state.userState);
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ export default function SearchResult({
       </div>
       {users.length < 1 ? (
         <div className={style["no-result"]}>
-          <p>No users found.</p>
+          <p>Nothing's found related to "{query}".</p>
         </div>
       ) : (
         users.map(({ first_name, last_name, username, Profile, id }) => (
