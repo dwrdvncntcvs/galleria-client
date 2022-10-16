@@ -1,45 +1,45 @@
 @import "../../../variables.scss";
 @import "../../../index.scss";
 
-.profile-container{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
+.profile-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.profile-link{
-    border: 3px solid $primary-color;
+.profile-link {
+  border: 5px solid white;
+  border-radius: 50%;
+  display: inline-block;
+  margin: -50px 10px 0px 20px;
+  width: 100px;
+  height: 100px;
+  vertical-align: bottom;
+
+  img {
     border-radius: 50%;
-    display: inline-block;
-    margin: -30px 5px 0px 8px;
-    width: 72px;
-    height: 72px;
-    vertical-align: bottom;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 
-    img{
-        border: 1px solid transparent;
-        border-radius: 50%;
-        height: 100%;
-        width: 100%;
-        object-fit:cover;
-    }
+  }
 }
 
-.follow-btn{
-    font-size: 0.8rem;
-    border: 2px solid $secondary-color;
-    border-radius: 25px;
-    background-color: rgba(29, 164, 242, 0);
-    padding: 3px 20px;
-    margin: 5px;
-    font-weight: bold;
-    color: $secondary-color;
-    font-weight: 700;
-    outline: none;
-    transition: all 0.3s ease-in-out;
+.follow-btn {
+  font-size: 0.8rem;
+  border: 2px solid $secondary-color;
+  border-radius: 25px;
+  background-color: rgba(29, 164, 242, 0);
+  padding: 3px 20px;
+  margin: 5px;
+  font-weight: bold;
+  color: $secondary-color;
+  font-weight: 700;
+  outline: none;
+  transition: all 0.3s ease-in-out;
 
-    &:hover{
-        background-color:$quaternary-color;
-    }
+  &:hover {
+    background-color: $quaternary-color;
+  }
 }

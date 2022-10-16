@@ -2,6 +2,7 @@ import React from "react";
 import style from "./profileInfoCard.module.scss";
 import { UserProfile } from "../../../models/User";
 import { useNavigate } from "react-router-dom";
+import { HiUser } from "react-icons/hi";
 
 interface ProfileInfoCardProps {
   profile: UserProfile;
@@ -30,6 +31,11 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
     },
   ];
 
+  const details = [
+    { content: profile.username, Icon: HiUser },
+    { content: profile.Profile?.bio },
+  ];
+
   return (
     <div className={style["profile-info"]}>
       <div className={style["profile-body"]}>
@@ -37,10 +43,13 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
           {profile.first_name}&nbsp;
           {profile.last_name}
         </h4>
-        <p className={style["username-txt"]}>{profile.username}</p>
       </div>
-      <div className={style["bio-container"]}>
-        <p className={style["bio-txt"]}>{profile.Profile?.bio}</p>
+      <div className={style["details-container"]}>
+        {details.map(({ Icon, content }, i) => (
+          <p className={style["details-txt"]} key={i}>
+            {content}
+          </p>
+        ))}
       </div>
       <div className={style["follow-container"]}>
         {followButtons.map(({ action, count, spanText }, i) => (

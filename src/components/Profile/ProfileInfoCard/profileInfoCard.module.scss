@@ -1,11 +1,6 @@
 @import "../../../variables.scss";
 @import "../../../index.scss";
 
-.username-txt {
-  color: $dark-gray;
-  font-size: small;
-  font-weight: 500;
-}
 .profile-info {
   margin-top: 5px;
   display: flex;
@@ -13,59 +8,60 @@
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-}
 
-.follow-btn {
-  font-size: 0.8rem;
-  border: 2px solid $secondary-color;
-  border-radius: 25px;
-  background-color: rgba(29, 164, 242, 0);
-  padding: 3px 20px;
-  margin: 5px;
-  font-weight: bold;
-  color: $secondary-color;
-  font-weight: 700;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    background-color: $quaternary-color;
-  }
-}
-
-.follow-container {
-  display: flex;
-  margin-top: 0;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  .follow-txt {
+  .follow-btn {
     font-size: 0.8rem;
-    font-weight: bolder;
+    border: 2px solid $secondary-color;
+    border-radius: 25px;
+    background-color: rgba(29, 164, 242, 0);
+    padding: 3px 20px;
+    margin: 5px;
+    font-weight: bold;
+    color: $secondary-color;
+    font-weight: 700;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: $quaternary-color;
+    }
+  }
+
+  .follow-container {
     display: flex;
+    margin-top: 0;
     flex-direction: row;
-    background-color: transparent;
-    border: none;
-  }
-  span {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: $dark-gray;
-    font-weight: 200;
-    margin-left: 5px;
-  }
-}
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 
-.bio-container {
-  width: 100%;
-  margin: 5px 0px 5px;
-}
+    .follow-txt {
+      font-size: 0.8rem;
+      font-weight: bolder;
+      display: flex;
+      flex-direction: row;
+      background-color: transparent;
+      border: none;
+    }
+    span {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: $dark-gray;
+      font-weight: 200;
+      margin-left: 5px;
+    }
+  }
 
-.bio-txt {
-  font-size: 12px;
-  text-align: justify;
-  color: black;
-  font-weight: 700;
+  .details-container {
+    @extend .flex-column;
+    width: 100%;
+    margin: 5px 0px 5px;
+    gap: 5px;
+
+    .details-txt {
+      font-size: 12px;
+      text-align: justify;
+      color: $primary-color;
+    }
+  }
 }
