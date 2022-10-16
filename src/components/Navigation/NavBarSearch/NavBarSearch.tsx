@@ -1,10 +1,10 @@
 import { debounce } from "lodash";
 import React, { useState, ChangeEvent } from "react";
-import { HiTrash, HiX } from "react-icons/hi";
+import { HiTrash } from "react-icons/hi";
 import { searchUserProfile } from "../../../api/userRequest";
 import { resetSearchResults } from "../../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
-import SearchResult from "../SearchResult/SearchResult";
+import { SearchResult } from "../../Search";
 import style from "./navBarSearch.module.scss";
 
 const searchDebounce = debounce(async (str, dispatch) => {
