@@ -1,9 +1,9 @@
 import React from "react";
 import { HiX } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { defaultAvatar } from "../../../assets/images";
 import { useAppSelector } from "../../../hooks/reduxHook";
 import { UserProfile } from "../../../models/User";
+import { PersonResult } from "..";
 import style from "./searchResult.module.scss";
 
 interface SearchResultProps {
@@ -43,22 +43,15 @@ export default function SearchResult({
         </div>
       ) : (
         users.map(({ first_name, last_name, username, Profile, id }) => (
-          <button key={id} onClick={goToUserProfile(username!)}>
-            <img
-              src={
-                Profile?.profileImage !== ""
-                  ? Profile?.profileImage
-                  : defaultAvatar
-              }
-              alt={`${first_name} ${last_name}`}
-            />
-            <div className={style["profile-details"]}>
-              <p>
-                {first_name} {last_name}
-              </p>
-              <p>{userData?.username === username ? "You" : username}</p>
-            </div>
-          </button>
+          <PersonResult
+            first_name={first_name!}
+            Profile={Profile!}
+            last_name={last_name!}
+            onNavigateUser={goToUserProfile}
+            userData={userData!}
+            username={username!}
+            key={id}
+          />
         ))
       )}
     </div>

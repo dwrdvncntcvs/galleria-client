@@ -47,39 +47,4 @@
       }
     }
   }
-
-  button {
-    @extend .flex-row;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    padding: 5px 20px;
-    background-color: white;
-    border: none;
-    border-radius: 0px;
-    gap: 15px;
-    transition: all ease 0.2s;
-
-    &:hover {
-      background-color: gainsboro;
-    }
-
-    img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 100%;
-    }
-
-    .profile-details {
-      @extend .flex-column;
-      justify-content: center;
-      align-items: flex-start;
-
-      p {
-        font-size: 0.85rem;
-        color: $primary-color;
-      }
-    }
-  }
 }
