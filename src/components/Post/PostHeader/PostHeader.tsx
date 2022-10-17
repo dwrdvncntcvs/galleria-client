@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { defaultAvatar } from "../../../assets/images";
 import { UserProfile } from "../../../models/User";
 import { convertDate } from "../../../utils/helper";
-import { RoundedAvatar } from "../../global";
 import { HiDotsHorizontal } from "react-icons/hi";
 import style from "./postHeader.module.scss";
 import { useAppSelector } from "../../../hooks/reduxHook";
@@ -39,14 +38,15 @@ export default function PostHeader({
   return (
     <header className={style.header}>
       <div className={style["details"]}>
-        <RoundedAvatar
+        <img
+          className={style["post-image"]}
           src={
             user.Profile?.profileImage! !== ""
               ? user.Profile?.profileImage!
               : defaultAvatar
           }
           alt={`${user.first_name}'s avatar`}
-          onClickAction={goToProfile}
+          onClick={goToProfile}
         />
         <div className={style["header-content"]}>
           <p>

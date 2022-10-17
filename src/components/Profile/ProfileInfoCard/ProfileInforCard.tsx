@@ -39,14 +39,14 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
   ];
 
   const details = [
-    { content: profile.username, Icon: HiUser },
+    { content: profile.Profile?.bio, Icon: HiInformationCircle },
+    { content: `@${profile.username}`, Icon: HiUser },
     {
       content: convertDateOfBirth(profile.Profile?.dateOfBirth!),
       Icon: HiCalendar,
     },
     { content: profile.Profile?.contactNumber, Icon: HiPhone },
     { content: profile.Profile?.address, Icon: HiLocationMarker },
-    { content: profile.Profile?.bio, Icon: HiInformationCircle },
   ];
 
   return (

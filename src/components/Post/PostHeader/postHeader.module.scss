@@ -18,6 +18,12 @@
       height: 35px;
       border-radius: 100%;
       object-fit: cover;
+      cursor: pointer;
+      transition: all ease .2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
 
     .header-content {
