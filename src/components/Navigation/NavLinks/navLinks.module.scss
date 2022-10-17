@@ -10,9 +10,9 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 1000px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
     font-weight: bold;
     border: none;
     font-size: 15px;
@@ -23,13 +23,6 @@ nav {
 
     &:hover {
       opacity: 0.5;
-    }
-
-    img {
-      border-radius: 1000px;
-      width: 25px;
-      height: 25px;
-      object-fit: cover;
     }
   }
 }

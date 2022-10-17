@@ -3,13 +3,14 @@
 
 .rounded-avatar {
   display: flex;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
+  width: 30px;
+  height: 30px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all ease 0.2s;
+  border-radius: 100%;
+  border: 1px solid black;
 
   &:hover {
     opacity: 0.8;
