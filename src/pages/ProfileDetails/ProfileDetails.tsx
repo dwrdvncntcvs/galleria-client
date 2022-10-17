@@ -39,7 +39,7 @@ export default function ProfileDetails() {
 
   return (
     <>
-      <ProfileCard profile={userProfile} isFollowing={isFollowing} />
+      <ProfileCard profile={userProfile} isFollowing={isFollowing} username={username}/>
       {myProfile && (
         <CreatePost
           firstName={userState.userData?.first_name!}
