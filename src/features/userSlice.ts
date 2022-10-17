@@ -60,7 +60,8 @@ const userSlice = createSlice({
       .userOtpRequest()
       .userSignIn()
       .userSignUpRequest()
-      .searchUserProfileRequest();
+      .searchUserProfileRequest()
+      .updateUserProfileRequest();
   },
 });
 

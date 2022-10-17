@@ -9,7 +9,6 @@ import { UpdateUserData } from "../../../models/User";
 export default function EditProfile() {
   const { props } = useAppSelector((state) => state.modalState);
 
-
   return (
     <ModalOverlay hasBackButton={true} backButtonComponent={CloseModalButton}>
       <div className={style["edit-profile"]}>

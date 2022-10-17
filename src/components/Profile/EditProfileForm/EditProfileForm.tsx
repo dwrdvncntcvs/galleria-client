@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { updateUserProfile } from "../../../api/userRequest";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { closeModal } from "../../../features/modalSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UpdateUserData } from "../../../models/User";
 import style from "./editProfileForm.module.scss";
 import { inputFields } from "./inputFields";
@@ -15,15 +16,17 @@ export default function EditProfileForm({
   userId,
 }: EditProfileFormProps) {
   const dispatch = useAppDispatch();
-  const { address, dateOfBirth, first_name, last_name, username, bio } =
-    profile;
+  const { userProfile } = useAppSelector((state) => state.userState);
+  // const { address, dateOfBirth, first_name, last_name, username, bio } =
+  //   profile!;
+
   const [data, setData] = useState<UpdateUserData>({
-    address,
-    dateOfBirth,
-    first_name,
-    last_name,
-    username,
-    bio,
+    address: userProfile.Profile?.address!,
+    dateOfBirth: userProfile.Profile?.dateOfBirth!,
+    first_name: userProfile.first_name!,
+    last_name: userProfile.last_name!,
+    username: userProfile.username!,
+    bio: userProfile.Profile?.bio!,
   });
 
   const bioHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,8 +45,11 @@ export default function EditProfileForm({
     e.preventDefault();
     data.dateOfBirth =
       data.dateOfBirth !== "" ? new Date(data.dateOfBirth!) : null;
-    console.log(data);
-    await dispatch(updateUserProfile({ data, id: userId }));
+    const { meta } = await dispatch(updateUserProfile({ data, id: userId }));
+
+    if (meta.requestStatus === "fulfilled") {
+      dispatch(closeModal());
+    }
   };
 
   return (
@@ -55,7 +61,7 @@ export default function EditProfileForm({
             <input
               name={name}
               type={type}
-              value={value as string}
+              value={value! as string}
               onChange={changeValue}
             ></input>
           </div>

@@ -128,9 +128,7 @@ export const updateUserProfile = createAsyncThunk(
         data
       );
 
-      console.log(responseData);
-
-      return responseData;
+      return { responseData, data: JSON.stringify(data) };
     } catch (err: any) {
       rejectWithValue(err.response.data.msg);
     }

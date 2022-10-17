@@ -178,6 +178,24 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         console.log("Fulfilled...");
+        const { address, bio, dateOfBirth, first_name, last_name, username } =
+          JSON.parse(action.payload?.data!);
+
+        return {
+          ...state!,
+          userProfile: {
+            ...state.userProfile!,
+            address,
+            dateOfBirth,
+            first_name,
+            last_name,
+            username,
+            Profile: {
+              ...state.userProfile.Profile!,
+              bio,
+            },
+          },
+        };
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
         console.log("Rejected...");
