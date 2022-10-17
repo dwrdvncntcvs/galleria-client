@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserProfileRequest } from "../../api/userRequest";
 import { CreatePost, Posts } from "../../components/Post";
 import { ProfileCard } from "../../components/Profile";
 import { resetPostState } from "../../features/postSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import { usePrivateAxios } from "../../hooks/usePrivateAxios";
+import { privateHttpService } from "../../services/httpService";
 import style from "./profileDetails.module.scss";
 
 export default function ProfileDetails() {
+  const [isFollowing, setIsFollowing] = useState(false);
   const { userState, postState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const params = useParams();
+  const privateInstance = usePrivateAxios();
+
   const username = params.username!;
 
   const { posts } = postState;
@@ -20,6 +25,11 @@ export default function ProfileDetails() {
     dispatch(resetPostState());
     const getData = async () => {
       await dispatch(getUserProfileRequest({ username }));
+      const { isFollowed } = await privateHttpService(privateInstance).get(
+        `/is-following/${username}`
+      );
+
+      setIsFollowing(isFollowed);
     };
 
     getData();
@@ -29,7 +39,7 @@ export default function ProfileDetails() {
 
   return (
     <>
-      <ProfileCard profile={userProfile} />
+      <ProfileCard profile={userProfile} isFollowing={isFollowing} />
       {myProfile && (
         <CreatePost
           firstName={userState.userData?.first_name!}

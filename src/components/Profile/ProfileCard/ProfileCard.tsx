@@ -7,16 +7,17 @@ import ProfileCoverPhoto from "../ProfileCoverPhoto/ProfileCoverPhoto";
 
 interface ProfileCardProps {
   profile: UserProfile;
+  isFollowing: boolean;
 }
 
 // On this component, it could be used to fetch or get data from the backend and other components will be receiving
 // those data as props.
-export default function ProfileCard({ profile }: ProfileCardProps) {
+export default function ProfileCard({ profile, isFollowing }: ProfileCardProps) {
   return (
     <div className={style["main-container"]}>
       <div className={style["content-container"]}>
-        <ProfileCoverPhoto/>
-        <ProfileImageCard profile={profile} />
+        <ProfileCoverPhoto />
+        <ProfileImageCard profile={profile} isFollowing={isFollowing}/>
         <ProfileInfoCard profile={profile} />
       </div>
     </div>

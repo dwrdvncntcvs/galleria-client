@@ -6,10 +6,16 @@ import { useAppSelector } from "../../../hooks/reduxHook";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
+  isFollowing: boolean;
 }
 
-export default function ProfileImageCard({ profile }: ProfileImageCardProps) {
+export default function ProfileImageCard({
+  profile,
+  isFollowing,
+}: ProfileImageCardProps) {
   const { userData } = useAppSelector((state) => state.userState);
+  console.log(isFollowing);
+
   return (
     <div className={style["profile-container"]}>
       <div className={style["profile-link"]}>
@@ -22,7 +28,7 @@ export default function ProfileImageCard({ profile }: ProfileImageCardProps) {
           alt={`${profile.first_name}'s avatar'`}
         />
       </div>
-      {userData?.id !== profile.id && (
+      {userData?.id !== profile.id && !isFollowing && (
         <button className={style["follow-btn"]}>Follow</button>
       )}
     </div>
