@@ -66,5 +66,6 @@ export interface UpdateUserData {
   last_name: string;
   username: string;
   address: string;
-  dateOfBirth: string;
+  dateOfBirth: string | Date | null;
+  bio: string;
 }

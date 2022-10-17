@@ -29,6 +29,7 @@ export default function ProfileImageCard({
     first_name: profile.first_name!,
     last_name: profile.last_name!,
     username: profile.username!,
+    bio: profile.Profile?.bio!,
   };
 
   const buttonsArr = [

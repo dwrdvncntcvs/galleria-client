@@ -37,7 +37,7 @@ export const convertDate = (date: Date) =>
 export const convertDateOfBirth = (date: Date) => {
   return date === undefined || date === null
     ? ""
-    : moment(date).format("mm/dd/yyyy");
+    : moment(date).format("MMMM d, yyyy");
 };
 
 export const canRequest = (

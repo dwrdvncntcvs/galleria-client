@@ -3,6 +3,7 @@ import style from "./profileInfoCard.module.scss";
 import { UserProfile } from "../../../models/User";
 import { useNavigate } from "react-router-dom";
 import { HiUser } from "react-icons/hi";
+import { convertDateOfBirth } from "../../../utils/helper";
 
 interface ProfileInfoCardProps {
   profile: UserProfile;
@@ -33,6 +34,8 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
 
   const details = [
     { content: profile.username, Icon: HiUser },
+    { content: convertDateOfBirth(profile.Profile?.dateOfBirth!) },
+    { content: profile.Profile?.address },
     { content: profile.Profile?.bio },
   ];
 

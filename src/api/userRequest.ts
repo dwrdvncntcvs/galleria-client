@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { privateInstance } from "../config/axios";
 import {
   OTP,
+  UpdateUserData,
   UserAuth,
   UserProfile,
   UserRegistration,
@@ -111,6 +112,27 @@ export const searchUserProfile = createAsyncThunk(
       return responseData;
     } catch (err: any) {
       return rejectWithValue(err.response.data.msg);
+    }
+  }
+);
+
+export const updateUserProfile = createAsyncThunk(
+  "user/updateUserProfile",
+  async (
+    { data, id }: { data: UpdateUserData; id: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const responseData = await privateHttpService(privateInstance).put(
+        `/user/update/profile/${id}`,
+        data
+      );
+
+      console.log(responseData);
+
+      return responseData;
+    } catch (err: any) {
+      rejectWithValue(err.response.data.msg);
     }
   }
 );
