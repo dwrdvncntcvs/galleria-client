@@ -1,9 +1,12 @@
 import React from "react";
 import style from "./profileImageCard.module.scss";
-import { UserProfile } from "../../../models/User";
+import { UpdateUserData, UserProfile } from "../../../models/User";
 import { defaultAvatar } from "../../../assets/images";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { followUserRequest } from "../../../api/followerRequest";
+import { setModal } from "../../../features/modalSlice";
+import EditProfile from "../EditProfile/EditProfile";
+import { convertDateOfBirth } from "../../../utils/helper";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -17,7 +20,16 @@ export default function ProfileImageCard({
   username,
 }: ProfileImageCardProps) {
   const { userData } = useAppSelector((state) => state.userState);
+  const { name, status } = useAppSelector((state) => state.modalState);
   const dispatch = useAppDispatch();
+
+  const profileData: UpdateUserData = {
+    address: profile.Profile?.address!,
+    dateOfBirth: convertDateOfBirth(profile.Profile?.dateOfBirth!),
+    first_name: profile.first_name!,
+    last_name: profile.last_name!,
+    username: profile.username!,
+  };
 
   const buttonsArr = [
     {
@@ -30,7 +42,14 @@ export default function ProfileImageCard({
     {
       condition: userData?.id === profile.id,
       label: "Edit Profile",
-      action: () => console.log("Edit Profile"),
+      action: () =>
+        dispatch(
+          setModal({
+            name: "updateProfileModal",
+            status: true,
+            props: { userId: profile.id, profileData },
+          })
+        ),
     },
   ];
 
@@ -54,6 +73,7 @@ export default function ProfileImageCard({
             </button>
           )
       )}
+      {name === "updateProfileModal" && status && <EditProfile />}
     </div>
   );
 }

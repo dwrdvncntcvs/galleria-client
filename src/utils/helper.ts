@@ -34,6 +34,12 @@ export const serializeDate = <
 export const convertDate = (date: Date) =>
   moment(date).format("MMMM D, YYYY | h:mm A");
 
+export const convertDateOfBirth = (date: Date) => {
+  return date === undefined || date === null
+    ? ""
+    : moment(date).format("mm/dd/yyyy");
+};
+
 export const canRequest = (
   limit: number,
   page: number,

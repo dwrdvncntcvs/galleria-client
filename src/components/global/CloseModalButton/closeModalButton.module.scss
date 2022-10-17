@@ -1,0 +1,23 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+#close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  border-radius: 100%;
+  border: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  transition: all ease 0.2s;
+  background-color: $error-color;
+  color: white;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

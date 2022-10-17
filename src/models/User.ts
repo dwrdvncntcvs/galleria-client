@@ -60,3 +60,11 @@ export interface FoundUsers {
   data: UserProfile[];
   count: number;
 }
+
+export interface UpdateUserData {
+  first_name: string;
+  last_name: string;
+  username: string;
+  address: string;
+  dateOfBirth: string;
+}
