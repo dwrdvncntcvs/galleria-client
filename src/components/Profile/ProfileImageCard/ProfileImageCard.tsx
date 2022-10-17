@@ -1,12 +1,11 @@
 import React from "react";
 import style from "./profileImageCard.module.scss";
-import { UpdateUserData, UserProfile } from "../../../models/User";
+import { UserProfile } from "../../../models/User";
 import { defaultAvatar } from "../../../assets/images";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { followUserRequest } from "../../../api/followerRequest";
 import { setModal } from "../../../features/modalSlice";
 import EditProfile from "../EditProfile/EditProfile";
-import { convertDateOfBirth } from "../../../utils/helper";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -22,15 +21,6 @@ export default function ProfileImageCard({
   const { userData } = useAppSelector((state) => state.userState);
   const { name, status } = useAppSelector((state) => state.modalState);
   const dispatch = useAppDispatch();
-
-  const profileData: UpdateUserData = {
-    address: profile.Profile?.address!,
-    dateOfBirth: convertDateOfBirth(profile.Profile?.dateOfBirth!),
-    first_name: profile.first_name!,
-    last_name: profile.last_name!,
-    username: profile.username!,
-    bio: profile.Profile?.bio!,
-  };
 
   const buttonsArr = [
     {
@@ -48,7 +38,7 @@ export default function ProfileImageCard({
           setModal({
             name: "updateProfileModal",
             status: true,
-            props: { userId: profile.id, profileData },
+            props: { userId: profile.id },
           })
         ),
     },

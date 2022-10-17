@@ -1,6 +1,6 @@
 {
   "name": "galleria",
-  "version": "1.5.50",
+  "version": "1.5.60",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",

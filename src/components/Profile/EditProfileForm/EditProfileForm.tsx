@@ -7,14 +7,10 @@ import style from "./editProfileForm.module.scss";
 import { inputFields } from "./inputFields";
 
 interface EditProfileFormProps {
-  profile: UpdateUserData;
   userId: string;
 }
 
-export default function EditProfileForm({
-  profile,
-  userId,
-}: EditProfileFormProps) {
+export default function EditProfileForm({ userId }: EditProfileFormProps) {
   const dispatch = useAppDispatch();
   const { userProfile } = useAppSelector((state) => state.userState);
   // const { address, dateOfBirth, first_name, last_name, username, bio } =
@@ -25,7 +21,6 @@ export default function EditProfileForm({
     dateOfBirth: userProfile.Profile?.dateOfBirth!,
     first_name: userProfile.first_name!,
     last_name: userProfile.last_name!,
-    username: userProfile.username!,
     bio: userProfile.Profile?.bio!,
   });
 
@@ -74,6 +69,7 @@ export default function EditProfileForm({
           rows={1}
           onChange={bioHandler}
           value={data.bio}
+          onFocus={bioHandler}
         ></textarea>
       </div>
 

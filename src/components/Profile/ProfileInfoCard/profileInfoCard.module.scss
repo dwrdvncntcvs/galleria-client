@@ -9,6 +9,11 @@
   justify-content: flex-start;
   align-items: flex-start;
 
+  .name {
+    font-size: 1.25rem;
+    color: $primary-color;
+  }
+
   .follow-btn {
     font-size: 0.8rem;
     border: 2px solid $secondary-color;
@@ -59,9 +64,19 @@
     gap: 5px;
 
     .details-txt {
+      @extend .flex-row;
       font-size: 12px;
       text-align: justify;
       color: $primary-color;
+      gap: 10px;
+
+      span {
+        font-size: 1rem;
+        font-weight: 800;
+        color: $dark-gray;
+        font-weight: 200;
+        margin-left: 5px;
+      }
     }
   }
 }

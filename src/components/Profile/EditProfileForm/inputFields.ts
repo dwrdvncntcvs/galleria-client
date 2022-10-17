@@ -20,13 +20,6 @@ export const inputFields = (
     changeValue,
   },
   {
-    label: "Username",
-    type: "text",
-    name: "username",
-    value: data.username,
-    changeValue,
-  },
-  {
     label: "Address",
     type: "text",
     name: "address",

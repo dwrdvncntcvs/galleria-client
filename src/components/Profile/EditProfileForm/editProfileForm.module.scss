@@ -14,7 +14,7 @@ form {
 
     label {
       font-size: 15px;
-      color: $primary-color;
+      color: gray;
     }
 
     input,
@@ -25,7 +25,8 @@ form {
       background-color: transparent;
       font-size: 0.8rem;
       max-height: 200px;
-      color: $primary-color;
+      color: $secondary-color;
+      font-weight: bold;
 
       &:focus {
         outline: 0px;

@@ -64,7 +64,6 @@ export interface FoundUsers {
 export interface UpdateUserData {
   first_name: string;
   last_name: string;
-  username: string;
   address: string;
   dateOfBirth: string | Date | null;
   bio: string;

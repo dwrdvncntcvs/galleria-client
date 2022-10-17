@@ -14,18 +14,13 @@ import {
 import { MiniProfile } from "../../components/Profile";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { MainPageLayout } from "../../layout";
-import {
-  AdjustedNavContainer,
-  Card,
-  ContentContainer,
-  MainPanel,
-  SidePanel,
-  StickyPanel,
-} from "../../UI";
+import { Card } from "../../UI";
 import style from "./postDetails.module.scss";
 
 export default function PostDetails() {
-  const { postState, commentState } = useAppSelector((state) => state);
+  const { postState, commentState, userState } = useAppSelector(
+    (state) => state
+  );
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -55,7 +50,11 @@ export default function PostDetails() {
     postState.post!;
 
   const goBack = () => {
-    navigate((location.state as { from: string }).from, {
+    const path = location.state
+      ? (location.state as { from: string }).from
+      : "/";
+
+    navigate(path, {
       state: { username: User.username },
     });
   };
@@ -65,9 +64,11 @@ export default function PostDetails() {
   ) : (
     <>
       <header className={style["post-header"]}>
-        <button onClick={goBack}>
-          <HiArrowLeft />
-        </button>
+        {userState.isAuth && (
+          <button onClick={goBack}>
+            <HiArrowLeft />
+          </button>
+        )}
         <h1>{User.first_name}'s Post</h1>
       </header>
       <Card>

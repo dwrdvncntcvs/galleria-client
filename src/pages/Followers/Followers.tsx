@@ -30,7 +30,7 @@ export default function Followers({ type }: FollowersProps) {
   return (
     <div className={style["main-container"]}>
       {userFollowers.followers.map((user) => (
-        <PeopleCard userProfile={user} type={type} key={user.id} />
+        <PeopleCard user={user} type={type} key={user.id} />
       ))}
       <EmptyPeopleMessage
         users={userFollowers.followers}

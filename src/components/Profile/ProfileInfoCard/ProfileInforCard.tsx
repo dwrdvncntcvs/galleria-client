@@ -2,7 +2,13 @@ import React from "react";
 import style from "./profileInfoCard.module.scss";
 import { UserProfile } from "../../../models/User";
 import { useNavigate } from "react-router-dom";
-import { HiUser } from "react-icons/hi";
+import {
+  HiCalendar,
+  HiInformationCircle,
+  HiLocationMarker,
+  HiPhone,
+  HiUser,
+} from "react-icons/hi";
 import { convertDateOfBirth } from "../../../utils/helper";
 
 interface ProfileInfoCardProps {
@@ -34,25 +40,33 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
 
   const details = [
     { content: profile.username, Icon: HiUser },
-    { content: convertDateOfBirth(profile.Profile?.dateOfBirth!) },
-    { content: profile.Profile?.address },
-    { content: profile.Profile?.bio },
+    {
+      content: convertDateOfBirth(profile.Profile?.dateOfBirth!),
+      Icon: HiCalendar,
+    },
+    { content: profile.Profile?.contactNumber, Icon: HiPhone },
+    { content: profile.Profile?.address, Icon: HiLocationMarker },
+    { content: profile.Profile?.bio, Icon: HiInformationCircle },
   ];
 
   return (
     <div className={style["profile-info"]}>
-      <div className={style["profile-body"]}>
-        <h4>
-          {profile.first_name}&nbsp;
-          {profile.last_name}
-        </h4>
-      </div>
+      <p className={style["name"]}>
+        {profile.first_name} {profile.last_name}
+      </p>
+
       <div className={style["details-container"]}>
-        {details.map(({ Icon, content }, i) => (
-          <p className={style["details-txt"]} key={i}>
-            {content}
-          </p>
-        ))}
+        {details.map(
+          ({ Icon, content }, i) =>
+            content?.length! > 0 && (
+              <p className={style["details-txt"]} key={i}>
+                <span>
+                  <Icon />
+                </span>{" "}
+                {content}
+              </p>
+            )
+        )}
       </div>
       <div className={style["follow-container"]}>
         {followButtons.map(({ action, count, spanText }, i) => (

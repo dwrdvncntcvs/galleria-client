@@ -2,21 +2,22 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { unfollowUser } from "../../../api/followerRequest";
 import { defaultAvatar } from "../../../assets/images";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { PeopleType } from "../../../models/GenericTypes";
 import { UserProfile } from "../../../models/User";
 import style from "./peopleCard.module.scss";
 
 interface PeopleCardProps {
-  userProfile: UserProfile;
+  user: UserProfile;
   type?: PeopleType;
 }
 
 export default function PeopleCard({
-  userProfile,
+  user,
   type = "followers",
 }: PeopleCardProps) {
+  const { userData, userProfile } = useAppSelector((state) => state.userState);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const privateAxiosInstance = usePrivateAxios();
@@ -30,32 +31,34 @@ export default function PeopleCard({
     e.stopPropagation();
 
     await dispatch(
-      unfollowUser({ username: userProfile.username!, privateAxiosInstance })
+      unfollowUser({ username: user.username!, privateAxiosInstance })
     );
   };
+
+  console.log(userData?.id === user.id);
 
   return (
     <div
       className={style["person-container"]}
-      onClick={goToProfile(userProfile.username!)}
+      onClick={goToProfile(user.username!)}
     >
       <div className={style["person-details"]}>
         <img
           src={
-            userProfile.Profile?.profileImage === ""
+            user.Profile?.profileImage === ""
               ? defaultAvatar
-              : userProfile.Profile?.profileImage
+              : user.Profile?.profileImage
           }
-          alt={`${userProfile.first_name}'s avatar`}
+          alt={`${user.first_name}'s avatar`}
         />
         <div>
           <p>
-            {userProfile.first_name} {userProfile.last_name}
+            {user.first_name} {user.last_name}
           </p>
-          <p>{userProfile.username}</p>
+          <p>{user.username}</p>
         </div>
       </div>
-      {type === "following" && (
+      {type === "following" && userData?.id! === userProfile?.id! && (
         <button onClick={unfollowAction}>Unfollow</button>
       )}
     </div>

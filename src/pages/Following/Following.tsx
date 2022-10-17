@@ -24,14 +24,15 @@ export default function Following({ type }: FollowingProps) {
     );
   }, []);
 
-  useEffect(() => {}, [userFollowing]);
-
   return (
     <div className={style["main-container"]}>
       {userFollowing.following.map((user) => (
-        <PeopleCard userProfile={user} type={type} key={user.id} />
+        <PeopleCard user={user} type={type} key={user.id} />
       ))}
-      <EmptyPeopleMessage users={userFollowing.following} message="Currently you doesn't follow anyone."/>
+      <EmptyPeopleMessage
+        users={userFollowing.following}
+        message="Currently you doesn't follow anyone."
+      />
     </div>
   );
 }
