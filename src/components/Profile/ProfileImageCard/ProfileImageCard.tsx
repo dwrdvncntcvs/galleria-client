@@ -14,7 +14,6 @@ export default function ProfileImageCard({
   isFollowing,
 }: ProfileImageCardProps) {
   const { userData } = useAppSelector((state) => state.userState);
-  console.log(isFollowing);
 
   return (
     <div className={style["profile-container"]}>

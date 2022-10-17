@@ -10,7 +10,7 @@ import { privateHttpService } from "../../services/httpService";
 import style from "./profileDetails.module.scss";
 
 export default function ProfileDetails() {
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(true);
   const { userState, postState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const params = useParams();
