@@ -9,6 +9,7 @@
 }
 
 .profile-link {
+  position: relative;
   border: 5px solid white;
   border-radius: 50%;
   display: inline-block;
@@ -22,7 +23,6 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-
   }
 }
 

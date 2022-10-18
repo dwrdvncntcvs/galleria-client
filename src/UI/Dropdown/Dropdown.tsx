@@ -3,19 +3,19 @@ import style from "./dropdown.module.scss";
 import { stopPropagation } from "../../utils/helper";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
 import { useAppDispatch } from "../../hooks/reduxHook";
-import { closeAllToggles, closeToggle } from "../../features/toggleSlice";
+import { closeToggle } from "../../features/toggleSlice";
 
 export default function Dropdown({ children }: PropsWithChildren) {
   const dispatch = useAppDispatch();
 
   const clickHandler = () => {
-    dispatch(closeAllToggles());
+    dispatch(closeToggle());
   };
 
   const ref = useOutsideClick(clickHandler);
 
   return (
-    <div ref={ref} className={style.dropdown} >
+    <div ref={ref} className={style.dropdown}>
       {children}
     </div>
   );

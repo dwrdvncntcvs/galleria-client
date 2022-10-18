@@ -6,6 +6,9 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { followUserRequest } from "../../../api/followerRequest";
 import { setModal } from "../../../features/modalSlice";
 import EditProfile from "../EditProfile/EditProfile";
+import { setToggle } from "../../../features/toggleSlice";
+import { Dropdown } from "../../../UI";
+import ImageAction from "../ImageAction/ImageAction";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -20,6 +23,7 @@ export default function ProfileImageCard({
 }: ProfileImageCardProps) {
   const { userData } = useAppSelector((state) => state.userState);
   const { name, status } = useAppSelector((state) => state.modalState);
+  const { toggleState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
   const buttonsArr = [
@@ -44,10 +48,21 @@ export default function ProfileImageCard({
     },
   ];
 
+  const toggleImageAction = (e: any) => {
+    e.stopPropagation();
+    dispatch(
+      setToggle({
+        name: toggleState.status ? "" : "imageAction",
+        status: !toggleState.status,
+      })
+    );
+  };
+
   return (
     <div className={style["profile-container"]}>
       <div className={style["profile-link"]}>
         <img
+          onClick={toggleImageAction}
           src={
             profile.Profile?.profileImage === ""
               ? defaultAvatar
@@ -55,6 +70,9 @@ export default function ProfileImageCard({
           }
           alt={`${profile.first_name}'s avatar'`}
         />
+        {toggleState.name === "imageAction" && toggleState.status && (
+          <ImageAction />
+        )}
       </div>
       {buttonsArr.map(
         ({ action, condition, label }, i) =>

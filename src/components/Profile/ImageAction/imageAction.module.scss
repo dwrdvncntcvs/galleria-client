@@ -1,0 +1,17 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.image-action {
+  @extend .flex-column;
+  width: 100px;
+  button {
+    padding: 5px 20px;
+    background-color: white;
+    border: none;
+    transition: all ease 0.2s;
+
+    &:hover {
+      background-color: rgb(230, 230, 230);
+    }
+  }
+}
