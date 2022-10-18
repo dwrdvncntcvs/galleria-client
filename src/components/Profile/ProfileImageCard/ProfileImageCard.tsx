@@ -7,8 +7,8 @@ import { followUserRequest } from "../../../api/followerRequest";
 import { setModal } from "../../../features/modalSlice";
 import EditProfile from "../EditProfile/EditProfile";
 import { setToggle } from "../../../features/toggleSlice";
-import { Dropdown } from "../../../UI";
 import ImageAction from "../ImageAction/ImageAction";
+import { useCheckToggle } from "../../../hooks/toggleHooks";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -25,6 +25,7 @@ export default function ProfileImageCard({
   const { name, status } = useAppSelector((state) => state.modalState);
   const { toggleState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const checkIfToggled = useCheckToggle();
 
   const buttonsArr = [
     {
@@ -70,9 +71,7 @@ export default function ProfileImageCard({
           }
           alt={`${profile.first_name}'s avatar'`}
         />
-        {toggleState.name === "imageAction" && toggleState.status && (
-          <ImageAction />
-        )}
+        {checkIfToggled("imageAction") && <ImageAction />}
       </div>
       {buttonsArr.map(
         ({ action, condition, label }, i) =>
