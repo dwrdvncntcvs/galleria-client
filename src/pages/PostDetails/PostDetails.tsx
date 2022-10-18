@@ -12,6 +12,7 @@ import {
   PreviewPostImage,
 } from "../../components/Post";
 import { MiniProfile } from "../../components/Profile";
+import { setToggle } from "../../features/toggleSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { MainPageLayout } from "../../layout";
 import { Card } from "../../UI";
