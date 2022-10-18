@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserProfile } from "../../../models/User";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { signOutRequest } from "../../../api/userRequest";
-import { closeToggle } from "../../../features/toggleSlice";
+import { closeAllToggles } from "../../../features/toggleSlice";
 import { resetPostState } from "../../../features/postSlice";
 import { resetUserState } from "../../../features/userSlice";
 import { IconType } from "react-icons/lib";
@@ -30,21 +30,21 @@ export default function NavDropdown({ user }: NavDropdownProps) {
       Icon: HiUser,
       name: "Profile",
       action: async () => {
-        dispatch(closeToggle());
+        dispatch(closeAllToggles());
         navigate(`/${user.username}`, { replace: true });
       },
     },
     {
       Icon: HiCog,
       action: () => {
-        dispatch(closeToggle());
+        dispatch(closeAllToggles());
         navigate("/settings");
       },
       name: "Settings",
     },
     {
       action: async () => {
-        dispatch(closeToggle());
+        dispatch(closeAllToggles());
         const res = await dispatch(signOutRequest());
 
         if (res.meta.requestStatus === "fulfilled") {

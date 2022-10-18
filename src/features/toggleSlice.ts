@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ToggleState {
-  status: boolean;
-  name: string;
+  queue: { name: string; status: boolean }[];
 }
 
 const initialState: ToggleState = {
-  status: false,
-  name: "",
+  queue: [],
 };
 
 const toggleSlice = createSlice({
@@ -17,17 +15,26 @@ const toggleSlice = createSlice({
     setToggle: (state, action) => {
       return {
         ...state,
-        status: action.payload.status,
-        name: action.payload.name,
+        queue: [
+          { name: action.payload.name, status: action.payload.status },
+          ...state.queue,
+        ],
       };
     },
-    closeToggle: () => ({
-      status: false,
-      name: "",
-    }),
+    closeToggle: (state, action) => {
+      return {
+        ...state,
+        queue: state.queue.filter(
+          ({ name, status }) => name !== action.payload
+        ),
+      };
+    },
+    closeAllToggles: () => {
+      return initialState;
+    },
   },
 });
 
-export const { closeToggle, setToggle } = toggleSlice.actions;
+export const { closeToggle, setToggle, closeAllToggles } = toggleSlice.actions;
 
 export default toggleSlice.reducer;

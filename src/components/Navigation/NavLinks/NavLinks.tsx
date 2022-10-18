@@ -5,11 +5,12 @@ import { HiOutlineHome, HiHome, HiPlus, HiUser } from "react-icons/hi";
 import style from "./navLinks.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
-import { setToggle } from "../../../features/toggleSlice";
+import { closeToggle, setToggle } from "../../../features/toggleSlice";
 import { defaultAvatar } from "../../../assets/images";
 import { resetPostState } from "../../../features/postSlice";
 import { RoundedAvatar } from "../../global";
 import { NavDropdown } from "..";
+import { useCheckToggle } from "../../../hooks/toggleHooks";
 
 interface NavLinksProps {
   user: UserProfile;
@@ -20,6 +21,7 @@ export default function NavLinks({ user }: NavLinksProps) {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const checkIfToggled = useCheckToggle();
 
   const activeURL = (endpoint: string) => {
     return endpoint === location.pathname ? true : false;
@@ -53,13 +55,15 @@ export default function NavLinks({ user }: NavLinksProps) {
       },
       hasImage: true,
       isDropdown: true,
-      action: () =>
-        dispatch(
-          setToggle({
-            status: toggleState.status ? false : true,
-            name: "createNavDropdown",
-          })
-        ),
+      action: () => {
+        if (!checkIfToggled("createNavDropdown")) {
+          console.log("Toggling");
+          dispatch(setToggle({ name: "createNavDropdown", status: true }));
+        } else {
+          console.log("Closing");
+          dispatch(closeToggle("createNavDropdown"));
+        }
+      },
     },
   ];
 
@@ -74,9 +78,9 @@ export default function NavLinks({ user }: NavLinksProps) {
               <Icon size={18} />
             )}
           </button>
-          {toggleState.status &&
-            toggleState.name === "createNavDropdown" &&
-            isDropdown && <NavDropdown user={user!} />}
+          {checkIfToggled("createNavDropdown") && isDropdown && (
+            <NavDropdown user={user!} />
+          )}
         </Fragment>
       ))}
     </nav>

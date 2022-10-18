@@ -5,15 +5,16 @@ export const useOutsideClick = (callback: () => void) => {
 
   useEffect(() => {
     const handleClick = (event: any) => {
+      event.stopPropagation();
       if (ref.current && !ref.current.contains(event.target)) {
         callback();
       }
     };
 
-    document.addEventListener("click", handleClick, true);
+    document.addEventListener("click", handleClick);
 
     return () => {
-      document.removeEventListener("click", handleClick, true);
+      document.removeEventListener("click", handleClick);
     };
   }, [ref]);
 
