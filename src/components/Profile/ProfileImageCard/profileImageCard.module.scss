@@ -17,12 +17,19 @@
   width: 100px;
   height: 100px;
   vertical-align: bottom;
+  background-color: black;
+  cursor: pointer;
 
   img {
     border-radius: 50%;
     height: 100%;
     width: 100%;
     object-fit: cover;
+    transition: all ease 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 
