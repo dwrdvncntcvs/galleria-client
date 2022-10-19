@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../../hooks/reduxHook";
 import { deletePostRequest } from "../../../api/postRequest";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setModal } from "../../../features/modalSlice";
+import { modalName } from "../../../variables";
 
 interface PostActionDropdownProps {
   postId: string;
@@ -27,7 +28,11 @@ export default function PostActionDropdown({
         onClose();
         console.log("Editing Post: ", postId);
         dispatch(
-          setModal({ name: "editPostModal", status: true, props: { postId } })
+          setModal({
+            name: modalName.EDIT_POST_MODAL,
+            status: true,
+            props: { postId },
+          })
         );
       },
     },

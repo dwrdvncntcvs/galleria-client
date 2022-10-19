@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../../UI/Card/Card";
 import CreatePostModal from "../CreatePostModal/CreatePostModal";
 import { useImageSrc } from "../../../hooks/imageHooks";
+import { modalName } from "../../../variables";
+import { useActiveModal } from "../../../hooks/modalHooks";
 
 interface CreatePostProps {
   userId: string;
@@ -26,6 +28,7 @@ export default function CreatePost({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const imageSrc = useImageSrc();
+  const checkIfModalActive = useActiveModal();
 
   const goToProfile = () => {
     console.log("Going to profile");
@@ -45,12 +48,14 @@ export default function CreatePost({
         <button
           className={style["text-input"]}
           onClick={() =>
-            dispatch(setModal({ status: true, name: "createPostModal" }))
+            dispatch(
+              setModal({ status: true, name: modalName.CREATE_POST_MODAL })
+            )
           }
         >
           <p>What's on your mind, {firstName}?</p>
         </button>
-        {status && name === "createPostModal" && <CreatePostModal />}
+        {checkIfModalActive(modalName.CREATE_POST_MODAL) && <CreatePostModal />}
       </div>
     </Card>
   );

@@ -3,10 +3,9 @@ import { HiEye, HiPencilAlt } from "react-icons/hi";
 import { IconType } from "react-icons/lib";
 import { setModal } from "../../../features/modalSlice";
 import { closeToggle } from "../../../features/toggleSlice";
-import { useActiveModal } from "../../../hooks/modalHooks";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { Dropdown } from "../../../UI";
-import { ViewImage } from "../../Images";
+import { modalName } from "../../../variables";
 import style from "./imageAction.module.scss";
 
 type ImageActionButtons = {
@@ -30,7 +29,7 @@ export default function ImageAction({ imageSrc }: ImageActionProps) {
         dispatch(
           setModal({
             status: true,
-            name: "viewImageProfileModal",
+            name: modalName.VIEW_PROFILE_IMAGE_MODAL,
             props: { imageSrc },
           })
         );
@@ -41,7 +40,13 @@ export default function ImageAction({ imageSrc }: ImageActionProps) {
       Icon: HiPencilAlt,
       label: "Update",
       action: () => {
-        console.log("Update");
+        dispatch(
+          setModal({
+            status: true,
+            name: modalName.UPDATE_PROFILE_IMAGE_MODAL,
+            props: { imageSrc },
+          })
+        );
         dispatch(closeToggle());
       },
     },

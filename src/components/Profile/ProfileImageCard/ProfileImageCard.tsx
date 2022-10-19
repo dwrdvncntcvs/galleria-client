@@ -9,8 +9,9 @@ import { setToggle } from "../../../features/toggleSlice";
 import ImageAction from "../ImageAction/ImageAction";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
 import { useActiveModal } from "../../../hooks/modalHooks";
-import { ViewImage } from "../../Images";
+import { UpdateProfileImage, ViewImage } from "../../Images";
 import { useImageSrc } from "../../../hooks/imageHooks";
+import { modalName } from "../../../variables";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -44,7 +45,7 @@ export default function ProfileImageCard({
       action: () =>
         dispatch(
           setModal({
-            name: "updateProfileModal",
+            name: modalName.UPDATE_PROFILE_MODAL,
             status: true,
             props: { userId: profile.id },
           })
@@ -82,8 +83,11 @@ export default function ProfileImageCard({
             </button>
           )
       )}
-      {checkIfModalActive("updateProfileModal") && <EditProfile />}
-      {checkIfModalActive("viewImageProfileModal") && <ViewImage />}
+      {checkIfModalActive(modalName.UPDATE_PROFILE_MODAL) && <EditProfile />}
+      {checkIfModalActive(modalName.VIEW_PROFILE_IMAGE_MODAL) && <ViewImage />}
+      {checkIfModalActive(modalName.UPDATE_PROFILE_IMAGE_MODAL) && (
+        <UpdateProfileImage />
+      )}
     </div>
   );
 }

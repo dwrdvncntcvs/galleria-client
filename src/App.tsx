@@ -20,9 +20,11 @@ import {
 } from "./pages";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import { Persistent, RequiredAuth } from "./routes";
+import { useActiveModal } from "./hooks/modalHooks";
+import { modalName } from "./variables";
 
 function App() {
-  const { status, name } = useAppSelector((state) => state.modalState);
+  const checkIfModalActive = useActiveModal();
 
   return (
     <MainContainer>
@@ -60,7 +62,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      {status && name === "editPostModal" && <EditPostModal />}
+      {checkIfModalActive(modalName.EDIT_POST_MODAL) && <EditPostModal />}
     </MainContainer>
   );
 }

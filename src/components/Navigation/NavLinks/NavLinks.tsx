@@ -11,6 +11,7 @@ import { RoundedAvatar } from "../../global";
 import { NavDropdown } from "..";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
 import { useImageSrc } from "../../../hooks/imageHooks";
+import { modalName } from "../../../variables";
 
 interface NavLinksProps {
   user: UserProfile;
@@ -34,7 +35,7 @@ export default function NavLinks({ user }: NavLinksProps) {
       hasImage: false,
       isDropdown: false,
       action: () =>
-        dispatch(setModal({ status: true, name: "createPostModal" })),
+        dispatch(setModal({ status: true, name: modalName.CREATE_POST_MODAL })),
     },
     {
       Icon: activeURL("/home") ? HiHome : HiOutlineHome,
@@ -57,7 +58,7 @@ export default function NavLinks({ user }: NavLinksProps) {
         dispatch(
           setToggle({
             status: !toggleState.status,
-            name: toggleState.status ? "" : "createNavDropdown",
+            name: toggleState.status ? "" : modalName.CREATE_POST_MODAL,
           })
         ),
     },
@@ -74,7 +75,7 @@ export default function NavLinks({ user }: NavLinksProps) {
               <Icon size={18} />
             )}
           </button>
-          {checkIfToggled("createNavDropdown") && isDropdown && (
+          {checkIfToggled(modalName.CREATE_POST_MODAL) && isDropdown && (
             <NavDropdown user={user!} />
           )}
         </Fragment>
