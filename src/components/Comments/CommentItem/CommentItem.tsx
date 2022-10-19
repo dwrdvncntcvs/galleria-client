@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { defaultAvatar } from "../../../assets/images";
+import { useImageSrc } from "../../../hooks/imageHooks";
 import { Comment } from "../../../models/Comments";
 import { convertDate } from "../../../utils/helper";
 import { RoundedAvatar } from "../../global";
@@ -13,6 +14,7 @@ interface CommentItemProps {
 export default function CommentItem({ comment }: CommentItemProps) {
   const { text, imageUrl, postId, createdAt, User, id } = comment;
   const navigate = useNavigate();
+  const imageSrc = useImageSrc();
 
   const goToProfile = () => {
     navigate(`/${User.username}`);
@@ -22,11 +24,7 @@ export default function CommentItem({ comment }: CommentItemProps) {
     <div className={style.comment}>
       <div className={style.header}>
         <RoundedAvatar
-          src={
-            User.Profile?.profileImage! !== ""
-              ? User.Profile?.profileImage!
-              : defaultAvatar
-          }
+          src={imageSrc(User.Profile?.profileImage!)}
           alt={`${User.first_name}'s avatar`}
           onClickAction={goToProfile}
         />

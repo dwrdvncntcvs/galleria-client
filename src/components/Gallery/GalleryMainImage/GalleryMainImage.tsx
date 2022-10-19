@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Image } from "../../../models/ImageGallery";
 import style from "./galleryMainImage.module.scss";
 import { SideImages, MainImageNavigator, MainImage } from "..";
-import { canRequest } from "../../../utils/helper";
+import { useImageNavigate } from "../../../hooks/imageHooks";
 interface GalleryMainImageProps {
   images: Image[];
   request: ({ page }: { page: number }) => void;
@@ -20,40 +20,21 @@ export default function GalleryMainImage({
   numberOfItems,
   limit,
 }: GalleryMainImageProps) {
-  const [previewImage, setPreviewImage] = useState<Image>(images[0]);
-  const [leftList, setLeftList] = useState<Image[]>([]);
-  const [rightList, setRightList] = useState<Image[]>([]);
+  const [previewImage, leftImages, rightImages] = useImageNavigate(
+    images,
+    limit,
+    page,
+    numberOfItems,
+    request
+  );
+  const { leftList, navigateLeft } = leftImages;
+  const { navigateRight, rightList } = rightImages;
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    setRightList((prev) => [
-      ...images.filter((image) => image.id !== previewImage.id),
-    ]);
-  }, [images]);
-
   const viewPostAction = (postId: string) => () => {
     navigate(`/post/${postId}`, { state: { from: location.pathname } });
-  };
-
-  const navigateLeft = () => {
-    const previousElement = leftList[leftList.length - 1];
-    setLeftList((prev) =>
-      prev.filter((image) => image.id !== previousElement.id)
-    );
-    setPreviewImage(previousElement);
-    setRightList((prev) => [previewImage, ...prev]);
-  };
-
-  const navigateRight = () => {
-    if (!canRequest(limit, page, numberOfItems))
-      if (rightList.length === 2) request({ page: page + 1 });
-
-    const nextElement = rightList[0];
-    setRightList((prev) => prev.filter((image) => image.id !== nextElement.id));
-    setPreviewImage(nextElement);
-    setLeftList((prev) => [...prev, previewImage]);
   };
 
   return (
