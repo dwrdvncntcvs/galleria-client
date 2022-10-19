@@ -5,8 +5,12 @@
   @extend .flex-column;
   width: 100px;
   button {
-    padding: 5px 20px;
+    @extend .flex-row;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
     background-color: white;
+    color: $primary-color;
     border: none;
     transition: all ease 0.2s;
 
