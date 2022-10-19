@@ -9,6 +9,7 @@ import EditProfile from "../EditProfile/EditProfile";
 import { setToggle } from "../../../features/toggleSlice";
 import ImageAction from "../ImageAction/ImageAction";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
+import { useActiveModal } from "../../../hooks/modalHooks";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -22,10 +23,10 @@ export default function ProfileImageCard({
   username,
 }: ProfileImageCardProps) {
   const { userData } = useAppSelector((state) => state.userState);
-  const { name, status } = useAppSelector((state) => state.modalState);
   const { toggleState } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const checkIfToggled = useCheckToggle();
+  const checkIfModalActive = useActiveModal();
 
   const buttonsArr = [
     {
@@ -81,7 +82,7 @@ export default function ProfileImageCard({
             </button>
           )
       )}
-      {name === "updateProfileModal" && status && <EditProfile />}
+      {checkIfModalActive("updateProfileModal") && <EditProfile />}
     </div>
   );
 }

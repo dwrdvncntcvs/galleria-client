@@ -1,12 +1,12 @@
 import React from "react";
-import { useAppSelector } from "../../../hooks/reduxHook";
 import { ModalOverlay } from "../../../UI";
 import { CloseModalButton } from "../../global";
 import { EditProfileForm } from "..";
 import style from "./editProfile.module.scss";
+import { useModalProps } from "../../../hooks/modalHooks";
 
 export default function EditProfile() {
-  const { props } = useAppSelector((state) => state.modalState);
+  const props = useModalProps();
 
   return (
     <ModalOverlay hasBackButton={true} backButtonComponent={CloseModalButton}>

@@ -1,7 +1,11 @@
 import React from "react";
 import { HiEye, HiPencilAlt } from "react-icons/hi";
 import { IconType } from "react-icons/lib";
+import { setModal } from "../../../features/modalSlice";
+import { useActiveModal } from "../../../hooks/modalHooks";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import { Dropdown } from "../../../UI";
+import { ViewImage } from "../../Images";
 import style from "./imageAction.module.scss";
 
 type ImageActionButtons = {
@@ -11,12 +15,17 @@ type ImageActionButtons = {
 };
 
 export default function ImageAction() {
+  const dispatch = useAppDispatch();
+  const checkIfModalActive = useActiveModal();
+
   const buttons: ImageActionButtons[] = [
     {
       Icon: HiEye,
       label: "View",
       action: () => {
-        console.log("View");
+        dispatch(
+          setModal({ status: true, name: "viewImageProfileModal", props: {} })
+        );
       },
     },
     {
@@ -38,6 +47,7 @@ export default function ImageAction() {
           </button>
         ))}
       </div>
+      {checkIfModalActive("viewImageProfileModal") && <ViewImage />}
     </Dropdown>
   );
 }
