@@ -2,6 +2,7 @@ import { defaultAvatar } from "../assets/images";
 import { Image } from "../models/ImageGallery";
 import { canRequest } from "../utils/helper";
 import { useState, useEffect } from "react";
+import { ImageService } from "../services/imageServices";
 
 type LeftImages = { leftList: Image[]; navigateLeft: () => void };
 
@@ -59,4 +60,27 @@ export const useImageNavigate = (
   ] = [previewImage, leftImages, rightImages];
 
   return imagesInfo;
+};
+
+export const useImageUrl = (imageBlob: Blob) => {
+  const [imageUrl, setImageUrl] = useState("");
+
+  if (!imageBlob) return "";
+
+  if (imageBlob) {
+    const fileReader = new FileReader();
+
+    fileReader.onerror = () => {
+      fileReader.abort();
+    };
+
+    fileReader.readAsDataURL(imageBlob);
+    fileReader.addEventListener("load", (e) => {
+      const viewedFile = e.target?.result;
+      const fileData = viewedFile!;
+      setImageUrl(fileData as string);
+    });
+  }
+
+  return imageUrl;
 };

@@ -1,0 +1,75 @@
+@import "../../../index.scss";
+@import "../../../variables.scss";
+
+.update-profile-image {
+  @extend .flex-column;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  gap: 20px;
+  position: relative;
+
+  p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  #save {
+    background-color: $primary-color;
+    border-radius: 5px;
+    padding: 5px 20px;
+    border: none;
+    color: white;
+    transition: all ease 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .display-image {
+    position: relative;
+    align-self: center;
+
+    .image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    #add {
+      @extend .flex-column;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      border: none;
+      color: $primary-color;
+      transition: all ease 0.2s;
+      background-color: white;
+      border: 2px solid $primary-color;
+    }
+
+    #remove {
+      @extend .flex-column;
+      color: white;
+      font-size: 15px;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      right: 0px;
+      top: 25px;
+      border: none;
+      border-radius: 50%;
+      background-color: $error-color;
+      transition: all ease 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

@@ -186,9 +186,9 @@ const genFormData = (body: PostData) => {
   formData.append("content", body.content);
   if (body.imagePost.length > 1)
     body.imagePost.forEach((imagePost) => {
-      formData.append("image_post", imagePost.value);
+      formData.append("image_post", imagePost.value!);
     });
-  else formData.append("image_post", body.imagePost[0].value);
+  else formData.append("image_post", body.imagePost[0].value!);
 
   return formData;
 };

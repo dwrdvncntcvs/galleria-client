@@ -51,7 +51,7 @@ export interface ImageData {
 }
 
 export interface ImageBlob {
-  value: Blob;
+  value: Blob | null;
   id: string;
 }
 
