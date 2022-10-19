@@ -1,13 +1,18 @@
 import React, { ChangeEvent, useState, useRef } from "react";
 import { HiPlus, HiTrash } from "react-icons/hi";
 import { v4 } from "uuid";
+import { updateUserAvatar } from "../../../api/userRequest";
+import { closeModal } from "../../../features/modalSlice";
 import { useImageUrl } from "../../../hooks/imageHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { ImageBlob } from "../../../models/Post";
 import { Card, ModalOverlay } from "../../../UI";
 import { CloseModalButton } from "../../global";
 import style from "./updateProfileImage.module.scss";
 
 export default function UpdateProfileImage() {
+  const { userData } = useAppSelector((state) => state.userState);
+  const dispatch = useAppDispatch();
   const [imageBlob, setImageBlob] = useState<ImageBlob>({
     id: "",
     value: null,
@@ -22,8 +27,16 @@ export default function UpdateProfileImage() {
   const addImage = () => buttonRef.current?.click();
   const removeImage = () => setImageBlob((prev) => ({ id: "", value: null }));
 
-  const updateImageAction = () => {
+  const updateImageAction = async () => {
     console.log("Image Blob: ", imageBlob);
+    const { meta } = await dispatch(
+      updateUserAvatar({ imageData: imageBlob.value!, userId: userData?.id! })
+    );
+
+    if (meta.requestStatus === "fulfilled") {
+      dispatch(closeModal());
+      window.location.reload();
+    }
   };
 
   return (

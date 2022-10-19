@@ -19,3 +19,21 @@ export class ImageService {
     });
   };
 }
+
+export const getImageData = (imageFile: Blob) => {
+  const fileReader = new FileReader();
+
+  return new Promise<string | ArrayBuffer>((resolve, reject) => {
+    fileReader.onerror = () => {
+      fileReader.abort();
+      reject(new Error("Error loading image file"));
+    };
+
+    fileReader.readAsDataURL(imageFile);
+    fileReader.addEventListener("load", (e) => {
+      const viewedFile = e.target?.result;
+      const fileData = viewedFile!;
+      resolve(fileData);
+    });
+  });
+};

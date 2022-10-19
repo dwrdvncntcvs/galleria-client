@@ -9,6 +9,7 @@ import {
   UserState,
 } from "../models/User";
 import { httpService, privateHttpService } from "../services/httpService";
+import { getImageData } from "../services/imageServices";
 
 export const userSignIn = createAsyncThunk(
   "user/signIn",
@@ -131,6 +132,30 @@ export const updateUserProfile = createAsyncThunk(
       return { responseData, data: JSON.stringify(data) };
     } catch (err: any) {
       rejectWithValue(err.response.data.msg);
+    }
+  }
+);
+
+export const updateUserAvatar = createAsyncThunk(
+  "user/updateUserAvatar",
+  async (
+    { imageData, userId }: { imageData: Blob; userId: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const formData = new FormData();
+      formData.append("avatar", imageData);
+
+      const responseData = await privateHttpService(privateInstance).post(
+        `/avatar/${userId}`,
+        formData
+      );
+
+      const imageUrl = await getImageData(imageData);
+
+      return { responseData, imageUrl };
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.msg);
     }
   }
 );

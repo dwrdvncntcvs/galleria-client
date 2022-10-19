@@ -51,8 +51,6 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
     { content: convertDateOfBirth(profile?.createdAt!), Icon: HiCalendar },
   ];
 
-  console.log(convertDateOfBirth(profile?.createdAt!));
-
   return (
     <div className={style["profile-info"]}>
       <p className={style["name"]}>
