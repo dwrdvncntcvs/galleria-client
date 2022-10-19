@@ -3,6 +3,7 @@ import style from "./profileInfoCard.module.scss";
 import { UserProfile } from "../../../models/User";
 import { useNavigate } from "react-router-dom";
 import {
+  HiCake,
   HiCalendar,
   HiInformationCircle,
   HiLocationMarker,
@@ -43,11 +44,14 @@ export default function ProfileInfoCard({ profile }: ProfileInfoCardProps) {
     { content: `@${profile.username}`, Icon: HiUser },
     {
       content: convertDateOfBirth(profile.Profile?.dateOfBirth!),
-      Icon: HiCalendar,
+      Icon: HiCake,
     },
     { content: profile.Profile?.contactNumber, Icon: HiPhone },
     { content: profile.Profile?.address, Icon: HiLocationMarker },
+    { content: convertDateOfBirth(profile?.createdAt!), Icon: HiCalendar },
   ];
+
+  console.log(convertDateOfBirth(profile?.createdAt!));
 
   return (
     <div className={style["profile-info"]}>
