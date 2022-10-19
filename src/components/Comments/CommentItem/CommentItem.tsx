@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { defaultAvatar } from "../../../assets/images";
 import { useImageSrc } from "../../../hooks/imageHooks";
 import { Comment } from "../../../models/Comments";
 import { convertDate } from "../../../utils/helper";

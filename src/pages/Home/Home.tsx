@@ -2,6 +2,7 @@ import React from "react";
 import { getAllPosts } from "../../api/postRequest";
 import { InfiniteScroll, SuggestPeople } from "../../components/global";
 import { CreatePost, Posts } from "../../components/Post";
+import { useImageSrc } from "../../hooks/imageHooks";
 import { useAppSelector } from "../../hooks/reduxHook";
 import { MainPageLayout } from "../../layout";
 import style from "./home.module.scss";

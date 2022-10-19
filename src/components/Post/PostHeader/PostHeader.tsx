@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { defaultAvatar } from "../../../assets/images";
 import { UserProfile } from "../../../models/User";
 import { convertDate } from "../../../utils/helper";
 import { HiDotsHorizontal } from "react-icons/hi";
 import style from "./postHeader.module.scss";
 import { useAppSelector } from "../../../hooks/reduxHook";
 import { PostActionDropDown } from "..";
+import { useImageSrc } from "../../../hooks/imageHooks";
 
 interface PostHeaderProps {
   user: UserProfile;
@@ -22,6 +22,7 @@ export default function PostHeader({
   const { userState } = useAppSelector((state) => state);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
+  const imageSrc = useImageSrc();
 
   const goToProfile = () => {
     navigate(`/${user.username}`);
@@ -40,11 +41,7 @@ export default function PostHeader({
       <div className={style["details"]}>
         <img
           className={style["post-image"]}
-          src={
-            user.Profile?.profileImage! !== ""
-              ? user.Profile?.profileImage!
-              : defaultAvatar
-          }
+          src={imageSrc(user.Profile?.profileImage!)}
           alt={`${user.first_name}'s avatar`}
           onClick={goToProfile}
         />

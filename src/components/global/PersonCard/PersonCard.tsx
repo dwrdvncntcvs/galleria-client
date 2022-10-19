@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { followUserRequest } from "../../../api/followerRequest";
-import { defaultAvatar } from "../../../assets/images";
+import { useImageSrc } from "../../../hooks/imageHooks";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserProfile } from "../../../models/User";
 import style from "./personCard.module.scss";
@@ -13,6 +13,7 @@ interface PersonCardProps {
 export default function PersonCard({ user }: PersonCardProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const imageSrc = useImageSrc();
 
   const goToUserProfile = (e: any) => {
     e.stopPropagation();
@@ -29,11 +30,7 @@ export default function PersonCard({ user }: PersonCardProps) {
     <div className={style.person} onClick={goToUserProfile}>
       <div className={style.profile}>
         <img
-          src={
-            user.Profile?.profileImage !== ""
-              ? user.Profile?.profileImage
-              : defaultAvatar
-          }
+          src={imageSrc(user.Profile?.profileImage!)}
           alt={`${user.first_name}'s avatar`}
         />
         <p>

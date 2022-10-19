@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { defaultAvatar } from "../../../assets/images";
 import { Card } from "../../../UI";
 import { UserProfile } from "../../../models/User";
 import { RoundedAvatar } from "../../global";
 import style from "./miniProfile.module.scss";
+import { useImageSrc } from "../../../hooks/imageHooks";
 
 interface MiniProfileProps {
   profile: UserProfile;
@@ -12,6 +12,7 @@ interface MiniProfileProps {
 
 export default function MiniProfile({ profile }: MiniProfileProps) {
   const navigate = useNavigate();
+  const imageSrc = useImageSrc();
 
   const { first_name, last_name, username, Profile } = profile;
 
@@ -25,11 +26,7 @@ export default function MiniProfile({ profile }: MiniProfileProps) {
         <h1>Relevant Profile</h1>
         <div className={style["profile-header"]}>
           <RoundedAvatar
-            src={
-              Profile?.profileImage !== ""
-                ? Profile?.profileImage!
-                : defaultAvatar
-            }
+            src={imageSrc(Profile?.profileImage!)}
             alt={`${first_name}'s avatar`}
             onClickAction={navigateToProfile}
           />

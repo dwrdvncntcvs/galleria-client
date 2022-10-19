@@ -1,5 +1,5 @@
 import React from "react";
-import { defaultAvatar } from "../../../assets/images";
+import { useImageSrc } from "../../../hooks/imageHooks";
 import { UserProfile } from "../../../models/User";
 import style from "./personResult.module.scss";
 
@@ -20,12 +20,12 @@ export default function PersonResult({
   userData,
   onNavigateUser,
 }: PersonalResult) {
+  const imageSrc = useImageSrc();
+
   return (
     <button className={style["person"]} onClick={onNavigateUser(username!)}>
       <img
-        src={
-          Profile?.profileImage !== "" ? Profile?.profileImage : defaultAvatar
-        }
+        src={imageSrc(Profile?.profileImage!)}
         alt={`${first_name} ${last_name}`}
       />
       <div className={style["profile-details"]}>

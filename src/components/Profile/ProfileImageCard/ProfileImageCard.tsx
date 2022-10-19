@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./profileImageCard.module.scss";
 import { UserProfile } from "../../../models/User";
-import { defaultAvatar } from "../../../assets/images";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { followUserRequest } from "../../../api/followerRequest";
 import { setModal } from "../../../features/modalSlice";
@@ -11,6 +10,7 @@ import ImageAction from "../ImageAction/ImageAction";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
 import { useActiveModal } from "../../../hooks/modalHooks";
 import { ViewImage } from "../../Images";
+import { useImageSrc } from "../../../hooks/imageHooks";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -28,6 +28,7 @@ export default function ProfileImageCard({
   const dispatch = useAppDispatch();
   const checkIfToggled = useCheckToggle();
   const checkIfModalActive = useActiveModal();
+  const imageSrc = useImageSrc();
 
   const buttonsArr = [
     {
@@ -61,20 +62,17 @@ export default function ProfileImageCard({
     );
   };
 
-  const imageSrc =
-    profile.Profile?.profileImage === ""
-      ? defaultAvatar
-      : profile.Profile?.profileImage;
-
   return (
     <div className={style["profile-container"]}>
       <div className={style["profile-link"]}>
         <img
           onClick={toggleImageAction}
-          src={imageSrc}
+          src={imageSrc(profile.Profile?.profileImage!)}
           alt={`${profile.first_name}'s avatar'`}
         />
-        {checkIfToggled("imageAction") && <ImageAction imageSrc={imageSrc!} />}
+        {checkIfToggled("imageAction") && (
+          <ImageAction imageSrc={imageSrc(profile.Profile?.profileImage!)} />
+        )}
       </div>
       {buttonsArr.map(
         ({ action, condition, label }, i) =>

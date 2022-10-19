@@ -2,11 +2,11 @@ import React from "react";
 import style from "./createPost.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
-import { defaultAvatar } from "../../../assets/images";
 import { RoundedAvatar } from "../../global";
 import { useNavigate } from "react-router-dom";
 import Card from "../../../UI/Card/Card";
 import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import { useImageSrc } from "../../../hooks/imageHooks";
 
 interface CreatePostProps {
   userId: string;
@@ -25,6 +25,7 @@ export default function CreatePost({
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const imageSrc = useImageSrc();
 
   const goToProfile = () => {
     console.log("Going to profile");
@@ -36,7 +37,7 @@ export default function CreatePost({
       <div className={style["create-post"]}>
         <div className={style.avatar}>
           <RoundedAvatar
-            src={imageUrl === "" ? defaultAvatar : imageUrl}
+            src={imageSrc(imageUrl)}
             alt={`${firstName}'s avatar`}
             onClickAction={goToProfile}
           />

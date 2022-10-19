@@ -6,11 +6,11 @@ import style from "./navLinks.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { setModal } from "../../../features/modalSlice";
 import { setToggle } from "../../../features/toggleSlice";
-import { defaultAvatar } from "../../../assets/images";
 import { resetPostState } from "../../../features/postSlice";
 import { RoundedAvatar } from "../../global";
 import { NavDropdown } from "..";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
+import { useImageSrc } from "../../../hooks/imageHooks";
 
 interface NavLinksProps {
   user: UserProfile;
@@ -22,6 +22,7 @@ export default function NavLinks({ user }: NavLinksProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const checkIfToggled = useCheckToggle();
+  const imageSrc = useImageSrc();
 
   const activeURL = (endpoint: string) => {
     return endpoint === location.pathname ? true : false;
@@ -47,10 +48,7 @@ export default function NavLinks({ user }: NavLinksProps) {
     {
       Icon: HiUser,
       image: {
-        src:
-          user.Profile?.profileImage !== ""
-            ? user.Profile?.profileImage
-            : defaultAvatar,
+        src: imageSrc(user.Profile?.profileImage!),
         alt: `${user.first_name}'s avatar`,
       },
       hasImage: true,

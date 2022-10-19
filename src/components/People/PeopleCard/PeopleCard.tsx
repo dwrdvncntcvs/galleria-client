@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { unfollowUser } from "../../../api/followerRequest";
-import { defaultAvatar } from "../../../assets/images";
+import { useImageSrc } from "../../../hooks/imageHooks";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { usePrivateAxios } from "../../../hooks/usePrivateAxios";
 import { PeopleType } from "../../../models/GenericTypes";
@@ -21,6 +21,7 @@ export default function PeopleCard({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const privateAxiosInstance = usePrivateAxios();
+  const imageSrc = useImageSrc();
 
   const goToProfile = (username: string) => (e: any) => {
     e.stopPropagation();
@@ -44,11 +45,7 @@ export default function PeopleCard({
     >
       <div className={style["person-details"]}>
         <img
-          src={
-            user.Profile?.profileImage === ""
-              ? defaultAvatar
-              : user.Profile?.profileImage
-          }
+          src={imageSrc(user.Profile?.profileImage!)}
           alt={`${user.first_name}'s avatar`}
         />
         <div>
