@@ -69,7 +69,11 @@ export default function UpdateProfileImage() {
             )}
           </div>
 
-          <button id={style["save"]} onClick={updateImageAction}>
+          <button
+            id={style["save"]}
+            onClick={updateImageAction}
+            disabled={!imageBlob.value}
+          >
             Save
           </button>
         </div>
