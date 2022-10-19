@@ -2,6 +2,7 @@ import React from "react";
 import { HiEye, HiPencilAlt } from "react-icons/hi";
 import { IconType } from "react-icons/lib";
 import { setModal } from "../../../features/modalSlice";
+import { closeToggle } from "../../../features/toggleSlice";
 import { useActiveModal } from "../../../hooks/modalHooks";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { Dropdown } from "../../../UI";
@@ -14,9 +15,12 @@ type ImageActionButtons = {
   action: () => void;
 };
 
-export default function ImageAction() {
+interface ImageActionProps {
+  imageSrc: string;
+}
+
+export default function ImageAction({ imageSrc }: ImageActionProps) {
   const dispatch = useAppDispatch();
-  const checkIfModalActive = useActiveModal();
 
   const buttons: ImageActionButtons[] = [
     {
@@ -24,8 +28,13 @@ export default function ImageAction() {
       label: "View",
       action: () => {
         dispatch(
-          setModal({ status: true, name: "viewImageProfileModal", props: {} })
+          setModal({
+            status: true,
+            name: "viewImageProfileModal",
+            props: { imageSrc },
+          })
         );
+        dispatch(closeToggle());
       },
     },
     {
@@ -33,6 +42,7 @@ export default function ImageAction() {
       label: "Update",
       action: () => {
         console.log("Update");
+        dispatch(closeToggle());
       },
     },
   ];
@@ -47,7 +57,6 @@ export default function ImageAction() {
           </button>
         ))}
       </div>
-      {checkIfModalActive("viewImageProfileModal") && <ViewImage />}
     </Dropdown>
   );
 }

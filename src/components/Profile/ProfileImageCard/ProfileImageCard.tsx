@@ -10,6 +10,7 @@ import { setToggle } from "../../../features/toggleSlice";
 import ImageAction from "../ImageAction/ImageAction";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
 import { useActiveModal } from "../../../hooks/modalHooks";
+import { ViewImage } from "../../Images";
 
 interface ProfileImageCardProps {
   profile: UserProfile;
@@ -60,19 +61,20 @@ export default function ProfileImageCard({
     );
   };
 
+  const imageSrc =
+    profile.Profile?.profileImage === ""
+      ? defaultAvatar
+      : profile.Profile?.profileImage;
+
   return (
     <div className={style["profile-container"]}>
       <div className={style["profile-link"]}>
         <img
           onClick={toggleImageAction}
-          src={
-            profile.Profile?.profileImage === ""
-              ? defaultAvatar
-              : profile.Profile?.profileImage
-          }
+          src={imageSrc}
           alt={`${profile.first_name}'s avatar'`}
         />
-        {checkIfToggled("imageAction") && <ImageAction />}
+        {checkIfToggled("imageAction") && <ImageAction imageSrc={imageSrc!} />}
       </div>
       {buttonsArr.map(
         ({ action, condition, label }, i) =>
@@ -83,6 +85,7 @@ export default function ProfileImageCard({
           )
       )}
       {checkIfModalActive("updateProfileModal") && <EditProfile />}
+      {checkIfModalActive("viewImageProfileModal") && <ViewImage />}
     </div>
   );
 }

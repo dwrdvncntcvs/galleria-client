@@ -5,11 +5,11 @@ import { CloseModalButton } from "../../global";
 import style from "./viewImage.module.scss";
 
 export default function ViewImage() {
-  const props = useModalProps();
+  const { imageSrc } = useModalProps() as { imageSrc: string };
 
   return (
     <ModalOverlay backButtonComponent={CloseModalButton} hasBackButton={true}>
-      Image
+      <img className={style["view-image-img"]} src={imageSrc} alt="" />
     </ModalOverlay>
   );
 }
