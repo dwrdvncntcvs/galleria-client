@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, useState, SetStateAction } from "react";
 import { validationDebounce } from "../services/validationService";
 import { useValidationMessage } from "./validationHook";
 
@@ -9,6 +9,7 @@ export const useFormInput = <T>(
   errors: T;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isFormValid: boolean;
+  setData: Dispatch<SetStateAction<T>>;
 } => {
   const [inputData, setInputData] = useState<T>({ ...inputValues });
   const [errors, setErrors] = useState<T>({ ...inputValues });
@@ -35,7 +36,13 @@ export const useFormInput = <T>(
     checkFormErrors<T>(errors, "hasError") ||
     checkFormErrors<T>(inputData, "emptyFields");
 
-  return { data: inputData, errors, handleChange, isFormValid };
+  return {
+    data: inputData,
+    errors,
+    handleChange,
+    isFormValid,
+    setData: setInputData,
+  };
 };
 
 const checkFormErrors = <T>(dataObj: T, type: "hasError" | "emptyFields") => {

@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { updateUserProfile } from "../../../api/userRequest";
 import { closeModal } from "../../../features/modalSlice";
+import { useFormInput } from "../../../hooks/formInputHooks";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { UpdateUserData } from "../../../models/User";
 import style from "./editProfileForm.module.scss";
@@ -13,10 +14,7 @@ interface EditProfileFormProps {
 export default function EditProfileForm({ userId }: EditProfileFormProps) {
   const dispatch = useAppDispatch();
   const { userProfile } = useAppSelector((state) => state.userState);
-  // const { address, dateOfBirth, first_name, last_name, username, bio } =
-  //   profile!;
-
-  const [data, setData] = useState<UpdateUserData>({
+  const { data, handleChange, setData } = useFormInput<UpdateUserData>({
     address: userProfile.Profile?.address!,
     dateOfBirth: userProfile.Profile?.dateOfBirth!,
     first_name: userProfile.first_name!,
@@ -28,12 +26,6 @@ export default function EditProfileForm({ userId }: EditProfileFormProps) {
     e.currentTarget.style.height = "auto";
     e.currentTarget.style.height = `${e.target.scrollHeight}px`;
     setData((prev) => ({ ...prev, bio: e.target.value }));
-  };
-
-  const changeValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-
-    setData((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
   const submitForm = async (e: FormEvent) => {
@@ -49,7 +41,7 @@ export default function EditProfileForm({ userId }: EditProfileFormProps) {
 
   return (
     <form onSubmit={submitForm}>
-      {inputFields(data, changeValue).map(
+      {inputFields(data, handleChange).map(
         ({ label, type, name, value, changeValue }, i) => (
           <div key={i} className={style["form-control"]}>
             <label htmlFor={name}>{label}</label>
