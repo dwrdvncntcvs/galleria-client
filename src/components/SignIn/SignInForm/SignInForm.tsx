@@ -1,47 +1,33 @@
-import React, { useState, ChangeEvent, FormEvent, Fragment } from "react";
+import React, { useState, FormEvent, Fragment } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../api/userRequest";
 import { useAppDispatch } from "../../../hooks/reduxHook";
 import { UserAuth } from "../../../models/User";
 import { InputError, TextInput } from "../../global";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { useValidationMessage } from "../../../hooks/validationHook";
-import { validationDebounce } from "../../../services/validationService";
 import { signInFields } from "./inputFields";
 import { ButtonContainer, FormContainer } from "../../../UI";
+import { useFormInput } from "../../../hooks/formInputHooks";
 import style from "./signInForm.module.scss";
 
 const SignInForm = () => {
-  const dispatch = useAppDispatch();
-  const [userAuthData, setUserAuthData] = useState<UserAuth>({
-    email: "",
-    password: "",
-  });
-  const [errorMessage, setErrorMessage] = useState<UserAuth>({
-    email: "",
-    password: "",
-  });
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const validation = useValidationMessage();
   const location = useLocation();
+  const dispatch = useAppDispatch();
+  const {
+    data: userAuthData,
+    errors,
+    handleChange,
+  } = useFormInput<UserAuth>({
+    email: "",
+    password: "",
+  });
 
   const prevLocation =
     location.state !== null
       ? (location.state as { from: string }).from
       : "/home";
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-    validationDebounce({
-      validation,
-      target: e.target.value,
-      setter: setErrorMessage,
-      name,
-    });
-
-    setUserAuthData((prev) => ({ ...prev, [name]: e.target.value }));
-  };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -54,7 +40,7 @@ const SignInForm = () => {
 
   return (
     <FormContainer onSubmit={submit}>
-      {signInFields(handleChange, userAuthData, errorMessage, show).map(
+      {signInFields(handleChange, userAuthData, errors, show).map(
         ({ placeholder, type, value, onChange, error, name }, i) => (
           <Fragment key={i}>
             <TextInput
