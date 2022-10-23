@@ -11,3 +11,4 @@ export { default as Following } from "./Following/Following";
 export { default as People } from "./People/People";
 export { default as Settings } from "./Settings/Settings";
 export { default as PersonalInfoSettings } from "./PersonalInfoSettings/PersonalInfoSettings";
+export { default as SecuritySettings } from "./SecuritySettings/SecuritySettings";

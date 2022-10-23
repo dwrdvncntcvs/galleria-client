@@ -15,6 +15,7 @@ import {
   Portal,
   Profile,
   ProfileDetails,
+  SecuritySettings,
   Settings,
   SignIn,
   SignUp,
@@ -42,7 +43,7 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/settings/" element={<Settings />}>
                 <Route path="personal" element={<PersonalInfoSettings />} />
-                <Route path="security" element={<PersonalInfoSettings />} />
+                <Route path="security" element={<SecuritySettings />} />
               </Route>
             </Route>
             <Route path="/:username/" element={<Profile />}>
