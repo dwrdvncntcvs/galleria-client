@@ -4,4 +4,44 @@
   @extend .flex-column;
   flex: 1;
   padding: 12px;
+  gap: 10px;
+
+  h1 {
+    color: $primary-color;
+  }
+
+  nav {
+    @extend .flex-column;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background-color: white;
+    gap: 0px;
+
+    .active {
+      background-color: $primary-color;
+      color: white;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    a {
+      @extend .flex-row;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px;
+      text-decoration: none;
+      border-radius: 10px;
+      color: $primary-color;
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+        opacity: 0.8;
+      }
+    }
+  }
 }

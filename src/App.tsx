@@ -11,6 +11,7 @@ import {
   Home,
   Otp,
   People,
+  PersonalInfoSettings,
   Portal,
   Profile,
   ProfileDetails,
@@ -39,7 +40,10 @@ function App() {
           <Route path="" element={<Persistent />}>
             <Route element={<RequiredAuth />}>
               <Route path="/home" element={<Home />} />
-              <Route path="/settings" element={<Settings />} />
+              <Route path="/settings/" element={<Settings />}>
+                <Route path="personal" element={<PersonalInfoSettings />} />
+                <Route path="security" element={<PersonalInfoSettings />} />
+              </Route>
             </Route>
             <Route path="/:username/" element={<Profile />}>
               <Route path="" element={<ProfileDetails />} />
