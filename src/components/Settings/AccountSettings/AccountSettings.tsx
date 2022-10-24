@@ -1,14 +1,8 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useAppSelector } from "../../../hooks/reduxHook";
 import { SettingsSection } from "../../../layout";
 import style from "./accountSettings.module.scss";
-
-type InputField = {
-  type: string;
-  label: string;
-  name: string;
-  value: string;
-  changeAction: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+import { inputFields } from "./inputFields";
 
 interface InputData {
   username: string;
@@ -17,41 +11,35 @@ interface InputData {
 }
 
 export default function AccountSettings() {
+  const { userData } = useAppSelector((state) => state.userState);
+  const { contact_number, email, username } = JSON.parse(
+    localStorage.getItem("a_p")!
+  ) as {
+    username: string;
+    email: string;
+    contact_number: string;
+  };
+
   const [data, setData] = useState<InputData>({
-    username: "",
-    email: "",
-    contact_number: "",
+    username,
+    email,
+    contact_number,
   });
+
+  useEffect(() => {
+    const ls_data = {
+      username: userData!.username!,
+      email: userData!.email!,
+      contact_number: userData!.Profile?.contactNumber!,
+    };
+    localStorage.setItem("a_p", JSON.stringify(ls_data));
+  }, [userData]);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
 
     setData((prev) => ({ ...prev, [name]: e.target.value }));
   };
-
-  const inputFields: InputField[] = [
-    {
-      label: "Username",
-      name: "username",
-      type: "text",
-      value: data.username as string,
-      changeAction: changeHandler,
-    },
-    {
-      label: "Contact Number",
-      name: "contact_number",
-      type: "text",
-      value: data.contact_number,
-      changeAction: changeHandler,
-    },
-    {
-      label: "Email Address",
-      name: "email",
-      type: "text",
-      value: data.email,
-      changeAction: changeHandler,
-    },
-  ];
 
   const submitAction = (e: FormEvent) => {
     e.preventDefault();
@@ -65,18 +53,20 @@ export default function AccountSettings() {
       description="To fully manage your account information that presented on your profile."
     >
       <form className={style["settings-form"]} onSubmit={submitAction}>
-        {inputFields.map(({ label, name, type, value, changeAction }) => (
-          <div className={style["form-control"]} key={name}>
-            <label htmlFor={name}>{label}</label>
-            <input
-              type={type}
-              name={name}
-              id={name}
-              value={value}
-              onChange={changeAction}
-            />
-          </div>
-        ))}
+        {inputFields(data, changeHandler).map(
+          ({ label, name, type, value, changeAction }) => (
+            <div className={style["form-control"]} key={name}>
+              <label htmlFor={name}>{label}</label>
+              <input
+                type={type}
+                name={name}
+                id={name}
+                value={value}
+                onChange={changeAction}
+              />
+            </div>
+          )
+        )}
         <button type="submit">Save</button>
       </form>
     </SettingsSection>
