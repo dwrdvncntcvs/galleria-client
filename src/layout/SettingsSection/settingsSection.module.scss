@@ -1,0 +1,26 @@
+@import "../../variables.scss";
+@import "../../index.scss";
+
+.settings-section {
+  @extend .flex-column;
+  gap: 10px;
+
+  .section-header {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      transform: translateY(-5px);
+      font-size: 0.75rem;
+      color: rgb(103, 103, 103);
+    }
+  }
+
+  .section-content {
+    @extend .flex-column;
+    width: 100%;
+    height: auto;
+    padding: 5px 20px;
+  }
+}

@@ -1,0 +1,18 @@
+@import "../../../variables.scss";
+@import "../../../index.scss";
+
+#deactivate {
+  width: 50%;
+  height: 40px;
+  border: 2px solid $error-color;
+  background-color: white;
+  letter-spacing: 2px;
+  color: $error-color;
+  border-radius: 10px;
+  transition: all ease 0.2s;
+
+  &:hover {
+    background-color: $error-color;
+    color: white;
+  }
+}
