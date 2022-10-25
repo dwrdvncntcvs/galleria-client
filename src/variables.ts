@@ -4,4 +4,5 @@ export const modalName = {
   VIEW_PROFILE_IMAGE_MODAL: "viewProfileImageModal",
   UPDATE_PROFILE_IMAGE_MODAL: "updateProfileImageModal",
   UPDATE_PROFILE_MODAL: "updateProfileModal",
+  DEACTIVATE_ACCOUNT_MODAL: "deactivateAccountModal",
 };

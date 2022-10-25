@@ -9,6 +9,9 @@
     @extend .flex-column;
 
     label {
+      display: flex;
+      gap: 5px;
+      align-items: center;
       margin: 0px 10px;
       font-size: 1rem;
       color: $primary-color;
@@ -25,6 +28,10 @@
       &:focus {
         font-weight: normal;
         outline: 2px solid $primary-color;
+      }
+
+      &:disabled {
+        color: gray;
       }
     }
   }

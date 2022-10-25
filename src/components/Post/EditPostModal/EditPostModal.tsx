@@ -6,26 +6,28 @@ import { ModalOverlay } from "../../../UI";
 import { Post } from "../../../models/Post";
 import { EditPostForm } from "..";
 import style from "./editPostModal.module.scss";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export default function EditPostModal() {
   const [curPost, setCurPost] = useState<Post>();
   const { posts } = useAppSelector((state) => state.postState);
   const { props } = useAppSelector((state) => state.modalState);
   const dispatch = useAppDispatch();
+  const P_E_LS = useLocalStorage("p_e");
 
   const { postId } = props as { postId: string };
 
   useEffect(() => {
     const post: Post = posts.filter((post) => post.id === postId)[0];
     if (!post) {
-      const post = JSON.parse(localStorage.getItem("p_e")!);
+      const post = P_E_LS.getItemJSON<Post>();
       setCurPost((prev) => ({ ...prev, ...post }));
     } else {
       console.log("Saving to local storage...");
-      localStorage.setItem("p_e", JSON.stringify(post));
+      P_E_LS.addItem(post);
       setCurPost(post);
     }
-  }, [postId, posts]);
+  }, [postId, posts, P_E_LS]);
 
   const closeModalAction = () => {
     dispatch(closeModal());

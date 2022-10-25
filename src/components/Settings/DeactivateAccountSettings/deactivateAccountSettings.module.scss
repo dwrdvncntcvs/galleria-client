@@ -16,3 +16,25 @@
     color: white;
   }
 }
+
+.modal-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: flex-end;
+
+  button {
+    width: 100px !important;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px !important;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    transition: all ease 0.2s;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}

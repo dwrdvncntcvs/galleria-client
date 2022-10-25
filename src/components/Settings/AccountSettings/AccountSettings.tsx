@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/reduxHook";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 import { SettingsSection } from "../../../layout";
 import style from "./accountSettings.module.scss";
 import { inputFields } from "./inputFields";
@@ -11,29 +12,30 @@ interface InputData {
 }
 
 export default function AccountSettings() {
+  const A_P_LS = useLocalStorage("a_p");
+
   const { userData } = useAppSelector((state) => state.userState);
-  const { contact_number, email, username } = JSON.parse(
-    localStorage.getItem("a_p")!
-  ) as {
-    username: string;
-    email: string;
-    contact_number: string;
-  };
+
+  useEffect(() => {
+    const ls_data: InputData & { userId: string } = {
+      username: userData!.username!,
+      email: userData!.email!,
+      contact_number: userData!.Profile?.contactNumber!,
+      userId: userData!.id!,
+    };
+
+    A_P_LS.addItem(ls_data);
+  }, [userData, A_P_LS]);
+
+  const { contact_number, email, username, userId } = A_P_LS.getItemJSON<
+    InputData & { userId: string }
+  >()!;
 
   const [data, setData] = useState<InputData>({
     username,
     email,
     contact_number,
   });
-
-  useEffect(() => {
-    const ls_data = {
-      username: userData!.username!,
-      email: userData!.email!,
-      contact_number: userData!.Profile?.contactNumber!,
-    };
-    localStorage.setItem("a_p", JSON.stringify(ls_data));
-  }, [userData]);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -44,25 +46,32 @@ export default function AccountSettings() {
   const submitAction = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log(data);
+    const body = {
+      ...data,
+      userId,
+    };
+    console.log("Body: ", body);
   };
 
   return (
     <SettingsSection
       title="Account Information"
-      description="To fully manage your account information that presented on your profile."
+      description="Manage your account information that displayed on your profile and used to login to your account."
     >
       <form className={style["settings-form"]} onSubmit={submitAction}>
         {inputFields(data, changeHandler).map(
-          ({ label, name, type, value, changeAction }) => (
+          ({ label, name, type, value, changeAction, disabled, Icon }) => (
             <div className={style["form-control"]} key={name}>
-              <label htmlFor={name}>{label}</label>
+              <label htmlFor={name}>
+                <Icon /> {label}
+              </label>
               <input
                 type={type}
                 name={name}
                 id={name}
                 value={value}
                 onChange={changeAction}
+                disabled={disabled}
               />
             </div>
           )
