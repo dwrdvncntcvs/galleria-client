@@ -1,7 +1,7 @@
 import React from "react";
 import { HiLockClosed, HiUser } from "react-icons/hi";
 import { IconType } from "react-icons/lib";
-import { Link, useLocation, useMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SideFooter } from "../../global";
 import style from "./settingsNav.module.scss";
 
@@ -34,7 +34,7 @@ export default function SettingsNav() {
   ];
 
   return (
-    <div className={style["settings-nav"]}>
+    <aside className={style["settings-nav"]}>
       <h1>Settings</h1>
       <nav>
         {buttonsArr.map(({ Icon, label, link, isActive }, i) => (
@@ -44,6 +44,6 @@ export default function SettingsNav() {
         ))}
       </nav>
       <SideFooter />
-    </div>
+    </aside>
   );
 }
