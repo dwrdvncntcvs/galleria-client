@@ -3,6 +3,7 @@ import { useFormInput } from "../../../hooks/formInputHooks";
 import { SettingsSection } from "../../../layout";
 import style from "./changePasswordSettings.module.scss";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { InputError } from "../../global";
 
 interface InputField {
   type: string;
@@ -91,7 +92,7 @@ export default function ChangePasswordSettings() {
                 name={name}
                 onBlur={blurAction}
               />
-              {error.length > 0 && <p>{error}</p>}
+              {error.length > 0 && <InputError errorMessage={error}/>}
             </div>
           )
         )}
