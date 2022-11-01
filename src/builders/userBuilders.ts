@@ -5,6 +5,7 @@ import {
   getUserRequest,
   searchUserProfile,
   signOutRequest,
+  updateUserAccount,
   updateUserAvatar,
   updateUserProfile,
   userOtpRequest,
@@ -204,7 +205,7 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
     return this;
   },
 
-  updateUserAvatarRequest: () => {
+  updateUserAvatarRequest() {
     builder
       .addCase(updateUserAvatar.pending, () => {
         console.log("Pending...");
@@ -231,6 +232,27 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
         };
       })
       .addCase(updateUserAvatar.rejected, (state, action) => {
+        console.log("Rejected...");
+      });
+    return this;
+  },
+
+  updateUserAccountRequest() {
+    builder
+      .addCase(updateUserAccount.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(updateUserAccount.fulfilled, (state, action) => {
+        const { contactNumber, username } = action.payload as {
+          username: string;
+          contactNumber: string;
+        };
+        console.log("Fulfilled...");
+
+        state.userData!.username = username;
+        state.userData!.Profile!.contactNumber = contactNumber;
+      })
+      .addCase(updateUserAccount.rejected, (state, action) => {
         console.log("Rejected...");
       });
     return this;

@@ -159,3 +159,28 @@ export const updateUserAvatar = createAsyncThunk(
     }
   }
 );
+
+interface UpdateUserAccountData {
+  userId?: string;
+  username: string;
+  email: string;
+  contact_number: string;
+}
+
+export const updateUserAccount = createAsyncThunk(
+  "user/updateUserAccount",
+  async (data: UpdateUserAccountData, { rejectWithValue }) => {
+    console.log("Data passed: ");
+
+    try {
+      const responseData = await privateHttpService(privateInstance).put(
+        `/user/account/${data.userId}`,
+        data
+      );
+
+      return responseData;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.msg);
+    }
+  }
+);

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useAppSelector } from "../../../hooks/reduxHook";
+import { updateUserAccount } from "../../../api/userRequest";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { SettingsSection } from "../../../layout";
 import style from "./accountSettings.module.scss";
@@ -13,6 +14,7 @@ interface InputData {
 
 export default function AccountSettings() {
   const A_P_LS = useLocalStorage("a_p");
+  const dispatch = useAppDispatch();
 
   const { userData } = useAppSelector((state) => state.userState);
 
@@ -43,7 +45,7 @@ export default function AccountSettings() {
     setData((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
-  const submitAction = (e: FormEvent) => {
+  const submitAction = async (e: FormEvent) => {
     e.preventDefault();
 
     const body = {
@@ -51,6 +53,11 @@ export default function AccountSettings() {
       userId,
     };
     console.log("Body: ", body);
+    const { meta } = await dispatch(updateUserAccount(body));
+
+    if (meta.requestStatus === "fulfilled") {
+      A_P_LS.addItem(body);
+    }
   };
 
   return (
