@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { SettingsNav } from "../../components/Settings";
 import { useAppSelector } from "../../hooks/reduxHook";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -10,7 +10,6 @@ import style from "./settings.module.scss";
 export default function Settings() {
   const { addItem: accountAddItem, getItemJSON: getAccountData } =
     useLocalStorage("accountInfo");
-  const navigate = useNavigate();
 
   const { userData } = useAppSelector((state) => state.userState);
   const { Profile, email, username, id } = userData!;
@@ -39,10 +38,6 @@ export default function Settings() {
     id,
     accData,
   ]);
-
-  useEffect(() => {
-    navigate("personal");
-  }, []);
 
   const mainPanel = (
     <SettingsLayout>
