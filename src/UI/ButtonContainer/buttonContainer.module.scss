@@ -24,6 +24,11 @@
     &:hover {
       opacity: 0.8;
     }
+
+    &:disabled {
+      cursor: default;
+      opacity: .6 !important;
+    }
   }
 
   button:nth-child(1) {

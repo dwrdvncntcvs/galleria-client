@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, SyntheticEvent } from "react";
 import style from "./textInput.module.scss";
 
 interface TextInputProps {
@@ -9,6 +9,7 @@ interface TextInputProps {
   name?: string;
   hasError?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function TextInput({
@@ -18,6 +19,7 @@ export default function TextInput({
   value,
   onChange,
   hasError = false,
+  onBlur,
 }: TextInputProps) {
   return (
     <input
@@ -29,6 +31,7 @@ export default function TextInput({
       type={type}
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
     />
   );
 }

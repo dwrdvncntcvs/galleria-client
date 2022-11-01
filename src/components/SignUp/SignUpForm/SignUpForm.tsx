@@ -17,6 +17,7 @@ const SignUpForm = () => {
   const {
     data: userRegData,
     errors: errorMessage,
+    handleBlur,
     handleChange,
     isFormValid,
   } = useFormInput<UserRegistration>({
@@ -39,8 +40,14 @@ const SignUpForm = () => {
 
   return (
     <FormContainer onSubmit={signUpAction}>
-      {signUpInputFields(handleChange, userRegData, errorMessage, show).map(
-        ({ placeholder, type, value, onChange, error, name }, i) => (
+      {signUpInputFields(
+        handleChange,
+        userRegData,
+        errorMessage,
+        show,
+        handleBlur
+      ).map(
+        ({ placeholder, type, value, onChange, error, name, onBlur }, i) => (
           <Fragment key={i}>
             <TextInput
               name={name}
@@ -49,19 +56,14 @@ const SignUpForm = () => {
               value={value}
               onChange={onChange}
               hasError={error !== ""}
+              onBlur={onBlur}
             />
             {error !== "" ? <InputError errorMessage={error!} /> : ""}
           </Fragment>
         )
       )}
       <ButtonContainer>
-        <button
-          style={{
-            cursor: isFormValid ? "not-allowed" : "pointer",
-          }}
-          type="submit"
-          disabled={isFormValid}
-        >
+        <button type="submit" disabled={isFormValid}>
           Sign Up
         </button>
         <button type="button" onClick={() => setShow((prev) => !prev)}>

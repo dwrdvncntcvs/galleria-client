@@ -5,7 +5,8 @@ export const signUpInputFields = (
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void,
   data: UserRegistration,
   errorMsg: UserRegistration,
-  toggle: boolean
+  toggle: boolean,
+  handleBlur: (e: ChangeEvent<HTMLInputElement>) => void
 ) => {
   return [
     {
@@ -15,6 +16,7 @@ export const signUpInputFields = (
       value: data.first_name,
       onChange: handleChange,
       error: errorMsg.first_name,
+      onBlur: handleBlur,
     },
     {
       placeholder: "Last Name",
@@ -23,6 +25,7 @@ export const signUpInputFields = (
       value: data.last_name,
       onChange: handleChange,
       error: errorMsg.last_name,
+      onBlur: handleBlur,
     },
     {
       placeholder: "Username",
@@ -31,6 +34,7 @@ export const signUpInputFields = (
       value: data.username,
       onChange: handleChange,
       error: errorMsg.username,
+      onBlur: handleBlur,
     },
     {
       placeholder: "Email",
@@ -39,6 +43,7 @@ export const signUpInputFields = (
       value: data.email,
       onChange: handleChange,
       error: errorMsg.email,
+      onBlur: handleBlur,
     },
     {
       placeholder: "Password",
@@ -47,6 +52,7 @@ export const signUpInputFields = (
       value: data.password,
       onChange: handleChange,
       error: errorMsg.password,
+      onBlur: handleBlur,
     },
     {
       placeholder: "Re-type Password",
@@ -55,6 +61,7 @@ export const signUpInputFields = (
       value: data.password2,
       onChange: handleChange,
       error: errorMsg.password2,
+      onBlur: handleBlur,
     },
   ];
 };

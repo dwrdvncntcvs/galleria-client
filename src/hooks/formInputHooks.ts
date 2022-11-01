@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, useState, SetStateAction } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  useState,
+  SetStateAction,
+  SyntheticEvent,
+} from "react";
 import { validationDebounce } from "../services/validationService";
 import { useValidationMessage } from "./validationHook";
 
@@ -10,6 +16,7 @@ export const useFormInput = <T>(
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isFormValid: boolean;
   setData: Dispatch<SetStateAction<T>>;
+  handleBlur: (e: SyntheticEvent<HTMLInputElement>) => void;
 } => {
   const [inputData, setInputData] = useState<T>({ ...inputValues });
   const [errors, setErrors] = useState<T>({ ...inputValues });
@@ -18,6 +25,13 @@ export const useFormInput = <T>(
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
+
+    setInputData((prev) => ({ ...prev, [name]: e.target.value }));
+  };
+
+  const handleBlur = (e: any) => {
+    const name = e.target.name;
+
     validationDebounce({
       validation,
       target: e.target.value,
@@ -28,8 +42,6 @@ export const useFormInput = <T>(
           ? (inputData as { password: string }).password
           : "",
     });
-
-    setInputData((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
   const isFormValid =
@@ -42,6 +54,7 @@ export const useFormInput = <T>(
     handleChange,
     isFormValid,
     setData: setInputData,
+    handleBlur,
   };
 };
 

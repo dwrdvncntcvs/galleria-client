@@ -19,6 +19,8 @@ const SignInForm = () => {
     data: userAuthData,
     errors,
     handleChange,
+    handleBlur,
+    isFormValid,
   } = useFormInput<UserAuth>({
     email: "",
     password: "",
@@ -40,8 +42,8 @@ const SignInForm = () => {
 
   return (
     <FormContainer onSubmit={submit}>
-      {signInFields(handleChange, userAuthData, errors, show).map(
-        ({ placeholder, type, value, onChange, error, name }, i) => (
+      {signInFields(handleChange, userAuthData, errors, show, handleBlur).map(
+        ({ placeholder, type, value, onChange, error, name, onBlur }, i) => (
           <Fragment key={i}>
             <TextInput
               name={name}
@@ -50,13 +52,16 @@ const SignInForm = () => {
               value={value}
               onChange={onChange}
               hasError={error !== ""}
+              onBlur={onBlur}
             />
             {error ? <InputError errorMessage={error!} /> : null}
           </Fragment>
         )
       )}
       <ButtonContainer>
-        <button type="submit">Sign In</button>
+        <button type="submit" disabled={isFormValid}>
+          Sign In
+        </button>
         <button type="button" onClick={() => setShow((prev) => !prev)}>
           {show ? <BsEyeSlashFill /> : <BsEyeFill />}
         </button>
