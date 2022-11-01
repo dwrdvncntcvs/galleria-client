@@ -63,7 +63,8 @@ const userSlice = createSlice({
       .searchUserProfileRequest()
       .updateUserProfileRequest()
       .updateUserAvatarRequest()
-      .updateUserAccountRequest();
+      .updateUserAccountRequest()
+      .deactivateUserAccountRequest();
   },
 });
 

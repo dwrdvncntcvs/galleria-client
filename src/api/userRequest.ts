@@ -170,8 +170,6 @@ interface UpdateUserAccountData {
 export const updateUserAccount = createAsyncThunk(
   "user/updateUserAccount",
   async (data: UpdateUserAccountData, { rejectWithValue }) => {
-    console.log("Data passed: ");
-
     try {
       const responseData = await privateHttpService(privateInstance).put(
         `/user/account/${data.userId}`,
@@ -181,6 +179,21 @@ export const updateUserAccount = createAsyncThunk(
       return responseData;
     } catch (error: any) {
       return rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
+export const deactivateUserAccount = createAsyncThunk(
+  "user/deactivateUserAccount",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const responseData = await privateHttpService(privateInstance).delete(
+        `/user/${userId}`
+      );
+
+      return responseData;
+    } catch (err: any) {
+      return rejectWithValue(err.response.data.msg);
     }
   }
 );

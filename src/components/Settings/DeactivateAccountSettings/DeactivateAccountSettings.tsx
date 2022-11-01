@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { deactivateUserAccount } from "../../../api/userRequest";
 import { setModal, closeModal } from "../../../features/modalSlice";
 import { useActiveModal } from "../../../hooks/modalHooks";
 import { useAppDispatch } from "../../../hooks/reduxHook";
@@ -13,10 +15,15 @@ export default function DeactivateAccountSettings() {
   const dispatch = useAppDispatch();
   const checkIfModalActive = useActiveModal();
   const A_P_LS = useLocalStorage("a_p");
+  const navigate = useNavigate();
   const { userId } = A_P_LS.getItemJSON<{ userId: string }>();
 
-  const deactivateAccountAction = () => {
-    console.log("Deactivating account with user ID: ", userId);
+  const deactivateAccountAction = async () => {
+    const { meta } = await dispatch(deactivateUserAccount(userId));
+
+    if (meta.requestStatus === "fulfilled") {
+      navigate("/");
+    }
   };
 
   const activateModal = () => {
@@ -34,7 +41,9 @@ export default function DeactivateAccountSettings() {
       <Card style={{ padding: 20, gap: 10 }}>
         <p>Are you sure you want to deactivate this account?</p>
         <div className={style["modal-btns"]}>
-          <button id={style.deactivate} onClick={deactivateAccountAction}>Yes</button>
+          <button id={style.deactivate} onClick={deactivateAccountAction}>
+            Yes
+          </button>
           <button onClick={removeModal}>No</button>
         </div>
       </Card>

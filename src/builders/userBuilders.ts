@@ -1,5 +1,6 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import {
+  deactivateUserAccount,
   getUserProfileRequest,
   getUserRefresher,
   getUserRequest,
@@ -253,6 +254,20 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
         state.userData!.Profile!.contactNumber = contactNumber;
       })
       .addCase(updateUserAccount.rejected, (state, action) => {
+        console.log("Rejected...");
+      });
+    return this;
+  },
+
+  deactivateUserAccountRequest() {
+    builder
+      .addCase(deactivateUserAccount.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(deactivateUserAccount.fulfilled, (state, action) => {
+        console.log("Fulfilled...");
+      })
+      .addCase(deactivateUserAccount.rejected, (state, action) => {
         console.log("Rejected...");
       });
     return this;
