@@ -38,7 +38,7 @@ export default function NavDropdown({ user }: NavDropdownProps) {
       Icon: HiCog,
       action: () => {
         dispatch(closeToggle());
-        navigate("/settings");
+        navigate("/settings/personal");
       },
       name: "Settings",
     },
