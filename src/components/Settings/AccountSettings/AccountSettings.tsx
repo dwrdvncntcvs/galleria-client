@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { updateUserAccount } from "../../../api/userRequest";
-import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useAppDispatch } from "../../../hooks/reduxHook";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { SettingsSection } from "../../../layout";
 import { SettingsData } from "../../../models/Settings";
