@@ -210,7 +210,6 @@ export const changeAccountPassword = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      console.log("Data: ", data);
       const responseData = await privateHttpService(privateInstance).put(
         `/user/change-password/${data.userId}`,
         { password: data.oldPassword, newPassword: data.password }
