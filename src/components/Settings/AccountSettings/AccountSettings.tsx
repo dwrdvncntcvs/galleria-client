@@ -3,6 +3,7 @@ import { updateUserAccount } from "../../../api/userRequest";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { SettingsSection } from "../../../layout";
+import { SettingsData } from "../../../models/Settings";
 import style from "./accountSettings.module.scss";
 import { inputFields } from "./inputFields";
 
@@ -13,25 +14,12 @@ interface InputData {
 }
 
 export default function AccountSettings() {
-  const A_P_LS = useLocalStorage("a_p");
+  const { addItem: accountAddItem, getItemJSON: getAccountData } =
+    useLocalStorage("accountInfo");
   const dispatch = useAppDispatch();
 
-  const { userData } = useAppSelector((state) => state.userState);
-
-  useEffect(() => {
-    const ls_data: InputData & { userId: string } = {
-      username: userData!.username!,
-      email: userData!.email!,
-      contact_number: userData!.Profile?.contactNumber!,
-      userId: userData!.id!,
-    };
-
-    A_P_LS.addItem(ls_data);
-  }, [userData, A_P_LS]);
-
-  const { contact_number, email, username, userId } = A_P_LS.getItemJSON<
-    InputData & { userId: string }
-  >()!;
+  const { contact_number, email, userId, username } =
+    getAccountData<SettingsData>();
 
   const [data, setData] = useState<InputData>({
     username,
@@ -56,7 +44,7 @@ export default function AccountSettings() {
     const { meta } = await dispatch(updateUserAccount(body));
 
     if (meta.requestStatus === "fulfilled") {
-      A_P_LS.addItem(body);
+      accountAddItem(body);
     }
   };
 

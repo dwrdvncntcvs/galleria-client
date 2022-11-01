@@ -14,13 +14,12 @@ import style from "./deactivateAccountSettings.module.scss";
 export default function DeactivateAccountSettings() {
   const dispatch = useAppDispatch();
   const checkIfModalActive = useActiveModal();
-  const A_P_LS = useLocalStorage("a_p");
+  const { getItemJSON: getAccountData } = useLocalStorage("accountInfo");
   const navigate = useNavigate();
-  const { userId } = A_P_LS.getItemJSON<{ userId: string }>();
+  const { userId } = getAccountData<{ userId: string }>();
 
   const deactivateAccountAction = async () => {
     const { meta } = await dispatch(deactivateUserAccount(userId));
-
     if (meta.requestStatus === "fulfilled") {
       navigate("/");
     }
