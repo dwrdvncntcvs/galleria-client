@@ -1,5 +1,6 @@
 import { ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import {
+  changeAccountPassword,
   deactivateUserAccount,
   getUserProfileRequest,
   getUserRefresher,
@@ -270,6 +271,25 @@ export const userBuilder = (builder: ActionReducerMapBuilder<UserState>) => ({
       .addCase(deactivateUserAccount.rejected, (state, action) => {
         console.log("Rejected...");
       });
+    return this;
+  },
+
+  changeAccountPasswordRequest() {
+    builder
+      .addCase(changeAccountPassword.pending, () => {
+        console.log("Pending...");
+      })
+      .addCase(changeAccountPassword.fulfilled, (state, action) => {
+        console.log("Fulfilled...");
+        state.status = "success";
+        state.message = "Password changed successfully";
+      })
+      .addCase(changeAccountPassword.rejected, (state, action) => {
+        console.log("Rejected...");
+        state.message = action.payload as string;
+        state.status = "error";
+      });
+
     return this;
   },
 });

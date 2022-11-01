@@ -197,3 +197,28 @@ export const deactivateUserAccount = createAsyncThunk(
     }
   }
 );
+
+export const changeAccountPassword = createAsyncThunk(
+  "user/changeAccountPassword",
+  async (
+    data: {
+      userId?: string;
+      oldPassword: string;
+      password: string;
+      password2: string;
+    },
+    { rejectWithValue }
+  ) => {
+    try {
+      console.log("Data: ", data);
+      const responseData = await privateHttpService(privateInstance).put(
+        `/user/change-password/${data.userId}`,
+        { password: data.oldPassword, newPassword: data.password }
+      );
+
+      return responseData;
+    } catch (err: any) {
+      return rejectWithValue(err.response.data.msg);
+    }
+  }
+);

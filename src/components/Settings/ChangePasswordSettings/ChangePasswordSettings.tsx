@@ -1,9 +1,20 @@
-import React, { ChangeEvent, FormEvent, SyntheticEvent, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useFormInput } from "../../../hooks/formInputHooks";
 import { SettingsSection } from "../../../layout";
 import style from "./changePasswordSettings.module.scss";
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
+import { useOutletContext } from "react-router-dom";
+import { changeAccountPassword } from "../../../api/userRequest";
 import { InputError } from "../../global";
+import { setMessage, setStatus } from "../../../features/userSlice";
 
 interface InputField {
   type: string;
@@ -18,6 +29,9 @@ interface InputField {
 const initialInputValues = { oldPassword: "", password: "", password2: "" };
 
 export default function ChangePasswordSettings() {
+  const { message, status } = useAppSelector((state) => state.userState);
+  const { userId } = useOutletContext() as { userId: string };
+  const dispatch = useAppDispatch();
   const [showPass, setShowPass] = useState(false);
   const { data, errors, handleChange, isFormValid, setData, handleBlur } =
     useFormInput<{
@@ -56,14 +70,14 @@ export default function ChangePasswordSettings() {
     },
   ];
 
-  const submitForm = (e: FormEvent) => {
+  const submitForm = async (e: FormEvent) => {
     e.preventDefault();
 
     if (isFormValid) {
       return;
     }
 
-    console.log("Data: ", data);
+    await dispatch(changeAccountPassword({ ...data, userId }));
 
     setData(initialInputValues);
   };
@@ -71,6 +85,17 @@ export default function ChangePasswordSettings() {
   const showPasswordAction = () => {
     setShowPass((prev) => !prev);
   };
+
+  const setDefaultStatus = useCallback(() => {
+    dispatch(setStatus("none"));
+    dispatch(setMessage(""));
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDefaultStatus();
+    }, 3000);
+  }, [setDefaultStatus, status]);
 
   return (
     <SettingsSection
@@ -92,7 +117,7 @@ export default function ChangePasswordSettings() {
                 name={name}
                 onBlur={blurAction}
               />
-              {error.length > 0 && <InputError errorMessage={error}/>}
+              {error.length > 0 && <InputError errorMessage={error} />}
             </div>
           )
         )}
@@ -104,6 +129,8 @@ export default function ChangePasswordSettings() {
             {showPass ? <HiEyeOff /> : <HiEye />}
           </button>
         </div>
+        {message!?.length > 0 && status === "error" && <p>{message!}</p>}
+        {message!?.length > 0 && status === "success" && <p>{message!}</p>}
       </form>
     </SettingsSection>
   );
