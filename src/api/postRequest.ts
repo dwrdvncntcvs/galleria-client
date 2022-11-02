@@ -68,6 +68,9 @@ export const createPost = createAsyncThunk(
     try {
       const responseData = await create(postData, body);
 
+      const postId = responseData.postId;
+      postData.id = postId;
+      
       createSyncPost(dispatch, postData, imageUrls, userState.userData!);
 
       return responseData;

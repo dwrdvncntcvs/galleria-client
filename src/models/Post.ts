@@ -56,6 +56,7 @@ export interface ImageBlob {
 }
 
 export interface PostData {
+  id?: string;
   content: string;
   imagePost: ImageBlob[];
   hasImage: boolean;
@@ -67,7 +68,7 @@ export const generatePostFromUserInput = (
   user: User
 ): Post => {
   return {
-    id: v4(),
+    id: post.id!,
     content: post.content,
     createdAt: new Date(),
     ImagePost: images,

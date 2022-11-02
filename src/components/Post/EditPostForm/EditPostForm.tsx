@@ -41,9 +41,11 @@ export default function EditPostForm({ post }: EditPostFormProps) {
         onChange={contentHandler}
         value={content}
       ></textarea>
-      <div>
-        <PreviewImage imagePost={post?.ImagePost!} userData={post?.User!} />
-      </div>
+      {post?.ImagePost!.length > 0 && (
+        <div>
+          <PreviewImage imagePost={post?.ImagePost!} userData={post?.User!} />
+        </div>
+      )}
       <button id={style.save} type="submit">
         Save Changes
       </button>
