@@ -27,9 +27,9 @@ const Portal = () => {
           <Outlet />
         </section>
       </div>
-      <section className={style.footer}>
+      {/* <section className={style.footer}>
         <Footer />
-      </section>
+      </section> */}
     </div>
   );
 };
