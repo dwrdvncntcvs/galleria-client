@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { updateUserProfile } from "../../../api/userRequest";
 import { closeModal } from "../../../features/modalSlice";
@@ -45,12 +46,20 @@ export default function EditProfileForm({ userId }: EditProfileFormProps) {
         ({ label, type, name, value, changeValue }, i) => (
           <div key={i} className={style["form-control"]}>
             <label htmlFor={name}>{label}</label>
-            <input
-              name={name}
-              type={type}
-              value={value! as string}
-              onChange={changeValue}
-            ></input>
+            {
+              <input
+                name={name}
+                type={type}
+                value={
+                  type === "date"
+                    ? moment(value! as Date)
+                        .locale("en")
+                        .format("YYYY-MM-DD")
+                    : (value! as string)
+                }
+                onChange={changeValue}
+              ></input>
+            }
           </div>
         )
       )}
