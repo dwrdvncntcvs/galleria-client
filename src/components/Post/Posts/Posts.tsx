@@ -30,6 +30,9 @@ export default function Posts({
       <NoPostMessage posts={posts} message={message!} />
     </>
   ) : (
-    <p>This account's posts are hidden...</p>
+    <NoPostMessage
+      posts={posts}
+      message={"This account's posts are hidden..."}
+    />
   );
 }

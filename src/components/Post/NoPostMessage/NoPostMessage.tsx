@@ -8,5 +8,9 @@ interface NoPostMessageProps {
 }
 
 export default function NoPostMessage({ message, posts }: NoPostMessageProps) {
-  return posts.length < 1 ? <div>{message}</div> : null;
+  return posts.length < 1 ? (
+    <div className={style["no-post-msg"]}>
+      <p>{message}</p>
+    </div>
+  ) : null;
 }
