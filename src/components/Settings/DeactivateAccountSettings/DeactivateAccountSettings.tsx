@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { deactivateUserAccount } from "../../../api/userRequest";
 import { setModal, closeModal } from "../../../features/modalSlice";
 import { useActiveModal } from "../../../hooks/modalHooks";
-import { useAppDispatch } from "../../../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { SettingsSection } from "../../../layout";
 import { Card, ModalOverlay } from "../../../UI";
@@ -12,14 +12,13 @@ import { CloseModalButton } from "../../global";
 import style from "./deactivateAccountSettings.module.scss";
 
 export default function DeactivateAccountSettings() {
+  const { id } = useAppSelector((state) => state.userState.userData!);
   const dispatch = useAppDispatch();
   const checkIfModalActive = useActiveModal();
-  const { getItemJSON: getAccountData } = useLocalStorage("accountInfo");
   const navigate = useNavigate();
-  const { userId } = getAccountData<{ userId: string }>();
 
   const deactivateAccountAction = async () => {
-    const { meta } = await dispatch(deactivateUserAccount(userId));
+    const { meta } = await dispatch(deactivateUserAccount(id!));
     if (meta.requestStatus === "fulfilled") {
       navigate("/");
     }

@@ -30,7 +30,7 @@ const initialInputValues = { oldPassword: "", password: "", password2: "" };
 
 export default function ChangePasswordSettings() {
   const { message, status } = useAppSelector((state) => state.userState);
-  const { userId } = useOutletContext() as { userId: string };
+  const { id } = useAppSelector((state) => state.userState.userData!);
   const dispatch = useAppDispatch();
   const [showPass, setShowPass] = useState(false);
   const { data, errors, handleChange, isFormValid, setData, handleBlur } =
@@ -77,7 +77,7 @@ export default function ChangePasswordSettings() {
       return;
     }
 
-    await dispatch(changeAccountPassword({ ...data, userId }));
+    await dispatch(changeAccountPassword({ ...data, userId: id! }));
 
     setData(initialInputValues);
   };

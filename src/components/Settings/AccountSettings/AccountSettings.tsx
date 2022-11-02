@@ -1,9 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { updateUserAccount } from "../../../api/userRequest";
-import { useAppDispatch } from "../../../hooks/reduxHook";
-import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHook";
 import { SettingsSection } from "../../../layout";
-import { SettingsData } from "../../../models/Settings";
 import style from "./accountSettings.module.scss";
 import { inputFields } from "./inputFields";
 
@@ -13,18 +11,35 @@ interface InputData {
   email: string;
 }
 
+const isDataValid = (data: any) => {
+  delete data.email;
+  let bool = true;
+
+  for (let key in data) {
+    if (data[key] === "") bool = false;
+  }
+
+  return bool;
+};
+
 export default function AccountSettings() {
-  const { addItem: accountAddItem, getItemJSON: getAccountData } =
-    useLocalStorage("accountInfo");
   const dispatch = useAppDispatch();
 
-  const { contact_number, email, userId, username } =
-    getAccountData<SettingsData>();
+  const { Profile, id, username, email } = useAppSelector(
+    (state) => state.userState.userData!
+  );
+
+  const defaultValues = {
+    contact_number: Profile?.contactNumber!,
+    userId: id!,
+    username: username!,
+    email: email!,
+  };
 
   const [data, setData] = useState<InputData>({
-    username,
-    email,
-    contact_number,
+    username: "",
+    email: "",
+    contact_number: "",
   });
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,14 +53,10 @@ export default function AccountSettings() {
 
     const body = {
       ...data,
-      userId,
+      userId: id!,
     };
     console.log("Body: ", body);
-    const { meta } = await dispatch(updateUserAccount(body));
-
-    if (meta.requestStatus === "fulfilled") {
-      accountAddItem(body);
-    }
+    await dispatch(updateUserAccount(body));
   };
 
   return (
@@ -54,7 +65,7 @@ export default function AccountSettings() {
       description="Manage your account information that displayed on your profile and used to login to your account."
     >
       <form className={style["settings-form"]} onSubmit={submitAction}>
-        {inputFields(data, changeHandler).map(
+        {inputFields(defaultValues, changeHandler).map(
           ({ label, name, type, value, changeAction, disabled, Icon }) => (
             <div className={style["form-control"]} key={name}>
               <label htmlFor={name}>
@@ -64,14 +75,16 @@ export default function AccountSettings() {
                 type={type}
                 name={name}
                 id={name}
-                value={value}
+                defaultValue={value!}
                 onChange={changeAction}
                 disabled={disabled}
               />
             </div>
           )
         )}
-        <button type="submit">Save</button>
+        <button type="submit" disabled={!isDataValid(data)}>
+          Save
+        </button>
       </form>
     </SettingsSection>
   );
