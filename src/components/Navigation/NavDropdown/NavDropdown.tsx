@@ -50,6 +50,7 @@ export default function NavDropdown({ user }: NavDropdownProps) {
         if (res.meta.requestStatus === "fulfilled") {
           dispatch(resetPostState());
           dispatch(resetUserState());
+          localStorage.clear();
           navigate("/");
         }
       },

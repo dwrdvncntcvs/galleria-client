@@ -22,7 +22,11 @@ export default function PortalFormLayout({
       {formComponent}
       <div className={style["links"]}>
         {links.length > 0 &&
-          links.map(({ to, label }) => <Link to={to}>{label}</Link>)}
+          links.map(({ to, label }, i) => (
+            <Link to={to} key={i}>
+              {label}
+            </Link>
+          ))}
       </div>
     </div>
   );

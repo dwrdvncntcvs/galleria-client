@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { SettingsNav } from "../../components/Settings";
+import { useForceUpdate } from "../../hooks/forceUpdate";
 import { useAppSelector } from "../../hooks/reduxHook";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { SettingsLayout, SettingsPageLayout } from "../../layout";
@@ -10,6 +11,8 @@ import style from "./settings.module.scss";
 export default function Settings() {
   const { addItem: accountAddItem, getItemJSON: getAccountData } =
     useLocalStorage("accountInfo");
+
+  const forceUpdate = useForceUpdate();
 
   const { userData } = useAppSelector((state) => state.userState);
   const { Profile, email, username, id } = userData!;
@@ -22,6 +25,7 @@ export default function Settings() {
       accData === undefined ||
       Array.of(accData).length <= 1
     ) {
+      forceUpdate();
       accountAddItem<SettingsData>({
         contact_number: Profile?.contactNumber!,
         email: email!,
@@ -37,6 +41,7 @@ export default function Settings() {
     username,
     id,
     accData,
+    forceUpdate,
   ]);
 
   const mainPanel = (
