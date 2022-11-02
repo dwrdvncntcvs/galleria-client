@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { SignUpForm } from "../../components/SignUp";
 import { setMessage, setStatus } from "../../features/userSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
+import PortalFormLayout from "../../layout/PortalLayout/PortalFormLayout";
 import style from "./signUp.module.scss";
 
 const SignUp = () => {
@@ -27,13 +28,17 @@ const SignUp = () => {
     return <p>{userState.message}</p>;
   };
 
+  const links: { to: string; label: string }[] = [
+    { to: "/", label: "Already have an account?" },
+  ];
+
   return (
-    <div className={style["sign-up"]}>
-      {userState.status === "error" && displayErrorMessage()}
-      <h1>Sign Up</h1>
-      <SignUpForm />
-      <Link to="/">Already have an account?</Link>
-    </div>
+    <PortalFormLayout
+      errorMessage={userState.status === "error" ? displayErrorMessage() : null}
+      formComponent={<SignUpForm />}
+      header="Sign Up"
+      links={links}
+    />
   );
 };
 

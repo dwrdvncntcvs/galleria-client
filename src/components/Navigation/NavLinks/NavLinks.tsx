@@ -12,9 +12,22 @@ import { NavDropdown } from "..";
 import { useCheckToggle } from "../../../hooks/toggleHooks";
 import { useImageSrc } from "../../../hooks/imageHooks";
 import { modalName } from "../../../variables";
+import { IconType } from "react-icons/lib";
 
 interface NavLinksProps {
   user: UserProfile;
+}
+
+interface NavButtonProps {
+  Icon: IconType;
+  hasImage: boolean;
+  isDropdown: boolean;
+  shown: boolean;
+  action: () => void;
+  image?: {
+    src: string;
+    alt: string;
+  };
 }
 
 export default function NavLinks({ user }: NavLinksProps) {
@@ -29,16 +42,18 @@ export default function NavLinks({ user }: NavLinksProps) {
     return endpoint === location.pathname ? true : false;
   };
 
-  const navButtons = [
+  const navButtons: NavButtonProps[] = [
     {
       Icon: HiPlus,
       hasImage: false,
       isDropdown: false,
+      shown: location.pathname.includes("settings") ? false : true,
       action: () =>
         dispatch(setModal({ status: true, name: modalName.CREATE_POST_MODAL })),
     },
     {
       Icon: activeURL("/home") ? HiHome : HiOutlineHome,
+      shown: true,
       hasImage: false,
       isDropdown: false,
       action: async () => {
@@ -48,6 +63,7 @@ export default function NavLinks({ user }: NavLinksProps) {
     },
     {
       Icon: HiUser,
+      shown: true,
       image: {
         src: imageSrc(user.Profile?.profileImage!),
         alt: `${user.first_name}'s avatar`,
@@ -66,20 +82,24 @@ export default function NavLinks({ user }: NavLinksProps) {
 
   return (
     <nav>
-      {navButtons.map(({ action, Icon, hasImage, image, isDropdown }, i) => (
-        <Fragment key={i}>
-          <button onClick={action} className={style["button-link"]}>
-            {hasImage ? (
-              <RoundedAvatar src={image?.src!} alt={image?.alt!} />
-            ) : (
-              <Icon size={18} />
+      {navButtons.map(
+        ({ action, Icon, hasImage, image, isDropdown, shown }, i) => (
+          <Fragment key={i}>
+            {shown && (
+              <button onClick={action} className={style["button-link"]}>
+                {hasImage ? (
+                  <RoundedAvatar src={image?.src!} alt={image?.alt!} />
+                ) : (
+                  <Icon size={18} />
+                )}
+              </button>
             )}
-          </button>
-          {checkIfToggled(modalName.CREATE_POST_MODAL) && isDropdown && (
-            <NavDropdown user={user!} />
-          )}
-        </Fragment>
-      ))}
+            {checkIfToggled(modalName.CREATE_POST_MODAL) && isDropdown && (
+              <NavDropdown user={user!} />
+            )}
+          </Fragment>
+        )
+      )}
     </nav>
   );
 }

@@ -1,0 +1,18 @@
+@import "../../variables.scss";
+@import "../../index.scss";
+
+.main-container {
+  @extend .flex-column;
+  flex: 1;
+  padding: 20px;
+
+  h1 {
+    font-size: 75px;
+    color: $primary-color;
+  }
+
+  .links {
+    @extend .flex-column;
+    margin: 0px 20px;
+  }
+}
