@@ -4,8 +4,6 @@
 
 This project was written from scratch using <i><b>[Typescript](https://www.typescriptlang.org/)</b></i>, <i><b>[ReactJS](https://reactjs.org/)</b></i>, <i><b>[Redux](https://redux.js.org/)</b></i>, <i><b>[SCSS](https://sass-lang.com/)</b></i> and other libraries. Typescript was chosen as the primary language for the project as it is a typed version of javascript which allows the developers to write reliable and robust code. As I am an aspiring NodeJS and ReactJS developer, I used ReactJS to build this application alongside with Redux to manage states of the application. The purpose of this project is to enhance and improve my skills and understanding with regards to ReactJS and Redux.
 
-<i><b>Note:</b></i> I'm building this project with my colleague during our capstone project as he also wanted to learn ReactJS.
-
 ## Installation
 
 - Be sure to have the latest LTS version of <i><b>[NodeJS](https://nodejs.org/)</b></i> installed.
